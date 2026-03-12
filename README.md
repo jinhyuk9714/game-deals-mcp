@@ -1,57 +1,57 @@
 # Game Deal Explorer MCP
 
-`Game Deal Explorer MCP` is a Node.js stdio MCP server for finding discounted games that are actually worth buying, not just cheap. It combines price data from [IsThereAnyDeal](https://docs.isthereanydeal.com/) with game metadata from [RAWG](https://rawg.io/apidocs), defaults to the `KR` market, and supports country overrides for every tool.
+`Game Deal Explorer MCP`는 단순히 "싼 게임"이 아니라 "지금 살 만한 할인 게임"을 찾도록 도와주는 Node.js stdio MCP 서버입니다. [IsThereAnyDeal](https://docs.isthereanydeal.com/)의 가격 데이터와 [RAWG](https://rawg.io/apidocs)의 게임 메타데이터를 함께 사용하며, 기본 시장은 `KR`이고 모든 툴에서 `country` override를 지원합니다.
 
-Repository: [jinhyuk9714/game-deals-mcp](https://github.com/jinhyuk9714/game-deals-mcp)
+저장소: [jinhyuk9714/game-deals-mcp](https://github.com/jinhyuk9714/game-deals-mcp)
 
-## What It Does
+## 무엇을 하는 MCP인가요
 
-- `discover_deals`: search current discounts by budget, genre, platform, multiplayer, and sort order
-- `compare_game_price`: compare one game's current price, discount, store offers, and historical low
-- `recommend_sale_games`: turn structured preferences into sale recommendations
-- `explain_deal_value`: explain whether the current deal looks good versus the historical low
+- `discover_deals`: 예산, 장르, 플랫폼, 멀티플레이 여부, 정렬 기준으로 현재 할인 게임을 찾습니다
+- `compare_game_price`: 특정 게임의 현재 가격, 할인율, 판매처, 역대 최저가를 비교합니다
+- `recommend_sale_games`: 구조화된 취향 입력을 바탕으로 할인 게임을 추천합니다
+- `explain_deal_value`: 현재 할인 딜이 역대 최저가 기준으로 살 만한 수준인지 설명합니다
 
-## Requirements
+## 요구 사항
 
 - Node.js `22+`
 - `IsThereAnyDeal` API key
 - `RAWG` API key
 
-## Quick Start
+## 빠른 시작
 
-Install dependencies and create your env file:
+의존성을 설치하고 `.env` 파일을 만듭니다.
 
 ```bash
 npm install
 cp .env.example .env
 ```
 
-Get your API keys:
+API 키는 아래에서 발급받을 수 있습니다.
 
-- `IsThereAnyDeal`: create an app at [isthereanydeal.com/apps](https://isthereanydeal.com/apps/)
-- `RAWG`: request a key at [rawg.io/apidocs](https://rawg.io/apidocs)
+- `IsThereAnyDeal`: [isthereanydeal.com/apps](https://isthereanydeal.com/apps/) 에서 앱 생성
+- `RAWG`: [rawg.io/apidocs](https://rawg.io/apidocs) 에서 API 키 요청
 
-Add them to `.env`:
+발급받은 키를 `.env`에 넣습니다.
 
 ```bash
 ITAD_API_KEY=your_isthereanydeal_api_key
 RAWG_API_KEY=your_rawg_api_key
 ```
 
-Build and run the server:
+서버를 빌드하고 실행합니다.
 
 ```bash
 npm run build
 ITAD_API_KEY=... RAWG_API_KEY=... node dist/index.js
 ```
 
-If the keys are missing, the server still starts and exposes the tools, but tool calls return setup warnings instead of fake results.
+키가 없더라도 서버는 실행되지만, 툴 호출 시 실제 결과 대신 설정 안내 경고를 반환합니다.
 
-## MCP Client Setup
+## MCP 클라이언트 설정
 
 ### Codex
 
-Add this block to your Codex config:
+Codex 설정 파일에 아래 블록을 추가합니다.
 
 ```toml
 [mcp_servers.game-deals-mcp]
@@ -61,11 +61,11 @@ cwd = "/absolute/path/to/game-deals-mcp"
 env = { ITAD_API_KEY = "your_isthereanydeal_api_key", RAWG_API_KEY = "your_rawg_api_key" }
 ```
 
-Replace both absolute paths with your local project path.
+두 개의 절대경로는 현재 로컬 프로젝트 경로로 바꿔 주세요.
 
 ### Claude Desktop
 
-Add this server to `claude_desktop_config.json`:
+`claude_desktop_config.json`에 아래 서버를 추가합니다.
 
 ```json
 {
@@ -82,9 +82,9 @@ Add this server to `claude_desktop_config.json`:
 }
 ```
 
-Use the absolute path to this repository's `dist/index.js`.
+`args`에는 이 저장소의 `dist/index.js` 절대경로를 넣으면 됩니다.
 
-## Example Tool Inputs
+## 예시 입력
 
 ### `discover_deals`
 
@@ -129,9 +129,9 @@ Use the absolute path to this repository's `dist/index.js`.
 }
 ```
 
-## Example Prompts
+## 바로 써볼 질문
 
-Try these in your MCP client:
+MCP 클라이언트에서 이렇게 물어볼 수 있습니다.
 
 1. `2만원 이하 스팀덱용 로그라이크 할인 게임 찾아줘`
 2. `Balatro 지금 어디가 제일 싸고 역대 최저가랑 얼마나 차이나?`
@@ -140,14 +140,14 @@ Try these in your MCP client:
 5. `Hades II 현재 할인 딜이 바로 사도 될 수준인지 설명해줘`
 6. `한국 가격 기준으로 지금 50% 이상 할인 중인 전략 게임 보여줘`
 
-## Limitations
+## 제한 사항
 
-- `Steam Deck` recommendations currently use a `PC proxy`, not official Deck compatibility data.
-- v1 is read-only. There is no wishlist, alerting, or account sync.
-- Prices are shown in the source currency returned by the API. There is no FX conversion.
-- RAWG title matching is conservative. If confidence is low, the server returns price data without metadata enrichment.
+- `Steam Deck` 추천은 아직 공식 호환성 데이터가 아니라 `PC proxy` 기준으로 동작합니다.
+- v1은 읽기 전용입니다. wishlist, alerting, account sync는 포함하지 않습니다.
+- 가격은 API가 반환한 원본 통화 그대로 보여주며, 환율 변환은 하지 않습니다.
+- RAWG 제목 매칭은 보수적으로 처리합니다. 신뢰도가 낮으면 메타데이터 없이 가격 정보만 반환합니다.
 
-## Development
+## 개발
 
 ```bash
 npm test
@@ -155,6 +155,6 @@ npm run typecheck
 npm run build
 ```
 
-## License
+## 라이선스
 
 MIT

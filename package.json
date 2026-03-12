@@ -1,7 +1,7 @@
 {
   "name": "game-deal-explorer-mcp",
   "version": "0.1.0",
-  "description": "Node.js stdio MCP server for discovering discounted games with IsThereAnyDeal and RAWG",
+  "description": "IsThereAnyDeal과 RAWG로 할인 게임을 찾는 Node.js stdio MCP 서버",
   "type": "module",
   "private": true,
   "main": "dist/index.js",
