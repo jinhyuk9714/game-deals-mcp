@@ -78,17 +78,17 @@ npm run deploy:worker
 
 ### Codex
 
-Codex에서는 `~/.codex/config.toml` 또는 프로젝트의 `.codex/config.toml`에 원격 서버를 이렇게 등록할 수 있습니다.
+Codex에서는 CLI로 한 번 등록하는 방법을 가장 권장합니다.
+
+```bash
+codex mcp add game-deals-mcp --url https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp
+```
+
+직접 설정 파일을 수정하고 싶다면 `~/.codex/config.toml` 또는 프로젝트의 `.codex/config.toml`에 아래처럼 넣을 수도 있습니다.
 
 ```toml
 [mcp_servers.game-deals-mcp]
-url = "https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev/mcp"
-```
-
-또는 CLI로 추가할 수도 있습니다.
-
-```bash
-codex mcp add game-deals-mcp --url https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev/mcp
+url = "https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp"
 ```
 
 ### Claude
@@ -96,7 +96,7 @@ codex mcp add game-deals-mcp --url https://game-deal-explorer-mcp.<your-workers-
 Claude에서는 Custom Connectors의 remote MCP 설정 화면에서 같은 `/mcp` URL을 넣으면 됩니다.
 
 ```text
-https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev/mcp
+https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp
 ```
 
 ## 로컬 실행
