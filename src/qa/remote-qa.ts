@@ -54,6 +54,8 @@ export interface RemoteQaRun {
   results: QaResult[];
 }
 
+export type QaFixtureName = "canonical" | "variant";
+
 export const DEFAULT_REMOTE_MCP_URL = "https://game-deals-mcp.jinhyuk9714.workers.dev/mcp";
 const QA_CASE_TIMEOUT_MS = 20_000;
 
@@ -285,10 +287,245 @@ export const QA_CASES: QaCase[] = [
   }
 ];
 
-export async function runRemoteQa(url = DEFAULT_REMOTE_MCP_URL): Promise<RemoteQaRun> {
+export const VARIANT_QA_CASES: QaCase[] = [
+  {
+    index: 1,
+    category: "recommend",
+    prompt: "스팀덱에서 굴리기 괜찮은 로그라이크 세일작 뭐 있어?",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+      budget: 20000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    }
+  },
+  {
+    index: 2,
+    category: "discover",
+    prompt: "2만원 안쪽으로 스팀덱 로그라이트 할인가만 보여줘",
+    tool: "discover_deals",
+    arguments: {
+      budget: 20000,
+      genres: ["Roguelike"],
+      platforms: ["Steam Deck"],
+      sort: "best-value",
+      country: "KR"
+    }
+  },
+  {
+    index: 3,
+    category: "discover",
+    prompt: "만원 이하로 친구랑 같이할 액션 세일겜 골라줘",
+    tool: "discover_deals",
+    arguments: {
+      budget: 10000,
+      genres: ["Action"],
+      multiplayer: true,
+      platforms: ["PC"],
+      sort: "biggest-discount",
+      country: "KR"
+    }
+  },
+  {
+    index: 4,
+    category: "recommend",
+    prompt: "덱빌딩 쪽으로 짧게 한 판 하기 좋은 할인작 있어?",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "짧게 하기 좋은 덱빌딩 게임",
+      budget: 15000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    }
+  },
+  {
+    index: 5,
+    category: "recommend",
+    prompt: "평 좋은 전략겜 세일 중인 것만 추려줘",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "전략 게임 좋아하고 평가 좋은 작품 우선",
+      budget: 25000,
+      platforms: ["PC"],
+      country: "KR"
+    }
+  },
+  {
+    index: 6,
+    category: "compare",
+    prompt: "Balatro 최저가 어디야?",
+    tool: "compare_game_price",
+    arguments: {
+      title: "Balatro",
+      country: "KR"
+    }
+  },
+  {
+    index: 7,
+    category: "compare",
+    prompt: "Dead Cells 지금 어디서 사는 게 제일 싸?",
+    tool: "compare_game_price",
+    arguments: {
+      title: "Dead Cells",
+      country: "KR"
+    }
+  },
+  {
+    index: 8,
+    category: "explain",
+    prompt: "Slay the Spire 이번 세일 타이밍 괜찮음?",
+    tool: "explain_deal_value",
+    arguments: {
+      title: "Slay the Spire",
+      country: "KR"
+    }
+  },
+  {
+    index: 9,
+    category: "explain",
+    prompt: "Into the Breach 지금 바로 사도 후회 없을까?",
+    tool: "explain_deal_value",
+    arguments: {
+      title: "Into the Breach",
+      country: "KR"
+    }
+  },
+  {
+    index: 10,
+    category: "recommend",
+    prompt: "가볍게 즐길 액션 로그라이트 뭐가 괜찮아?",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "가볍게 즐길 액션 로그라이트",
+      budget: 18000,
+      platforms: ["PC"],
+      country: "KR"
+    }
+  },
+  {
+    index: 11,
+    category: "discover",
+    prompt: "2만5천원 밑으로 RPG 할인작 좀",
+    tool: "discover_deals",
+    arguments: {
+      budget: 25000,
+      genres: ["RPG"],
+      platforms: ["PC"],
+      sort: "best-value",
+      country: "KR"
+    }
+  },
+  {
+    index: 12,
+    category: "discover",
+    prompt: "스팀덱에서 돌릴 수 있는 저렴한 할인겜부터 보여줘",
+    tool: "discover_deals",
+    arguments: {
+      budget: 8000,
+      platforms: ["Steam Deck"],
+      sort: "lowest-price",
+      country: "KR"
+    }
+  },
+  {
+    index: 13,
+    category: "recommend",
+    prompt: "친구랑 같이 켜서 놀기 좋은 할인 게임 뭐 있어?",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "친구와 같이 할 협동 게임",
+      budget: 20000,
+      platforms: ["PC"],
+      country: "KR"
+    }
+  },
+  {
+    index: 14,
+    category: "compare",
+    prompt: "Hades 가격 비교 한 번 해줘",
+    tool: "compare_game_price",
+    arguments: {
+      title: "Hades",
+      country: "KR"
+    }
+  },
+  {
+    index: 15,
+    category: "explain",
+    prompt: "Balatro 지금 사는 거 메리트 있어?",
+    tool: "explain_deal_value",
+    arguments: {
+      title: "Balatro",
+      country: "KR"
+    }
+  },
+  {
+    index: 16,
+    category: "recommend",
+    prompt: "리뷰 괜찮은 전략 세일겜, 너무 마이너한 건 말고",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "전략 게임 좋아하고 평가 좋은 작품 우선",
+      budget: 25000,
+      platforms: ["PC"],
+      country: "KR"
+    }
+  },
+  {
+    index: 17,
+    category: "discover",
+    prompt: "평점 높은 전략 할인겜만 보고 싶어",
+    tool: "discover_deals",
+    arguments: {
+      budget: 15000,
+      genres: ["Strategy"],
+      platforms: ["PC"],
+      sort: "highest-rating",
+      country: "KR"
+    }
+  },
+  {
+    index: 18,
+    category: "compare",
+    prompt: "Vampire Survivors 어디가 싼지 알려줘",
+    tool: "compare_game_price",
+    arguments: {
+      title: "Vampire Survivors",
+      country: "KR"
+    }
+  },
+  {
+    index: 19,
+    category: "explain",
+    prompt: "Dead Cells 이번 할인, 역사적으로 보면 어때?",
+    tool: "explain_deal_value",
+    arguments: {
+      title: "Dead Cells",
+      country: "KR"
+    }
+  },
+  {
+    index: 20,
+    category: "recommend",
+    prompt: "스팀덱에서 패드로 하기 편한 로그라이크 할인작 추천해줘",
+    tool: "recommend_sale_games",
+    arguments: {
+      preferences: "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+      budget: 20000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    }
+  }
+];
+
+export async function runRemoteQa(
+  url = DEFAULT_REMOTE_MCP_URL,
+  cases: QaCase[] = QA_CASES
+): Promise<RemoteQaRun> {
   const results: QaResult[] = [];
 
-  for (const testCase of QA_CASES) {
+  for (const testCase of cases) {
     results.push(await runQaCase(url, testCase));
   }
 
@@ -298,6 +535,10 @@ export async function runRemoteQa(url = DEFAULT_REMOTE_MCP_URL): Promise<RemoteQ
     summary: summarizeQaResults(results),
     results
   };
+}
+
+export function getQaCases(fixture: QaFixtureName): QaCase[] {
+  return fixture === "variant" ? VARIANT_QA_CASES : QA_CASES;
 }
 
 async function runQaCase(url: string, testCase: QaCase): Promise<QaResult> {

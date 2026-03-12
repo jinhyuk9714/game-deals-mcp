@@ -35,6 +35,15 @@ export interface CatalogDiscoveryInput {
   limit?: number | undefined;
 }
 
+interface BroadIntentSignals {
+  cheapBrowse: boolean;
+  avoidObscure: boolean;
+  broadCoop: boolean;
+  steamDeckBrowse: boolean;
+  broadGenreBrowse: boolean;
+  requestedGenres: string[];
+}
+
 export interface GameProviders {
   findDeals(args: DiscoverFilters & { country: string }): Promise<DealCandidate[]>;
   enrichDeals(
@@ -87,6 +96,7 @@ export class GameDealService {
     const warnings: string[] = [];
     const candidateDeals = filterJunkCandidates(baseDeals);
     let deals = candidateDeals;
+    const broadIntentSignals = buildDiscoverBroadIntentSignals(args);
 
     try {
       const enrichmentOptions = {
@@ -140,7 +150,7 @@ export class GameDealService {
             preferredShops
           }),
           steamDeckRequest
-        );
+          );
         warnings.push(...recovery.warnings);
       } catch (error) {
         warnings.push(
@@ -178,6 +188,8 @@ export class GameDealService {
         }
       }
     }
+
+    rankedDeals = applyBroadIntentRanking(rankedDeals, broadIntentSignals);
 
     return {
       query,
@@ -244,6 +256,12 @@ export class GameDealService {
     }
 
     const excluded = new Set((args.excludeGenres ?? []).map((genre) => genre.trim().toLowerCase()));
+    const broadIntentSignals = buildRecommendationBroadIntentSignals(
+      args.preferences,
+      preferences,
+      effectivePlatforms,
+      multiplayer
+    );
     let base: CompareResult | null = null;
     let matches: DealCandidate[] = [];
     const warnings: string[] = [];
@@ -387,6 +405,8 @@ export class GameDealService {
         warnings: uniqueWarnings(warnings)
       };
     }
+
+    matches = applyBroadIntentRanking(matches, broadIntentSignals);
 
     const top = matches[0];
     if (!top) {
@@ -1247,6 +1267,168 @@ function applyRecommendationQualityGates(
   return filtered;
 }
 
+function buildDiscoverBroadIntentSignals(filters: DiscoverFilters): BroadIntentSignals {
+  const requestedGenres = (filters.genres ?? []).map((genre) => genre.trim()).filter(Boolean);
+  const normalizedGenres = requestedGenres.map((genre) => genre.toLowerCase());
+  const steamDeckRequest = hasSteamDeckRequest(filters.platforms);
+  const cheapBrowse =
+    filters.sort === "lowest-price" ||
+    typeof filters.budget === "number" && filters.budget <= 10_000;
+  const avoidObscure = filters.sort === "highest-rating";
+  const broadCoop =
+    filters.multiplayer === true &&
+    !normalizedGenres.includes("racing") &&
+    !normalizedGenres.includes("sports");
+  const broadGenreBrowse =
+    requestedGenres.length === 1 &&
+    (normalizedGenres[0] === "rpg" || normalizedGenres[0] === "strategy");
+
+  return {
+    cheapBrowse,
+    avoidObscure,
+    broadCoop,
+    steamDeckBrowse: steamDeckRequest && cheapBrowse,
+    broadGenreBrowse,
+    requestedGenres
+  };
+}
+
+function buildRecommendationBroadIntentSignals(
+  rawPreferences: string,
+  preferences: {
+    genres: string[];
+    highRating: boolean;
+  },
+  platforms: string[],
+  multiplayer: boolean
+): BroadIntentSignals {
+  const requestedGenres = preferences.genres;
+  const normalizedGenres = requestedGenres.map((genre) => genre.trim().toLowerCase());
+  const broadCoop =
+    multiplayer &&
+    !normalizedGenres.includes("racing") &&
+    !normalizedGenres.includes("sports");
+  const broadGenreBrowse =
+    requestedGenres.length === 1 &&
+    (normalizedGenres[0] === "rpg" || normalizedGenres[0] === "strategy");
+  const cheapBrowse = /저렴|가성비|싸게|할인가만|밑으로|안쪽/i.test(rawPreferences);
+
+  return {
+    cheapBrowse,
+    avoidObscure: preferences.highRating,
+    broadCoop,
+    steamDeckBrowse: hasSteamDeckRequest(platforms) && cheapBrowse,
+    broadGenreBrowse,
+    requestedGenres
+  };
+}
+
+function applyBroadIntentRanking(
+  deals: DealCandidate[],
+  signals: BroadIntentSignals
+): DealCandidate[] {
+  if (
+    deals.length <= 1 ||
+    (!signals.cheapBrowse &&
+      !signals.avoidObscure &&
+      !signals.broadCoop &&
+      !signals.steamDeckBrowse &&
+      !signals.broadGenreBrowse)
+  ) {
+    return deals;
+  }
+
+  const originalOrder = new Map(
+    deals.map((deal, index) => [deal.id || normalizeTitleKey(deal.title), index])
+  );
+
+  return [...deals].sort((left, right) => {
+    const scoreDifference =
+      getBroadIntentRankingScore(right, signals) - getBroadIntentRankingScore(left, signals);
+
+    if (scoreDifference !== 0) {
+      return scoreDifference;
+    }
+
+    return (
+      (originalOrder.get(left.id || normalizeTitleKey(left.title)) ?? 0) -
+      (originalOrder.get(right.id || normalizeTitleKey(right.title)) ?? 0)
+    );
+  });
+}
+
+function getBroadIntentRankingScore(deal: DealCandidate, signals: BroadIntentSignals): number {
+  const reviewScore = Math.max((deal.rating ?? 0) * 20, deal.metacritic ?? 0);
+  const hasReview = hasStrongReviewSignal(deal);
+  const hasCriticScore = (deal.metacritic ?? 0) >= 75;
+  const metadataKnown = deal.metadataStatus !== "missing" && deal.metadataStatus !== "unavailable";
+  const isFree = deal.price.amount <= 0;
+  const isUltraCheap = deal.price.amount > 0 && deal.price.amount <= 1000;
+  const deckStatus = getDeckCompatibilityStatus(deal);
+
+  let score = reviewScore;
+
+  if (metadataKnown) {
+    score += 80;
+  } else {
+    score -= 80;
+  }
+
+  if (signals.broadGenreBrowse || signals.avoidObscure || signals.steamDeckBrowse) {
+    score += hasReview ? 90 : -120;
+  }
+
+  if (signals.avoidObscure) {
+    score += hasCriticScore ? 120 : -60;
+  }
+
+  if (signals.broadGenreBrowse && matchesAllRequestedGenres(deal, signals.requestedGenres)) {
+    score += 45;
+  }
+
+  if (signals.broadCoop) {
+    score += deal.multiplayer ? 120 : -240;
+    score += hasBroadCoopFriendlyShape(deal) ? 40 : 0;
+    score -= hasUnrequestedRacingOrSports(deal, signals.requestedGenres) ? 110 : 0;
+  }
+
+  if (signals.steamDeckBrowse) {
+    switch (deckStatus) {
+      case "verified":
+        score += 140;
+        break;
+      case "playable":
+        score += 110;
+        break;
+      case "unknown":
+        score -= 40;
+        break;
+      case "unsupported":
+        score -= 220;
+        break;
+    }
+  }
+
+  if (signals.cheapBrowse || signals.broadGenreBrowse || signals.avoidObscure || signals.steamDeckBrowse) {
+    if (isFree) {
+      score -= 220;
+    }
+
+    if (isUltraCheap) {
+      score -= 120;
+    }
+
+    if ((deal.rating ?? 0) === 0 && (deal.metacritic ?? 0) === 0) {
+      score -= 160;
+    }
+  }
+
+  score += Math.min(deal.cut, 75) * 0.3;
+  score -= deal.price.amount / 500;
+
+  return score;
+}
+
 function hasDeckbuildingEvidence(deal: DealCandidate): boolean {
   return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(
     `${deal.title} ${deal.genres.join(" ")}`
@@ -1377,6 +1559,27 @@ function hasRoguelikeDealEvidence(deal: DealCandidate): boolean {
     const normalized = genre.trim().toLowerCase();
     return normalized === "roguelike" || normalized === "roguelite";
   });
+}
+
+function hasBroadCoopFriendlyShape(deal: DealCandidate): boolean {
+  const normalizedGenres = new Set(deal.genres.map((genre) => genre.trim().toLowerCase()));
+  return (
+    normalizedGenres.has("action") ||
+    normalizedGenres.has("casual") ||
+    normalizedGenres.has("arcade") ||
+    normalizedGenres.has("party")
+  );
+}
+
+function hasUnrequestedRacingOrSports(deal: DealCandidate, requestedGenres: string[]): boolean {
+  const normalizedGenres = new Set(deal.genres.map((genre) => genre.trim().toLowerCase()));
+  const requested = new Set(requestedGenres.map((genre) => genre.trim().toLowerCase()));
+
+  return (
+    (normalizedGenres.has("racing") || normalizedGenres.has("sports")) &&
+    !requested.has("racing") &&
+    !requested.has("sports")
+  );
 }
 
 function hasCatalogReviewSignal(candidate: CatalogCandidate): boolean {

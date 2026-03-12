@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { QA_CASES, summarizeQaResults } from "../../src/qa/remote-qa.js";
+import { QA_CASES, VARIANT_QA_CASES, summarizeQaResults } from "../../src/qa/remote-qa.js";
 
 describe("remote QA helpers", () => {
   it("keeps the 20 canonical smoke prompts in the repo", () => {
@@ -9,6 +9,19 @@ describe("remote QA helpers", () => {
     expect(QA_CASES.filter((testCase) => testCase.category === "compare")).toHaveLength(5);
     expect(QA_CASES.filter((testCase) => testCase.category === "recommend")).toHaveLength(5);
     expect(QA_CASES.filter((testCase) => testCase.category === "explain")).toHaveLength(5);
+  });
+
+  it("keeps the 20 variant smoke prompts in the repo for broad-intent regression checks", () => {
+    expect(VARIANT_QA_CASES).toHaveLength(20);
+    expect(new Set(VARIANT_QA_CASES.map((testCase) => testCase.index)).size).toBe(20);
+    expect(VARIANT_QA_CASES.map((testCase) => testCase.prompt)).toEqual(
+      expect.arrayContaining([
+        "2만5천원 밑으로 RPG 할인작 좀",
+        "스팀덱에서 돌릴 수 있는 저렴한 할인겜부터 보여줘",
+        "친구랑 같이 켜서 놀기 좋은 할인 게임 뭐 있어?",
+        "리뷰 괜찮은 전략 세일겜, 너무 마이너한 건 말고"
+      ])
+    );
   });
 
   it("summarizes remote QA outcomes into the core rollout metrics", () => {

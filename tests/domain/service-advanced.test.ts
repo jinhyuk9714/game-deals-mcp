@@ -53,6 +53,152 @@ describe("GameDealService.compareGamePrice", () => {
 });
 
 describe("GameDealService.discoverDeals", () => {
+  it("demotes free or ultra-cheap filler below reviewed RPG picks for broad best-value browse queries", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "free-rpg",
+            title: "Deponia",
+            price: { amount: 0, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 100,
+            genres: ["Indie", "Adventure", "RPG", "Puzzle"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 3.85,
+            metacritic: 74,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "low-quality-rpg",
+            title: "The Book of Legends",
+            price: { amount: 881, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 96,
+            genres: ["Indie", "Adventure", "RPG"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 2,
+            metacritic: null,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "representative-rpg",
+            title: "Chained Echoes",
+            price: { amount: 15400, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 30,
+            genres: ["RPG", "Indie"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.2,
+            metacritic: 82,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.discoverDeals({
+      country: "KR",
+      budget: 25000,
+      genres: ["RPG"],
+      platforms: ["PC"],
+      sort: "best-value"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Chained Echoes" });
+    expect(result.matches[0]).not.toMatchObject({ title: "Deponia" });
+  });
+
+  it("prefers reviewed Steam Deck compatible bargains over unknown metadata fillers in cheap browse queries", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "free-steam-deck",
+            title: "Deponia",
+            price: { amount: 0, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 100,
+            genres: ["Adventure", "RPG"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 3.85,
+            metacritic: 74,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "unknown",
+              details: [],
+              source: "steam"
+            }
+          },
+          {
+            id: "filler-one",
+            title: "Abduction Bit",
+            price: { amount: 550, currency: "KRW" },
+            regular: { amount: 1100, currency: "KRW" },
+            cut: 50,
+            genres: ["Action"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 0,
+            metacritic: null,
+            metadataStatus: "missing",
+            steamDeckCompatibility: {
+              status: "unknown",
+              details: [],
+              source: "steam"
+            }
+          },
+          {
+            id: "verified-bargain",
+            title: "Verified Bargain",
+            price: { amount: 4400, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 80,
+            genres: ["Action", "Indie"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.2,
+            metacritic: 80,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "verified",
+              details: ["Runs well on Steam Deck"],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.discoverDeals({
+      country: "KR",
+      budget: 8000,
+      platforms: ["Steam Deck"],
+      sort: "lowest-price"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Verified Bargain" });
+    expect(result.matches.slice(0, 3).map((match) => (match as { title: string }).title)).toEqual(
+      expect.arrayContaining(["Verified Bargain"])
+    );
+  });
+
   it("requests Steam-only deals when the platform mentions Steam Deck", async () => {
     const service = new GameDealService({
       async findDeals(args) {
@@ -433,6 +579,106 @@ describe("GameDealService.discoverDeals", () => {
 });
 
 describe("GameDealService.recommendSaleGames", () => {
+  it("prefers broad co-op crowd-pleasers over racing or sports outliers", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "trailblazers",
+            title: "Trailblazers",
+            price: { amount: 1776, currency: "KRW" },
+            regular: { amount: 44400, currency: "KRW" },
+            cut: 96,
+            genres: ["Racing", "Action", "Casual", "Sports", "Indie"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 3.17,
+            metacritic: null,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "party-brawler",
+            title: "Party Brawler Heroes",
+            price: { amount: 9900, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 55,
+            genres: ["Action", "Casual", "Indie"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 4.05,
+            metacritic: 78,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "친구랑 같이 켜서 놀기 좋은 할인 게임 뭐 있어?",
+      budget: 20000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Party Brawler Heroes" });
+  });
+
+  it("demotes obscure high-rating strategy picks below stronger reviewed strategy candidates", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "obscure-strategy",
+            title: "Dominions 5 - Warriors of the Faith",
+            price: { amount: 9450, currency: "KRW" },
+            regular: { amount: 43000, currency: "KRW" },
+            cut: 78,
+            genres: ["Strategy", "Indie"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 4.67,
+            metacritic: null,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "known-strategy",
+            title: "Into the Breach",
+            price: { amount: 5420, currency: "KRW" },
+            regular: { amount: 15500, currency: "KRW" },
+            cut: 65,
+            genres: ["Strategy", "Indie", "Roguelike"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.2,
+            metacritic: 89,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "리뷰 괜찮은 전략 세일겜, 너무 마이너한 건 말고",
+      budget: 25000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Into the Breach" });
+  });
+
   it("filters excluded genres and explains why the remaining game fits", async () => {
     const service = new GameDealService({
       async findDeals() {
