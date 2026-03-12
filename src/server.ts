@@ -1,6 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
+import type { ConfigSource } from "./config.js";
 import { readConfig } from "./config.js";
 import { GameDealService } from "./domain/service.js";
 import { TtlCache } from "./cache/ttl-cache.js";
@@ -15,12 +16,17 @@ import {
   callRecommendSaleGamesTool
 } from "./tools/handlers.js";
 
-export async function createMcpServer(options?: { service?: GameDealService }) {
+export const MCP_SERVER_INFO = {
+  name: "game-deal-explorer-mcp",
+  version: "0.1.0"
+} as const;
+
+export async function createMcpServer(options?: {
+  service?: GameDealService;
+  env?: ConfigSource;
+}) {
   const server = new McpServer(
-    {
-      name: "game-deal-explorer-mcp",
-      version: "0.1.0"
-    },
+    MCP_SERVER_INFO,
     {
       capabilities: {
         logging: {}
@@ -28,7 +34,7 @@ export async function createMcpServer(options?: { service?: GameDealService }) {
     }
   );
 
-  const service = options?.service ?? createDefaultService();
+  const service = options?.service ?? createDefaultService(options?.env);
 
   server.registerTool(
     "discover_deals",
@@ -97,8 +103,8 @@ export async function createMcpServer(options?: { service?: GameDealService }) {
   return server;
 }
 
-function createDefaultService() {
-  const config = readConfig();
+export function createDefaultService(env?: ConfigSource) {
+  const config = readConfig(env);
 
   if (!config.ITAD_API_KEY || !config.RAWG_API_KEY) {
     return new GameDealService({

@@ -1,7 +1,7 @@
 {
   "name": "game-deal-explorer-mcp",
   "version": "0.1.0",
-  "description": "IsThereAnyDeal, RAWG, Steam 정보를 바탕으로 할인 게임을 찾는 Node.js stdio MCP 서버",
+  "description": "IsThereAnyDeal, RAWG, Steam 정보를 바탕으로 할인 게임을 찾는 MCP 서버",
   "type": "module",
   "license": "MIT",
   "main": "dist/index.js",
@@ -38,6 +38,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "tsx src/index.ts",
+    "dev:worker": "wrangler dev",
+    "deploy:worker": "wrangler deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit -p tsconfig.json"
@@ -47,12 +50,14 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.27.1",
+    "hono": "^4.10.5",
     "zod": "^4.0.18"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
     "tsx": "^4.20.5",
     "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "wrangler": "^4.40.1"
   }
 }

@@ -1,6 +1,6 @@
 # Game Deal Explorer MCP
 
-`Game Deal Explorer MCP`는 지금 할인 중인 게임 가운데 실제로 살 만한 게임을 찾도록 도와주는 Node.js stdio MCP 서버입니다. 가격 정보는 [IsThereAnyDeal](https://docs.isthereanydeal.com/)에서, 장르와 평점 같은 메타데이터는 [RAWG](https://rawg.io/apidocs)에서 가져옵니다. `Steam Deck` 관련 요청에서는 공식 Steam 호환성 상태도 함께 확인합니다. 기본 국가는 `KR`이며, 각 툴에서 `country` 값을 따로 지정할 수 있습니다.
+`Game Deal Explorer MCP`는 지금 할인 중인 게임 가운데 실제로 살 만한 게임을 찾도록 도와주는 MCP 서버입니다. 가격 정보는 [IsThereAnyDeal](https://docs.isthereanydeal.com/)에서, 장르와 평점 같은 메타데이터는 [RAWG](https://rawg.io/apidocs)에서, `Steam Deck` 호환성 상태는 공식 Steam 데이터에서 확인합니다. 기본 국가는 `KR`이며, 각 툴에서 `country` 값을 따로 지정할 수 있습니다.
 
 저장소: [jinhyuk9714/game-deals-mcp](https://github.com/jinhyuk9714/game-deals-mcp)
 
@@ -19,7 +19,87 @@
 - `IsThereAnyDeal` API key
 - `RAWG` API key
 
-## 빠른 시작
+## 원격 MCP 배포
+
+이 프로젝트는 `Cloudflare Workers` 기반 원격 MCP를 기본 경로로 사용합니다. 기존 `stdio` 실행은 그대로 유지하지만, 실제 사용자는 배포된 `workers.dev` URL에 붙는 쪽이 더 간단합니다.
+
+먼저 의존성을 설치합니다.
+
+```bash
+npm install
+```
+
+API 키는 아래에서 받을 수 있습니다.
+
+- `IsThereAnyDeal`: [isthereanydeal.com/apps](https://isthereanydeal.com/apps/) 에서 앱 생성
+- `RAWG`: [rawg.io/apidocs](https://rawg.io/apidocs) 에서 API 키 발급
+
+Cloudflare Workers에 런타임 시크릿을 넣습니다.
+
+```bash
+wrangler secret put ITAD_API_KEY
+wrangler secret put RAWG_API_KEY
+```
+
+로컬에서 Worker를 미리 확인할 때는 아래처럼 실행합니다.
+
+```bash
+npm run dev:worker
+```
+
+실제 배포는 다음 명령으로 진행합니다.
+
+```bash
+npm run deploy:worker
+```
+
+배포가 끝나면 `https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev` 형태의 주소가 생깁니다. MCP 클라이언트에는 이 주소 뒤에 `/mcp`를 붙여 사용하면 됩니다.
+
+- 메타데이터: `GET /`
+- 헬스체크: `GET /health`
+- MCP 엔드포인트: `GET|POST|DELETE|OPTIONS /mcp`
+
+현재 범위는 `MCP + health`만 포함합니다. `prompt`, `openapi`, 별도 REST API는 아직 제공하지 않습니다.
+
+## GitHub Actions 자동 배포
+
+`main` 브랜치에 푸시할 때 자동 배포하려면 GitHub 저장소 시크릿에 아래 값을 추가합니다.
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `ITAD_API_KEY`
+- `RAWG_API_KEY`
+
+워크플로우는 `.github/workflows/deploy-worker.yml` 에 들어 있습니다.
+
+## 원격 MCP 연결
+
+배포된 Worker는 인증 없이 공개할 수 있지만, 운영은 Cloudflare 쪽 rate limit 규칙을 전제로 합니다.
+
+### Codex
+
+Codex에서는 `~/.codex/config.toml` 또는 프로젝트의 `.codex/config.toml`에 원격 서버를 이렇게 등록할 수 있습니다.
+
+```toml
+[mcp_servers.game-deals-mcp]
+url = "https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev/mcp"
+```
+
+또는 CLI로 추가할 수도 있습니다.
+
+```bash
+codex mcp add game-deals-mcp --url https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev/mcp
+```
+
+### Claude
+
+Claude에서는 Custom Connectors의 remote MCP 설정 화면에서 같은 `/mcp` URL을 넣으면 됩니다.
+
+```text
+https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev/mcp
+```
+
+## 로컬 실행
 
 의존성을 설치하고 `.env` 파일을 만듭니다.
 
@@ -40,7 +120,7 @@ ITAD_API_KEY=your_isthereanydeal_api_key
 RAWG_API_KEY=your_rawg_api_key
 ```
 
-서버를 빌드하고 실행합니다.
+stdio 서버를 빌드하고 실행합니다.
 
 ```bash
 npm run build
@@ -65,7 +145,7 @@ npx -y @jinhyuk9714/game-deal-explorer-mcp
 
 `npx`로 실행해도 API 키가 필요합니다. MCP 클라이언트 설정의 `env`에 `ITAD_API_KEY`, `RAWG_API_KEY`를 넣어 두면 됩니다.
 
-## MCP 클라이언트 설정
+## 로컬 MCP 클라이언트 설정
 
 ### Codex
 
@@ -191,6 +271,7 @@ MCP 클라이언트에서 아래처럼 바로 써볼 수 있습니다.
 ## 제한 사항
 
 - `Steam Deck` 요청에서는 공식 Steam 호환성 정보를 우선 확인합니다. 확인하지 못한 게임은 `Steam Deck 정보 없음`으로 표시합니다.
+- 공개 Worker는 인증 없이 열어 두는 구성이며, 운영 제어는 Cloudflare 쪽 보호 규칙을 전제로 합니다.
 - v1은 조회 전용입니다. wishlist, alerting, account sync는 포함하지 않습니다.
 - 가격은 API가 내려준 원본 통화 그대로 보여주며, 환율 변환은 하지 않습니다.
 - RAWG 제목 매칭은 보수적으로 잡아 두었습니다. 신뢰도가 낮으면 메타데이터 없이 가격 정보만 반환합니다.
@@ -201,6 +282,7 @@ MCP 클라이언트에서 아래처럼 바로 써볼 수 있습니다.
 npm test
 npm run typecheck
 npm run build
+npm run dev:worker
 ```
 
 ## npm 배포 체크리스트

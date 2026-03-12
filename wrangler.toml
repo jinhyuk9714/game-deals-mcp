@@ -1,0 +1,7 @@
+name = "game-deal-explorer-mcp"
+main = "src/worker.ts"
+compatibility_date = "2026-03-12"
+workers_dev = true
+
+[observability]
+enabled = true
