@@ -49,11 +49,27 @@ ITAD_API_KEY=... RAWG_API_KEY=... node dist/index.js
 
 키가 없어도 서버는 실행되지만, 툴을 호출하면 결과 대신 설정 안내 메시지를 돌려줍니다.
 
+## npm으로 실행하기
+
+패키지가 npm에 공개되면 로컬 빌드 없이 `npx`로 바로 실행할 수 있습니다.
+
+```bash
+npx -y game-deal-explorer-mcp
+```
+
+패키지 이름 충돌로 scoped 이름을 쓰게 되면 아래처럼 바꿔서 실행하면 됩니다.
+
+```bash
+npx -y @jinhyuk9714/game-deal-explorer-mcp
+```
+
+`npx`로 실행해도 API 키가 필요합니다. MCP 클라이언트 설정의 `env`에 `ITAD_API_KEY`, `RAWG_API_KEY`를 넣어 두면 됩니다.
+
 ## MCP 클라이언트 설정
 
 ### Codex
 
-Codex 설정 파일에 아래 블록을 넣습니다.
+로컬 저장소를 직접 실행할 때는 Codex 설정 파일에 아래 블록을 넣습니다.
 
 ```toml
 [mcp_servers.game-deals-mcp]
@@ -65,9 +81,20 @@ env = { ITAD_API_KEY = "your_isthereanydeal_api_key", RAWG_API_KEY = "your_rawg_
 
 두 개의 절대경로는 현재 로컬 프로젝트 경로에 맞게 바꿔 주세요.
 
+npm 패키지로 실행할 때는 아래처럼 `npx`를 사용하면 됩니다.
+
+```toml
+[mcp_servers.game-deals-mcp]
+command = "npx"
+args = ["-y", "game-deal-explorer-mcp"]
+env = { ITAD_API_KEY = "your_isthereanydeal_api_key", RAWG_API_KEY = "your_rawg_api_key" }
+```
+
+scoped 이름으로 배포됐다면 `args = ["-y", "@jinhyuk9714/game-deal-explorer-mcp"]`로 바꾸면 됩니다.
+
 ### Claude Desktop
 
-`claude_desktop_config.json`에 아래 서버를 추가합니다.
+로컬 저장소를 직접 실행할 때는 `claude_desktop_config.json`에 아래 서버를 추가합니다.
 
 ```json
 {
@@ -85,6 +112,25 @@ env = { ITAD_API_KEY = "your_isthereanydeal_api_key", RAWG_API_KEY = "your_rawg_
 ```
 
 `args`에는 이 저장소의 `dist/index.js` 절대경로를 넣으면 됩니다.
+
+npm 패키지로 실행할 때는 아래처럼 `npx`를 사용하면 됩니다.
+
+```json
+{
+  "mcpServers": {
+    "game-deals-mcp": {
+      "command": "npx",
+      "args": ["-y", "game-deal-explorer-mcp"],
+      "env": {
+        "ITAD_API_KEY": "your_isthereanydeal_api_key",
+        "RAWG_API_KEY": "your_rawg_api_key"
+      }
+    }
+  }
+}
+```
+
+scoped 이름으로 배포됐다면 `args`의 패키지 이름만 `@jinhyuk9714/game-deal-explorer-mcp`로 바꾸면 됩니다.
 
 ## 입력 예시
 
@@ -155,6 +201,41 @@ MCP 클라이언트에서 아래처럼 바로 써볼 수 있습니다.
 npm test
 npm run typecheck
 npm run build
+```
+
+## npm 배포 체크리스트
+
+공개 npm 배포는 수동으로 진행합니다. 배포 전에 아래 순서로 확인하면 됩니다.
+
+```bash
+npm run build
+npm test
+npm pack --dry-run
+```
+
+그다음 임시 디렉터리에서 tarball 설치 스모크를 확인합니다.
+
+```bash
+tmpdir=$(mktemp -d)
+npm pack --silent
+mv game-deal-explorer-mcp-*.tgz "$tmpdir/"
+cd "$tmpdir"
+npm init -y >/dev/null
+npm install ./game-deal-explorer-mcp-*.tgz
+npx game-deal-explorer-mcp
+```
+
+마지막으로 npm 로그인 상태를 확인하고 publish 합니다.
+
+```bash
+npm whoami
+npm publish
+```
+
+이름 충돌이 나면 패키지 이름을 `@jinhyuk9714/game-deal-explorer-mcp`로 바꾸고 아래처럼 다시 publish 하면 됩니다.
+
+```bash
+npm publish --access public
 ```
 
 ## 라이선스
