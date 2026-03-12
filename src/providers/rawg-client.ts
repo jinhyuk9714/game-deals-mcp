@@ -5,6 +5,7 @@ import { bindFetchImplementation } from "./fetch-impl.js";
 export interface RawgMetadata extends TitleCandidate {
   genres: string[];
   platforms: string[];
+  tags: string[];
   rating?: number | null;
   metacritic?: number | null;
   multiplayer: boolean;
@@ -80,6 +81,7 @@ export class RawgClient {
       released: item.released ?? null,
       genres: (item.genres ?? []).map((genre) => genre.name),
       platforms: (item.platforms ?? []).map((platform) => platform.platform.name),
+      tags: (item.tags ?? []).map((tag) => tag.name),
       rating: item.rating ?? null,
       metacritic: item.metacritic ?? null,
       multiplayer: inferMultiplayer(item.tags, item.genres)

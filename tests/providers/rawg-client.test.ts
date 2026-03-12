@@ -37,6 +37,7 @@ describe("RawgClient.searchGames", () => {
         released: "2024-02-20",
         genres: ["Strategy", "Indie"],
         platforms: ["PC", "macOS"],
+        tags: ["Singleplayer"],
         rating: 4.6,
         metacritic: 90,
         multiplayer: false
@@ -78,6 +79,7 @@ describe("RawgClient.searchGames", () => {
         released: "2020-09-17",
         genres: ["Action", "Indie"],
         platforms: ["PC", "PlayStation 5"],
+        tags: ["Roguelike"],
         rating: 4.7,
         metacritic: 93,
         multiplayer: false

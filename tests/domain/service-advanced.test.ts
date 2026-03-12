@@ -631,6 +631,161 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(result.summary).toContain("Card Deckbuilder Expedition");
   });
 
+  it("recovers non-Steam deckbuilding requests from catalog candidates with deckbuilder tags", async () => {
+    const resolveOptions: Array<unknown> = [];
+
+    const service = new GameDealService({
+      async findDeals() {
+        return [];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title, _country, options) {
+        resolveOptions.push(options ?? null);
+
+        if (title !== "Monster Train") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "Monster Train",
+          matches: [
+            {
+              id: "monster-train",
+              title: "Monster Train",
+              price: { amount: 9150, currency: "KRW" },
+              regular: { amount: 30500, currency: "KRW" },
+              cut: 70,
+              genres: ["Strategy", "Roguelike"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.4,
+              metacritic: 86,
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles(input) {
+        if (!input.tags?.includes("roguelike-deckbuilder")) {
+          return [];
+        }
+
+        return [
+          {
+            title: "Monster Train",
+            released: "2020-05-21",
+            genres: ["Strategy", "Roguelike"],
+            platforms: ["PC"],
+            rating: 4.4,
+            metacritic: 86,
+            multiplayer: false,
+            tags: ["Roguelike", "Roguelike-Deckbuilder", "Card Battler"]
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "짧게 하기 좋은 덱빌딩 할인 게임",
+      budget: 15000,
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Monster Train" });
+    expect(result.summary).toContain("Monster Train");
+    expect(resolveOptions).toContainEqual(expect.not.objectContaining({ dealsOnly: true }));
+  });
+
+  it("retries deckbuilding recovery with broader catalog signals when the strict query is empty", async () => {
+    const discoverCalls: Array<{ tags: string[] | undefined; genres: string[] | undefined }> = [];
+
+    const service = new GameDealService({
+      async findDeals() {
+        return [];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title) {
+        if (title !== "Slay the Spire") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "Slay the Spire",
+          matches: [
+            {
+              id: "slay-the-spire",
+              title: "Slay the Spire",
+              price: { amount: 6750, currency: "KRW" },
+              regular: { amount: 27000, currency: "KRW" },
+              cut: 75,
+              genres: ["Strategy", "Card"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.7,
+              metacritic: 89,
+              steamDeckCompatibility: {
+                status: "playable",
+                details: ["Runs well on Steam Deck"],
+                steamAppId: 646570,
+                source: "steam"
+              },
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles(input) {
+        discoverCalls.push({ tags: input.tags, genres: input.genres });
+
+        if (
+          input.tags?.includes("roguelike-deckbuilder") &&
+          input.genres?.includes("card")
+        ) {
+          return [];
+        }
+
+        if (input.tags?.includes("roguelike-deckbuilder")) {
+          return [
+            {
+              title: "Slay the Spire",
+              released: "2019-01-23",
+              genres: ["Strategy", "Card"],
+              platforms: ["PC"],
+              tags: ["Singleplayer", "Deckbuilder"],
+              rating: 4.7,
+              metacritic: 89,
+              multiplayer: false
+            }
+          ];
+        }
+
+        return [];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "짧게 하기 좋은 덱빌딩 게임",
+      budget: 15000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ title: "Slay the Spire" });
+    expect(discoverCalls).toEqual(
+      expect.arrayContaining([
+        { tags: ["roguelike-deckbuilder"], genres: ["card"] },
+        { tags: ["roguelike-deckbuilder"], genres: [] }
+      ])
+    );
+  });
+
   it("requires multi-genre intent matches for action roguelite recommendations", async () => {
     const service = new GameDealService({
       async findDeals() {
@@ -680,6 +835,159 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(result.matches.map((match) => (match as { title: string }).title)).toEqual([
       "Action Roguelite Hero"
     ]);
+  });
+
+  it("recovers non-Steam action roguelite requests from catalog candidates", async () => {
+    const resolveOptions: Array<unknown> = [];
+
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "action-only",
+            title: "Trailblazers",
+            price: { amount: 1763, currency: "KRW" },
+            regular: { amount: 44080, currency: "KRW" },
+            cut: 96,
+            genres: ["Action"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 3.17,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title, _country, options) {
+        resolveOptions.push(options ?? null);
+
+        if (title !== "Warm Snow") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "Warm Snow",
+          matches: [
+            {
+              id: "warm-snow",
+              title: "Warm Snow",
+              price: { amount: 14000, currency: "KRW" },
+              regular: { amount: 20000, currency: "KRW" },
+              cut: 30,
+              genres: ["Action", "Roguelike"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.3,
+              metacritic: 79,
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles() {
+        return [
+          {
+            title: "Warm Snow",
+            released: "2022-01-19",
+            genres: ["Action"],
+            platforms: ["PC"],
+            rating: 4.3,
+            metacritic: 79,
+            multiplayer: false,
+            tags: ["Roguelike", "Action"]
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "가볍게 즐길 액션 로그라이트 추천해줘",
+      budget: 18000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Warm Snow" });
+    expect(result.matches.map((match) => (match as { title: string }).title)).toEqual(["Warm Snow"]);
+    expect(resolveOptions).toContainEqual(expect.not.objectContaining({ dealsOnly: true }));
+  });
+
+  it("recovers Steam Deck roguelike recommendations after discover fallback returns nothing", async () => {
+    let discoverCallCount = 0;
+
+    const service = new GameDealService({
+      async findDeals() {
+        return [];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title) {
+        if (title !== "The King is Watching") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "The King is Watching",
+          matches: [
+            {
+              id: "the-king-is-watching",
+              title: "The King is Watching",
+              price: { amount: 9680, currency: "KRW" },
+              regular: { amount: 14892, currency: "KRW" },
+              cut: 35,
+              genres: ["Strategy"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.36,
+              metacritic: null,
+              steamDeckCompatibility: {
+                status: "playable",
+                details: ["Works on Steam Deck"],
+                steamAppId: 2753900,
+                source: "steam"
+              },
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles() {
+        discoverCallCount += 1;
+
+        if (discoverCallCount === 1) {
+          return [];
+        }
+
+        return [
+          {
+            title: "The King is Watching",
+            released: "2025-07-21",
+            genres: ["Strategy"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Singleplayer"],
+            rating: 4.36,
+            metacritic: null,
+            multiplayer: false
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+      budget: 20000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
+    expect(discoverCallCount).toBe(2);
   });
 
   it("returns fewer-but-better results for high-rating strategy requests", async () => {
@@ -784,7 +1092,7 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(resolveCount).toBe(8);
+    expect(resolveCount).toBe(5);
   });
 
   it("deduplicates already compacted Steam Deck warnings in recommendation results", async () => {
