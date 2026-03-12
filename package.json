@@ -1,5 +1,5 @@
 {
-  "name": "game-deal-explorer-mcp",
+  "name": "game-deals-mcp",
   "version": "0.1.0",
   "description": "IsThereAnyDeal, RAWG, Steam 정보를 바탕으로 할인 게임을 찾는 MCP 서버",
   "type": "module",

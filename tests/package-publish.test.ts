@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 describe("publish package metadata", () => {
   it("is configured for public npm publishing", () => {
     const manifest = JSON.parse(readFileSync("package.json", "utf8")) as {
+      name?: string;
       private?: boolean;
       license?: string;
       repository?: unknown;
@@ -14,6 +15,7 @@ describe("publish package metadata", () => {
       author?: string;
     };
 
+    expect(manifest.name).toBe("game-deals-mcp");
     expect(manifest.private).not.toBe(true);
     expect(manifest.license).toBe("MIT");
     expect(manifest.repository).toBeTruthy();

@@ -17,7 +17,7 @@ import {
 } from "./tools/handlers.js";
 
 export const MCP_SERVER_INFO = {
-  name: "game-deal-explorer-mcp",
+  name: "game-deals-mcp",
   version: "0.1.0"
 } as const;
 

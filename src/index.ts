@@ -8,7 +8,7 @@ async function main() {
   const server = await createMcpServer();
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("game-deal-explorer-mcp running on stdio");
+  console.error("game-deals-mcp running on stdio");
 }
 
 main().catch((error) => {

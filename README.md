@@ -1,6 +1,6 @@
-# Game Deal Explorer MCP
+# Game Deals MCP
 
-`Game Deal Explorer MCP`는 지금 할인 중인 게임 가운데 실제로 살 만한 게임을 찾도록 도와주는 MCP 서버입니다. 가격 정보는 [IsThereAnyDeal](https://docs.isthereanydeal.com/)에서, 장르와 평점 같은 메타데이터는 [RAWG](https://rawg.io/apidocs)에서, `Steam Deck` 호환성 상태는 공식 Steam 데이터에서 확인합니다. 기본 국가는 `KR`이며, 각 툴에서 `country` 값을 따로 지정할 수 있습니다.
+`Game Deals MCP`는 지금 할인 중인 게임 가운데 실제로 살 만한 게임을 찾도록 도와주는 MCP 서버입니다. 가격 정보는 [IsThereAnyDeal](https://docs.isthereanydeal.com/)에서, 장르와 평점 같은 메타데이터는 [RAWG](https://rawg.io/apidocs)에서, `Steam Deck` 호환성 상태는 공식 Steam 데이터에서 확인합니다. 기본 국가는 `KR`이며, 각 툴에서 `country` 값을 따로 지정할 수 있습니다.
 
 저장소: [jinhyuk9714/game-deals-mcp](https://github.com/jinhyuk9714/game-deals-mcp)
 
@@ -53,7 +53,7 @@ npm run dev:worker
 npm run deploy:worker
 ```
 
-배포가 끝나면 `https://game-deal-explorer-mcp.<your-workers-subdomain>.workers.dev` 형태의 주소가 생깁니다. MCP 클라이언트에는 이 주소 뒤에 `/mcp`를 붙여 사용하면 됩니다.
+배포가 끝나면 `https://game-deals-mcp.<your-workers-subdomain>.workers.dev` 형태의 주소가 생깁니다. MCP 클라이언트에는 이 주소 뒤에 `/mcp`를 붙여 사용하면 됩니다.
 
 - 메타데이터: `GET /`
 - 헬스체크: `GET /health`
@@ -81,14 +81,14 @@ npm run deploy:worker
 Codex에서는 CLI로 한 번 등록하는 방법을 가장 권장합니다.
 
 ```bash
-codex mcp add game-deals-mcp --url https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp
+codex mcp add game-deals-mcp --url https://game-deals-mcp.jinhyuk9714.workers.dev/mcp
 ```
 
 직접 설정 파일을 수정하고 싶다면 `~/.codex/config.toml` 또는 프로젝트의 `.codex/config.toml`에 아래처럼 넣을 수도 있습니다.
 
 ```toml
 [mcp_servers.game-deals-mcp]
-url = "https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp"
+url = "https://game-deals-mcp.jinhyuk9714.workers.dev/mcp"
 ```
 
 ### Claude
@@ -96,7 +96,7 @@ url = "https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp"
 Claude에서는 Custom Connectors의 remote MCP 설정 화면에서 같은 `/mcp` URL을 넣으면 됩니다.
 
 ```text
-https://game-deal-explorer-mcp.jinhyuk9714.workers.dev/mcp
+https://game-deals-mcp.jinhyuk9714.workers.dev/mcp
 ```
 
 ## 로컬 실행
@@ -134,13 +134,13 @@ ITAD_API_KEY=... RAWG_API_KEY=... node dist/index.js
 패키지가 npm에 공개되면 로컬 빌드 없이 `npx`로 바로 실행할 수 있습니다.
 
 ```bash
-npx -y game-deal-explorer-mcp
+npx -y game-deals-mcp
 ```
 
 패키지 이름 충돌로 scoped 이름을 쓰게 되면 아래처럼 바꿔서 실행하면 됩니다.
 
 ```bash
-npx -y @jinhyuk9714/game-deal-explorer-mcp
+npx -y @jinhyuk9714/game-deals-mcp
 ```
 
 `npx`로 실행해도 API 키가 필요합니다. MCP 클라이언트 설정의 `env`에 `ITAD_API_KEY`, `RAWG_API_KEY`를 넣어 두면 됩니다.
@@ -166,11 +166,11 @@ npm 패키지로 실행할 때는 아래처럼 `npx`를 사용하면 됩니다.
 ```toml
 [mcp_servers.game-deals-mcp]
 command = "npx"
-args = ["-y", "game-deal-explorer-mcp"]
+args = ["-y", "game-deals-mcp"]
 env = { ITAD_API_KEY = "your_isthereanydeal_api_key", RAWG_API_KEY = "your_rawg_api_key" }
 ```
 
-scoped 이름으로 배포됐다면 `args = ["-y", "@jinhyuk9714/game-deal-explorer-mcp"]`로 바꾸면 됩니다.
+scoped 이름으로 배포됐다면 `args = ["-y", "@jinhyuk9714/game-deals-mcp"]`로 바꾸면 됩니다.
 
 ### Claude Desktop
 
@@ -200,7 +200,7 @@ npm 패키지로 실행할 때는 아래처럼 `npx`를 사용하면 됩니다.
   "mcpServers": {
     "game-deals-mcp": {
       "command": "npx",
-      "args": ["-y", "game-deal-explorer-mcp"],
+      "args": ["-y", "game-deals-mcp"],
       "env": {
         "ITAD_API_KEY": "your_isthereanydeal_api_key",
         "RAWG_API_KEY": "your_rawg_api_key"
@@ -210,7 +210,7 @@ npm 패키지로 실행할 때는 아래처럼 `npx`를 사용하면 됩니다.
 }
 ```
 
-scoped 이름으로 배포됐다면 `args`의 패키지 이름만 `@jinhyuk9714/game-deal-explorer-mcp`로 바꾸면 됩니다.
+scoped 이름으로 배포됐다면 `args`의 패키지 이름만 `@jinhyuk9714/game-deals-mcp`로 바꾸면 됩니다.
 
 ## 입력 예시
 
@@ -300,11 +300,11 @@ npm pack --dry-run
 ```bash
 tmpdir=$(mktemp -d)
 npm pack --silent
-mv game-deal-explorer-mcp-*.tgz "$tmpdir/"
+mv game-deals-mcp-*.tgz "$tmpdir/"
 cd "$tmpdir"
 npm init -y >/dev/null
-npm install ./game-deal-explorer-mcp-*.tgz
-npx game-deal-explorer-mcp
+npm install ./game-deals-mcp-*.tgz
+npx game-deals-mcp
 ```
 
 마지막으로 npm 로그인 상태를 확인하고 publish 합니다.
@@ -314,7 +314,7 @@ npm whoami
 npm publish
 ```
 
-이름 충돌이 나면 패키지 이름을 `@jinhyuk9714/game-deal-explorer-mcp`로 바꾸고 아래처럼 다시 publish 하면 됩니다.
+이름 충돌이 나면 패키지 이름을 `@jinhyuk9714/game-deals-mcp`로 바꾸고 아래처럼 다시 publish 하면 됩니다.
 
 ```bash
 npm publish --access public

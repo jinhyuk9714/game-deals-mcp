@@ -24,7 +24,7 @@ describe("createWorkerApp", () => {
 
     expect(root.status).toBe(200);
     await expect(root.json()).resolves.toMatchObject({
-      name: "game-deal-explorer-mcp",
+      name: "game-deals-mcp",
       endpoints: {
         health: "/health",
         mcp: "/mcp"
