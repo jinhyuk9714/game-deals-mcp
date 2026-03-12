@@ -1,10 +1,20 @@
 {
   "name": "game-deal-explorer-mcp",
   "version": "0.1.0",
-  "description": "A Node.js stdio MCP server for exploring current game deals with IsThereAnyDeal and RAWG metadata.",
+  "description": "Node.js stdio MCP server for discovering discounted games with IsThereAnyDeal and RAWG",
   "type": "module",
   "private": true,
   "main": "dist/index.js",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "nodejs",
+    "typescript",
+    "game-deals",
+    "steam",
+    "rawg",
+    "isthereanydeal"
+  ],
   "bin": {
     "game-deal-explorer-mcp": "./dist/index.js"
   },

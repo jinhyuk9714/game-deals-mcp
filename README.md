@@ -1,68 +1,78 @@
 # Game Deal Explorer MCP
 
-`Game Deal Explorer MCP` is a public Node.js stdio MCP server that helps Korean users decide which discounted games are worth buying right now.
+`Game Deal Explorer MCP` is a Node.js stdio MCP server for finding discounted games that are actually worth buying, not just cheap. It combines price data from [IsThereAnyDeal](https://docs.isthereanydeal.com/) with game metadata from [RAWG](https://rawg.io/apidocs), defaults to the `KR` market, and supports country overrides for every tool.
 
-It combines:
+Repository: [jinhyuk9714/game-deals-mcp](https://github.com/jinhyuk9714/game-deals-mcp)
 
-- `IsThereAnyDeal` for current price, discount rate, store comparison, and historical low data
-- `RAWG` for genres, platforms, ratings, and basic game metadata
+## What It Does
 
-The default market is `KR`, and all tools allow a `country` override.
-
-## Features
-
-- `discover_deals`: find discounted games by budget, genre, platform, multiplayer, and sort order
-- `compare_game_price`: compare a specific game's current price, discount, and historical low
-- `recommend_sale_games`: recommend sale games from structured preferences instead of free-form search
-- `explain_deal_value`: explain whether the current deal is close to the historical low
+- `discover_deals`: search current discounts by budget, genre, platform, multiplayer, and sort order
+- `compare_game_price`: compare one game's current price, discount, store offers, and historical low
+- `recommend_sale_games`: turn structured preferences into sale recommendations
+- `explain_deal_value`: explain whether the current deal looks good versus the historical low
 
 ## Requirements
 
 - Node.js `22+`
-- An `IsThereAnyDeal` API key
-- A `RAWG` API key
+- `IsThereAnyDeal` API key
+- `RAWG` API key
 
-Official docs:
+## Quick Start
 
-- [IsThereAnyDeal API docs](https://docs.isthereanydeal.com/)
-- [RAWG API docs](https://rawg.io/apidocs)
-
-## Install
+Install dependencies and create your env file:
 
 ```bash
 npm install
 cp .env.example .env
 ```
 
-Fill in your keys:
+Get your API keys:
+
+- `IsThereAnyDeal`: create an app at [isthereanydeal.com/apps](https://isthereanydeal.com/apps/)
+- `RAWG`: request a key at [rawg.io/apidocs](https://rawg.io/apidocs)
+
+Add them to `.env`:
 
 ```bash
 ITAD_API_KEY=your_isthereanydeal_api_key
 RAWG_API_KEY=your_rawg_api_key
 ```
 
-Build the server:
+Build and run the server:
 
 ```bash
 npm run build
-```
-
-Run it locally:
-
-```bash
 ITAD_API_KEY=... RAWG_API_KEY=... node dist/index.js
 ```
 
-## Claude Desktop / Codex Config
+If the keys are missing, the server still starts and exposes the tools, but tool calls return setup warnings instead of fake results.
 
-Add this MCP server to your client config:
+## MCP Client Setup
+
+### Codex
+
+Add this block to your Codex config:
+
+```toml
+[mcp_servers.game-deals-mcp]
+command = "node"
+args = ["/absolute/path/to/game-deals-mcp/dist/index.js"]
+cwd = "/absolute/path/to/game-deals-mcp"
+env = { ITAD_API_KEY = "your_isthereanydeal_api_key", RAWG_API_KEY = "your_rawg_api_key" }
+```
+
+Replace both absolute paths with your local project path.
+
+### Claude Desktop
+
+Add this server to `claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "game-deal-explorer": {
+    "game-deals-mcp": {
       "command": "node",
-      "args": ["/absolute/path/to/game-deal-explorer-mcp/dist/index.js"],
+      "args": ["/absolute/path/to/game-deals-mcp/dist/index.js"],
       "env": {
         "ITAD_API_KEY": "your_isthereanydeal_api_key",
         "RAWG_API_KEY": "your_rawg_api_key"
@@ -72,9 +82,9 @@ Add this MCP server to your client config:
 }
 ```
 
-If the API keys are missing, the server still starts and exposes the tools, but tool calls return a friendly setup warning instead of fake results.
+Use the absolute path to this repository's `dist/index.js`.
 
-## Tool Inputs
+## Example Tool Inputs
 
 ### `discover_deals`
 
@@ -130,28 +140,21 @@ Try these in your MCP client:
 5. `Hades II 현재 할인 딜이 바로 사도 될 수준인지 설명해줘`
 6. `한국 가격 기준으로 지금 50% 이상 할인 중인 전략 게임 보여줘`
 
-## Development
+## Limitations
 
-Run the test suite:
+- `Steam Deck` recommendations currently use a `PC proxy`, not official Deck compatibility data.
+- v1 is read-only. There is no wishlist, alerting, or account sync.
+- Prices are shown in the source currency returned by the API. There is no FX conversion.
+- RAWG title matching is conservative. If confidence is low, the server returns price data without metadata enrichment.
+
+## Development
 
 ```bash
 npm test
-```
-
-Run a typecheck:
-
-```bash
 npm run typecheck
-```
-
-Build production output:
-
-```bash
 npm run build
 ```
 
-## Notes
+## License
 
-- This project is read-only in v1. There is no wishlist, alerting, or account sync.
-- Currency values are shown in the source currency returned by the API. v1 does not convert exchange rates.
-- RAWG matching is conservative. If title confidence is low, the server returns price data without metadata enrichment.
+MIT
