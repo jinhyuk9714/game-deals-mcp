@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 
 import { GameDealService } from "../src/domain/service.js";
 import { createWorkerApp } from "../src/worker.js";
@@ -52,10 +54,10 @@ describe("createWorkerApp", () => {
       })
     });
 
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(200);
   });
 
-  it("creates an MCP session for initialize and rejects unknown session ids", async () => {
+  it("handles initialize without issuing an MCP session header", async () => {
     const app = createWorkerApp({ service: stubService });
 
     const initResponse = await app.request("https://example.com/mcp", {
@@ -80,24 +82,29 @@ describe("createWorkerApp", () => {
     });
 
     expect(initResponse.status).toBe(200);
-    expect(initResponse.headers.get("mcp-session-id")).toBeTruthy();
+    expect(initResponse.headers.get("mcp-session-id")).toBeNull();
+  });
 
-    const badSessionResponse = await app.request("https://example.com/mcp", {
-      method: "POST",
-      headers: {
-        accept: "application/json, text/event-stream",
-        "content-type": "application/json",
-        "mcp-session-id": "missing-session"
-      },
-      body: JSON.stringify({
-        jsonrpc: "2.0",
-        id: 2,
-        method: "tools/list",
-        params: {}
-      })
+  it("supports SDK clients even when each request hits a fresh worker instance", async () => {
+    const client = new Client({ name: "worker-test", version: "1.0.0" });
+    const transport = new StreamableHTTPClientTransport(new URL("https://example.com/mcp"), {
+      fetch: async (input, init) => {
+        const request = input instanceof Request ? input : new Request(input, init);
+
+        return createWorkerApp({ service: stubService }).fetch(request);
+      }
     });
 
-    expect(badSessionResponse.status).toBe(404);
+    await client.connect(transport as Parameters<Client["connect"]>[0]);
+
+    const tools = await client.listTools();
+
+    expect(tools.tools.map((tool) => tool.name).sort()).toEqual([
+      "compare_game_price",
+      "discover_deals",
+      "explain_deal_value",
+      "recommend_sale_games"
+    ]);
   });
 
   it("handles CORS preflight for public remote MCP usage", async () => {

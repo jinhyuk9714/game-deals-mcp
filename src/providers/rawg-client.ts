@@ -1,5 +1,6 @@
 import type { TitleCandidate } from "../domain/match.js";
 import { TtlCache } from "../cache/ttl-cache.js";
+import { bindFetchImplementation } from "./fetch-impl.js";
 
 export interface RawgMetadata extends TitleCandidate {
   genres: string[];
@@ -24,7 +25,7 @@ export class RawgClient {
 
   constructor(options: RawgClientOptions) {
     this.apiKey = options.apiKey;
-    this.fetchImpl = options.fetch ?? fetch;
+    this.fetchImpl = bindFetchImplementation(options.fetch);
     this.baseUrl = options.baseUrl ?? "https://api.rawg.io/api";
     this.cache = options.cache ?? new TtlCache<string, unknown>();
   }

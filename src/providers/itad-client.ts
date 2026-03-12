@@ -1,5 +1,6 @@
 import type { DiscoverFilters, DealCandidate, PricePoint, StoreOffer } from "../domain/score.js";
 import { TtlCache } from "../cache/ttl-cache.js";
+import { bindFetchImplementation } from "./fetch-impl.js";
 
 export interface DealResolution {
   kind: "match" | "ambiguous" | "not-found";
@@ -29,7 +30,7 @@ export class IsThereAnyDealClient {
 
   constructor(options: ItadClientOptions) {
     this.apiKey = options.apiKey;
-    this.fetchImpl = options.fetch ?? fetch;
+    this.fetchImpl = bindFetchImplementation(options.fetch);
     this.baseUrl = options.baseUrl ?? "https://api.isthereanydeal.com";
     this.cache = options.cache ?? new TtlCache<string, unknown>();
   }

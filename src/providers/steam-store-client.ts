@@ -1,5 +1,6 @@
 import { TtlCache } from "../cache/ttl-cache.js";
 import type { DealCandidate, DealsEnrichment, SteamDeckCompatibility } from "../domain/score.js";
+import { bindFetchImplementation } from "./fetch-impl.js";
 
 interface SteamStoreClientOptions {
   fetch?: typeof fetch;
@@ -23,7 +24,7 @@ export class SteamStoreClient {
   private readonly cache: TtlCache<string, unknown>;
 
   constructor(options: SteamStoreClientOptions = {}) {
-    this.fetchImpl = options.fetch ?? fetch;
+    this.fetchImpl = bindFetchImplementation(options.fetch);
     this.baseUrl = options.baseUrl ?? "https://store.steampowered.com";
     this.cache = options.cache ?? new TtlCache<string, unknown>();
   }

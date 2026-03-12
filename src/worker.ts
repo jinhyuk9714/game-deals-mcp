@@ -1,5 +1,4 @@
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
-import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 
@@ -7,21 +6,12 @@ import type { ConfigSource } from "./config.js";
 import { GameDealService } from "./domain/service.js";
 import { createDefaultService, createMcpServer, MCP_SERVER_INFO } from "./server.js";
 
-const MCP_SESSION_HEADER = "mcp-session-id";
-const defaultSessions = new Map<string, WorkerSession>();
-
 let cachedWorkerApp: Hono<{ Bindings: ConfigSource }> | undefined;
 let cachedEnvKey: string | undefined;
-
-interface WorkerSession {
-  server: McpServer;
-  transport: WebStandardStreamableHTTPServerTransport;
-}
 
 interface CreateWorkerAppOptions {
   service?: GameDealService;
   env?: ConfigSource;
-  sessionStore?: Map<string, WorkerSession>;
 }
 
 function createJsonErrorResponse(status: number, code: number, message: string) {
@@ -47,34 +37,17 @@ function envKey(env: ConfigSource | undefined) {
   return `${env?.ITAD_API_KEY ?? ""}:${env?.RAWG_API_KEY ?? ""}`;
 }
 
-async function createSessionRuntime(
-  service: GameDealService,
-  sessions: Map<string, WorkerSession>
-) {
-  let runtime: WorkerSession | undefined;
-
-  const transport = new WebStandardStreamableHTTPServerTransport({
-    sessionIdGenerator: () => crypto.randomUUID(),
-    onsessioninitialized(sessionId) {
-      if (runtime) {
-        sessions.set(sessionId, runtime);
-      }
-    },
-    onsessionclosed(sessionId) {
-      sessions.delete(sessionId);
-    }
-  });
+async function createRequestRuntime(service: GameDealService) {
+  const transport = new WebStandardStreamableHTTPServerTransport();
 
   const server = await createMcpServer({ service });
-  runtime = { server, transport };
   await server.connect(transport);
 
-  return runtime;
+  return { server, transport };
 }
 
 export function createWorkerApp(options: CreateWorkerAppOptions = {}) {
   const service = options.service ?? createDefaultService(options.env);
-  const sessions = options.sessionStore ?? new Map<string, WorkerSession>();
   const app = new Hono<{ Bindings: ConfigSource }>();
 
   app.use(
@@ -111,20 +84,8 @@ export function createWorkerApp(options: CreateWorkerAppOptions = {}) {
   app.options("/mcp", (c) => c.body(null, 204));
 
   app.on(["GET", "POST", "DELETE"], "/mcp", async (c) => {
-    const request = c.req.raw;
-    const sessionId = request.headers.get(MCP_SESSION_HEADER);
-
-    if (sessionId) {
-      const session = sessions.get(sessionId);
-      if (!session) {
-        return createJsonErrorResponse(404, -32001, "Session not found");
-      }
-
-      return session.transport.handleRequest(request);
-    }
-
-    const runtime = await createSessionRuntime(service, sessions);
-    return runtime.transport.handleRequest(request);
+    const runtime = await createRequestRuntime(service);
+    return runtime.transport.handleRequest(c.req.raw);
   });
 
   return app;
@@ -134,12 +95,8 @@ function getOrCreateWorkerApp(env: ConfigSource) {
   const key = envKey(env);
 
   if (!cachedWorkerApp || cachedEnvKey !== key) {
-    defaultSessions.clear();
     cachedEnvKey = key;
-    cachedWorkerApp = createWorkerApp({
-      env,
-      sessionStore: defaultSessions
-    });
+    cachedWorkerApp = createWorkerApp({ env });
   }
 
   return cachedWorkerApp;

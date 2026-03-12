@@ -21,7 +21,7 @@
 
 ## 원격 MCP 배포
 
-이 프로젝트는 `Cloudflare Workers` 기반 원격 MCP를 기본 경로로 사용합니다. 기존 `stdio` 실행은 그대로 유지하지만, 실제 사용자는 배포된 `workers.dev` URL에 붙는 쪽이 더 간단합니다.
+이 프로젝트는 `Cloudflare Workers` 기반 원격 MCP를 기본 경로로 사용합니다. 기존 `stdio` 실행은 그대로 유지하지만, 실제 사용자는 배포된 `workers.dev` URL에 붙는 쪽이 더 간단합니다. 원격 Worker는 request 간 상태를 저장하지 않는 sessionless stateless 구성이며, 서버 푸시형 기능보다 도구 호출 중심 사용에 맞춰져 있습니다.
 
 먼저 의존성을 설치합니다.
 
@@ -74,7 +74,7 @@ npm run deploy:worker
 
 ## 원격 MCP 연결
 
-배포된 Worker는 인증 없이 공개할 수 있지만, 운영은 Cloudflare 쪽 rate limit 규칙을 전제로 합니다.
+배포된 Worker는 인증 없이 공개할 수 있지만, 운영은 Cloudflare 쪽 rate limit 규칙을 전제로 합니다. 원격 연결에서는 별도 세션 헤더를 직접 다룰 필요가 없습니다.
 
 ### Codex
 
