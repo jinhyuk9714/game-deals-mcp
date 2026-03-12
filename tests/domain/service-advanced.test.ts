@@ -210,6 +210,90 @@ describe("GameDealService.discoverDeals", () => {
     expect(result.matches).toHaveLength(2);
     expect(result.matches.map((match) => (match as { title: string }).title)).toContain("Inscryption");
   });
+
+  it("filters out unsupported Steam Deck titles and keeps unknown ones only when results are sparse", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "1",
+            title: "Verified Deck Game",
+            price: { amount: 12000, currency: "KRW" },
+            regular: { amount: 24000, currency: "KRW" },
+            cut: 50,
+            genres: ["Roguelike"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.7,
+            metacritic: 88,
+            steamDeckCompatibility: {
+              status: "verified",
+              details: ["Interface text is legible"],
+              steamAppId: 100,
+              source: "steam"
+            }
+          },
+          {
+            id: "2",
+            title: "Unknown Deck Game",
+            price: { amount: 11000, currency: "KRW" },
+            regular: { amount: 22000, currency: "KRW" },
+            cut: 50,
+            genres: ["Roguelike"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.5,
+            metacritic: 84,
+            steamDeckCompatibility: {
+              status: "unknown",
+              details: [],
+              source: "steam"
+            }
+          },
+          {
+            id: "3",
+            title: "Unsupported Deck Game",
+            price: { amount: 9000, currency: "KRW" },
+            regular: { amount: 18000, currency: "KRW" },
+            cut: 50,
+            genres: ["Roguelike"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.8,
+            metacritic: 90,
+            steamDeckCompatibility: {
+              status: "unsupported",
+              details: [],
+              steamAppId: 300,
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return { deals, warnings: ["Steam Deck 호환성 정보를 확인하지 못했습니다."] };
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.discoverDeals({
+      country: "KR",
+      budget: 20000,
+      genres: ["Roguelike"],
+      platforms: ["Steam Deck"],
+      sort: "best-value"
+    });
+
+    expect(result.matches.map((match) => (match as { title: string }).title)).toEqual([
+      "Verified Deck Game",
+      "Unknown Deck Game"
+    ]);
+    expect(result.summary).toContain("Steam Deck Verified");
+    expect(result.summary).toContain("Steam Deck 정보 없음");
+    expect(result.warnings).not.toContain("Steam Deck 호환성은 현재 PC 플랫폼 기준으로 근사해 추천합니다.");
+  });
 });
 
 describe("GameDealService.recommendSaleGames", () => {

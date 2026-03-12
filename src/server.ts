@@ -7,6 +7,7 @@ import { TtlCache } from "./cache/ttl-cache.js";
 import { GameDataGateway } from "./providers/game-data-gateway.js";
 import { IsThereAnyDealClient } from "./providers/itad-client.js";
 import { RawgClient } from "./providers/rawg-client.js";
+import { SteamStoreClient } from "./providers/steam-store-client.js";
 import {
   callCompareGamePriceTool,
   callDiscoverDealsTool,
@@ -121,6 +122,9 @@ function createDefaultService() {
     }),
     new RawgClient({
       apiKey: config.RAWG_API_KEY,
+      cache: sharedCache
+    }),
+    new SteamStoreClient({
       cache: sharedCache
     })
   );

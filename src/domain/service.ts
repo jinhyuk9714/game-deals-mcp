@@ -26,7 +26,10 @@ export interface CatalogDiscoveryInput {
 
 export interface GameProviders {
   findDeals(args: DiscoverFilters & { country: string }): Promise<DealCandidate[]>;
-  enrichDeals(deals: DealCandidate[]): Promise<DealCandidate[] | DealsEnrichment>;
+  enrichDeals(
+    deals: DealCandidate[],
+    options?: { includeSteamDeckCompatibility?: boolean }
+  ): Promise<DealCandidate[] | DealsEnrichment>;
   resolveDeal?(
     title: string,
     country: string,
@@ -51,6 +54,8 @@ export class GameDealService {
   async discoverDeals(args: DiscoverFilters & { country: string }): Promise<CompareResult> {
     const country = args.country || "KR";
     const preferredShops = preferredShopsFromContext(args.platforms);
+    const steamContext = (preferredShops?.length ?? 0) > 0;
+    const steamDeckRequest = hasSteamDeckRequest(args.platforms);
     const query = {
       budget: args.budget,
       genres: args.genres ?? [],
@@ -75,20 +80,24 @@ export class GameDealService {
     }
 
     const warnings: string[] = [];
-    if (hasSteamDeckRequest(args.platforms)) {
-      warnings.push("Steam Deck 호환성은 현재 PC 플랫폼 기준으로 근사해 추천합니다.");
-    }
     let deals = baseDeals;
 
     try {
-      const enrichment = normalizeEnrichmentResult(await this.providers.enrichDeals(baseDeals));
+      const enrichment = normalizeEnrichmentResult(
+        await this.providers.enrichDeals(baseDeals, {
+          includeSteamDeckCompatibility: steamContext
+        })
+      );
       deals = enrichment.deals;
       warnings.push(...enrichment.warnings);
     } catch (error) {
       warnings.push(toWarning(error, "RAWG 메타데이터를 불러오지 못해 가격 정보만 표시했습니다."));
     }
 
-    let rankedDeals = scoreDealCandidates(deals, { ...args, preferredShops });
+    let rankedDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(deals, { ...args, preferredShops }),
+      steamDeckRequest
+    );
 
     if (rankedDeals.length < 5 && this.providers.discoverTitles && this.providers.resolveDeal) {
       const fallbackSignals = catalogSignalsFromFilters(args);
@@ -101,10 +110,13 @@ export class GameDealService {
           excluded: new Set<string>(),
           preferredShops
         });
-        rankedDeals = scoreDealCandidates(dedupeDeals([...rankedDeals, ...fallback.matches]), {
-          ...args,
-          preferredShops
-        });
+        rankedDeals = applySteamDeckCompatibilityPreference(
+          scoreDealCandidates(dedupeDeals([...rankedDeals, ...fallback.matches]), {
+            ...args,
+            preferredShops
+          }),
+          steamDeckRequest
+        );
         warnings.push(...fallback.warnings);
       }
     }
@@ -113,8 +125,8 @@ export class GameDealService {
       query,
       country,
       matches: rankedDeals,
-      summary: summarizeDeals(rankedDeals, query, warnings),
-      sources: ["IsThereAnyDeal", "RAWG"],
+      summary: summarizeDeals(rankedDeals, query, warnings, steamDeckRequest),
+      sources: steamContext ? ["IsThereAnyDeal", "RAWG", "Steam"] : ["IsThereAnyDeal", "RAWG"],
       warnings: uniqueWarnings(warnings)
     };
   }
@@ -150,6 +162,7 @@ export class GameDealService {
     const multiplayer = preferences.multiplayer || /협동|co-?op|멀티/i.test(args.preferences);
     const effectivePlatforms = uniqueValues([...(args.platforms ?? []), ...preferences.platforms]);
     const preferredShops = preferredShopsFromContext(effectivePlatforms, args.preferences);
+    const steamDeckRequest = hasSteamDeckRequest(effectivePlatforms);
     const discoverArgs: DiscoverFilters & { country: string } = {
       country,
       sort: "best-value",
@@ -205,9 +218,7 @@ export class GameDealService {
       warnings.push(...base.warnings);
     }
 
-    if (hasSteamDeckRequest(effectivePlatforms) && !warnings.includes("Steam Deck 호환성은 현재 PC 플랫폼 기준으로 근사해 추천합니다.")) {
-      warnings.push("Steam Deck 호환성은 현재 PC 플랫폼 기준으로 근사해 추천합니다.");
-    }
+    matches = applySteamDeckCompatibilityPreference(matches, steamDeckRequest);
 
     if (matches.length === 0) {
       const emptyBase =
@@ -263,6 +274,13 @@ export class GameDealService {
       reasons.push(`${pickPreferredPlatform(top.platforms, effectivePlatforms)} 지원`);
     }
 
+    const deckStatus = getDeckCompatibilityStatus(top);
+    if (steamDeckRequest) {
+      if (deckStatus === "verified" || deckStatus === "playable") {
+        reasons.push(deckCompatibilityLabel(deckStatus));
+      }
+    }
+
     return {
       query: {
         preferences: args.preferences,
@@ -273,8 +291,11 @@ export class GameDealService {
       },
       country,
       matches,
-      summary: `${top.title}를 추천합니다. ${reasons.join(", ")} 조건과 잘 맞습니다.`,
-      sources: base?.sources ?? ["IsThereAnyDeal", "RAWG"],
+      summary:
+        deckStatus === "unknown" && steamDeckRequest
+          ? `${top.title}를 추천합니다. ${reasons.join(", ")} 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.`
+          : `${top.title}를 추천합니다. ${reasons.join(", ")} 조건과 잘 맞습니다.`,
+      sources: base?.sources ?? ["IsThereAnyDeal", "RAWG", "Steam"],
       warnings: uniqueWarnings(warnings)
     };
   }
@@ -430,7 +451,8 @@ export class GameDealService {
 function summarizeDeals(
   deals: DealCandidate[],
   query: Record<string, unknown>,
-  warnings: string[]
+  warnings: string[],
+  steamDeckRequest: boolean
 ): string {
   if (deals.length === 0) {
     const hasMetadataRisk =
@@ -447,7 +469,12 @@ function summarizeDeals(
   }
 
   const highlights = deals.slice(0, 3).map((deal) =>
-    formatKoreanPriceSummary(deal.title, deal.price.amount, deal.price.currency)
+    formatKoreanPriceSummary(
+      deal.title,
+      deal.price.amount,
+      deal.price.currency,
+      steamDeckRequest ? deckCompatibilityLabel(getDeckCompatibilityStatus(deal)) : undefined
+    )
   );
 
   return `조건에 맞는 할인 게임 ${deals.length}개를 찾았습니다. ${highlights.join(" / ")}`;
@@ -549,6 +576,45 @@ function hasPriceOverview(deal: DealCandidate): boolean {
 
 function hasSteamDeckRequest(platforms?: string[]): boolean {
   return (platforms ?? []).some((platform) => /steam ?deck|스팀덱/i.test(platform));
+}
+
+function getDeckCompatibilityStatus(
+  deal: DealCandidate
+): NonNullable<DealCandidate["steamDeckCompatibility"]>["status"] {
+  return deal.steamDeckCompatibility?.status ?? "unknown";
+}
+
+function deckCompatibilityLabel(
+  status: NonNullable<DealCandidate["steamDeckCompatibility"]>["status"]
+): string {
+  switch (status) {
+    case "verified":
+      return "Steam Deck Verified";
+    case "playable":
+      return "Steam Deck Playable";
+    case "unsupported":
+      return "Steam Deck 미지원";
+    case "unknown":
+    default:
+      return "Steam Deck 정보 없음";
+  }
+}
+
+function applySteamDeckCompatibilityPreference(
+  deals: DealCandidate[],
+  steamDeckRequest: boolean
+): DealCandidate[] {
+  if (!steamDeckRequest) {
+    return deals;
+  }
+
+  const supported = deals.filter((deal) => {
+    const status = getDeckCompatibilityStatus(deal);
+    return status === "verified" || status === "playable";
+  });
+  const unknown = deals.filter((deal) => getDeckCompatibilityStatus(deal) === "unknown");
+
+  return supported.length >= 5 ? supported : [...supported, ...unknown];
 }
 
 function preferredShopsFromContext(

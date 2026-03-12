@@ -210,4 +210,69 @@ describe("scoreDealCandidates", () => {
       "Space Rangers HD: A War Apart"
     ]);
   });
+
+  it("prefers verified Steam Deck titles over playable and unknown titles for best-value", () => {
+    const ranked = scoreDealCandidates(
+      [
+        {
+          id: "1",
+          title: "Unknown Deck Game",
+          price: { amount: 9000, currency: "KRW" },
+          regular: { amount: 18000, currency: "KRW" },
+          cut: 50,
+          genres: ["Roguelike"],
+          platforms: ["PC"],
+          multiplayer: false,
+          rating: 4.6,
+          metacritic: 84,
+          steamDeckCompatibility: {
+            status: "unknown",
+            details: [],
+            source: "steam"
+          }
+        },
+        {
+          id: "2",
+          title: "Playable Deck Game",
+          price: { amount: 9500, currency: "KRW" },
+          regular: { amount: 19000, currency: "KRW" },
+          cut: 50,
+          genres: ["Roguelike"],
+          platforms: ["PC"],
+          multiplayer: false,
+          rating: 4.5,
+          metacritic: 82,
+          steamDeckCompatibility: {
+            status: "playable",
+            details: [],
+            source: "steam"
+          }
+        },
+        {
+          id: "3",
+          title: "Verified Deck Game",
+          price: { amount: 10000, currency: "KRW" },
+          regular: { amount: 20000, currency: "KRW" },
+          cut: 50,
+          genres: ["Roguelike"],
+          platforms: ["PC"],
+          multiplayer: false,
+          rating: 4.4,
+          metacritic: 80,
+          steamDeckCompatibility: {
+            status: "verified",
+            details: [],
+            source: "steam"
+          }
+        }
+      ],
+      { sort: "best-value", genres: ["Roguelike"], platforms: ["Steam Deck"] }
+    );
+
+    expect(ranked.map((deal) => deal.title)).toEqual([
+      "Verified Deck Game",
+      "Playable Deck Game",
+      "Unknown Deck Game"
+    ]);
+  });
 });

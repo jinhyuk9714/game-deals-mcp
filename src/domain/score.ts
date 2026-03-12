@@ -11,6 +11,13 @@ export interface StoreOffer {
   url?: string | null;
 }
 
+export interface SteamDeckCompatibility {
+  status: "verified" | "playable" | "unsupported" | "unknown";
+  details: string[];
+  steamAppId?: number | undefined;
+  source: "steam";
+}
+
 export interface DealCandidate {
   id: string;
   title: string;
@@ -26,6 +33,7 @@ export interface DealCandidate {
   historyLow?: PricePoint | null | undefined;
   stores?: StoreOffer[] | undefined;
   metadataStatus?: "itad" | "rawg" | "missing" | "unavailable" | undefined;
+  steamDeckCompatibility?: SteamDeckCompatibility | undefined;
 }
 
 export interface DealsEnrichment {
@@ -113,6 +121,7 @@ function getValueScore(deal: DealCandidate): number {
   const discountScore = Math.min(75, deal.cut) * 0.35;
   const historyScore = getHistoryScore(deal);
   const multiplayerBonus = deal.multiplayer ? 3 : 0;
+  const steamDeckBonus = getSteamDeckScore(deal.steamDeckCompatibility?.status);
   const metadataPenalty =
     deal.metadataStatus === "missing" ? 18 : deal.metadataStatus === "unavailable" ? 6 : 0;
 
@@ -122,6 +131,8 @@ function getValueScore(deal: DealCandidate): number {
     discountScore +
     historyScore +
     multiplayerBonus -
+    steamDeckBonus +
+    steamDeckBonus * 2 -
     getTitlePenalty(deal.title) -
     metadataPenalty
   );
@@ -176,4 +187,19 @@ function getTitlePenalty(title: string): number {
   return /\b(dlc|soundtrack|art ?book|bundle|pack|season pass|expansion|supporter)\b/i.test(title)
     ? 18
     : 0;
+}
+
+function getSteamDeckScore(status?: SteamDeckCompatibility["status"]): number {
+  switch (status) {
+    case "verified":
+      return 16;
+    case "playable":
+      return 8;
+    case "unsupported":
+      return -18;
+    case "unknown":
+      return 0;
+    default:
+      return 0;
+  }
 }

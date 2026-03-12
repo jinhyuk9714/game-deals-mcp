@@ -1,5 +1,12 @@
-export function formatKoreanPriceSummary(title: string, price: number, currency: string): string {
-  return `${title} 현재가 ${formatPrice(price, currency)}`;
+export function formatKoreanPriceSummary(
+  title: string,
+  price: number,
+  currency: string,
+  suffix?: string
+): string {
+  return suffix
+    ? `${title} 현재가 ${formatPrice(price, currency)} (${suffix})`
+    : `${title} 현재가 ${formatPrice(price, currency)}`;
 }
 
 export function formatPrice(amount: number, currency: string): string {
