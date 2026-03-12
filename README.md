@@ -1,6 +1,6 @@
 # Game Deal Explorer MCP
 
-`Game Deal Explorer MCP`는 지금 할인 중인 게임 가운데 실제로 살 만한 게임을 찾도록 도와주는 Node.js stdio MCP 서버입니다. 가격 정보는 [IsThereAnyDeal](https://docs.isthereanydeal.com/)에서, 장르와 평점 같은 메타데이터는 [RAWG](https://rawg.io/apidocs)에서 가져옵니다. 기본 국가는 `KR`이며, 각 툴에서 `country` 값을 따로 지정할 수 있습니다.
+`Game Deal Explorer MCP`는 지금 할인 중인 게임 가운데 실제로 살 만한 게임을 찾도록 도와주는 Node.js stdio MCP 서버입니다. 가격 정보는 [IsThereAnyDeal](https://docs.isthereanydeal.com/)에서, 장르와 평점 같은 메타데이터는 [RAWG](https://rawg.io/apidocs)에서 가져옵니다. `Steam Deck` 관련 요청에서는 공식 Steam 호환성 상태도 함께 확인합니다. 기본 국가는 `KR`이며, 각 툴에서 `country` 값을 따로 지정할 수 있습니다.
 
 저장소: [jinhyuk9714/game-deals-mcp](https://github.com/jinhyuk9714/game-deals-mcp)
 
@@ -10,6 +10,8 @@
 - `compare_game_price`: 특정 게임의 현재 가격, 할인율, 판매처, 역대 최저가를 비교합니다
 - `recommend_sale_games`: 취향과 예산에 맞는 할인 게임을 추천합니다
 - `explain_deal_value`: 지금 사도 괜찮은 딜인지 역대 최저가 기준으로 설명합니다
+
+`Steam Deck` 문맥의 검색과 추천에서는 가능한 경우 `Steam Deck Verified`, `Steam Deck Playable`, `Steam Deck 정보 없음` 같은 상태를 함께 반환합니다.
 
 ## 요구 사항
 
@@ -142,7 +144,7 @@ MCP 클라이언트에서 아래처럼 바로 써볼 수 있습니다.
 
 ## 제한 사항
 
-- `Steam Deck` 추천은 아직 공식 호환성 데이터가 아니라 PC용 메타데이터를 기준으로 추정합니다.
+- `Steam Deck` 요청에서는 공식 Steam 호환성 정보를 우선 확인합니다. 확인하지 못한 게임은 `Steam Deck 정보 없음`으로 표시합니다.
 - v1은 조회 전용입니다. wishlist, alerting, account sync는 포함하지 않습니다.
 - 가격은 API가 내려준 원본 통화 그대로 보여주며, 환율 변환은 하지 않습니다.
 - RAWG 제목 매칭은 보수적으로 잡아 두었습니다. 신뢰도가 낮으면 메타데이터 없이 가격 정보만 반환합니다.
