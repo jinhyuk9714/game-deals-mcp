@@ -191,6 +191,7 @@ describe("GameDealService.discoverDeals", () => {
             released: "2021-10-19",
             genres: ["Strategy", "Adventure"],
             platforms: ["PC"],
+            tags: ["Roguelike", "Deckbuilder"],
             rating: 4.38,
             metacritic: 86,
             multiplayer: false
@@ -293,6 +294,141 @@ describe("GameDealService.discoverDeals", () => {
     expect(result.summary).toContain("Steam Deck Verified");
     expect(result.summary).toContain("Steam Deck 정보 없음");
     expect(result.warnings).not.toContain("Steam Deck 호환성은 현재 PC 플랫폼 기준으로 근사해 추천합니다.");
+  });
+
+  it("recovers Steam Deck roguelike discovery results from broader Steam sale titles when strict search is empty", async () => {
+    const findDealsCalls: Array<{
+      genres: string[] | undefined;
+      preferredShops: number[] | undefined;
+    }> = [];
+    const resolvedTitles: string[] = [];
+    let discoverTitleCalls = 0;
+
+    const service = new GameDealService({
+      async findDeals(args) {
+        findDealsCalls.push({
+          genres: args.genres,
+          preferredShops: args.preferredShops
+        });
+
+        if (args.genres?.includes("Roguelike")) {
+          return [];
+        }
+
+        return [
+          {
+            id: "broad-sale",
+            title: "The King is Watching",
+            price: { amount: 9680, currency: "KRW" },
+            regular: { amount: 14900, currency: "KRW" },
+            cut: 35,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          },
+          {
+            id: "noise-sale",
+            title: "Cheap Non-Roguelike",
+            price: { amount: 3900, currency: "KRW" },
+            regular: { amount: 7800, currency: "KRW" },
+            cut: 50,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title) {
+        resolvedTitles.push(title);
+
+        if (title !== "The King is Watching") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "The King is Watching",
+          matches: [
+            {
+              id: "the-king-is-watching",
+              title: "The King is Watching",
+              price: { amount: 9680, currency: "KRW" },
+              regular: { amount: 14900, currency: "KRW" },
+              cut: 35,
+              genres: ["Strategy", "Indie", "Roguelike"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.36,
+              metacritic: null,
+              steamDeckCompatibility: {
+                status: "playable",
+                details: ["Works on Steam Deck"],
+                steamAppId: 2753900,
+                source: "steam"
+              },
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles() {
+        discoverTitleCalls += 1;
+
+        if (discoverTitleCalls === 1) {
+          return [];
+        }
+
+        return [
+          {
+            title: "Hades",
+            released: "2020-09-17",
+            genres: ["Action", "RPG"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Roguelite"],
+            rating: 4.42,
+            metacritic: 93,
+            multiplayer: false
+          },
+          {
+            title: "The King is Watching",
+            released: "2025-07-21",
+            genres: ["Strategy", "Indie"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Roguelite"],
+            rating: 4.36,
+            metacritic: null,
+            multiplayer: false
+          }
+        ];
+      }
+    });
+
+    const result = await service.discoverDeals({
+      country: "KR",
+      budget: 20000,
+      genres: ["Roguelike"],
+      platforms: ["Steam Deck"],
+      sort: "best-value"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
+    expect(findDealsCalls).toEqual([
+      { genres: ["Roguelike"], preferredShops: [61] },
+      { genres: undefined, preferredShops: [61] }
+    ]);
+    expect(discoverTitleCalls).toBe(3);
+    expect(resolvedTitles).toEqual([
+      "Hades",
+      "The King is Watching",
+      "Hades",
+      "The King is Watching"
+    ]);
   });
 });
 
@@ -514,6 +650,7 @@ describe("GameDealService.recommendSaleGames", () => {
             released: "2021-10-19",
             genres: ["Strategy", "Adventure"],
             platforms: ["PC"],
+            tags: ["Roguelike", "Deckbuilder"],
             rating: 4.38,
             metacritic: 86,
             multiplayer: false
@@ -915,7 +1052,7 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(resolveOptions).toContainEqual(expect.not.objectContaining({ dealsOnly: true }));
   });
 
-  it("recovers Steam Deck roguelike recommendations after discover fallback returns nothing", async () => {
+  it("recovers Steam Deck roguelike recommendations from catalog candidates when no sale-title recovery path exists", async () => {
     let discoverCallCount = 0;
 
     const service = new GameDealService({
@@ -959,10 +1096,6 @@ describe("GameDealService.recommendSaleGames", () => {
       async discoverTitles() {
         discoverCallCount += 1;
 
-        if (discoverCallCount === 1) {
-          return [];
-        }
-
         return [
           {
             title: "The King is Watching",
@@ -987,11 +1120,249 @@ describe("GameDealService.recommendSaleGames", () => {
 
     expect(result.matches).toHaveLength(1);
     expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
-    expect(discoverCallCount).toBe(2);
+    expect(discoverCallCount).toBe(1);
+  });
+
+  it("recovers generic Steam Deck roguelike recommendations from broader Steam deals when strict genre search is empty", async () => {
+    const findDealsCalls: Array<{
+      genres: string[] | undefined;
+      preferredShops: number[] | undefined;
+    }> = [];
+    const resolvedTitles: string[] = [];
+    let discoverTitleCalls = 0;
+
+    const service = new GameDealService({
+      async findDeals(args) {
+        findDealsCalls.push({
+          genres: args.genres,
+          preferredShops: args.preferredShops
+        });
+
+        if (args.genres?.includes("Roguelike")) {
+          return [];
+        }
+
+        return [
+          {
+            id: "broad-sale",
+            title: "The King is Watching",
+            price: { amount: 9680, currency: "KRW" },
+            regular: { amount: 14900, currency: "KRW" },
+            cut: 35,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          },
+          {
+            id: "broad-noise",
+            title: "Cheap Non-Roguelike",
+            price: { amount: 3900, currency: "KRW" },
+            regular: { amount: 7800, currency: "KRW" },
+            cut: 50,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title) {
+        resolvedTitles.push(title);
+
+        if (title !== "The King is Watching") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "The King is Watching",
+          matches: [
+            {
+              id: "the-king-is-watching",
+              title: "The King is Watching",
+              price: { amount: 9680, currency: "KRW" },
+              regular: { amount: 14900, currency: "KRW" },
+              cut: 35,
+              genres: ["Strategy", "Indie", "Roguelike"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.36,
+              metacritic: null,
+              steamDeckCompatibility: {
+                status: "playable",
+                details: ["Works on Steam Deck"],
+                steamAppId: 2753900,
+                source: "steam"
+              },
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles() {
+        discoverTitleCalls += 1;
+
+        if (discoverTitleCalls === 1) {
+          return [];
+        }
+
+        return [
+          {
+            title: "Hades",
+            released: "2020-09-17",
+            genres: ["Action", "RPG"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Roguelite"],
+            rating: 4.42,
+            metacritic: 93,
+            multiplayer: false
+          },
+          {
+            title: "The King is Watching",
+            released: "2025-07-21",
+            genres: ["Strategy", "Indie"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Roguelite", "deckbuilding"],
+            rating: 4.36,
+            metacritic: null,
+            multiplayer: false
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+      budget: 20000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
+    expect(findDealsCalls).toEqual([{ genres: undefined, preferredShops: [61] }]);
+    expect(discoverTitleCalls).toBe(2);
+    expect(resolvedTitles).toEqual(["Hades", "The King is Watching"]);
+  });
+
+  it("keeps Steam Deck roguelike recovery alive when one catalog resolution fails", async () => {
+    const resolvedTitles: string[] = [];
+
+    const service = new GameDealService({
+      async findDeals(args) {
+        if (args.genres?.includes("Roguelike")) {
+          return [];
+        }
+
+        return [
+          {
+            id: "broad-sale",
+            title: "Broken Candidate",
+            price: { amount: 8700, currency: "KRW" },
+            regular: { amount: 14500, currency: "KRW" },
+            cut: 40,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          },
+          {
+            id: "broad-sale-2",
+            title: "The King is Watching",
+            price: { amount: 9680, currency: "KRW" },
+            regular: { amount: 14900, currency: "KRW" },
+            cut: 35,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title) {
+        resolvedTitles.push(title);
+
+        if (title === "Broken Candidate") {
+          throw new Error("temporary upstream failure");
+        }
+
+        if (title !== "The King is Watching") {
+          return { kind: "not-found" as const, title };
+        }
+
+        return {
+          kind: "match" as const,
+          title: "The King is Watching",
+          matches: [
+            {
+              id: "the-king-is-watching",
+              title: "The King is Watching",
+              price: { amount: 9680, currency: "KRW" },
+              regular: { amount: 14900, currency: "KRW" },
+              cut: 35,
+              genres: ["Strategy", "Indie", "Roguelike"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.36,
+              metacritic: null,
+              steamDeckCompatibility: {
+                status: "playable",
+                details: ["Works on Steam Deck"],
+                steamAppId: 2753900,
+                source: "steam"
+              },
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles() {
+        return [
+          {
+            title: "Broken Candidate",
+            released: "2025-01-01",
+            genres: ["Strategy"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Roguelite"],
+            rating: 4.1,
+            metacritic: 80,
+            multiplayer: false
+          },
+          {
+            title: "The King is Watching",
+            released: "2025-07-21",
+            genres: ["Strategy", "Indie"],
+            platforms: ["PC"],
+            tags: ["Roguelike", "Roguelite"],
+            rating: 4.36,
+            metacritic: null,
+            multiplayer: false
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+      budget: 20000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
+    expect(resolvedTitles).toEqual(["Broken Candidate", "The King is Watching"]);
   });
 
   it("returns fewer-but-better results for high-rating strategy requests", async () => {
-    const service = new GameDealService({
+    const highRatingService = new GameDealService({
       async findDeals() {
         return [
           {
@@ -1030,7 +1401,7 @@ describe("GameDealService.recommendSaleGames", () => {
       }
     });
 
-    const result = await service.recommendSaleGames({
+    const result = await highRatingService.recommendSaleGames({
       preferences: "평가 좋은 전략 할인 게임 추천해줘",
       budget: 10000,
       country: "KR"
@@ -1040,7 +1411,7 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(result.summary).toContain("조건에 맞는 추천 할인 게임을 찾지 못했습니다.");
   });
 
-  it("limits catalog resolution fan-out for Steam-first recommendations", async () => {
+  it("caps generic Steam roguelike catalog resolution fan-out at three calls", async () => {
     let resolveCount = 0;
 
     const service = new GameDealService({
@@ -1092,7 +1463,7 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(resolveCount).toBe(5);
+    expect(resolveCount).toBe(3);
   });
 
   it("deduplicates already compacted Steam Deck warnings in recommendation results", async () => {

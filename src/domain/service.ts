@@ -108,6 +108,47 @@ export class GameDealService {
       steamDeckRequest
     );
 
+    if (
+      rankedDeals.length === 0 &&
+      steamDeckRequest &&
+      hasRoguelikeIntent(args.genres ?? []) &&
+      this.providers.discoverTitles &&
+      this.providers.resolveDeal
+    ) {
+      try {
+        const recovery = await this.recoverRecommendationMatches({
+          country,
+          filters: { ...args, country, preferredShops },
+          preferences: {
+            genres: ["Roguelike"],
+            rawgGenres: [],
+            platforms: args.platforms ?? [],
+            tags: ["roguelike", "roguelite"],
+            multiplayer: Boolean(args.multiplayer),
+            deckbuilding: false,
+            highRating: false,
+            shortSession: false
+          },
+          excluded: new Set<string>(),
+          preferredShops,
+          steamDeckRequest,
+          skipPrimaryAttempt: false
+        });
+        rankedDeals = applySteamDeckCompatibilityPreference(
+          scoreDealCandidates(dedupeDeals([...rankedDeals, ...recovery.matches]), {
+            ...args,
+            preferredShops
+          }),
+          steamDeckRequest
+        );
+        warnings.push(...recovery.warnings);
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다.")
+        );
+      }
+    }
+
     if (rankedDeals.length < 5 && this.providers.discoverTitles && this.providers.resolveDeal) {
       const fallbackSignals = catalogSignalsFromFilters(args);
       if (fallbackSignals.tags.length > 0 || fallbackSignals.rawgGenres.length > 0) {
@@ -209,6 +250,11 @@ export class GameDealService {
     let attemptedTargetedRecovery = false;
     const hasStrongCatalogIntent =
       preferences.deckbuilding || hasActionRogueliteIntent(preferences.genres);
+    const genericSteamRoguelikeRequest =
+      steamDeckRequest &&
+      hasRoguelikeIntent(preferences.genres) &&
+      !preferences.deckbuilding &&
+      !hasActionRogueliteIntent(preferences.genres);
 
     const canUseCatalogFirst =
       hasStrongCatalogIntent &&
@@ -262,12 +308,35 @@ export class GameDealService {
       preferences
     );
 
+    if (matches.length === 0 && genericSteamRoguelikeRequest && !attemptedTargetedRecovery) {
+      try {
+        const recovery = await this.recoverRecommendationMatches({
+          country,
+          filters: discoverArgs,
+          preferences,
+          excluded,
+          preferredShops,
+          steamDeckRequest,
+          skipPrimaryAttempt: false
+        });
+
+        matches = recovery.matches;
+        warnings.push(...recovery.warnings);
+        attemptedTargetedRecovery = true;
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+        );
+      }
+    }
+
     if (matches.length === 0) {
       base = await this.discoverDeals(discoverArgs);
       matches = (base.matches as DealCandidate[]).filter(
         (deal) => !deal.genres.some((genre) => excluded.has(genre.trim().toLowerCase()))
       );
       warnings.push(...base.warnings);
+
       matches = applyRecommendationQualityGates(
         applySteamDeckCompatibilityPreference(matches, steamDeckRequest),
         preferences
@@ -502,10 +571,21 @@ export class GameDealService {
     const matches: DealCandidate[] = [];
 
     for (const candidate of filteredCatalog.slice(0, args.maxResolutions ?? MAX_CATALOG_RESOLUTIONS)) {
-      const resolution = await this.providers.resolveDeal!(candidate.title, args.country, {
-        preferredShops: args.preferredShops,
-        dealsOnly: (args.preferredShops?.length ?? 0) > 0
-      });
+      let resolution: DealResolution;
+      try {
+        resolution = await this.providers.resolveDeal!(candidate.title, args.country, {
+          preferredShops: args.preferredShops,
+          dealsOnly: (args.preferredShops?.length ?? 0) > 0
+        });
+      } catch (error) {
+        warnings.push(
+          toWarning(
+            error,
+            `추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다: ${candidate.title}`
+          )
+        );
+        continue;
+      }
 
       warnings.push(...(resolution.warnings ?? []));
 
@@ -576,6 +656,15 @@ export class GameDealService {
       !hasActionRogueliteIntent(args.preferences.genres);
     const maxResolutions = broadSteamRoguelikeRecovery ? 8 : steamOnly ? 3 : 5;
 
+    if (broadSteamRoguelikeRecovery) {
+      const broadRecovery = await this.recoverBroadSteamRoguelikeDeals(args);
+      warnings.push(...broadRecovery.warnings);
+
+      if (broadRecovery.matches.length > 0) {
+        return broadRecovery;
+      }
+    }
+
     for (const recoverySignals of recoveryAttempts) {
       const recovered = await this.resolveCatalogCandidates({
         country: args.country,
@@ -607,11 +696,73 @@ export class GameDealService {
 
     return { matches: [], warnings };
   }
+  private async recoverBroadSteamRoguelikeDeals(args: {
+    country: string;
+    filters: DiscoverFilters & { country: string };
+    preferences: {
+      genres: string[];
+      rawgGenres: string[];
+      platforms: string[];
+      tags: string[];
+      multiplayer: boolean;
+      deckbuilding: boolean;
+      highRating: boolean;
+      shortSession: boolean;
+    };
+    excluded: Set<string>;
+    preferredShops?: number[] | undefined;
+    steamDeckRequest: boolean;
+  }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
+    const broadFilters: DiscoverFilters & { country: string } = {
+      ...args.filters,
+      genres: undefined
+    };
+
+    const baseDeals = await this.providers.findDeals({
+      ...broadFilters,
+      country: args.country,
+      preferredShops: args.preferredShops
+    });
+    const warnings: string[] = [];
+    const candidateDeals = filterJunkCandidates(baseDeals);
+
+    if (candidateDeals.length === 0) {
+      return { matches: [], warnings };
+    }
+    const discountedTitles = new Set(
+      candidateDeals.map((deal) => normalizeTitleKey(deal.title)).filter(Boolean)
+    );
+    const recovered = await this.resolveCatalogCandidates({
+      country: args.country,
+      filters: args.filters,
+      tags: ["roguelike", "roguelite"],
+      rawgGenres: [],
+      excluded: args.excluded,
+      preferredShops: args.preferredShops,
+      maxMatches: 3,
+      maxResolutions: 4,
+      candidateFilter: (candidate) =>
+        discountedTitles.has(normalizeTitleKey(candidate.title)) &&
+        catalogCandidateMatchesRecoveryIntent(candidate, args.preferences)
+    });
+
+    warnings.push(...recovered.warnings);
+
+    return {
+      matches: applyRecommendationQualityGates(
+        applySteamDeckCompatibilityPreference(recovered.matches, args.steamDeckRequest).filter(
+          (deal) => matchesDealRecoveryIntent(deal, args.preferences)
+        ),
+        args.preferences
+      ),
+      warnings
+    };
+  }
 }
 
 function summarizeDeals(
   deals: DealCandidate[],
-  query: Record<string, unknown>,
+  query: { genres?: unknown; platforms?: unknown },
   warnings: string[],
   steamDeckRequest: boolean
 ): string {
@@ -1052,6 +1203,10 @@ function applyRecommendationQualityGates(
   }
 ): DealCandidate[] {
   let filtered = [...deals];
+  const genericRoguelikeIntent =
+    hasRoguelikeIntent(preferences.genres) &&
+    !preferences.deckbuilding &&
+    !hasActionRogueliteIntent(preferences.genres);
 
   if (preferences.genres.length > 1) {
     filtered = filtered.filter((deal) => matchesAllRequestedGenres(deal, preferences.genres));
@@ -1064,6 +1219,17 @@ function applyRecommendationQualityGates(
   if (preferences.deckbuilding) {
     const deckbuildingMatches = filtered.filter(hasDeckbuildingEvidence);
     filtered = deckbuildingMatches.length > 0 ? deckbuildingMatches : [];
+  }
+
+  if (genericRoguelikeIntent) {
+    const roguelikeMatches = filtered.filter(
+      (deal) =>
+        hasRoguelikeDealEvidence(deal) &&
+        hasStrongReviewSignal(deal) &&
+        deal.metadataStatus !== "missing" &&
+        deal.metadataStatus !== "unavailable"
+    );
+    filtered = roguelikeMatches.length > 0 ? roguelikeMatches : [];
   }
 
   if (preferences.highRating) {
@@ -1138,6 +1304,38 @@ function catalogCandidateMatchesRecoveryIntent(
   return true;
 }
 
+function matchesDealRecoveryIntent(
+  deal: DealCandidate,
+  preferences: {
+    genres: string[];
+    deckbuilding: boolean;
+  }
+): boolean {
+  const actionRogueliteIntent = hasActionRogueliteIntent(preferences.genres);
+  const genericRoguelikeIntent =
+    hasRoguelikeIntent(preferences.genres) && !preferences.deckbuilding && !actionRogueliteIntent;
+
+  if (preferences.deckbuilding && !hasDeckbuildingEvidence(deal)) {
+    return false;
+  }
+
+  if (actionRogueliteIntent && !hasActionRogueliteDealEvidence(deal)) {
+    return false;
+  }
+
+  if (genericRoguelikeIntent) {
+    if (!hasRoguelikeDealEvidence(deal)) {
+      return false;
+    }
+
+    if (!hasStrongReviewSignal(deal)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function hasDeckbuildingCandidateEvidence(candidate: CatalogCandidate): boolean {
   const values = `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`;
   return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(values);
@@ -1168,6 +1366,19 @@ function hasRoguelikeCandidateEvidence(candidate: CatalogCandidate): boolean {
   );
 }
 
+function hasActionRogueliteDealEvidence(deal: DealCandidate): boolean {
+  const normalizedGenres = new Set(deal.genres.map((genre) => genre.trim().toLowerCase()));
+
+  return normalizedGenres.has("action") && normalizedGenres.has("roguelike");
+}
+
+function hasRoguelikeDealEvidence(deal: DealCandidate): boolean {
+  return deal.genres.some((genre) => {
+    const normalized = genre.trim().toLowerCase();
+    return normalized === "roguelike" || normalized === "roguelite";
+  });
+}
+
 function hasCatalogReviewSignal(candidate: CatalogCandidate): boolean {
   return (candidate.rating ?? 0) >= 4 || (candidate.metacritic ?? 0) >= 75;
 }
@@ -1192,4 +1403,8 @@ function normalizePlatform(value: string): string {
     default:
       return normalized;
   }
+}
+
+function normalizeTitleKey(value: string): string {
+  return value.trim().toLowerCase();
 }

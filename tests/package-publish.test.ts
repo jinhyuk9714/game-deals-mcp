@@ -26,35 +26,39 @@ describe("publish package metadata", () => {
 });
 
 describe("publish package contents", () => {
-  it("packs only runtime files for npm", () => {
-    rmSync("dist", { recursive: true, force: true });
+  it(
+    "packs only runtime files for npm",
+    () => {
+      rmSync("dist", { recursive: true, force: true });
 
-    execFileSync("npm", ["run", "build"], {
-      cwd: process.cwd(),
-      stdio: "pipe"
-    });
+      execFileSync("npm", ["run", "build"], {
+        cwd: process.cwd(),
+        stdio: "pipe"
+      });
 
-    const output = execFileSync("npm", ["pack", "--dry-run", "--json"], {
-      cwd: process.cwd(),
-      stdio: "pipe",
-      encoding: "utf8"
-    });
+      const output = execFileSync("npm", ["pack", "--dry-run", "--json"], {
+        cwd: process.cwd(),
+        stdio: "pipe",
+        encoding: "utf8"
+      });
 
-    const packResult = JSON.parse(output) as Array<{
-      files: Array<{ path: string }>;
-    }>;
-    const packedPaths = new Set(packResult[0]?.files.map((file) => file.path));
+      const packResult = JSON.parse(output) as Array<{
+        files: Array<{ path: string }>;
+      }>;
+      const packedPaths = new Set(packResult[0]?.files.map((file) => file.path));
 
-    expect(packedPaths.has("dist/index.js")).toBe(true);
-    expect(packedPaths.has("README.md")).toBe(true);
-    expect(packedPaths.has("LICENSE")).toBe(true);
-    expect(packedPaths.has("package.json")).toBe(true);
-    expect(packedPaths.has(".env.example")).toBe(true);
+      expect(packedPaths.has("dist/index.js")).toBe(true);
+      expect(packedPaths.has("README.md")).toBe(true);
+      expect(packedPaths.has("LICENSE")).toBe(true);
+      expect(packedPaths.has("package.json")).toBe(true);
+      expect(packedPaths.has(".env.example")).toBe(true);
 
-    expect([...packedPaths].some((path) => path.startsWith("src/"))).toBe(false);
-    expect([...packedPaths].some((path) => path.startsWith("tests/"))).toBe(false);
-    expect(packedPaths.has("tsconfig.json")).toBe(false);
-    expect(packedPaths.has("tsconfig.build.json")).toBe(false);
-    expect(packedPaths.has("vitest.config.ts")).toBe(false);
-  });
+      expect([...packedPaths].some((path) => path.startsWith("src/"))).toBe(false);
+      expect([...packedPaths].some((path) => path.startsWith("tests/"))).toBe(false);
+      expect(packedPaths.has("tsconfig.json")).toBe(false);
+      expect(packedPaths.has("tsconfig.build.json")).toBe(false);
+      expect(packedPaths.has("vitest.config.ts")).toBe(false);
+    },
+    20_000
+  );
 });
