@@ -1,5 +1,5 @@
 import type { DealsEnrichment, DiscoverFilters, DealCandidate } from "./score.js";
-import { scoreDealCandidates } from "./score.js";
+import { filterJunkCandidates, scoreDealCandidates } from "./score.js";
 import { formatKoreanPriceSummary, formatPrice } from "../presentation/summary.js";
 import type { DealResolution, ResolveDealOptions } from "../providers/itad-client.js";
 
@@ -28,7 +28,11 @@ export interface GameProviders {
   findDeals(args: DiscoverFilters & { country: string }): Promise<DealCandidate[]>;
   enrichDeals(
     deals: DealCandidate[],
-    options?: { includeSteamDeckCompatibility?: boolean }
+    options?: {
+      includeSteamDeckCompatibility?: boolean;
+      maxRawgLookups?: number;
+      maxSteamLookups?: number;
+    }
   ): Promise<DealCandidate[] | DealsEnrichment>;
   resolveDeal?(
     title: string,
@@ -80,13 +84,17 @@ export class GameDealService {
     }
 
     const warnings: string[] = [];
-    let deals = baseDeals;
+    const candidateDeals = filterJunkCandidates(baseDeals);
+    let deals = candidateDeals;
 
     try {
+      const enrichmentOptions = {
+        includeSteamDeckCompatibility: steamContext,
+        maxRawgLookups: MAX_RAWG_ENRICHMENT,
+        ...(steamContext ? { maxSteamLookups: MAX_STEAM_ENRICHMENT } : {})
+      };
       const enrichment = normalizeEnrichmentResult(
-        await this.providers.enrichDeals(baseDeals, {
-          includeSteamDeckCompatibility: steamContext
-        })
+        await this.providers.enrichDeals(candidateDeals, enrichmentOptions)
       );
       deals = enrichment.deals;
       warnings.push(...enrichment.warnings);
@@ -419,7 +427,7 @@ export class GameDealService {
     const warnings: string[] = [];
     const inferredGenres = discoveryTagsToGenres(args.tags);
     const resolutions = await Promise.all(
-      catalog.map(async (candidate) => {
+      filterCatalogCandidates(catalog).slice(0, MAX_CATALOG_RESOLUTIONS).map(async (candidate) => {
         const resolution = await this.providers.resolveDeal!(candidate.title, args.country, {
           preferredShops: args.preferredShops,
           dealsOnly: (args.preferredShops?.length ?? 0) > 0
@@ -708,10 +716,21 @@ function dedupeDeals(deals: DealCandidate[]): DealCandidate[] {
 function uniqueWarnings(warnings: string[]): string[] {
   const seen = new Set<string>();
   const unique: string[] = [];
+  const hasSubrequestWarning = warnings.some((warning) =>
+    warning.includes("Too many subrequests by single Worker invocation")
+  );
+
+  if (hasSubrequestWarning) {
+    unique.push("Worker 한도 때문에 일부 메타데이터를 생략했습니다.");
+  }
 
   for (const warning of warnings) {
     const normalized = warning.trim();
-    if (!normalized || seen.has(normalized)) {
+    if (
+      !normalized ||
+      normalized.includes("Too many subrequests by single Worker invocation") ||
+      seen.has(normalized)
+    ) {
       continue;
     }
 
@@ -720,6 +739,18 @@ function uniqueWarnings(warnings: string[]): string[] {
   }
 
   return unique;
+}
+
+const MAX_RAWG_ENRICHMENT = 12;
+const MAX_STEAM_ENRICHMENT = 8;
+const MAX_CATALOG_RESOLUTIONS = 8;
+
+function filterCatalogCandidates<
+  T extends {
+    title: string;
+  }
+>(candidates: T[]): T[] {
+  return candidates.filter((candidate) => !/^(3d puzzle|room football|how much items|archaeology)\b/i.test(candidate.title));
 }
 
 function catalogSignalsFromFilters(filters: DiscoverFilters): {

@@ -22,11 +22,18 @@ export class GameDataGateway implements GameProviders {
 
   async enrichDeals(
     deals: DealCandidate[],
-    options?: { includeSteamDeckCompatibility?: boolean }
+    options?: {
+      includeSteamDeckCompatibility?: boolean;
+      maxRawgLookups?: number;
+      maxSteamLookups?: number;
+    }
   ): Promise<DealsEnrichment> {
+    const maxRawgLookups = options?.maxRawgLookups ?? deals.length;
+    const rawgEligibleDeals = deals.slice(0, maxRawgLookups);
+    const skippedRawgDeals = deals.slice(maxRawgLookups);
     const rawgResults: Array<{ deal: DealCandidate; warning?: string }> = [];
 
-    for (const deal of deals) {
+    for (const deal of rawgEligibleDeals) {
       try {
         const candidates = await this.rawg.searchGames(deal.title);
         const bestMatch = findBestRawgMatch(
@@ -71,15 +78,28 @@ export class GameDataGateway implements GameProviders {
     }
 
     let enriched: DealsEnrichment = {
-      deals: rawgResults.map((result) => result.deal),
+      deals: [...rawgResults.map((result) => result.deal), ...skippedRawgDeals],
       warnings: rawgResults.flatMap((result) => (result.warning ? [result.warning] : []))
     };
 
+    if (skippedRawgDeals.length > 0) {
+      enriched.warnings.push("RAWG 보강 한도 때문에 일부 메타데이터를 생략했습니다.");
+    }
+
     if (options?.includeSteamDeckCompatibility && this.steam) {
-      const steamEnriched = await this.steam.enrichDeals(enriched.deals);
+      const maxSteamLookups = options.maxSteamLookups ?? enriched.deals.length;
+      const steamEligibleDeals = enriched.deals.slice(0, maxSteamLookups);
+      const skippedSteamDeals = enriched.deals.slice(maxSteamLookups);
+      const steamEnriched = await this.steam.enrichDeals(steamEligibleDeals);
       enriched = {
-        deals: steamEnriched.deals,
-        warnings: [...enriched.warnings, ...steamEnriched.warnings]
+        deals: [...steamEnriched.deals, ...skippedSteamDeals],
+        warnings: [
+          ...enriched.warnings,
+          ...steamEnriched.warnings,
+          ...(skippedSteamDeals.length > 0
+            ? ["Steam Deck 호환성 보강 한도 때문에 일부 정보를 생략했습니다."]
+            : [])
+        ]
       };
     }
 

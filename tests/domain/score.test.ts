@@ -275,4 +275,49 @@ describe("scoreDealCandidates", () => {
       "Unknown Deck Game"
     ]);
   });
+
+  it("filters soundtrack and known junk-series titles before ranking", () => {
+    const ranked = scoreDealCandidates(
+      [
+        {
+          id: "1",
+          title: "Dead Cells",
+          price: { amount: 10320, currency: "KRW" },
+          regular: { amount: 25800, currency: "KRW" },
+          cut: 60,
+          genres: ["Action", "Roguelike"],
+          platforms: ["PC", "Steam Deck"],
+          multiplayer: false,
+          rating: 4.7,
+          metacritic: 89,
+          metadataStatus: "rawg"
+        },
+        {
+          id: "2",
+          title: "GravKitten Soundtrack",
+          price: { amount: 550, currency: "KRW" },
+          regular: { amount: 11000, currency: "KRW" },
+          cut: 95,
+          genres: ["Roguelike"],
+          platforms: ["PC"],
+          multiplayer: false,
+          metadataStatus: "missing"
+        },
+        {
+          id: "3",
+          title: "3D PUZZLE - Pizza Shop 1",
+          price: { amount: 550, currency: "KRW" },
+          regular: { amount: 11000, currency: "KRW" },
+          cut: 95,
+          genres: ["Roguelike"],
+          platforms: ["PC"],
+          multiplayer: false,
+          metadataStatus: "missing"
+        }
+      ],
+      { sort: "best-value", genres: ["Roguelike"], platforms: ["Steam Deck"] }
+    );
+
+    expect(ranked.map((deal) => deal.title)).toEqual(["Dead Cells"]);
+  });
 });

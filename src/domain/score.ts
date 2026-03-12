@@ -50,11 +50,23 @@ export interface DiscoverFilters {
   preferredShops?: number[] | undefined;
 }
 
+const EXCLUDED_TITLE_PATTERNS = [
+  /\b(dlc|soundtrack|art ?book|bundle|season pass|expansion|supporter)\b/i,
+  /\bost\b/i,
+  /^3d puzzle\b/i,
+  /^room football\b/i,
+  /^how much items\b/i,
+  /^archaeology\b/i,
+  /^just move:/i,
+  /top-?down 3d/i
+] as const;
+
 export function scoreDealCandidates(deals: DealCandidate[], filters: DiscoverFilters): DealCandidate[] {
   const requestedGenres = (filters.genres ?? []).map(normalizeFacet);
   const requestedPlatforms = (filters.platforms ?? []).map(normalizeFacet);
 
   return [...deals]
+    .filter((deal) => !isJunkCandidate(deal))
     .filter((deal) => {
       if (typeof filters.budget === "number" && deal.price.amount > filters.budget) {
         return false;
@@ -95,6 +107,10 @@ export function scoreDealCandidates(deals: DealCandidate[], filters: DiscoverFil
       return true;
     })
     .sort((left, right) => compareDeals(left, right, filters.sort ?? "best-value"));
+}
+
+export function filterJunkCandidates(deals: DealCandidate[]): DealCandidate[] {
+  return deals.filter((deal) => !isJunkCandidate(deal));
 }
 
 function compareDeals(
@@ -184,9 +200,11 @@ function getHistoryScore(deal: DealCandidate): number {
 }
 
 function getTitlePenalty(title: string): number {
-  return /\b(dlc|soundtrack|art ?book|bundle|pack|season pass|expansion|supporter)\b/i.test(title)
-    ? 18
-    : 0;
+  if (isExcludedTitle(title)) {
+    return 30;
+  }
+
+  return /\bpack\b|\bdemo\b/i.test(title) ? 14 : 0;
 }
 
 function getSteamDeckScore(status?: SteamDeckCompatibility["status"]): number {
@@ -202,4 +220,16 @@ function getSteamDeckScore(status?: SteamDeckCompatibility["status"]): number {
     default:
       return 0;
   }
+}
+
+function isJunkCandidate(deal: DealCandidate): boolean {
+  if (isExcludedTitle(deal.title)) {
+    return true;
+  }
+
+  return false;
+}
+
+function isExcludedTitle(title: string): boolean {
+  return EXCLUDED_TITLE_PATTERNS.some((pattern) => pattern.test(title));
 }

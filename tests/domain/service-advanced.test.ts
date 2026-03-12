@@ -530,6 +530,110 @@ describe("GameDealService.recommendSaleGames", () => {
 
     expect(result.matches[0]).toMatchObject({ title: "Inscryption" });
   });
+
+  it("filters junk sale titles before choosing the top recommendation", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "junk-1",
+            title: "Just Move:Clean City Messy Battle",
+            price: { amount: 870, currency: "KRW" },
+            regular: { amount: 17400, currency: "KRW" },
+            cut: 95,
+            genres: ["Action"],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          },
+          {
+            id: "real-1",
+            title: "Deckbuilder Roguelike",
+            price: { amount: 11820, currency: "KRW" },
+            regular: { amount: 29571, currency: "KRW" },
+            cut: 60,
+            genres: ["Roguelike", "Strategy"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: 4.8,
+            metacritic: 88,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "짧게 하기 좋은 덱빌딩 게임",
+      budget: 15000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Deckbuilder Roguelike" });
+    expect(result.summary).toContain("Deckbuilder Roguelike");
+  });
+
+  it("limits catalog resolution fan-out for Steam-first recommendations", async () => {
+    let resolveCount = 0;
+
+    const service = new GameDealService({
+      async findDeals() {
+        return [];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal(title) {
+        resolveCount += 1;
+
+        return {
+          kind: "match" as const,
+          title,
+          matches: [
+            {
+              id: title,
+              title,
+              price: { amount: 9000, currency: "KRW" },
+              regular: { amount: 18000, currency: "KRW" },
+              cut: 50,
+              genres: ["Roguelike", "Strategy"],
+              platforms: ["PC", "Steam Deck"],
+              multiplayer: false,
+              rating: 4.0,
+              metacritic: 80,
+              metadataStatus: "rawg"
+            }
+          ]
+        };
+      },
+      async discoverTitles() {
+        return Array.from({ length: 12 }, (_, index) => ({
+          title: `Candidate ${index + 1}`,
+          released: "2024-01-01",
+          genres: ["Roguelike", "Strategy"],
+          platforms: ["PC", "Steam Deck"],
+          rating: 4.0,
+          metacritic: 80,
+          multiplayer: false
+        }));
+      }
+    });
+
+    await service.recommendSaleGames({
+      preferences: "스팀덱용 로그라이크",
+      budget: 20000,
+      country: "KR"
+    });
+
+    expect(resolveCount).toBe(8);
+  });
 });
 
 describe("GameDealService.explainDealValue", () => {
