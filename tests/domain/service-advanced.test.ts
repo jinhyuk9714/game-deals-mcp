@@ -580,6 +580,158 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(result.summary).toContain("Deckbuilder Roguelike");
   });
 
+  it("prefers card or deck grounded candidates for deckbuilding recommendations", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "generic-strategy",
+            title: "Strategy Roguelike Deluxe",
+            price: { amount: 7900, currency: "KRW" },
+            regular: { amount: 15800, currency: "KRW" },
+            cut: 50,
+            genres: ["Strategy", "Roguelike"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: 4.9,
+            metacritic: 90,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "real-deckbuilder",
+            title: "Card Deckbuilder Expedition",
+            price: { amount: 11800, currency: "KRW" },
+            regular: { amount: 23600, currency: "KRW" },
+            cut: 50,
+            genres: ["Strategy", "Roguelike"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: 4.4,
+            metacritic: 82,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "짧게 하기 좋은 덱빌딩 할인 게임",
+      budget: 15000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Card Deckbuilder Expedition" });
+    expect(result.summary).toContain("Card Deckbuilder Expedition");
+  });
+
+  it("requires multi-genre intent matches for action roguelite recommendations", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "action-only",
+            title: "Trailblazers",
+            price: { amount: 1763, currency: "KRW" },
+            regular: { amount: 44080, currency: "KRW" },
+            cut: 96,
+            genres: ["Action"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 3.17,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "action-roguelite",
+            title: "Action Roguelite Hero",
+            price: { amount: 8900, currency: "KRW" },
+            regular: { amount: 17800, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Roguelike"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.2,
+            metacritic: 80,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "가볍게 즐길 액션 로그라이트 추천해줘",
+      budget: 15000,
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Action Roguelite Hero" });
+    expect(result.matches.map((match) => (match as { title: string }).title)).toEqual([
+      "Action Roguelite Hero"
+    ]);
+  });
+
+  it("returns fewer-but-better results for high-rating strategy requests", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "thin-strategy-1",
+            title: "Budget Strategy One",
+            price: { amount: 3900, currency: "KRW" },
+            regular: { amount: 39000, currency: "KRW" },
+            cut: 90,
+            genres: ["Strategy"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: null,
+            metacritic: null,
+            metadataStatus: "missing"
+          },
+          {
+            id: "thin-strategy-2",
+            title: "Budget Strategy Two",
+            price: { amount: 5200, currency: "KRW" },
+            regular: { amount: 26000, currency: "KRW" },
+            cut: 80,
+            genres: ["Strategy"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 2.8,
+            metacritic: 54,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "평가 좋은 전략 할인 게임 추천해줘",
+      budget: 10000,
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("조건에 맞는 추천 할인 게임을 찾지 못했습니다.");
+  });
+
   it("limits catalog resolution fan-out for Steam-first recommendations", async () => {
     let resolveCount = 0;
 
@@ -633,6 +785,116 @@ describe("GameDealService.recommendSaleGames", () => {
     });
 
     expect(resolveCount).toBe(8);
+  });
+
+  it("deduplicates already compacted Steam Deck warnings in recommendation results", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "1",
+            title: "Deck Verified Pick",
+            price: { amount: 14000, currency: "KRW" },
+            regular: { amount: 28000, currency: "KRW" },
+            cut: 50,
+            genres: ["Roguelike"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: 4.6,
+            metacritic: 85,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "verified",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return {
+          deals,
+          warnings: [
+            "RAWG 보강 한도 때문에 일부 메타데이터를 생략했습니다.",
+            "Steam Deck 호환성 정보를 확인하지 못했습니다.",
+            "Steam Deck 호환성 보강 한도 때문에 일부 정보를 생략했습니다.",
+            "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+          ]
+        };
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱용 로그라이크 추천해줘",
+      budget: 20000,
+      country: "KR"
+    });
+
+    expect(result.warnings).toEqual([
+      "일부 메타데이터를 생략했습니다.",
+      "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+    ]);
+  });
+});
+
+describe("GameDealService.warning compaction", () => {
+  it("compacts noisy success warnings down to short summary warnings", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "1",
+            title: "Deck Verified Pick",
+            price: { amount: 14000, currency: "KRW" },
+            regular: { amount: 28000, currency: "KRW" },
+            cut: 50,
+            genres: ["Roguelike"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: 4.6,
+            metacritic: 85,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "verified",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return {
+          deals,
+          warnings: [
+            "RAWG 보강 한도 때문에 일부 메타데이터를 생략했습니다.",
+            "Steam Deck 호환성 정보를 확인하지 못했습니다.",
+            "Steam Deck 호환성 보강 한도 때문에 일부 정보를 생략했습니다.",
+            "Steam Deck 호환성 정보를 확인하지 못했습니다.",
+            "지정한 상점 범위에서 현재 할인 가격을 찾지 못했습니다."
+          ]
+        };
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.discoverDeals({
+      country: "KR",
+      budget: 20000,
+      genres: ["Roguelike"],
+      platforms: ["Steam Deck"],
+      sort: "best-value"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.warnings).toEqual([
+      "일부 메타데이터를 생략했습니다.",
+      "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+    ]);
   });
 });
 

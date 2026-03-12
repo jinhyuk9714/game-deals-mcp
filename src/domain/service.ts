@@ -226,7 +226,10 @@ export class GameDealService {
       warnings.push(...base.warnings);
     }
 
-    matches = applySteamDeckCompatibilityPreference(matches, steamDeckRequest);
+    matches = applyRecommendationQualityGates(
+      applySteamDeckCompatibilityPreference(matches, steamDeckRequest),
+      preferences
+    );
 
     if (matches.length === 0) {
       const emptyBase =
@@ -510,11 +513,17 @@ function parsePreferenceSignals(preferences: string): {
   platforms: string[];
   tags: string[];
   multiplayer: boolean;
+  deckbuilding: boolean;
+  highRating: boolean;
+  shortSession: boolean;
 } {
   const genres = new Set<string>();
   const rawgGenres = new Set<string>();
   const platforms = new Set<string>();
   const tags = new Set<string>();
+  const deckbuilding = /덱빌딩|deck ?build|deckbuilder|card battler/i.test(preferences);
+  const highRating = /평가 좋은|평 좋은|호평|high[- ]rated|highly rated|well-reviewed/i.test(preferences);
+  const shortSession = /짧게|가볍게|부담 없이|quick|short session|pick-?up/i.test(preferences);
 
   if (/로그라이크|로그라이트|roguelike|roguelite/i.test(preferences)) {
     genres.add("Roguelike");
@@ -522,7 +531,7 @@ function parsePreferenceSignals(preferences: string): {
     tags.add("roguelite");
   }
 
-  if (/덱빌딩|deck ?build|deckbuilder|card battler/i.test(preferences)) {
+  if (deckbuilding) {
     genres.add("Strategy");
     rawgGenres.add("card");
     tags.add("roguelike-deckbuilder");
@@ -551,7 +560,10 @@ function parsePreferenceSignals(preferences: string): {
     rawgGenres: [...rawgGenres],
     platforms: [...platforms],
     tags: [...tags],
-    multiplayer: /협동|co-?op|coop|멀티/i.test(preferences)
+    multiplayer: /협동|co-?op|coop|멀티/i.test(preferences),
+    deckbuilding,
+    highRating,
+    shortSession
   };
 }
 
@@ -719,9 +731,24 @@ function uniqueWarnings(warnings: string[]): string[] {
   const hasSubrequestWarning = warnings.some((warning) =>
     warning.includes("Too many subrequests by single Worker invocation")
   );
+  const hasMetadataWarning =
+    hasSubrequestWarning ||
+    warnings.some((warning) => warning.includes("RAWG 보강 한도")) ||
+    warnings.some((warning) => warning.includes("메타데이터를 생략"));
+  const hasSteamDeckWarning =
+    warnings.some((warning) => warning.includes("Steam Deck 호환성 정보를 확인하지 못했습니다")) ||
+    warnings.some((warning) => warning.includes("Steam Deck 호환성 보강 한도"));
 
-  if (hasSubrequestWarning) {
-    unique.push("Worker 한도 때문에 일부 메타데이터를 생략했습니다.");
+  if (hasMetadataWarning) {
+    const message = "일부 메타데이터를 생략했습니다.";
+    unique.push(message);
+    seen.add(message);
+  }
+
+  if (hasSteamDeckWarning) {
+    const message = "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.";
+    unique.push(message);
+    seen.add(message);
   }
 
   for (const warning of warnings) {
@@ -729,6 +756,11 @@ function uniqueWarnings(warnings: string[]): string[] {
     if (
       !normalized ||
       normalized.includes("Too many subrequests by single Worker invocation") ||
+      normalized.includes("RAWG 보강 한도") ||
+      normalized.includes("메타데이터를 생략") ||
+      normalized.includes("Steam Deck 호환성 정보를 확인하지 못했습니다") ||
+      normalized.includes("Steam Deck 호환성 보강 한도") ||
+      normalized.includes("지정한 상점 범위에서 현재 할인 가격을 찾지 못했습니다") ||
       seen.has(normalized)
     ) {
       continue;
@@ -791,6 +823,68 @@ function pickPreferredPlatform(platforms: string[], requested: string[]): string
   );
 
   return matched ?? platforms[0] ?? "PC";
+}
+
+function applyRecommendationQualityGates(
+  deals: DealCandidate[],
+  preferences: {
+    genres: string[];
+    deckbuilding: boolean;
+    highRating: boolean;
+    shortSession: boolean;
+    multiplayer: boolean;
+  }
+): DealCandidate[] {
+  let filtered = [...deals];
+
+  if (preferences.genres.length > 1) {
+    filtered = filtered.filter((deal) => matchesAllRequestedGenres(deal, preferences.genres));
+  }
+
+  if (preferences.multiplayer) {
+    filtered = filtered.filter((deal) => deal.multiplayer);
+  }
+
+  if (preferences.deckbuilding) {
+    const deckbuildingMatches = filtered.filter(hasDeckbuildingEvidence);
+    filtered = deckbuildingMatches.length > 0 ? deckbuildingMatches : [];
+  }
+
+  if (preferences.highRating) {
+    filtered = filtered.filter(hasStrongReviewSignal);
+  }
+
+  if (preferences.shortSession) {
+    filtered = filtered.sort((left, right) => {
+      const leftScore = getShortSessionScore(left);
+      const rightScore = getShortSessionScore(right);
+      return rightScore - leftScore;
+    });
+  }
+
+  return filtered;
+}
+
+function hasDeckbuildingEvidence(deal: DealCandidate): boolean {
+  return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(deal.title);
+}
+
+function hasStrongReviewSignal(deal: DealCandidate): boolean {
+  return (deal.rating ?? 0) >= 4 || (deal.metacritic ?? 0) >= 75;
+}
+
+function matchesAllRequestedGenres(deal: DealCandidate, requestedGenres: string[]): boolean {
+  const normalizedGenres = new Set(deal.genres.map((genre) => genre.trim().toLowerCase()));
+
+  return requestedGenres.every((genre) => normalizedGenres.has(genre.trim().toLowerCase()));
+}
+
+function getShortSessionScore(deal: DealCandidate): number {
+  const titleBonus = /\b(deck|card|arcade|survivor|survivors|roguelike|roguelite)\b/i.test(deal.title)
+    ? 2
+    : 0;
+  const priceBonus = deal.price.amount <= 12000 ? 1 : 0;
+  return titleBonus + priceBonus;
 }
 
 function normalizePlatform(value: string): string {
