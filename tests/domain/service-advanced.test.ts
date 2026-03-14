@@ -679,7 +679,7 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(result.matches[0]).toMatchObject({ title: "Into the Breach" });
   });
 
-  it("filters excluded genres and explains why the remaining game fits", async () => {
+  it("rejects Steam Deck matches without official compatibility evidence even when other filters fit", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -725,12 +725,11 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(result.matches).toHaveLength(1);
-    expect(result.summary).toContain("Co-op Deckbuilder");
-    expect(result.summary).toContain("협동");
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("추천 할인 게임을 찾지 못했습니다");
   });
 
-  it("parses structured preferences like steam deck roguelikes before ranking", async () => {
+  it("rejects Steam Deck roguelikes without verified or playable evidence", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -774,13 +773,11 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(result.matches).toHaveLength(1);
-    expect(result.matches[0]).toMatchObject({ title: "Deckbuilder Roguelike" });
-    expect(result.summary).toContain("Deckbuilder Roguelike");
-    expect(result.summary).toContain("Steam Deck");
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("추천 할인 게임을 찾지 못했습니다");
   });
 
-  it("falls back to catalog candidate discovery when broad deal search is empty", async () => {
+  it("does not surface catalog fallback for Steam Deck when official deck evidence is missing", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [];
@@ -834,12 +831,11 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(result.matches).toHaveLength(1);
-    expect(result.matches[0]).toMatchObject({ title: "Hades" });
-    expect(result.summary).toContain("Hades");
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("추천 할인 게임을 찾지 못했습니다");
   });
 
-  it("prefers catalog-first Steam sale candidates over broad deal noise", async () => {
+  it("keeps Steam catalog candidates out when deck evidence is missing", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -911,10 +907,11 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Inscryption" });
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("추천 할인 게임을 찾지 못했습니다");
   });
 
-  it("filters junk sale titles before choosing the top recommendation", async () => {
+  it("still rejects Steam Deck deckbuilding picks without official deck evidence after junk filtering", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -959,11 +956,11 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Deckbuilder Roguelike" });
-    expect(result.summary).toContain("Deckbuilder Roguelike");
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("추천 할인 게임을 찾지 못했습니다");
   });
 
-  it("prefers card or deck grounded candidates for deckbuilding recommendations", async () => {
+  it("rejects Steam Deck deckbuilding recommendations without official compatibility evidence", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -1010,8 +1007,8 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Card Deckbuilder Expedition" });
-    expect(result.summary).toContain("Card Deckbuilder Expedition");
+    expect(result.matches).toHaveLength(0);
+    expect(result.summary).toContain("추천 할인 게임을 찾지 못했습니다");
   });
 
   it("recovers non-Steam deckbuilding requests from catalog candidates with deckbuilder tags", async () => {
@@ -1915,5 +1912,111 @@ describe("GameDealService.explainDealValue", () => {
 
     expect(result.summary).toContain("역대 최저가에 근접");
     expect(result.summary).toContain("12,000원");
+  });
+});
+
+describe("GameDealService.recommendSaleGames evidence-first contracts", () => {
+  it("adds structured evidence to accepted recommendation matches", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "1",
+            title: "Reviewed Tactics Reserve",
+            price: { amount: 15900, currency: "KRW" },
+            regular: { amount: 31800, currency: "KRW" },
+            cut: 50,
+            genres: ["Strategy", "Tactics"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.4,
+            metacritic: 84,
+            historyLow: { amount: 14900, currency: "KRW" },
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "평가 좋은 전략 할인 게임",
+      budget: 20000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({
+      title: "Reviewed Tactics Reserve",
+      evidence: {
+        priceEvidence: {
+          source: "ITAD",
+          current: { amount: 15900, currency: "KRW" },
+          regular: { amount: 31800, currency: "KRW" },
+          cut: 50,
+          historyLow: { amount: 14900, currency: "KRW" }
+        },
+        platformEvidence: {
+          source: "ITAD",
+          platforms: ["PC"]
+        },
+        metadataEvidence: {
+          source: "RAWG",
+          genres: ["Strategy", "Tactics"],
+          rating: 4.4,
+          metacritic: 84
+        }
+      },
+      matchedSignals: expect.arrayContaining(["strategy", "tactics", "high-rating"]),
+      recommendationReason: expect.any(String)
+    });
+  });
+
+  it("rejects Steam Deck unknown candidates when no verified or playable evidence exists", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "1",
+            title: "Unknown Deck Roguelike",
+            price: { amount: 12000, currency: "KRW" },
+            regular: { amount: 24000, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Roguelike"],
+            platforms: ["PC", "Steam Deck"],
+            multiplayer: false,
+            rating: 4.2,
+            metacritic: 80,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "unknown",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async resolveDeal() {
+        return { kind: "not-found" as const, title: "" };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 하기 좋은 로그라이크",
+      budget: 20000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toEqual([]);
+    expect(result.summary).toContain("조건에 맞는 추천 할인 게임을 찾지 못했습니다.");
   });
 });

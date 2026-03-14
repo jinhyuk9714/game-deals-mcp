@@ -1,21 +1,17 @@
 {
-  "generatedAt": "2026-03-14T22:18:22.529Z",
+  "generatedAt": "2026-03-14T22:48:04.398Z",
   "summary": {
     "total": 50,
-    "zeroMatches": 0,
-    "flagged": 0,
+    "zeroMatches": 19,
+    "flagged": 19,
     "timeouts": 0,
     "topCounts": [
       {
         "title": "BALL x PIT",
-        "count": 14
-      },
-      {
-        "title": "Racket: Nx",
         "count": 10
       },
       {
-        "title": "Super Robot Taisen: Original Generation",
+        "title": "Dominions 5 - Warriors of the Faith",
         "count": 10
       },
       {
@@ -23,15 +19,7 @@
         "count": 9
       },
       {
-        "title": "Shining Force III",
-        "count": 4
-      },
-      {
         "title": "Dice & Fold",
-        "count": 1
-      },
-      {
-        "title": "Dominions 5 - Warriors of the Faith",
         "count": 1
       },
       {
@@ -42,26 +30,14 @@
   },
   "groups": {
     "steam-deck": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 1,
       "topCounts": [
-        {
-          "title": "BALL x PIT",
-          "count": 4
-        },
-        {
-          "title": "Super Robot Taisen: Original Generation",
-          "count": 4
-        },
-        {
-          "title": "Dominions 5 - Warriors of the Faith",
-          "count": 1
-        },
         {
           "title": "The King is Watching",
           "count": 1
         }
       ],
-      "flagged": 0,
+      "flagged": 9,
       "timeouts": 0
     },
     "deckbuilding-short": {
@@ -80,29 +56,20 @@
       "timeouts": 0
     },
     "strategy-rating": {
-      "uniqueTopPicks": 2,
+      "uniqueTopPicks": 1,
       "topCounts": [
         {
-          "title": "Super Robot Taisen: Original Generation",
-          "count": 6
-        },
-        {
-          "title": "Shining Force III",
-          "count": 4
+          "title": "Dominions 5 - Warriors of the Faith",
+          "count": 10
         }
       ],
       "flagged": 0,
       "timeouts": 0
     },
     "multiplayer": {
-      "uniqueTopPicks": 1,
-      "topCounts": [
-        {
-          "title": "Racket: Nx",
-          "count": 10
-        }
-      ],
-      "flagged": 0,
+      "uniqueTopPicks": 0,
+      "topCounts": [],
+      "flagged": 10,
       "timeouts": 0
     },
     "action-roguelite": {
@@ -127,30 +94,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -162,30 +114,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -197,30 +134,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -232,30 +154,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -267,29 +174,16 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Super Robot Taisen: Original Generation (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 4,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -301,29 +195,16 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Super Robot Taisen: Original Generation (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 4,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -335,29 +216,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 75% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 75,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -369,29 +236,16 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Super Robot Taisen: Original Generation (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 4,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -403,29 +257,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": "unknown"
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -437,7 +277,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, Steam Deck Playable, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -472,7 +312,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
@@ -510,7 +350,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
@@ -548,7 +388,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -585,7 +425,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -624,7 +464,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -661,7 +501,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -698,7 +538,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -735,7 +575,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -772,7 +612,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -809,7 +649,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -846,24 +686,24 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shining Force III를 추천합니다. 0% 할인, 현재가 0원, SEGA Saturn 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Shining Force III",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Shining Force III",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
+        "multiplayer": true,
         "rating": 4.67,
         "genres": [
           "Strategy",
-          "RPG"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -879,24 +719,24 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shining Force III를 추천합니다. 0% 할인, 현재가 0원, SEGA Saturn 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Shining Force III",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Shining Force III",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
+        "multiplayer": true,
         "rating": 4.67,
         "genres": [
           "Strategy",
-          "RPG"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -912,25 +752,25 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.83,
+        "multiplayer": true,
+        "rating": 4.67,
         "genres": [
           "Strategy",
-          "Action"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -946,25 +786,25 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.83,
+        "multiplayer": true,
+        "rating": 4.67,
         "genres": [
           "Strategy",
-          "Action"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -980,25 +820,25 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.83,
+        "multiplayer": true,
+        "rating": 4.67,
         "genres": [
           "Strategy",
-          "Action"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -1014,24 +854,24 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shining Force III를 추천합니다. 0% 할인, 현재가 0원, SEGA Saturn 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Shining Force III",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Shining Force III",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
+        "multiplayer": true,
         "rating": 4.67,
         "genres": [
           "Strategy",
-          "RPG"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -1047,25 +887,25 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.83,
+        "multiplayer": true,
+        "rating": 4.67,
         "genres": [
           "Strategy",
-          "Action"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -1081,25 +921,25 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.83,
+        "multiplayer": true,
+        "rating": 4.67,
         "genres": [
           "Strategy",
-          "Action"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -1115,25 +955,25 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.83,
+        "multiplayer": true,
+        "rating": 4.67,
         "genres": [
           "Strategy",
-          "Action"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -1149,24 +989,24 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shining Force III를 추천합니다. 0% 할인, 현재가 0원, SEGA Saturn 지원 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Shining Force III",
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
       "topMatch": {
-        "title": "Shining Force III",
-        "cut": 0,
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
         "price": {
-          "amount": 0,
+          "amount": 9450,
           "currency": "KRW"
         },
-        "multiplayer": false,
+        "multiplayer": true,
         "rating": 4.67,
         "genres": [
           "Strategy",
-          "RPG"
+          "Indie"
         ],
         "steamDeckStatus": null
       },
@@ -1182,29 +1022,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1216,29 +1041,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1250,29 +1060,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1284,29 +1079,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1318,29 +1098,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1352,29 +1117,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1386,29 +1136,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1420,29 +1155,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1454,29 +1174,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1488,29 +1193,14 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Racket: Nx",
-      "topMatch": {
-        "title": "Racket: Nx",
-        "cut": 50,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.5,
-        "genres": [
-          "Indie",
-          "Action",
-          "Sports"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1522,7 +1212,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1554,7 +1244,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1586,7 +1276,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1618,7 +1308,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1650,7 +1340,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1682,7 +1372,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1714,7 +1404,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1746,7 +1436,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1778,7 +1468,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -1810,7 +1500,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",

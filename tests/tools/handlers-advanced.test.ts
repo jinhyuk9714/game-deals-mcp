@@ -68,6 +68,24 @@ describe("advanced tool handlers", () => {
 
     expect(result.structuredContent.country).toBe("KR");
     expect(result.content[0]?.text).toContain("Balatro");
+    expect(result.structuredContent.matches[0]).toMatchObject({
+      title: "Balatro",
+      evidence: {
+        priceEvidence: {
+          source: "ITAD",
+          current: { amount: 12000, currency: "KRW" },
+          regular: { amount: 17000, currency: "KRW" },
+          cut: 29
+        },
+        metadataEvidence: {
+          source: "RAWG"
+        }
+      },
+      matchedSignals: expect.arrayContaining(["roguelike"]),
+      missingEvidence: expect.any(Array),
+      evidenceCompleteness: expect.any(String),
+      recommendationReason: expect.any(String)
+    });
   });
 
   it("wraps explain_deal_value output in MCP content", async () => {

@@ -61,7 +61,8 @@ describe("deterministic recommendation audit fixtures", () => {
     const steamDeckCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
       (testCase) => testCase.caseId === "steam-deck-unknown-allowed-after-strict-zero"
     );
-    expect(steamDeckCase?.expectation.forbiddenTopSignals).toContain("unsupported");
+    expect(steamDeckCase?.expectation.expectMatchCount).toBe(0);
+    expect(steamDeckCase?.expectation.forbiddenTopSignals).toContain("unknown");
 
     const localSteamDeckOverlayCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
       (testCase) => testCase.caseId === "local-steam-deck-reviewed-strategy-warning-overlay"
@@ -73,7 +74,8 @@ describe("deterministic recommendation audit fixtures", () => {
     const localDeckbuildingOverlayCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
       (testCase) => testCase.caseId === "local-steam-deck-deckbuilder-warning-overlay"
     );
-    expect(localDeckbuildingOverlayCase?.expectation.requiredTopSignals).toContain("deckbuilder");
+    expect(localDeckbuildingOverlayCase?.expectation.expectMatchCount).toBe(0);
+    expect(localDeckbuildingOverlayCase?.expectation.forbiddenTopSignals).toContain("unknown");
 
     const socialRichCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
       (testCase) => testCase.caseId === "social-friends-first-teamplay-beats-racket-nx"

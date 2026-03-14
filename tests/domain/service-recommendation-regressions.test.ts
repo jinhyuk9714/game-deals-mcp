@@ -588,7 +588,7 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Deck Rescue" });
   });
 
-  it("returns base Steam Deck strategy browse results and skips mixing when little budget remains", async () => {
+  it("keeps Steam Deck browse-only strategy picks out when official deck evidence is missing", async () => {
     const budgetWarning = "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다.";
     let currentTime = 0;
     let discoverTitlesCalls = 0;
@@ -656,7 +656,7 @@ describe("GameDealService recommendation regressions", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Deck Strategy" });
+    expect(result.matches).toHaveLength(0);
     expect(discoverTitlesCalls).toBe(0);
     expect(resolveCalls).toBe(0);
     expect(result.warnings.filter((warning) => warning === budgetWarning)).toHaveLength(1);
@@ -2652,7 +2652,7 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Party Brawler Heroes" });
   });
 
-  it("keeps structured multiplayer browse alive when platform metadata is omitted", async () => {
+  it("rejects structured multiplayer rescue candidates when platform metadata is omitted", async () => {
     const service = new GameDealService({
       async findDeals(args) {
         if (!args.genres || args.genres.length === 0) {
@@ -2694,7 +2694,7 @@ describe("GameDealService recommendation regressions", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Orbital Teamplay Co-op" });
+    expect(result.matches).toHaveLength(0);
   });
 
   it("treats shooter roguelike prompts as action roguelites", async () => {
@@ -3548,7 +3548,7 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Tactics Deck Verified" });
   });
 
-  it("continues Steam Deck strategy sparse recovery past zero-discount tactics matches until it finds a discounted reviewed strategy candidate", async () => {
+  it("rejects Steam Deck sparse recovery candidates when only unknown deck evidence is available", async () => {
     const resolveCalls: string[] = [];
 
     const service = new GameDealService({
@@ -3617,7 +3617,7 @@ describe("GameDealService recommendation regressions", () => {
     });
 
     expect(resolveCalls).toEqual(["Free Tactics", "The King is Watching"]);
-    expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
+    expect(result.matches).toHaveLength(0);
   });
 
   it("recovers deckbuilding tails through card-first sparse recovery", async () => {
@@ -4051,7 +4051,7 @@ describe("GameDealService recommendation regressions", () => {
     });
   });
 
-  it("salvages budget-constrained Steam Deck card roguelikes by overlaying card metadata onto browse matches", async () => {
+  it("does not salvage Steam Deck card roguelikes from unknown deck compatibility overlays", async () => {
     let discoverCalls = 0;
 
     const service = new GameDealService(
@@ -4113,7 +4113,7 @@ describe("GameDealService recommendation regressions", () => {
     });
 
     expect(discoverCalls).toBe(1);
-    expect(result.matches[0]).toMatchObject({ title: "Card Runner" });
+    expect(result.matches).toHaveLength(0);
   });
 
   it("salvages short deckbuilding prompts during ITAD 429 outages from discounted browse deals", async () => {
@@ -4298,7 +4298,7 @@ describe("GameDealService recommendation regressions", () => {
     });
   });
 
-  it("salvages Steam Deck deckbuilding prompts during ITAD 429 outages from unknown raw browse candidates", async () => {
+  it("keeps unknown Steam Deck deckbuilding outage candidates out of final recommendations", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -4355,11 +4355,7 @@ describe("GameDealService recommendation regressions", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({
-      title: "Portable Arcana Deluxe",
-      genres: expect.arrayContaining(["Card", "Deckbuilder"]),
-      steamDeckCompatibility: expect.objectContaining({ status: "unknown" })
-    });
+    expect(result.matches).toHaveLength(0);
   });
 
   it("keeps playable Steam Deck deckbuilders when browse genres only imply strategy", async () => {
@@ -5037,7 +5033,7 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Arcade Link", multiplayer: true, cut: 50 });
   });
 
-  it("rescues strict party-hangout prompts from discounted multiplayer action browse candidates", async () => {
+  it("does not rescue strict party-hangout prompts from action-only candidates without party evidence", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -5069,10 +5065,10 @@ describe("GameDealService recommendation regressions", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Couch Clash", multiplayer: true, cut: 50 });
+    expect(result.matches).toHaveLength(0);
   });
 
-  it("reuses the same social rescue tier for mixed-language social prompts", async () => {
+  it("does not reuse social rescue for mixed-language prompts when social evidence is missing", async () => {
     const service = new GameDealService({
       async findDeals() {
         return [
@@ -5104,7 +5100,7 @@ describe("GameDealService recommendation regressions", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Duo Blitz", multiplayer: true, cut: 50 });
+    expect(result.matches).toHaveLength(0);
   });
 
   it("rescues structured generic-coop browse results from raw multiplayer action candidates when strict teamplay matches are absent", async () => {
@@ -5146,7 +5142,7 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Arcade Link", multiplayer: true, cut: 50 });
   });
 
-  it("rescues structured party-hangout browse results from raw multiplayer action candidates when strict party matches are absent", async () => {
+  it("keeps structured party-hangout browse results empty when only action-only rescue candidates exist", async () => {
     const service = new GameDealService({
       async findDeals(args) {
         if (args.genres?.[0] === "Action") {
@@ -5182,7 +5178,7 @@ describe("GameDealService recommendation regressions", () => {
       country: "KR"
     });
 
-    expect(result.matches[0]).toMatchObject({ title: "Couch Clash", multiplayer: true, cut: 50 });
+    expect(result.matches).toHaveLength(0);
   });
 
   it("reuses structured social rescue for budget-strict social phrasing", async () => {

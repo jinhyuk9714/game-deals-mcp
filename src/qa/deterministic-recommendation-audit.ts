@@ -1,4 +1,9 @@
-import { GameDealService, type CatalogCandidate, type CompareResult } from "../domain/service.js";
+import {
+  GameDealService,
+  type CatalogCandidate,
+  type CompareResult,
+  type RecommendationMatch
+} from "../domain/service.js";
 import type {
   DealsEnrichment,
   DealCandidate,
@@ -102,6 +107,13 @@ export interface DeterministicRecommendationAuditTopMatch {
   platforms?: string[] | undefined;
   tags?: string[] | undefined;
   steamDeckStatus?: SteamDeckCompatibility["status"] | null | undefined;
+  matchedSignals?: string[] | undefined;
+  missingEvidence?: string[] | undefined;
+  recommendationReason?: string | undefined;
+  evidenceCompleteness?: string | undefined;
+  priceEvidenceSource?: string | undefined;
+  platformEvidenceSource?: string | undefined;
+  metadataEvidenceSource?: string | undefined;
 }
 
 export interface DeterministicRecommendationAuditResult {
@@ -212,8 +224,9 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 2,
-      expectedTopTitle: "Party Brawler Heroes"
+      expectMatchCount: 1,
+      expectedTopTitle: "Party Brawler Heroes",
+      requiredTopSignals: ["party", "multiplayer"]
     }
   },
   {
@@ -302,8 +315,9 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 2,
-      expectedTopTitle: "Aces of Ruin Deluxe"
+      expectMatchCount: 1,
+      expectedTopTitle: "Aces of Ruin Deluxe",
+      requiredTopSignals: ["card", "deckbuilder", "playable"]
     }
   },
   {
@@ -694,8 +708,8 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 1,
-      expectedTopTitle: "Portable Rogue Tactics Deluxe"
+      expectMatchCount: 0,
+      forbiddenTopSignals: ["unknown", "unsupported"]
     }
   },
   {
@@ -1214,7 +1228,7 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 2,
+      expectMatchCount: 1,
       expectedTopTitle: "Deck Ready Tactics",
       requiredTopSignals: ["strategy", "tactics", "playable"],
       forbiddenTopSignals: ["unsupported"],
@@ -1539,7 +1553,7 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 2,
+      expectMatchCount: 1,
       expectedTopTitle: "Deck Ready Tactics",
       requiredTopSignals: ["playable", "strategy"],
       forbiddenTopSignals: ["unsupported"]
@@ -1611,11 +1625,8 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 1,
-      expectedTopTitle: "Portable Unknown Tactics",
-      expectedTopGenres: ["Strategy", "Tactics"],
-      requiredTopSignals: ["unknown", "strategy", "tactics"],
-      forbiddenTopSignals: ["unsupported"]
+      expectMatchCount: 0,
+      forbiddenTopSignals: ["unknown", "unsupported"]
     }
   },
   {
@@ -2098,15 +2109,12 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 1,
-      expectedTopTitle: "Portable Arcana Deluxe",
+      expectMatchCount: 0,
       requiredWarnings: [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
-      requiredTopSignals: ["card", "deckbuilder", "unknown"],
-      forbiddenTopSignals: ["unsupported"]
+      forbiddenTopSignals: ["unknown", "unsupported"]
     }
   },
   {
@@ -2545,12 +2553,9 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 1,
-      expectedTopTitle: "Portable Arcana Deluxe",
+      expectMatchCount: 0,
       requiredWarnings: ["ITAD request failed with 429"],
-      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
-      requiredTopSignals: ["card", "deckbuilder", "unknown"],
-      forbiddenTopSignals: ["unsupported"]
+      forbiddenTopSignals: ["unknown", "unsupported"]
     }
   },
   {
@@ -3301,12 +3306,9 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 1,
-      expectedTopTitle: "Portable Arcana Deluxe",
+      expectMatchCount: 0,
       requiredWarnings: ["ITAD request failed with 429"],
-      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
-      requiredTopSignals: ["card", "deckbuilder", "unknown"],
-      forbiddenTopSignals: ["unsupported"],
+      forbiddenTopSignals: ["unknown", "unsupported"],
       forbiddenTopTitles: ["Deponia"]
     }
   },
@@ -4620,6 +4622,28 @@ function evaluateDeterministicExpectation(
   const topGenres = new Set((topMatch?.genres ?? []).map(normalizeText));
   const topSignals = topMatch ? buildTopSignalBlob(topMatch) : "";
 
+  if (matchCount > 0 && topMatch) {
+    if (topMatch.priceEvidenceSource !== "ITAD") {
+      failures.push("accepted top match is missing ITAD price evidence");
+    }
+
+    if (!topMatch.platformEvidenceSource) {
+      failures.push("accepted top match is missing platform evidence");
+    }
+
+    if (!topMatch.evidenceCompleteness) {
+      failures.push("accepted top match is missing evidence completeness");
+    }
+
+    if ((topMatch.matchedSignals?.length ?? 0) === 0) {
+      failures.push("accepted top match is missing matched signals");
+    }
+
+    if (typeof topMatch.recommendationReason !== "string" || topMatch.recommendationReason.length === 0) {
+      failures.push("accepted top match is missing recommendation reason");
+    }
+  }
+
   if (
     typeof expectation.expectMatchCount === "number" &&
     matchCount !== expectation.expectMatchCount
@@ -4756,7 +4780,7 @@ function toAuditTopMatch(value: unknown): DeterministicRecommendationAuditTopMat
     return null;
   }
 
-  const deal = value as Partial<DealCandidate & { tags?: string[] }>;
+  const deal = value as Partial<RecommendationMatch>;
   if (typeof deal.title !== "string" || deal.title.length === 0) {
     return null;
   }
@@ -4772,7 +4796,25 @@ function toAuditTopMatch(value: unknown): DeterministicRecommendationAuditTopMat
     genres: Array.isArray(deal.genres) ? deal.genres : undefined,
     platforms: Array.isArray(deal.platforms) ? deal.platforms : undefined,
     tags: Array.isArray(deal.tags) ? deal.tags : undefined,
-    steamDeckStatus: deal.steamDeckCompatibility?.status ?? null
+    steamDeckStatus: deal.steamDeckCompatibility?.status ?? null,
+    matchedSignals: Array.isArray(deal.matchedSignals) ? deal.matchedSignals : undefined,
+    missingEvidence: Array.isArray(deal.missingEvidence) ? deal.missingEvidence : undefined,
+    recommendationReason:
+      typeof deal.recommendationReason === "string" ? deal.recommendationReason : undefined,
+    evidenceCompleteness:
+      typeof deal.evidenceCompleteness === "string" ? deal.evidenceCompleteness : undefined,
+    priceEvidenceSource:
+      typeof deal.evidence?.priceEvidence?.source === "string"
+        ? deal.evidence.priceEvidence.source
+        : undefined,
+    platformEvidenceSource:
+      typeof deal.evidence?.platformEvidence?.source === "string"
+        ? deal.evidence.platformEvidence.source
+        : undefined,
+    metadataEvidenceSource:
+      typeof deal.evidence?.metadataEvidence?.source === "string"
+        ? deal.evidence.metadataEvidence.source
+        : undefined
   };
 }
 
@@ -4870,6 +4912,12 @@ function buildTopSignalBlob(match: DeterministicRecommendationAuditTopMatch): st
     ...(match.genres ?? []),
     ...(match.tags ?? []),
     ...(match.platforms ?? []),
+    ...(match.matchedSignals ?? []),
+    ...(match.missingEvidence ?? []),
+    match.evidenceCompleteness ?? "",
+    match.priceEvidenceSource ?? "",
+    match.platformEvidenceSource ?? "",
+    match.metadataEvidenceSource ?? "",
     match.steamDeckStatus ?? "",
     match.multiplayer === true ? "multiplayer" : ""
   ];

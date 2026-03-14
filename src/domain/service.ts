@@ -1,4 +1,11 @@
-import type { DealsEnrichment, DiscoverFilters, DealCandidate } from "./score.js";
+import type {
+  DealsEnrichment,
+  DiscoverFilters,
+  DealCandidate,
+  PricePoint,
+  StoreOffer,
+  SteamDeckCompatibility
+} from "./score.js";
 import { filterJunkCandidates, scoreDealCandidates } from "./score.js";
 import { formatKoreanPriceSummary, formatPrice } from "../presentation/summary.js";
 import type { DealResolution, ResolveDealOptions } from "../providers/itad-client.js";
@@ -59,6 +66,67 @@ export interface CompareResult {
   warnings: string[];
 }
 export interface CompareResult extends Record<string, unknown> {}
+
+export interface RecommendationPriceEvidence {
+  source: "ITAD";
+  current: PricePoint;
+  regular: PricePoint;
+  cut: number;
+  historyLow?: PricePoint | undefined;
+  stores?: StoreOffer[] | undefined;
+}
+
+export interface RecommendationPlatformEvidence {
+  source: "ITAD" | "Steam";
+  platforms: string[];
+  steamDeckStatus?: SteamDeckCompatibility["status"] | undefined;
+}
+
+export interface RecommendationMetadataEvidence {
+  source: "RAWG";
+  genres: string[];
+  tags?: string[] | undefined;
+  rating?: number | null | undefined;
+  metacritic?: number | null | undefined;
+}
+
+export interface RecommendationEvidence {
+  priceEvidence: RecommendationPriceEvidence;
+  platformEvidence: RecommendationPlatformEvidence;
+  metadataEvidence?: RecommendationMetadataEvidence | undefined;
+}
+
+export type RecommendationEvidenceCompleteness =
+  | "hard-facts-only"
+  | "hard-facts-plus-metadata"
+  | "partial";
+
+export interface RecommendationMatch extends DealCandidate {
+  tags?: string[] | undefined;
+  evidence: RecommendationEvidence;
+  matchedSignals: string[];
+  missingEvidence: string[];
+  recommendationReason: string;
+  evidenceCompleteness: RecommendationEvidenceCompleteness;
+}
+
+type RecommendationTaggedDeal = DealCandidate & {
+  tags?: string[] | undefined;
+};
+
+type RecommendationPreferences = ReturnType<typeof parsePreferenceSignals> & {
+  multiplayer: boolean;
+};
+
+interface RecommendationEvidenceContext {
+  rawPreferences: string;
+  preferences: RecommendationPreferences;
+  constraints: RecommendationConstraints;
+  requestedPlatforms: string[];
+  budget?: number | undefined;
+  steamDeckRequest: boolean;
+  socialProfile?: RecommendationSocialPromptProfile | undefined;
+}
 
 export interface CatalogDiscoveryInput {
   tags?: string[] | undefined;
@@ -1186,7 +1254,17 @@ export class GameDealService {
       constraints
     });
 
-    const top = matches[0];
+    const evidenceMatches = buildEvidenceFirstRecommendationMatches({
+      deals: matches,
+      rawPreferences: args.preferences,
+      preferences,
+      constraints,
+      requestedPlatforms: effectivePlatforms,
+      budget: args.budget,
+      steamDeckRequest,
+      socialProfile: effectiveSocialProfile
+    });
+    const top = evidenceMatches[0];
     if (!top) {
       return {
         query: {
@@ -1203,25 +1281,6 @@ export class GameDealService {
         warnings: uniqueWarnings(warnings)
       };
     }
-    const reasons = [
-      `${top.cut}% 할인`,
-      `현재가 ${formatPrice(top.price.amount, top.price.currency)}`
-    ];
-
-    if (top.multiplayer || multiplayer) {
-      reasons.push("협동 플레이 지원");
-    }
-
-    if (effectivePlatforms.length > 0 && top.platforms.length > 0) {
-      reasons.push(`${pickPreferredPlatform(top.platforms, effectivePlatforms)} 지원`);
-    }
-
-    const deckStatus = getDeckCompatibilityStatus(top);
-    if (steamDeckRequest) {
-      if (deckStatus === "verified" || deckStatus === "playable") {
-        reasons.push(deckCompatibilityLabel(deckStatus));
-      }
-    }
 
     return {
       query: {
@@ -1232,11 +1291,8 @@ export class GameDealService {
         country
       },
       country,
-      matches,
-      summary:
-        deckStatus === "unknown" && steamDeckRequest
-          ? `${top.title}를 추천합니다. ${reasons.join(", ")} 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.`
-          : `${top.title}를 추천합니다. ${reasons.join(", ")} 조건과 잘 맞습니다.`,
+      matches: evidenceMatches,
+      summary: buildRecommendationSummary(top),
       sources: base?.sources ?? ["IsThereAnyDeal", "RAWG", "Steam"],
       warnings: uniqueWarnings(warnings)
     };
@@ -2857,6 +2913,561 @@ function uniqueValues(values: string[]): string[] {
   }
 
   return unique;
+}
+
+function buildEvidenceFirstRecommendationMatches(args: {
+  deals: DealCandidate[];
+  rawPreferences: string;
+  preferences: RecommendationPreferences;
+  constraints: RecommendationConstraints;
+  requestedPlatforms: string[];
+  budget?: number | undefined;
+  steamDeckRequest: boolean;
+  socialProfile?: RecommendationSocialPromptProfile | undefined;
+}): RecommendationMatch[] {
+  const context: RecommendationEvidenceContext = {
+    rawPreferences: args.rawPreferences,
+    preferences: args.preferences,
+    constraints: args.constraints,
+    requestedPlatforms: args.requestedPlatforms,
+    budget: args.budget,
+    steamDeckRequest: args.steamDeckRequest,
+    socialProfile: args.socialProfile
+  };
+
+  return args.deals
+    .map((deal) => buildRecommendationMatchEvidence(toRecommendationTaggedDeal(deal), context))
+    .filter((match): match is RecommendationMatch => match !== null)
+    .sort(compareEvidenceFirstRecommendationMatches);
+}
+
+function buildRecommendationMatchEvidence(
+  deal: RecommendationTaggedDeal,
+  context: RecommendationEvidenceContext
+): RecommendationMatch | null {
+  const priceEvidence = buildRecommendationPriceEvidence(deal);
+  if (!priceEvidence) {
+    return null;
+  }
+
+  if (typeof context.budget === "number" && deal.price.amount > context.budget) {
+    return null;
+  }
+
+  if (!matchesEvidenceRequestedPlatforms(deal, context.requestedPlatforms, context.steamDeckRequest)) {
+    return null;
+  }
+
+  if (isRecommendationEvidenceJunk(deal)) {
+    return null;
+  }
+
+  const matchedSignals = getRecommendationMatchedSignals(deal, context);
+  const requiredSignals = getRecommendationRequiredSignals(context);
+  const missingEvidence = requiredSignals.filter((signal) => !matchedSignals.includes(signal));
+
+  if (context.steamDeckRequest) {
+    const deckStatus = getDeckCompatibilityStatus(deal);
+    if (deckStatus !== "verified" && deckStatus !== "playable") {
+      return null;
+    }
+  }
+
+  if (
+    context.preferences.highRating &&
+    !hasStrongReviewSignal(deal)
+  ) {
+    return null;
+  }
+
+  if (requiresStrategyRatingEvidence(context) && !hasStrategyRatingEvidence(deal)) {
+    return null;
+  }
+
+  if (requiresDeckbuildingEvidence(context) && !hasDeckbuildingEvidence(deal)) {
+    return null;
+  }
+
+  if (context.preferences.multiplayer && !hasAcceptedMultiplayerEvidence(deal, context.socialProfile)) {
+    return null;
+  }
+
+  if (
+    context.preferences.genres.length > 1 &&
+    !matchesEvidenceRequestedGenres(deal, context.preferences)
+  ) {
+    return null;
+  }
+
+  if (missingEvidence.length > 0) {
+    return null;
+  }
+
+  const metadataEvidence = buildRecommendationMetadataEvidence(deal);
+  const evidenceCompleteness = buildRecommendationEvidenceCompleteness(
+    priceEvidence,
+    metadataEvidence
+  );
+  const platformEvidence = buildRecommendationPlatformEvidence(deal, context.steamDeckRequest);
+  const recommendationReason = buildRecommendationReason({
+    deal,
+    priceEvidence,
+    platformEvidence,
+    metadataEvidence,
+    matchedSignals
+  });
+
+  return {
+    ...deal,
+    tags: getRecommendationDealTags(deal),
+    evidence: {
+      priceEvidence,
+      platformEvidence,
+      metadataEvidence
+    },
+    matchedSignals,
+    missingEvidence,
+    recommendationReason,
+    evidenceCompleteness
+  };
+}
+
+function compareEvidenceFirstRecommendationMatches(
+  left: RecommendationMatch,
+  right: RecommendationMatch
+): number {
+  const signalDelta = right.matchedSignals.length - left.matchedSignals.length;
+  if (signalDelta !== 0) {
+    return signalDelta;
+  }
+
+  const completenessDelta =
+    getRecommendationEvidenceCompletenessScore(right.evidenceCompleteness) -
+    getRecommendationEvidenceCompletenessScore(left.evidenceCompleteness);
+  if (completenessDelta !== 0) {
+    return completenessDelta;
+  }
+
+  const reviewDelta = getRecommendationReviewStrength(right) - getRecommendationReviewStrength(left);
+  if (reviewDelta !== 0) {
+    return reviewDelta;
+  }
+
+  const cutDelta = right.cut - left.cut;
+  if (cutDelta !== 0) {
+    return cutDelta;
+  }
+
+  const historyDelta = getRecommendationHistoryStrength(right) - getRecommendationHistoryStrength(left);
+  if (historyDelta !== 0) {
+    return historyDelta;
+  }
+
+  return left.price.amount - right.price.amount || left.title.localeCompare(right.title);
+}
+
+function buildRecommendationSummary(top: RecommendationMatch): string {
+  return `${top.title}를 추천합니다. ${top.recommendationReason}.`;
+}
+
+function buildRecommendationReason(args: {
+  deal: RecommendationTaggedDeal;
+  priceEvidence: RecommendationPriceEvidence;
+  platformEvidence: RecommendationPlatformEvidence;
+  metadataEvidence?: RecommendationMetadataEvidence | undefined;
+  matchedSignals: string[];
+}): string {
+  const parts = [
+    `${args.priceEvidence.cut}% 할인`,
+    `현재가 ${formatPrice(args.priceEvidence.current.amount, args.priceEvidence.current.currency)}`
+  ];
+
+  const primaryStore = args.priceEvidence.stores?.[0]?.store?.trim();
+  if (primaryStore) {
+    parts.push(`${primaryStore} 판매`);
+  }
+
+  if (args.platformEvidence.steamDeckStatus) {
+    parts.push(deckCompatibilityLabel(args.platformEvidence.steamDeckStatus));
+  } else if (args.platformEvidence.platforms.length > 0) {
+    parts.push(`${args.platformEvidence.platforms[0]} 지원`);
+  }
+
+  if ((args.metadataEvidence?.genres.length ?? 0) > 0) {
+    parts.push(`장르 ${args.metadataEvidence?.genres.slice(0, 2).join("/")}`);
+  }
+
+  if (typeof args.metadataEvidence?.rating === "number" && args.metadataEvidence.rating > 0) {
+    parts.push(`평점 ${args.metadataEvidence.rating.toFixed(1)}`);
+  } else if (
+    typeof args.metadataEvidence?.metacritic === "number" &&
+    args.metadataEvidence.metacritic > 0
+  ) {
+    parts.push(`메타크리틱 ${args.metadataEvidence.metacritic}`);
+  }
+
+  if (args.matchedSignals.length > 0) {
+    parts.push(`충족 신호 ${args.matchedSignals.slice(0, 3).join(", ")}`);
+  }
+
+  return parts.join(", ");
+}
+
+function buildRecommendationPriceEvidence(
+  deal: RecommendationTaggedDeal
+): RecommendationPriceEvidence | null {
+  if (
+    !Number.isFinite(deal.price.amount) ||
+    !Number.isFinite(deal.regular.amount) ||
+    deal.cut <= 0
+  ) {
+    return null;
+  }
+
+  return {
+    source: "ITAD",
+    current: deal.price,
+    regular: deal.regular,
+    cut: deal.cut,
+    historyLow: deal.historyLow ?? undefined,
+    stores: deal.stores
+  };
+}
+
+function buildRecommendationPlatformEvidence(
+  deal: RecommendationTaggedDeal,
+  steamDeckRequest: boolean
+): RecommendationPlatformEvidence {
+  const deckStatus = getDeckCompatibilityStatus(deal);
+
+  if (steamDeckRequest || deal.steamDeckCompatibility) {
+    return {
+      source: "Steam",
+      platforms: deal.platforms,
+      steamDeckStatus: deckStatus
+    };
+  }
+
+  return {
+    source: "ITAD",
+    platforms: deal.platforms
+  };
+}
+
+function buildRecommendationMetadataEvidence(
+  deal: RecommendationTaggedDeal
+): RecommendationMetadataEvidence | undefined {
+  const tags = getRecommendationDealTags(deal);
+  const hasGenres = deal.genres.length > 0;
+  const hasTags = tags.length > 0;
+  const hasRatings =
+    (typeof deal.rating === "number" && deal.rating > 0) ||
+    (typeof deal.metacritic === "number" && deal.metacritic > 0);
+
+  if (!hasGenres && !hasTags && !hasRatings) {
+    return undefined;
+  }
+
+  return {
+    source: "RAWG",
+    genres: deal.genres,
+    tags,
+    rating: deal.rating,
+    metacritic: deal.metacritic
+  };
+}
+
+function buildRecommendationEvidenceCompleteness(
+  priceEvidence: RecommendationPriceEvidence,
+  metadataEvidence?: RecommendationMetadataEvidence | undefined
+): RecommendationEvidenceCompleteness {
+  if (
+    metadataEvidence &&
+    (metadataEvidence.genres.length > 0 ||
+      (metadataEvidence.tags?.length ?? 0) > 0 ||
+      typeof metadataEvidence.rating === "number" ||
+      typeof metadataEvidence.metacritic === "number")
+  ) {
+    return "hard-facts-plus-metadata";
+  }
+
+  if (priceEvidence.current.currency && priceEvidence.regular.currency) {
+    return "hard-facts-only";
+  }
+
+  return "partial";
+}
+
+function getRecommendationEvidenceCompletenessScore(
+  completeness: RecommendationEvidenceCompleteness
+): number {
+  switch (completeness) {
+    case "hard-facts-plus-metadata":
+      return 2;
+    case "hard-facts-only":
+      return 1;
+    case "partial":
+    default:
+      return 0;
+  }
+}
+
+function getRecommendationReviewStrength(deal: RecommendationTaggedDeal): number {
+  return (deal.metacritic ?? 0) * 2 + (deal.rating ?? 0) * 20;
+}
+
+function getRecommendationHistoryStrength(deal: RecommendationTaggedDeal): number {
+  if (!deal.historyLow || deal.historyLow.amount <= 0 || deal.price.amount <= 0) {
+    return 0;
+  }
+
+  if (deal.price.amount <= deal.historyLow.amount) {
+    return 2;
+  }
+
+  const ratio = deal.price.amount / deal.historyLow.amount;
+  if (ratio <= 1.1) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function toRecommendationTaggedDeal(deal: DealCandidate): RecommendationTaggedDeal {
+  return deal as RecommendationTaggedDeal;
+}
+
+function getRecommendationDealTags(deal: RecommendationTaggedDeal): string[] {
+  return deal.tags?.filter((tag) => tag.trim().length > 0) ?? [];
+}
+
+function getRecommendationSignalHaystack(deal: RecommendationTaggedDeal): string {
+  return `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(deal).join(" ")}`.toLowerCase();
+}
+
+function getRecommendationRequiredSignals(context: RecommendationEvidenceContext): string[] {
+  const requiredSignals = new Set<string>();
+
+  if (context.steamDeckRequest) {
+    requiredSignals.add("steam-deck");
+  }
+
+  if (context.preferences.highRating) {
+    requiredSignals.add("high-rating");
+  }
+
+  if (requiresStrategyRatingEvidence(context)) {
+    requiredSignals.add("strategy");
+  }
+
+  if (requiresDeckbuildingEvidence(context)) {
+    requiredSignals.add("deckbuilder");
+  }
+
+  if (context.preferences.multiplayer) {
+    requiredSignals.add("multiplayer");
+  }
+
+  if (context.preferences.genres.length > 1) {
+    for (const genre of context.preferences.genres) {
+      const normalized = normalizeEvidenceSignal(genre);
+
+      if (
+        context.preferences.deckbuilding &&
+        (normalized === "strategy" || normalized === "card" || normalized === "deckbuilder")
+      ) {
+        continue;
+      }
+
+      requiredSignals.add(normalized);
+    }
+  }
+
+  return [...requiredSignals];
+}
+
+function getRecommendationMatchedSignals(
+  deal: RecommendationTaggedDeal,
+  context: RecommendationEvidenceContext
+): string[] {
+  const signals = new Set<string>();
+  const haystack = getRecommendationSignalHaystack(deal);
+
+  if (hasStrategyRecoveryDealEvidence(deal)) {
+    signals.add("strategy");
+  }
+
+  if (hasTacticsDealEvidence(deal)) {
+    signals.add("tactics");
+  }
+
+  if (hasDeckbuildingEvidence(deal)) {
+    signals.add("deckbuilder");
+    if (/\b(card|cards?)\b/i.test(haystack)) {
+      signals.add("card");
+    }
+  }
+
+  if (hasRoguelikeDealEvidence(deal)) {
+    signals.add("roguelike");
+  }
+
+  if (hasActionDealEvidence(deal)) {
+    signals.add("action");
+  }
+
+  if (deal.multiplayer) {
+    signals.add("multiplayer");
+  }
+
+  if (hasExplicitCoopDealEvidence(deal) || hasLocalSocialDealEvidence(deal)) {
+    signals.add("co-op");
+    signals.add("teamplay");
+  }
+
+  if (hasStrongPartyDealEvidence(deal)) {
+    signals.add("party");
+  }
+
+  const deckStatus = getDeckCompatibilityStatus(deal);
+  if (deckStatus === "verified" || deckStatus === "playable") {
+    signals.add("steam-deck");
+  }
+
+  if (hasStrongReviewSignal(deal)) {
+    signals.add("high-rating");
+  }
+
+  for (const genre of context.preferences.genres) {
+    if (matchesEvidenceGenreSignal(deal, genre)) {
+      signals.add(normalizeEvidenceSignal(genre));
+    }
+  }
+
+  return [...signals];
+}
+
+function normalizeEvidenceSignal(value: string): string {
+  return value.trim().toLowerCase().replace(/\s+/g, "-");
+}
+
+function matchesEvidenceRequestedPlatforms(
+  deal: RecommendationTaggedDeal,
+  requestedPlatforms: string[],
+  steamDeckRequest: boolean
+): boolean {
+  if (steamDeckRequest) {
+    const deckStatus = getDeckCompatibilityStatus(deal);
+    return deckStatus === "verified" || deckStatus === "playable";
+  }
+
+  if (requestedPlatforms.length === 0) {
+    return true;
+  }
+
+  if (deal.platforms.length === 0) {
+    return false;
+  }
+
+  return matchesRequestedPlatforms(deal.platforms, requestedPlatforms);
+}
+
+function requiresStrategyRatingEvidence(context: RecommendationEvidenceContext): boolean {
+  return (
+    context.preferences.highRating &&
+    (context.preferences.rawgGenres.includes("strategy") ||
+      context.constraints.strategyPreference === "required")
+  );
+}
+
+function hasStrategyRatingEvidence(deal: RecommendationTaggedDeal): boolean {
+  return (
+    (hasStrategyRecoveryDealEvidence(deal) || hasTacticsDealEvidence(deal)) &&
+    hasStrongReviewSignal(deal)
+  );
+}
+
+function requiresDeckbuildingEvidence(context: RecommendationEvidenceContext): boolean {
+  return context.preferences.deckbuilding || context.constraints.deckPreference === "required";
+}
+
+function hasAcceptedMultiplayerEvidence(
+  deal: RecommendationTaggedDeal,
+  socialProfile?: RecommendationSocialPromptProfile | undefined
+): boolean {
+  if (!deal.multiplayer) {
+    return false;
+  }
+
+  if (hasPvPDealEvidence(deal) || hasRacingOrSportsShape(deal)) {
+    return false;
+  }
+
+  if (socialProfile === "party-hangout") {
+    return hasStrongPartyDealEvidence(deal);
+  }
+
+  return (
+    hasExplicitCoopDealEvidence(deal) ||
+    hasLocalSocialDealEvidence(deal) ||
+    hasStrongPartyDealEvidence(deal)
+  );
+}
+
+function matchesEvidenceRequestedGenres(
+  deal: RecommendationTaggedDeal,
+  preferences: RecommendationPreferences
+): boolean {
+  if (preferences.deckbuilding) {
+    return matchesRequestedDeckbuildingHybridGenres(deal, preferences.genres);
+  }
+
+  return preferences.genres.every((genre) => matchesEvidenceGenreSignal(deal, genre));
+}
+
+function matchesEvidenceGenreSignal(deal: RecommendationTaggedDeal, genre: string): boolean {
+  const normalized = genre.trim().toLowerCase();
+  const haystack = getRecommendationSignalHaystack(deal);
+
+  switch (normalized) {
+    case "strategy":
+      return hasStrategyRecoveryDealEvidence(deal);
+    case "tactics":
+      return hasTacticsDealEvidence(deal);
+    case "action":
+      return hasActionDealEvidence(deal);
+    case "roguelike":
+    case "roguelite":
+      return hasRoguelikeDealEvidence(deal);
+    case "card":
+    case "deckbuilder":
+      return hasDeckbuildingEvidence(deal);
+    default:
+      return new RegExp(`\\b${escapeRecommendationRegex(normalized)}\\b`, "i").test(haystack);
+  }
+}
+
+function hasTacticsIntent(value: string): boolean {
+  return /전술|tactics?|tactical|turn-?based|턴제/i.test(value);
+}
+
+function isRecommendationEvidenceJunk(deal: RecommendationTaggedDeal): boolean {
+  if (isRecommendationOverlayBrowseJunk(deal)) {
+    return true;
+  }
+
+  const haystack = getRecommendationSignalHaystack(deal);
+  const hasMetadataEvidence =
+    deal.genres.length > 0 ||
+    getRecommendationDealTags(deal).length > 0 ||
+    typeof deal.rating === "number" ||
+    typeof deal.metacritic === "number";
+
+  if (!hasMetadataEvidence && /\b(bundle|collection|course|demo|ai games?)\b/i.test(haystack)) {
+    return true;
+  }
+
+  return false;
 }
 
 function buildNoRecommendationSummary(base: CompareResult): string {

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-03-14T22:17:34.514Z",
+  "generatedAt": "2026-03-14T22:46:46.230Z",
   "summary": {
     "total": 76,
-    "zeroMatches": 12,
+    "zeroMatches": 17,
     "flagged": 0,
     "timeouts": 0,
     "topCounts": [
@@ -17,10 +17,6 @@
       {
         "title": "Rogue Deck Assault",
         "count": 6
-      },
-      {
-        "title": "Portable Arcana Deluxe",
-        "count": 5
       },
       {
         "title": "Aces of Ruin Deluxe",
@@ -39,11 +35,15 @@
         "count": 3
       },
       {
-        "title": "Portable Rogue Tactics Deluxe",
-        "count": 3
+        "title": "Deck Ready Tactics",
+        "count": 2
       },
       {
-        "title": "Deck Ready Tactics",
+        "title": "Portable Arcana Deluxe",
+        "count": 2
+      },
+      {
+        "title": "Portable Rogue Tactics Deluxe",
         "count": 2
       },
       {
@@ -87,10 +87,6 @@
         "count": 1
       },
       {
-        "title": "Portable Unknown Tactics",
-        "count": 1
-      },
-      {
         "title": "Reviewed Strategy Fallback",
         "count": 1
       },
@@ -117,10 +113,6 @@
           "count": 2
         },
         {
-          "title": "Portable Arcana Deluxe",
-          "count": 2
-        },
-        {
           "title": "Aces of Ruin Deluxe",
           "count": 1
         },
@@ -134,6 +126,10 @@
         },
         {
           "title": "Party Brawler Heroes",
+          "count": 1
+        },
+        {
+          "title": "Portable Arcana Deluxe",
           "count": 1
         },
         {
@@ -161,7 +157,7 @@
       "timeouts": 0
     },
     "provider-outage": {
-      "uniqueTopPicks": 8,
+      "uniqueTopPicks": 7,
       "topCounts": [
         {
           "title": "Orbital Teamplay Co-op",
@@ -184,10 +180,6 @@
           "count": 1
         },
         {
-          "title": "Portable Arcana Deluxe",
-          "count": 1
-        },
-        {
           "title": "Reviewed Strategy Fallback",
           "count": 1
         },
@@ -200,7 +192,7 @@
       "timeouts": 0
     },
     "steam-deck-overlay": {
-      "uniqueTopPicks": 9,
+      "uniqueTopPicks": 8,
       "topCounts": [
         {
           "title": "Portable Lounge Brawler",
@@ -208,10 +200,6 @@
         },
         {
           "title": "Portable Rogue Tactics Deluxe",
-          "count": 3
-        },
-        {
-          "title": "Portable Arcana Deluxe",
           "count": 2
         },
         {
@@ -220,6 +208,10 @@
         },
         {
           "title": "Deck Ready Tactics",
+          "count": 1
+        },
+        {
+          "title": "Portable Arcana Deluxe",
           "count": 1
         },
         {
@@ -232,10 +224,6 @@
         },
         {
           "title": "Portable Tactics Complete",
-          "count": 1
-        },
-        {
-          "title": "Portable Unknown Tactics",
           "count": 1
         }
       ],
@@ -312,9 +300,9 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, party.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Party Brawler Heroes",
       "topMatch": {
         "title": "Party Brawler Heroes",
@@ -335,7 +323,20 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -350,7 +351,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Tactics Breakthrough를 추천합니다. 35% 할인, 현재가 14,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Tactics Breakthrough를 추천합니다. 35% 할인, 현재가 14,500원, PC 지원, 장르 Strategy/Tactics, 평점 4.6, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [],
       "matchCount": 2,
       "topTitle": "Tactics Breakthrough",
@@ -372,7 +373,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "35% 할인, 현재가 14,500원, PC 지원, 장르 Strategy/Tactics, 평점 4.6, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -387,9 +400,9 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, Steam Deck Playable, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Aces of Ruin Deluxe",
       "topMatch": {
         "title": "Aces of Ruin Deluxe",
@@ -410,7 +423,22 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,900원, Steam Deck Playable, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -425,7 +453,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 50% 할인, 현재가 11,250원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 50% 할인, 현재가 11,250원, PC 지원, 장르 Indie/Action, 평점 4.1, 충족 신호 roguelike, action, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
@@ -446,7 +474,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,250원, PC 지원, 장르 Indie/Action, 평점 4.1, 충족 신호 roguelike, action, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -461,7 +501,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Reviewed Strategy Fallback를 추천합니다. 50% 할인, 현재가 15,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Reviewed Strategy Fallback를 추천합니다. 50% 할인, 현재가 15,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [
         "RAWG 메타데이터를 불러오지 못해 가격 정보만 표시했습니다. (RAWG timeout)"
       ],
@@ -484,7 +524,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 15,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -499,7 +551,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [
         "ITAD request failed with 429",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -528,7 +580,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -543,7 +609,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, Steam Deck Playable, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
@@ -567,7 +633,22 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,900원, Steam Deck Playable, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -602,7 +683,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Tactics Complete를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Portable Tactics Complete를 추천합니다. 50% 할인, 현재가 14,900원, Steam Deck Verified, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -626,7 +707,20 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "verified"
+        "tags": [],
+        "steamDeckStatus": "verified",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, Steam Deck Verified, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, steam-deck",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -641,32 +735,14 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Portable Rogue Tactics Deluxe",
-      "topMatch": {
-        "title": "Portable Rogue Tactics Deluxe",
-        "cut": 50,
-        "price": {
-          "amount": 16500,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.2,
-        "metacritic": 81,
-        "genres": [
-          "Strategy",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": "unknown"
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": false,
       "timeout": false
     },
@@ -701,7 +777,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, Steam Deck Playable, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -727,7 +803,22 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,900원, Steam Deck Playable, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -742,7 +833,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Party Brawler Heroes",
@@ -768,7 +859,19 @@
           "party",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -783,7 +886,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -809,7 +912,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -824,7 +941,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Teamplay Co-op Deluxe를 추천합니다. 50% 할인, 현재가 12,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Teamplay Co-op Deluxe를 추천합니다. 50% 할인, 현재가 12,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Teamplay Co-op Deluxe",
@@ -850,7 +967,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -865,7 +996,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 32% 할인, 현재가 14,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Party Brawler Heroes를 추천합니다. 32% 할인, 현재가 14,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Party Brawler Heroes",
@@ -890,7 +1021,19 @@
           "party",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "32% 할인, 현재가 14,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -959,7 +1102,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -985,7 +1128,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1000,9 +1157,9 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deck Ready Tactics를 추천합니다. 50% 할인, 현재가 12,000원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Deck Ready Tactics를 추천합니다. 50% 할인, 현재가 12,000원, Steam Deck Playable, 장르 Strategy/Tactics, 평점 4.2, 충족 신호 strategy, tactics, deckbuilder.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Deck Ready Tactics",
       "topMatch": {
         "title": "Deck Ready Tactics",
@@ -1021,7 +1178,21 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "deckbuilder",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,000원, Steam Deck Playable, 장르 Strategy/Tactics, 평점 4.2, 충족 신호 strategy, tactics, deckbuilder",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1036,7 +1207,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 2,
       "topTitle": "Orbital Teamplay Co-op",
@@ -1062,7 +1233,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1077,7 +1262,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shining Force III를 추천합니다. 50% 할인, 현재가 17,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Shining Force III를 추천합니다. 50% 할인, 현재가 17,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Shining Force III",
@@ -1098,7 +1283,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 17,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1113,7 +1310,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Fallback Tactics Gold를 추천합니다. 50% 할인, 현재가 16,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Fallback Tactics Gold를 추천합니다. 50% 할인, 현재가 16,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [
         "ITAD request failed with 429",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -1137,7 +1334,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 16,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1152,7 +1361,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "RAWG timeout"
@@ -1180,7 +1389,19 @@
           "party",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1216,9 +1437,9 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deck Ready Tactics를 추천합니다. 50% 할인, 현재가 12,000원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Deck Ready Tactics를 추천합니다. 50% 할인, 현재가 12,000원, Steam Deck Playable, 장르 Strategy/Tactics, 평점 4.2, 충족 신호 strategy, tactics, deckbuilder.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Deck Ready Tactics",
       "topMatch": {
         "title": "Deck Ready Tactics",
@@ -1237,7 +1458,21 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "deckbuilder",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,000원, Steam Deck Playable, 장르 Strategy/Tactics, 평점 4.2, 충족 신호 strategy, tactics, deckbuilder",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1252,32 +1487,14 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Unknown Tactics를 추천합니다. 50% 할인, 현재가 14,500원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Portable Unknown Tactics",
-      "topMatch": {
-        "title": "Portable Unknown Tactics",
-        "cut": 50,
-        "price": {
-          "amount": 14500,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.2,
-        "metacritic": 80,
-        "genres": [
-          "Strategy",
-          "Tactics"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": "unknown"
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": false,
       "timeout": false
     },
@@ -1291,7 +1508,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, Steam Deck Playable, 장르 Strategy/Roguelike, 평점 4.2, 충족 신호 strategy, tactics, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Rogue Tactics Deluxe",
@@ -1312,7 +1529,21 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 16,500원, Steam Deck Playable, 장르 Strategy/Roguelike, 평점 4.2, 충족 신호 strategy, tactics, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1327,7 +1558,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -1353,7 +1584,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1368,7 +1613,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Party Brawler Heroes",
@@ -1393,7 +1638,19 @@
           "party",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1408,7 +1665,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Teamplay Co-op Deluxe를 추천합니다. 50% 할인, 현재가 12,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Teamplay Co-op Deluxe를 추천합니다. 50% 할인, 현재가 12,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
@@ -1436,7 +1693,21 @@
           "shared-screen",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1469,7 +1740,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -1495,7 +1766,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1510,7 +1795,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Aces of Ruin Deluxe",
@@ -1533,7 +1818,21 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,900원, PC 지원, 장르 Strategy/Card, 평점 4.2, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1548,7 +1847,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Tactics Complete를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Tactics Complete를 추천합니다. 50% 할인, 현재가 14,900원, Steam Deck Playable, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -1572,7 +1871,20 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, Steam Deck Playable, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, steam-deck",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1587,33 +1899,14 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Portable Arcana Deluxe",
-      "topMatch": {
-        "title": "Portable Arcana Deluxe",
-        "cut": 50,
-        "price": {
-          "amount": 10900,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.2,
-        "metacritic": 80,
-        "genres": [
-          "Card",
-          "Deckbuilder",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": "unknown"
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": false,
       "timeout": false
     },
@@ -1627,7 +1920,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Rogue Tactics Complete를 추천합니다. 50% 할인, 현재가 16,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Rogue Tactics Complete를 추천합니다. 50% 할인, 현재가 16,900원, Steam Deck Playable, 장르 Strategy/Roguelike, 평점 4.3, 충족 신호 strategy, tactics, roguelike.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -1651,7 +1944,21 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 16,900원, Steam Deck Playable, 장르 Strategy/Roguelike, 평점 4.3, 충족 신호 strategy, tactics, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1666,7 +1973,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "RAWG timeout"
@@ -1695,7 +2002,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1710,7 +2031,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "역대 최저가 정보를 가져오지 못했습니다."
@@ -1741,7 +2062,20 @@
           "card",
           "roguelike"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1777,7 +2111,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, Steam Deck Playable, 장르 Strategy/Roguelike, 평점 4.2, 충족 신호 strategy, tactics, roguelike.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "RAWG timeout",
@@ -1802,7 +2136,21 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 16,500원, Steam Deck Playable, 장르 Strategy/Roguelike, 평점 4.2, 충족 신호 strategy, tactics, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1817,34 +2165,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "ITAD request failed with 429",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Portable Arcana Deluxe",
-      "topMatch": {
-        "title": "Portable Arcana Deluxe",
-        "cut": 50,
-        "price": {
-          "amount": 10900,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.2,
-        "metacritic": 80,
-        "genres": [
-          "Card",
-          "Deckbuilder",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": "unknown"
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": false,
       "timeout": false
     },
@@ -1880,7 +2209,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -1906,7 +2235,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1921,7 +2264,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Hangout Teamplay Deluxe",
@@ -1947,7 +2290,21 @@
           "teamplay",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -1962,7 +2319,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Party Brawler Heroes",
@@ -1987,7 +2344,19 @@
           "party",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 9,900원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2020,7 +2389,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Hangout Teamplay Deluxe",
@@ -2046,7 +2415,21 @@
           "teamplay",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2061,7 +2444,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Rogue Deck Assault",
@@ -2089,7 +2472,20 @@
           "card",
           "roguelike"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2104,7 +2500,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -2130,7 +2526,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2145,7 +2555,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Rogue Deck Assault",
@@ -2173,7 +2583,20 @@
           "card",
           "roguelike"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2188,7 +2611,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, Steam Deck Playable, 장르 Card/Deckbuilder, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Arcana Deluxe",
@@ -2213,7 +2636,19 @@
           "deckbuilder",
           "portable"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "steam-deck"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 10,900원, Steam Deck Playable, 장르 Card/Deckbuilder, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2228,7 +2663,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "RAWG timeout"
@@ -2257,7 +2692,21 @@
           "teamplay",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2293,34 +2742,15 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "ITAD request failed with 429",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Portable Arcana Deluxe",
-      "topMatch": {
-        "title": "Portable Arcana Deluxe",
-        "cut": 50,
-        "price": {
-          "amount": 10900,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.2,
-        "metacritic": 80,
-        "genres": [
-          "Card",
-          "Deckbuilder",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": "unknown"
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": false,
       "timeout": false
     },
@@ -2334,7 +2764,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, Steam Deck Playable, 장르 Action/Casual, 평점 4.0, 충족 신호 action, party, steam-deck.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Lounge Brawler",
@@ -2359,7 +2789,19 @@
           "handheld",
           "short-session"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "action",
+          "party",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, Steam Deck Playable, 장르 Action/Casual, 평점 4.0, 충족 신호 action, party, steam-deck",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2374,7 +2816,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, Steam Deck Playable, 충족 신호 action, party, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -2391,7 +2833,18 @@
         "multiplayer": false,
         "genres": [],
         "platforms": [],
-        "steamDeckStatus": "playable"
+        "tags": [],
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "action",
+          "party",
+          "steam-deck"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, Steam Deck Playable, 충족 신호 action, party, steam-deck",
+        "evidenceCompleteness": "hard-facts-only",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam"
       },
       "flagged": false,
       "timeout": false
@@ -2427,7 +2880,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -2453,7 +2906,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2468,7 +2935,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Orbital Teamplay Co-op",
@@ -2494,7 +2961,21 @@
           "co-op",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Casual, 평점 4.1, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2509,7 +2990,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Hangout Teamplay Deluxe",
@@ -2535,7 +3016,21 @@
           "teamplay",
           "multiplayer"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "multiplayer",
+          "co-op",
+          "teamplay",
+          "party",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, PC 지원, 장르 Action/Casual, 평점 4.0, 충족 신호 action, multiplayer, co-op",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2550,7 +3045,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Rogue Deck Assault",
@@ -2578,7 +3073,20 @@
           "card",
           "roguelike"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2593,7 +3101,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Rogue Deck Assault",
@@ -2621,7 +3129,20 @@
           "card",
           "roguelike"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2636,7 +3157,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Rogue Deck Assault",
@@ -2664,7 +3185,20 @@
           "card",
           "roguelike"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2679,7 +3213,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
@@ -2704,7 +3238,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2719,7 +3265,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
@@ -2744,7 +3290,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2759,7 +3317,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
@@ -2784,7 +3342,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2799,7 +3369,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
@@ -2824,7 +3394,19 @@
         "platforms": [
           "PC"
         ],
-        "steamDeckStatus": null
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2839,7 +3421,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, Steam Deck Playable, 장르 Action/Casual, 평점 4.0, 충족 신호 action, party, steam-deck.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Lounge Brawler",
@@ -2864,7 +3446,19 @@
           "handheld",
           "short-session"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "action",
+          "party",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 12,900원, Steam Deck Playable, 장르 Action/Casual, 평점 4.0, 충족 신호 action, party, steam-deck",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2879,7 +3473,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, Steam Deck Playable, 장르 Card/Deckbuilder, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Arcana Deluxe",
@@ -2907,7 +3501,20 @@
           "portable",
           "readable"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 10,900원, Steam Deck Playable, 장르 Card/Deckbuilder, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2922,7 +3529,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Controller Ready를 추천합니다. 50% 할인, 현재가 13,200원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Controller Ready를 추천합니다. 50% 할인, 현재가 13,200원, Steam Deck Playable, 장르 Action/Casual, 평점 4.0, 충족 신호 action, party, steam-deck.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Controller Ready",
@@ -2947,7 +3554,19 @@
           "controller-friendly",
           "handheld"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "action",
+          "party",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,200원, Steam Deck Playable, 장르 Action/Casual, 평점 4.0, 충족 신호 action, party, steam-deck",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -2962,7 +3581,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Portable Readable Roguelite를 추천합니다. 50% 할인, 현재가 14,200원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Portable Readable Roguelite를 추천합니다. 50% 할인, 현재가 14,200원, Steam Deck Playable, 장르 Action/Roguelike, 평점 4.1, 충족 신호 roguelike, action, steam-deck.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Portable Readable Roguelite",
@@ -2987,7 +3606,19 @@
           "handheld",
           "readable"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "playable",
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "steam-deck",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,200원, Steam Deck Playable, 장르 Action/Roguelike, 평점 4.1, 충족 신호 roguelike, action, steam-deck",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -3002,7 +3633,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Card Deckbuilder Expedition를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Card Deckbuilder Expedition를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Strategy/Card, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Card Deckbuilder Expedition",
@@ -3030,7 +3661,20 @@
           "deckbuilder",
           "hand-management"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Strategy/Card, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -3045,7 +3689,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Monster Train를 추천합니다. 50% 할인, 현재가 15,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Monster Train를 추천합니다. 50% 할인, 현재가 15,200원, PC 지원, 장르 Strategy/Card, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Monster Train",
@@ -3073,7 +3717,20 @@
           "deckbuilder",
           "deck"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 15,200원, PC 지원, 장르 Strategy/Card, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
@@ -3088,7 +3745,7 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Dice & Fold를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Dice & Fold를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, 장르 Card/Deckbuilder, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
       "warnings": [],
       "matchCount": 1,
       "topTitle": "Dice & Fold",
@@ -3115,7 +3772,19 @@
           "deckbuilder",
           "lightweight"
         ],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 14,900원, PC 지원, 장르 Card/Deckbuilder, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "flagged": false,
       "timeout": false
