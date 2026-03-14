@@ -53,6 +53,53 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Party Brawler Heroes" });
   });
 
+  it("prefers explicit teamplay co-op deals over party-only fallbacks for generic co-op prompts", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "orbital-teamplay-local",
+            title: "Orbital Teamplay Co-op",
+            price: { amount: 13_500, currency: "KRW" },
+            regular: { amount: 27_000, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Casual", "Co-op"],
+            platforms: ["PC"],
+            tags: ["teamplay", "co-op", "multiplayer"],
+            multiplayer: true,
+            rating: 4.12,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "party-brawler-local",
+            title: "Party Brawler Heroes",
+            price: { amount: 9_900, currency: "KRW" },
+            regular: { amount: 22_000, currency: "KRW" },
+            cut: 55,
+            genres: ["Action", "Casual", "Party"],
+            platforms: ["PC"],
+            tags: ["party", "multiplayer"],
+            multiplayer: true,
+            rating: 4.1,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "co-op game for friends",
+      budget: 20_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Orbital Teamplay Co-op" });
+  });
+
   it("reranks tactics-focused strategy prompts toward tactics-backed reviewed titles", async () => {
     const service = new GameDealService({
       async findDeals() {
@@ -3666,6 +3713,78 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Deck Runner: Portable Edition™" });
   });
 
+  it("salvages Steam Deck roguelike prompts even when metadata-light browse deals are filtered before strict matching", async () => {
+    let discoverCalls = 0;
+
+    const service = new GameDealService(
+      {
+        async findDeals() {
+          return [
+            {
+              id: "portable-rogue-runner",
+              title: "Portable Rogue Runner Deluxe",
+              price: { amount: 11_800, currency: "KRW" },
+              regular: { amount: 23_600, currency: "KRW" },
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckCompatibility: {
+                status: "playable",
+                details: [],
+                source: "steam"
+              }
+            }
+          ];
+        },
+        async enrichDeals(deals) {
+          return {
+            deals,
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          };
+        },
+        async discoverTitles(input) {
+          discoverCalls += 1;
+          expect(input.tags).toEqual(["roguelike", "roguelite"]);
+
+          return [
+            {
+              title: "Portable Rogue Runner",
+              genres: ["Action", "Roguelike"],
+              platforms: ["PC"],
+              tags: ["roguelike"],
+              rating: 4.2,
+              metacritic: 80,
+              multiplayer: false
+            }
+          ];
+        }
+      },
+      {
+        recommendationTimeBudgetMs: 6_000,
+        now: () => 0
+      }
+    );
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 하기 좋은 로그라이크",
+      budget: 20_000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(discoverCalls).toBe(1);
+    expect(result.matches[0]).toMatchObject({
+      title: "Portable Rogue Runner Deluxe",
+      cut: 50,
+      genres: expect.arrayContaining(["Roguelike"])
+    });
+  });
+
   it("salvages budget-constrained Steam Deck strategy prompts by overlaying catalog metadata onto browse matches", async () => {
     let discoverCalls = 0;
 
@@ -3997,6 +4116,68 @@ describe("GameDealService recommendation regressions", () => {
     });
   });
 
+  it("prefers two-axis action deckbuilder candidates over single-axis fillers", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "solo-action-filler",
+            title: "Solo Action Story",
+            price: { amount: 9_900, currency: "KRW" },
+            regular: { amount: 19_800, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Adventure"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 3.9,
+            metadataStatus: "missing"
+          },
+          {
+            id: "rogue-deck-assault",
+            title: "Rogue Deck Assault",
+            price: { amount: 13_500, currency: "KRW" },
+            regular: { amount: 27_000, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+            platforms: ["PC"],
+            tags: ["deckbuilder", "card", "roguelike"],
+            multiplayer: false,
+            rating: 4.18,
+            metacritic: 81,
+            metadataStatus: "missing"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return {
+          deals,
+          warnings: [
+            "가격 개요 정보가 없어 제목만 확인했습니다.",
+            "역대 최저가 정보를 가져오지 못했습니다."
+          ]
+        };
+      },
+      async discoverTitles() {
+        return [];
+      },
+      async resolveDeal(title) {
+        return { kind: "not-found" as const, title };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "action deckbuilder bargain",
+      budget: 18_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({
+      title: "Rogue Deck Assault",
+      genres: expect.arrayContaining(["Action", "Card", "Deckbuilder"])
+    });
+  });
+
   it("salvages short deckbuilding prompts from metadata-light raw browse candidates", async () => {
     let discoverCalls = 0;
 
@@ -4058,6 +4239,294 @@ describe("GameDealService recommendation regressions", () => {
       title: "Pocket Arcana Deluxe",
       cut: 50,
       genres: expect.arrayContaining(["Card", "Deckbuilder"])
+    });
+  });
+
+  it("salvages Steam Deck deckbuilding prompts during ITAD 429 outages from unknown raw browse candidates", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "portable-deck-unknown-429",
+            title: "Portable Arcana Deluxe",
+            price: { amount: 10_900, currency: "KRW" },
+            regular: { amount: 21_800, currency: "KRW" },
+            cut: 50,
+            genres: [],
+            platforms: [],
+            multiplayer: false,
+            metadataStatus: "missing",
+            steamDeckCompatibility: {
+              status: "unknown",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return {
+          deals,
+          warnings: [
+            "ITAD request failed with 429",
+            "가격 개요 정보가 없어 제목만 확인했습니다.",
+            "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+          ]
+        };
+      },
+      async discoverTitles() {
+        return [
+          {
+            title: "Portable Arcana",
+            genres: ["Card", "Deckbuilder", "Roguelike"],
+            platforms: ["PC"],
+            tags: ["card", "deckbuilder", "roguelike-deckbuilder"],
+            rating: 4.2,
+            metacritic: 80,
+            multiplayer: false
+          }
+        ];
+      },
+      async resolveDeal(title) {
+        return { kind: "not-found" as const, title };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 가볍게 할 카드 덱빌딩",
+      budget: 15_000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({
+      title: "Portable Arcana Deluxe",
+      genres: expect.arrayContaining(["Card", "Deckbuilder"]),
+      steamDeckCompatibility: expect.objectContaining({ status: "unknown" })
+    });
+  });
+
+  it("keeps playable Steam Deck deckbuilders when browse genres only imply strategy", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "portable-arcana-clean",
+            title: "Portable Arcana Deluxe",
+            price: { amount: 10_900, currency: "KRW" },
+            regular: { amount: 21_800, currency: "KRW" },
+            cut: 50,
+            genres: ["Card", "Deckbuilder", "Roguelike"],
+            platforms: ["PC"],
+            tags: ["card", "deckbuilder", "portable"],
+            multiplayer: false,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "playable",
+              details: [],
+              source: "steam"
+            }
+          },
+          {
+            id: "unsupported-deck-clean",
+            title: "Unsupported Deck Rogue",
+            price: { amount: 8_900, currency: "KRW" },
+            regular: { amount: 17_800, currency: "KRW" },
+            cut: 50,
+            genres: ["Card", "Deckbuilder"],
+            platforms: ["PC"],
+            tags: ["card", "deckbuilder"],
+            multiplayer: false,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "unsupported",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱으로 잠깐씩 할 카드 덱빌딩",
+      budget: 15_000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({
+      title: "Portable Arcana Deluxe",
+      steamDeckCompatibility: expect.objectContaining({ status: "playable" })
+    });
+  });
+
+  it("keeps metadata-light story filler empty during provider outage fallback", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "history-missing-deponia",
+            title: "Deponia",
+            price: { amount: 9_900, currency: "KRW" },
+            regular: { amount: 19_800, currency: "KRW" },
+            cut: 50,
+            genres: ["Adventure", "Puzzle"],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing"
+          },
+          {
+            id: "history-missing-ai-games",
+            title: "AI Games",
+            price: { amount: 7_500, currency: "KRW" },
+            regular: { amount: 15_000, currency: "KRW" },
+            cut: 50,
+            genres: [],
+            platforms: [],
+            multiplayer: false,
+            metadataStatus: "missing"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return {
+          deals,
+          warnings: [
+            "가격 개요 정보가 없어 제목만 확인했습니다.",
+            "역대 최저가 정보를 가져오지 못했습니다."
+          ]
+        };
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "genre hybrid bargain, story filler 말고",
+      budget: 18_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches).toEqual([]);
+  });
+
+  it("filters Steam Deck lifestyle story filler when a playable handheld candidate exists", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "portable-lounge-brawler-clean",
+            title: "Portable Lounge Brawler",
+            price: { amount: 12_900, currency: "KRW" },
+            regular: { amount: 25_800, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Casual"],
+            platforms: ["PC"],
+            tags: ["portable", "handheld", "short-session"],
+            multiplayer: false,
+            rating: 4.01,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "playable",
+              details: [],
+              source: "steam"
+            }
+          },
+          {
+            id: "portable-lifestyle-deponia",
+            title: "Deponia",
+            price: { amount: 9_900, currency: "KRW" },
+            regular: { amount: 19_800, currency: "KRW" },
+            cut: 50,
+            genres: ["Adventure", "Puzzle"],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "rawg",
+            steamDeckCompatibility: {
+              status: "unknown",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱으로 출퇴근길에 잠깐 할 세일 게임",
+      budget: 20_000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({ title: "Portable Lounge Brawler" });
+  });
+
+  it("recovers playable Steam Deck lifestyle candidates from metadata-light browse results", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "portable-lifestyle-partial",
+            title: "Portable Lounge Brawler",
+            price: { amount: 12_900, currency: "KRW" },
+            regular: { amount: 25_800, currency: "KRW" },
+            cut: 50,
+            genres: [],
+            platforms: [],
+            multiplayer: false,
+            metadataStatus: "missing",
+            steamDeckCompatibility: {
+              status: "playable",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return {
+          deals,
+          warnings: [
+            "일부 메타데이터를 생략했습니다.",
+            "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+          ]
+        };
+      },
+      async discoverTitles() {
+        return [
+          {
+            title: "Portable Lounge Brawler",
+            genres: ["Action", "Casual"],
+            platforms: ["PC"],
+            tags: ["portable", "handheld", "short-session"],
+            rating: 4.01,
+            metacritic: 77,
+            multiplayer: false
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱으로 가볍게 즐길 handheld bargain",
+      budget: 18_000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(result.matches).toHaveLength(1);
+    expect(result.matches[0]).toMatchObject({
+      title: "Portable Lounge Brawler",
+      steamDeckCompatibility: expect.objectContaining({ status: "playable" })
     });
   });
 

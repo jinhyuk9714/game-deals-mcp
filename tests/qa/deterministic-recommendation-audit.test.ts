@@ -20,10 +20,10 @@ import {
 } from "../../scripts/run-deterministic-recommend-audit.js";
 
 describe("deterministic recommendation audit fixtures", () => {
-  it("keeps 35 provider-backed cases across five stable groups", () => {
-    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(35);
+  it("keeps 65 provider-backed cases across five stable groups", () => {
+    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(65);
     expect(new Set(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.map((testCase) => testCase.caseId)).size).toBe(
-      35
+      65
     );
 
     const counts = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.reduce<Record<string, number>>(
@@ -35,11 +35,11 @@ describe("deterministic recommendation audit fixtures", () => {
     );
 
     expect(counts).toEqual({
-      "local-guardrail": 7,
-      "provider-outage": 7,
-      "steam-deck-overlay": 7,
-      "social-tiering": 7,
-      "junk-suppression": 7
+      "local-guardrail": 13,
+      "provider-outage": 13,
+      "steam-deck-overlay": 13,
+      "social-tiering": 13,
+      "junk-suppression": 13
     });
 
     for (const testCase of DETERMINISTIC_RECOMMENDATION_AUDIT_CASES) {
@@ -62,6 +62,48 @@ describe("deterministic recommendation audit fixtures", () => {
       (testCase) => testCase.caseId === "steam-deck-unknown-allowed-after-strict-zero"
     );
     expect(steamDeckCase?.expectation.forbiddenTopSignals).toContain("unsupported");
+
+    const localSteamDeckOverlayCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "local-steam-deck-reviewed-strategy-warning-overlay"
+    );
+    expect(localSteamDeckOverlayCase?.expectation.requiredWarnings).toContain(
+      "일부 메타데이터를 생략했습니다."
+    );
+
+    const localDeckbuildingOverlayCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "local-steam-deck-deckbuilder-warning-overlay"
+    );
+    expect(localDeckbuildingOverlayCase?.expectation.requiredTopSignals).toContain("deckbuilder");
+
+    const socialRichCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "social-friends-first-teamplay-beats-racket-nx"
+    );
+    expect(socialRichCase?.expectation.forbiddenTopTitles).toContain("Racket: Nx");
+
+    const outageHybridCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "outage-price-overview-hybrid-two-axis-beats-filler"
+    );
+    expect(outageHybridCase?.expectation.requiredTopSignals).toContain("action");
+
+    const steamDeckTimeoutCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "steam-deck-timeout-junk-stays-empty"
+    );
+    expect(steamDeckTimeoutCase?.expectation.forbiddenTopTitles).toContain("Deponia");
+
+    const socialBudgetDriftCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "social-budget-strict-teamplay-rejects-racket-nx"
+    );
+    expect(socialBudgetDriftCase?.expectation.forbiddenTopTitles).toContain("Racket: Nx");
+
+    const hybridDriftCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-genre-hybrid-cozy-filler-loses-to-two-axis-match"
+    );
+    expect(hybridDriftCase?.expectation.requiredTopSignals).toContain("action");
+
+    const steamDeckLifestyleDriftCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "steam-deck-lifestyle-story-filler-rejected"
+    );
+    expect(steamDeckLifestyleDriftCase?.expectation.forbiddenTopTitles).toContain("Deponia");
   });
 });
 

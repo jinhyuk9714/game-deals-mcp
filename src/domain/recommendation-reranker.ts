@@ -8,6 +8,7 @@ import {
 interface RecommendationRerankSignals {
   broadCoop: boolean;
   partyPrompt: boolean;
+  genericCoopPrompt: boolean;
   highRatingStrategy: boolean;
   tacticsPrompt: boolean;
   fastPacedRoguelike: boolean;
@@ -68,6 +69,10 @@ function buildRecommendationRerankSignals(
   return {
     broadCoop: preferences.multiplayer,
     partyPrompt: /파티|웃긴|떠들|친구(?:들이)?랑.*(?:같이|놀)|party/i.test(rawPreferences),
+    genericCoopPrompt:
+      /협동|팀플|같이 할|같이 놀|co-?op|coop|cooperative|teamplay|with friends|friends|play together/i.test(
+        rawPreferences
+      ),
     highRatingStrategy: preferences.highRating && normalizedGenres.has("strategy"),
     tacticsPrompt: /전술|tactics|turn-?based|턴제/i.test(rawPreferences),
     fastPacedRoguelike:
@@ -95,6 +100,14 @@ function getRecommendationRerankScore(
 
     if (hasCoopFriendlyShape(deal)) {
       score += 90;
+    }
+
+    if (signals.genericCoopPrompt && hasExplicitCoopShape(deal)) {
+      score += 150;
+    }
+
+    if (signals.genericCoopPrompt && !signals.partyPrompt && hasPartyOnlyFallbackShape(deal)) {
+      score -= 120;
     }
 
     if (signals.partyPrompt && hasPartyFriendlyShape(deal)) {
@@ -191,6 +204,16 @@ function hasCoopFriendlyShape(deal: DealCandidate): boolean {
     normalizedGenres.has("arcade") ||
     normalizedGenres.has("party")
   );
+}
+
+function hasExplicitCoopShape(deal: DealCandidate): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")}`.toLowerCase();
+  return /\b(co-?op|coop|cooperative|teamplay|local[ -]?co-?op|shared[ -]?screen)\b/.test(values);
+}
+
+function hasPartyOnlyFallbackShape(deal: DealCandidate): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")}`.toLowerCase();
+  return /\b(party|brawler|beat ?em ?up|fun|hangout)\b/.test(values) && !hasExplicitCoopShape(deal);
 }
 
 function hasPartyFriendlyShape(deal: DealCandidate): boolean {

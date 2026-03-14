@@ -1954,6 +1954,1842 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
       requiredTopSignals: ["card", "deckbuilder", "roguelike"]
     }
+  },
+  {
+    index: 36,
+    caseId: "local-steam-deck-reviewed-strategy-warning-overlay",
+    group: "local-guardrail",
+    preferences: "스팀덱에서 평가 좋은 전략 게임",
+    budget: 20_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-tactics-complete-local",
+              title: "Portable Tactics Complete",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "playable"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "portable-tactics-complete-local",
+                title: "Portable Tactics Complete",
+                priceAmount: 14_900,
+                regularAmount: 29_800,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "playable"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Tactics",
+              genres: ["Strategy", "Tactics"],
+              tags: ["turn-based"],
+              rating: 4.4,
+              metacritic: 83
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Tactics Complete",
+      requiredWarnings: [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      expectedTopGenres: ["Strategy", "Tactics"],
+      requiredTopSignals: ["strategy", "tactics", "playable"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 37,
+    caseId: "local-steam-deck-deckbuilder-warning-overlay",
+    group: "local-guardrail",
+    preferences: "가볍게 할 카드 로그라이크",
+    budget: 15_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-arcana-local",
+              title: "Portable Arcana Deluxe",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "portable-arcana-local",
+                title: "Portable Arcana Deluxe",
+                priceAmount: 10_900,
+                regularAmount: 21_800,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unknown"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Arcana",
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "roguelike-deckbuilder"],
+              rating: 4.2,
+              metacritic: 80
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Arcana Deluxe",
+      requiredWarnings: [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
+      requiredTopSignals: ["card", "deckbuilder", "unknown"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 38,
+    caseId: "local-steam-deck-roguelike-warning-overlay",
+    group: "local-guardrail",
+    preferences: "스팀덱에서 할 만한 전략 로그라이크",
+    budget: 20_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-rogue-tactics-complete-local",
+              title: "Portable Rogue Tactics Complete",
+              priceAmount: 16_900,
+              regularAmount: 33_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "playable"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "portable-rogue-tactics-complete-local",
+                title: "Portable Rogue Tactics Complete",
+                priceAmount: 16_900,
+                regularAmount: 33_800,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "playable"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Rogue Tactics",
+              genres: ["Strategy", "Roguelike"],
+              tags: ["turn-based", "roguelike"],
+              rating: 4.3,
+              metacritic: 82
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Rogue Tactics Complete",
+      requiredWarnings: [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      expectedTopGenres: ["Strategy", "Roguelike"],
+      requiredTopSignals: ["strategy", "roguelike", "playable"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 39,
+    caseId: "outage-rawg-502-social-teamplay-recovers",
+    group: "provider-outage",
+    preferences: "teamplay 할인작인데 경쟁 냄새 적은 것",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "orbital-teamplay-rawg-502",
+              title: "Orbital Teamplay Co-op",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["teamplay", "co-op", "multiplayer"],
+              multiplayer: true,
+              rating: 4.12,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "orbital-teamplay-rawg-502",
+                title: "Orbital Teamplay Co-op",
+                priceAmount: 13_500,
+                regularAmount: 27_000,
+                cut: 50,
+                genres: ["Action", "Casual", "Co-op"],
+                tags: ["teamplay", "co-op", "multiplayer"],
+                multiplayer: true,
+                rating: 4.12,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: ["RAWG timeout", "일부 메타데이터를 생략했습니다."]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Orbital Teamplay Co-op",
+      requiredWarnings: ["RAWG timeout"],
+      requiredTopSignals: ["teamplay", "co-op", "multiplayer"]
+    }
+  },
+  {
+    index: 40,
+    caseId: "outage-price-overview-hybrid-two-axis-beats-filler",
+    group: "provider-outage",
+    preferences: "action deckbuilder bargain",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "solo-action-filler",
+              title: "Solo Action Story",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Action", "Adventure"],
+              multiplayer: false,
+              rating: 3.9,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "rogue-deck-assault",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "solo-action-filler",
+                title: "Solo Action Story",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Action", "Adventure"],
+                multiplayer: false,
+                rating: 3.9,
+                metadataStatus: "missing"
+              }),
+              buildDeal({
+                id: "rogue-deck-assault",
+                title: "Rogue Deck Assault",
+                priceAmount: 13_500,
+                regularAmount: 27_000,
+                cut: 50,
+                genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+                tags: ["deckbuilder", "card", "roguelike"],
+                multiplayer: false,
+                rating: 4.18,
+                metacritic: 81,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "가격 개요 정보가 없어 제목만 확인했습니다.",
+              "역대 최저가 정보를 가져오지 못했습니다."
+            ]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Solo Action Story"],
+      requiredWarnings: ["가격 개요 정보가 없어 제목만 확인했습니다."],
+      expectedTopGenres: ["Action", "Card", "Deckbuilder"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 41,
+    caseId: "outage-itad-429-junk-remains-empty",
+    group: "provider-outage",
+    preferences: "friends-only fun bargain, not sports",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "deponia-itad-429",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "ai-games-itad-429",
+              title: "AI Games",
+              priceAmount: 7_500,
+              regularAmount: 15_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "deponia-itad-429",
+                title: "Deponia",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Adventure", "Puzzle"],
+                multiplayer: false,
+                metadataStatus: "missing"
+              }),
+              buildDeal({
+                id: "ai-games-itad-429",
+                title: "AI Games",
+                priceAmount: 7_500,
+                regularAmount: 15_000,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "ITAD request failed with 429",
+              "가격 개요 정보가 없어 제목만 확인했습니다."
+            ]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 0,
+      requiredWarnings: ["ITAD request failed with 429"],
+      forbiddenTopTitles: ["Deponia", "AI Games"]
+    }
+  },
+  {
+    index: 42,
+    caseId: "steam-deck-rawg-timeout-playable-roguelike-recovers",
+    group: "steam-deck-overlay",
+    preferences: "스팀덱에서 할 만한 전략 로그라이크",
+    budget: 20_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-playable-timeout-rogue",
+              title: "Portable Rogue Tactics Deluxe",
+              priceAmount: 16_500,
+              regularAmount: 33_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "playable"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "portable-playable-timeout-rogue",
+                title: "Portable Rogue Tactics Deluxe",
+                priceAmount: 16_500,
+                regularAmount: 33_000,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "playable"
+              })
+            ],
+            warnings: [
+              "RAWG timeout",
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Rogue Tactics",
+              genres: ["Strategy", "Roguelike"],
+              tags: ["turn-based", "roguelike"],
+              rating: 4.2,
+              metacritic: 81
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Rogue Tactics Deluxe",
+      requiredWarnings: ["RAWG timeout"],
+      expectedTopGenres: ["Strategy", "Roguelike"],
+      requiredTopSignals: ["strategy", "roguelike", "playable"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 43,
+    caseId: "steam-deck-itad-429-unknown-deckbuilder-recovers",
+    group: "steam-deck-overlay",
+    preferences: "스팀덱에서 가볍게 할 카드 덱빌딩",
+    budget: 15_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-deck-unknown-429",
+              title: "Portable Arcana Deluxe",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "portable-deck-unknown-429",
+                title: "Portable Arcana Deluxe",
+                priceAmount: 10_900,
+                regularAmount: 21_800,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unknown"
+              })
+            ],
+            warnings: [
+              "ITAD request failed with 429",
+              "가격 개요 정보가 없어 제목만 확인했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Arcana",
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "roguelike-deckbuilder"],
+              rating: 4.2,
+              metacritic: 80
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Arcana Deluxe",
+      requiredWarnings: ["ITAD request failed with 429"],
+      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
+      requiredTopSignals: ["card", "deckbuilder", "unknown"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 44,
+    caseId: "steam-deck-timeout-junk-stays-empty",
+    group: "steam-deck-overlay",
+    preferences: "스팀덱에서 할 만한 전략 게임",
+    budget: 20_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "deponia-steamdeck-timeout",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            }),
+            buildDeal({
+              id: "ai-games-steamdeck-timeout",
+              title: "AI Games",
+              priceAmount: 7_500,
+              regularAmount: 15_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "deponia-steamdeck-timeout",
+                title: "Deponia",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Adventure", "Puzzle"],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unknown"
+              }),
+              buildDeal({
+                id: "ai-games-steamdeck-timeout",
+                title: "AI Games",
+                priceAmount: 7_500,
+                regularAmount: 15_000,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unknown"
+              })
+            ],
+            warnings: [
+              "RAWG timeout",
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 0,
+      requiredWarnings: ["RAWG timeout"],
+      forbiddenTopTitles: ["Deponia", "AI Games"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 45,
+    caseId: "social-friends-first-teamplay-beats-racket-nx",
+    group: "social-tiering",
+    preferences: "friends-first co-op bargain",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "orbital-teamplay-friends-first",
+              title: "Orbital Teamplay Co-op",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["teamplay", "co-op", "multiplayer"],
+              multiplayer: true,
+              rating: 4.12,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "racket-nx-friends-first",
+              title: "Racket: Nx",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Sports", "Party", "Arcade"],
+              tags: ["party", "multiplayer"],
+              multiplayer: true,
+              rating: 4.3,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Orbital Teamplay Co-op",
+      forbiddenTopTitles: ["Racket: Nx"],
+      requiredTopSignals: ["teamplay", "co-op", "multiplayer"],
+      forbiddenTopSignals: ["sports"]
+    }
+  },
+  {
+    index: 46,
+    caseId: "social-mixed-language-hangout-rejects-deponia",
+    group: "social-tiering",
+    preferences: "hangout-friendly game deal for friends, 스토리겜 말고",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "deponia-mixed-language",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "hangout-teamplay-mixed",
+              title: "Hangout Teamplay Deluxe",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["hangout", "teamplay", "multiplayer"],
+              multiplayer: true,
+              rating: 4.05,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Hangout Teamplay Deluxe",
+      forbiddenTopTitles: ["Deponia"],
+      requiredTopSignals: ["hangout", "teamplay", "multiplayer"]
+    }
+  },
+  {
+    index: 47,
+    caseId: "social-budget-party-rejects-ai-games",
+    group: "social-tiering",
+    preferences: "15000원 이하 party game",
+    budget: 15_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "ai-games-party-budget",
+              title: "AI Games",
+              priceAmount: 7_500,
+              regularAmount: 15_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "party-brawler-budget-clean",
+              title: "Party Brawler Heroes",
+              priceAmount: 9_900,
+              regularAmount: 22_000,
+              cut: 55,
+              genres: ["Action", "Casual", "Party"],
+              tags: ["party", "multiplayer"],
+              multiplayer: true,
+              rating: 4.1,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Party Brawler Heroes",
+      forbiddenTopTitles: ["AI Games"],
+      requiredTopSignals: ["party", "multiplayer"]
+    }
+  },
+  {
+    index: 48,
+    caseId: "junk-metadata-only-social-rejected",
+    group: "junk-suppression",
+    preferences: "party-friendly co-op on sale",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "metadata-only-social-pack",
+              title: "Metadata Social Pack",
+              priceAmount: 8_900,
+              regularAmount: 17_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 0,
+      forbiddenTopTitles: ["Metadata Social Pack"]
+    }
+  },
+  {
+    index: 49,
+    caseId: "junk-course-and-demo-lose-to-valid-social",
+    group: "junk-suppression",
+    preferences: "hangout game for friends, not PvP",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "co-op-course-megabundle",
+              title: "Co-op Course Megabundle",
+              priceAmount: 7_900,
+              regularAmount: 15_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "party-demo-collection",
+              title: "Party Demo Collection",
+              priceAmount: 4_900,
+              regularAmount: 9_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "hangout-teamplay-clean",
+              title: "Hangout Teamplay Deluxe",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["hangout", "teamplay", "multiplayer"],
+              multiplayer: true,
+              rating: 4.05,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Hangout Teamplay Deluxe",
+      forbiddenTopTitles: ["Co-op Course Megabundle", "Party Demo Collection"],
+      requiredTopSignals: ["hangout", "teamplay", "multiplayer"]
+    }
+  },
+  {
+    index: 50,
+    caseId: "junk-hybrid-two-axis-beats-filler",
+    group: "junk-suppression",
+    preferences: "short-session action deckbuilder",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "single-axis-card-filler",
+              title: "Card Puzzle Stories",
+              priceAmount: 8_900,
+              regularAmount: 17_800,
+              cut: 50,
+              genres: ["Card", "Puzzle"],
+              multiplayer: false,
+              rating: 3.8,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "two-axis-deck-assault",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Card Puzzle Stories"],
+      expectedTopGenres: ["Action", "Card", "Deckbuilder"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 51,
+    caseId: "local-non-sweaty-teamplay-clean-smoke",
+    group: "local-guardrail",
+    preferences: "non-sweaty multiplayer sale for PC",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "local-orbital-teamplay-clean",
+              title: "Orbital Teamplay Co-op",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["teamplay", "co-op", "multiplayer"],
+              multiplayer: true,
+              rating: 4.12,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "local-racket-nx-clean",
+              title: "Racket: Nx",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Sports", "Party", "Arcade"],
+              tags: ["party", "multiplayer"],
+              multiplayer: true,
+              rating: 4.3,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Orbital Teamplay Co-op",
+      forbiddenTopTitles: ["Racket: Nx"],
+      requiredTopSignals: ["teamplay", "co-op", "multiplayer"],
+      forbiddenTopSignals: ["sports"],
+      forbiddenWarnings: ["RAWG timeout", "ITAD request failed with 429"]
+    }
+  },
+  {
+    index: 52,
+    caseId: "local-hybrid-deckbuilder-clean-smoke",
+    group: "local-guardrail",
+    preferences: "action deckbuilder bargain",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "local-balatro-filler",
+              title: "Balatro",
+              priceAmount: 11_900,
+              regularAmount: 23_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card"],
+              multiplayer: false,
+              rating: 4.22,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "local-rogue-deck-assault-clean",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Balatro"],
+      expectedTopGenres: ["Action", "Card", "Deckbuilder"],
+      requiredTopSignals: ["action", "card", "deckbuilder"],
+      forbiddenWarnings: ["가격 개요 정보가 없어 제목만 확인했습니다.", "ITAD request failed with 429"]
+    }
+  },
+  {
+    index: 53,
+    caseId: "local-steam-deck-handheld-clean-smoke",
+    group: "local-guardrail",
+    preferences: "스팀덱으로 잠깐씩 할 카드 덱빌딩",
+    budget: 15_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "local-portable-arcana-playable",
+              title: "Portable Arcana Deluxe",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "portable"],
+              multiplayer: false,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            }),
+            buildDeal({
+              id: "local-unsupported-deck-rogue",
+              title: "Unsupported Deck Rogue",
+              priceAmount: 8_900,
+              regularAmount: 17_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder"],
+              tags: ["card", "deckbuilder"],
+              multiplayer: false,
+              metadataStatus: "rawg",
+              steamDeckStatus: "unsupported"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Arcana Deluxe",
+      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
+      requiredTopSignals: ["card", "deckbuilder", "playable"],
+      forbiddenTopSignals: ["unsupported"],
+      forbiddenWarnings: ["RAWG timeout", "ITAD request failed with 429"]
+    }
+  },
+  {
+    index: 54,
+    caseId: "outage-rawg-timeout-mixed-language-social-recovers",
+    group: "provider-outage",
+    preferences: "friends-first co-op bargain, 스포츠 말고",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "outage-hangout-teamplay-mixed",
+              title: "Hangout Teamplay Deluxe",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["hangout", "teamplay", "multiplayer"],
+              multiplayer: true,
+              rating: 4.05,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "outage-deponia-mixed",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "outage-hangout-teamplay-mixed",
+                title: "Hangout Teamplay Deluxe",
+                priceAmount: 12_900,
+                regularAmount: 25_800,
+                cut: 50,
+                genres: ["Action", "Casual", "Co-op"],
+                tags: ["hangout", "teamplay", "multiplayer"],
+                multiplayer: true,
+                rating: 4.05,
+                metadataStatus: "missing"
+              }),
+              buildDeal({
+                id: "outage-deponia-mixed",
+                title: "Deponia",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Adventure", "Puzzle"],
+                multiplayer: false,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: ["RAWG timeout", "일부 메타데이터를 생략했습니다."]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Hangout Teamplay Deluxe",
+      requiredWarnings: ["RAWG timeout"],
+      forbiddenTopTitles: ["Deponia"],
+      requiredTopSignals: ["hangout", "teamplay", "multiplayer"]
+    }
+  },
+  {
+    index: 55,
+    caseId: "outage-price-history-missing-junk-stays-empty",
+    group: "provider-outage",
+    preferences: "genre hybrid bargain, story filler 말고",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "outage-history-missing-deponia",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "outage-history-missing-ai-games",
+              title: "AI Games",
+              priceAmount: 7_500,
+              regularAmount: 15_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "outage-history-missing-deponia",
+                title: "Deponia",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Adventure", "Puzzle"],
+                multiplayer: false,
+                metadataStatus: "missing"
+              }),
+              buildDeal({
+                id: "outage-history-missing-ai-games",
+                title: "AI Games",
+                priceAmount: 7_500,
+                regularAmount: 15_000,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "가격 개요 정보가 없어 제목만 확인했습니다.",
+              "역대 최저가 정보를 가져오지 못했습니다."
+            ]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 0,
+      requiredWarnings: ["가격 개요 정보가 없어 제목만 확인했습니다."],
+      forbiddenTopTitles: ["Deponia", "AI Games"]
+    }
+  },
+  {
+    index: 56,
+    caseId: "outage-itad-429-handheld-recoverable-vs-junk",
+    group: "provider-outage",
+    preferences: "스팀덱으로 출퇴근길에 할 카드 로그라이크",
+    budget: 15_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "outage-portable-arcana-429",
+              title: "Portable Arcana Deluxe",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            }),
+            buildDeal({
+              id: "outage-deponia-handheld-429",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unsupported"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "outage-portable-arcana-429",
+                title: "Portable Arcana Deluxe",
+                priceAmount: 10_900,
+                regularAmount: 21_800,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unknown"
+              }),
+              buildDeal({
+                id: "outage-deponia-handheld-429",
+                title: "Deponia",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Adventure", "Puzzle"],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unsupported"
+              })
+            ],
+            warnings: [
+              "ITAD request failed with 429",
+              "가격 개요 정보가 없어 제목만 확인했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Arcana",
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "portable"],
+              rating: 4.2,
+              metacritic: 80
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Arcana Deluxe",
+      requiredWarnings: ["ITAD request failed with 429"],
+      expectedTopGenres: ["Card", "Deckbuilder", "Roguelike"],
+      requiredTopSignals: ["card", "deckbuilder", "unknown"],
+      forbiddenTopSignals: ["unsupported"],
+      forbiddenTopTitles: ["Deponia"]
+    }
+  },
+  {
+    index: 57,
+    caseId: "steam-deck-lifestyle-story-filler-rejected",
+    group: "steam-deck-overlay",
+    preferences: "스팀덱으로 출퇴근길에 잠깐 할 세일 게임",
+    budget: 20_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "steamdeck-lifestyle-portable-brawler",
+              title: "Portable Lounge Brawler",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Casual"],
+              tags: ["portable", "handheld", "short-session"],
+              multiplayer: false,
+              rating: 4.01,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            }),
+            buildDeal({
+              id: "steamdeck-lifestyle-deponia",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "rawg",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Lounge Brawler",
+      forbiddenTopTitles: ["Deponia"],
+      requiredTopSignals: ["playable", "portable"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 58,
+    caseId: "steam-deck-lifestyle-playable-recovers-under-partial-metadata",
+    group: "steam-deck-overlay",
+    preferences: "스팀덱으로 가볍게 즐길 handheld bargain",
+    budget: 18_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "steamdeck-lifestyle-partial-portable",
+              title: "Portable Lounge Brawler",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "playable"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "steamdeck-lifestyle-partial-portable",
+                title: "Portable Lounge Brawler",
+                priceAmount: 12_900,
+                regularAmount: 25_800,
+                cut: 50,
+                genres: [],
+                platforms: [],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "playable"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [
+        {
+          result: [
+            buildCatalogCandidate({
+              title: "Portable Lounge Brawler",
+              genres: ["Action", "Casual"],
+              tags: ["portable", "handheld", "short-session"],
+              rating: 4.01,
+              metacritic: 77
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Lounge Brawler",
+      requiredWarnings: ["일부 메타데이터를 생략했습니다."],
+      requiredTopSignals: ["playable", "portable"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 59,
+    caseId: "steam-deck-lifestyle-unsupported-stays-empty",
+    group: "steam-deck-overlay",
+    preferences: "스팀덱으로 출퇴근길에 할 만한 할인 게임",
+    budget: 20_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "steamdeck-lifestyle-unsupported-story",
+              title: "Portable Story Archive",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Story Rich"],
+              tags: ["portable"],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unsupported"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "steamdeck-lifestyle-unsupported-story",
+                title: "Portable Story Archive",
+                priceAmount: 9_900,
+                regularAmount: 19_800,
+                cut: 50,
+                genres: ["Adventure", "Story Rich"],
+                tags: ["portable"],
+                multiplayer: false,
+                metadataStatus: "missing",
+                steamDeckStatus: "unsupported"
+              })
+            ],
+            warnings: [
+              "RAWG timeout",
+              "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+            ]
+          }
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 0,
+      requiredWarnings: ["RAWG timeout"],
+      forbiddenTopTitles: ["Portable Story Archive"],
+      forbiddenTopSignals: ["unsupported"]
+    }
+  },
+  {
+    index: 60,
+    caseId: "social-budget-strict-teamplay-rejects-racket-nx",
+    group: "social-tiering",
+    preferences: "15000원 이하 teamplay 할인작, sports 말고",
+    budget: 15_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "social-budget-teamplay-clean",
+              title: "Orbital Teamplay Co-op",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["teamplay", "co-op", "multiplayer"],
+              multiplayer: true,
+              rating: 4.12,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "social-budget-racket-nx",
+              title: "Racket: Nx",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Sports", "Party", "Arcade"],
+              tags: ["party", "multiplayer"],
+              multiplayer: true,
+              rating: 4.3,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Orbital Teamplay Co-op",
+      forbiddenTopTitles: ["Racket: Nx"],
+      requiredTopSignals: ["teamplay", "co-op", "multiplayer"],
+      forbiddenTopSignals: ["sports"]
+    }
+  },
+  {
+    index: 61,
+    caseId: "social-constraint-heavy-non-sweaty-not-sports-teamplay",
+    group: "social-tiering",
+    preferences: "non-sweaty multiplayer sale for PC, not PvP, not sports",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "social-constraint-teamplay-clean",
+              title: "Orbital Teamplay Co-op",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["teamplay", "co-op", "multiplayer"],
+              multiplayer: true,
+              rating: 4.12,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "social-constraint-racket-nx",
+              title: "Racket: Nx",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Sports", "Party", "Arcade"],
+              tags: ["party", "multiplayer"],
+              multiplayer: true,
+              rating: 4.3,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "social-constraint-competitive",
+              title: "Competitive Arena Ultra",
+              priceAmount: 11_900,
+              regularAmount: 23_800,
+              cut: 50,
+              genres: ["Action", "Shooter"],
+              tags: ["pvp", "competitive", "multiplayer"],
+              multiplayer: true,
+              rating: 4,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Orbital Teamplay Co-op",
+      forbiddenTopTitles: ["Racket: Nx", "Competitive Arena Ultra"],
+      requiredTopSignals: ["teamplay", "co-op", "multiplayer"],
+      forbiddenTopSignals: ["sports", "pvp", "competitive"]
+    }
+  },
+  {
+    index: 62,
+    caseId: "social-mixed-language-friends-first-rejects-ai-games",
+    group: "social-tiering",
+    preferences: "hangout-friendly bargain, 팀플 느낌 강한 걸로, AI shovelware 말고",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "social-mixed-ai-games",
+              title: "AI Games",
+              priceAmount: 7_500,
+              regularAmount: 15_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "social-mixed-hangout-teamplay",
+              title: "Hangout Teamplay Deluxe",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Casual", "Co-op"],
+              tags: ["hangout", "teamplay", "multiplayer"],
+              multiplayer: true,
+              rating: 4.05,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Hangout Teamplay Deluxe",
+      forbiddenTopTitles: ["AI Games"],
+      requiredTopSignals: ["hangout", "teamplay", "multiplayer"]
+    }
+  },
+  {
+    index: 63,
+    caseId: "junk-genre-hybrid-cozy-filler-loses-to-two-axis-match",
+    group: "junk-suppression",
+    preferences: "action deckbuilder bargain, cozy filler 말고",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "junk-cozy-grove-filler",
+              title: "Cozy Grove",
+              priceAmount: 11_900,
+              regularAmount: 23_800,
+              cut: 50,
+              genres: ["Adventure", "Casual", "Cozy"],
+              tags: ["cozy", "story-rich"],
+              multiplayer: false,
+              rating: 4.0,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "junk-cozy-rogue-deck-assault",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Cozy Grove"],
+      expectedTopGenres: ["Action", "Card", "Deckbuilder"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 64,
+    caseId: "junk-hybrid-balatro-loses-when-action-axis-required",
+    group: "junk-suppression",
+    preferences: "action card roguelike bargain",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "junk-balatro-filler-action-required",
+              title: "Balatro",
+              priceAmount: 11_900,
+              regularAmount: 23_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card"],
+              multiplayer: false,
+              rating: 4.22,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "junk-rogue-deck-action-required",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Balatro"],
+      expectedTopGenres: ["Action", "Card", "Deckbuilder"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 65,
+    caseId: "junk-hybrid-ball-pit-loses-when-deck-axis-required",
+    group: "junk-suppression",
+    preferences: "deckbuilder action bargain",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "junk-ball-pit-filler",
+              title: "BALL x PIT",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Arcade", "Roguelike"],
+              tags: ["action", "arcade"],
+              multiplayer: false,
+              rating: 4.08,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "junk-ball-pit-deck-assault",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["deckbuilder", "card", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["BALL x PIT"],
+      expectedTopGenres: ["Action", "Card", "Deckbuilder"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
   }
 ];
 

@@ -118,6 +118,7 @@ export class GameDealService {
       skipCatalogFallback?: boolean;
       maxRawgLookups?: number;
       collectRawCandidates?: ((deals: DealCandidate[]) => void) | undefined;
+      allowDeckbuildingGenreFallback?: boolean;
       lenientFallbackMode?:
         | "none"
         | "genre-only"
@@ -189,6 +190,7 @@ export class GameDealService {
       preferredShops,
       steamDeckRequest,
       warnings,
+      allowDeckbuildingGenreFallback: options?.allowDeckbuildingGenreFallback,
       lenientFallbackMode
     });
 
@@ -380,7 +382,7 @@ export class GameDealService {
     let matches: DealCandidate[] = [];
     let degradedCandidates: DealCandidate[] = [];
     let rawBrowseCandidates: DealCandidate[] = [];
-    let rawSteamDeckStrategyBrowseCandidates: DealCandidate[] = [];
+    let rawSteamDeckOverlayBrowseCandidates: DealCandidate[] = [];
     let rawSocialBrowseCandidates: DealCandidate[] = [];
     const warnings: string[] = [];
     let attemptedTargetedRecovery = false;
@@ -431,9 +433,9 @@ export class GameDealService {
         )
       );
     };
-    const mergeRawSteamDeckStrategyBrowseCandidates = (incoming: DealCandidate[]): void => {
-      rawSteamDeckStrategyBrowseCandidates = mergeRecommendationCandidates(
-        rawSteamDeckStrategyBrowseCandidates,
+    const mergeRawSteamDeckOverlayBrowseCandidates = (incoming: DealCandidate[]): void => {
+      rawSteamDeckOverlayBrowseCandidates = mergeRecommendationCandidates(
+        rawSteamDeckOverlayBrowseCandidates,
         incoming.filter((deal) => deal.cut > 0 && !isRecommendationOverlayBrowseJunk(deal))
       );
     };
@@ -456,9 +458,26 @@ export class GameDealService {
     };
     const finalizeRecommendationMatches = (deals: DealCandidate[]): DealCandidate[] =>
       applyRecommendationSocialPromptGuardrail(
-        applyRecommendationQualityGates(
-          applySteamDeckCompatibilityPreference(applyHardConstraints(deals), steamDeckRequest),
-          preferences
+        applySteamDeckHandheldPromptGuardrail(
+          applySteamDeckLifestyleStoryFillerGuardrail(
+            applyRecommendationQualityGates(
+              applySteamDeckCompatibilityPreference(applyHardConstraints(deals), steamDeckRequest),
+              preferences
+            ),
+            {
+              rawPreferences: args.preferences,
+              preferences,
+              constraints,
+              steamDeckRequest
+            }
+          ),
+          {
+            rawPreferences: args.preferences,
+            preferences,
+            constraints,
+            steamDeckRequest,
+            warnings
+          }
         ),
         {
           socialProfile: effectiveSocialGuardrailProfile,
@@ -529,11 +548,13 @@ export class GameDealService {
         applied: false
       };
     };
-    const shouldCollectRawSteamDeckStrategyBrowseCandidates =
+    const shouldCollectRawSteamDeckOverlayBrowseCandidates =
       steamDeckRequest &&
-      (preferences.rawgGenres.includes("strategy") || constraints.strategySignal);
+      (hasRoguelikeIntent(preferences.genres) ||
+        preferences.rawgGenres.includes("strategy") ||
+        constraints.strategySignal);
     const shouldCollectRawOverlayBrowseCandidates =
-      shouldCollectRawSteamDeckStrategyBrowseCandidates ||
+      shouldCollectRawSteamDeckOverlayBrowseCandidates ||
       nonSteamHighRatingStrategyRequest ||
       preferences.deckbuilding ||
       constraints.deckPreference === "required" ||
@@ -627,8 +648,8 @@ export class GameDealService {
             ? {
                 collectRawCandidates: (deals) => {
                   mergeRawBrowseCandidates(deals);
-                  if (shouldCollectRawSteamDeckStrategyBrowseCandidates) {
-                    mergeRawSteamDeckStrategyBrowseCandidates(deals);
+                  if (shouldCollectRawSteamDeckOverlayBrowseCandidates) {
+                    mergeRawSteamDeckOverlayBrowseCandidates(deals);
                   }
                 }
               }
@@ -637,6 +658,8 @@ export class GameDealService {
             steamDeckRequest ||
             (hasStrongCatalogIntent &&
               executionBudget.remainingMs() < MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS),
+          allowDeckbuildingGenreFallback:
+            preferences.deckbuilding || constraints.deckPreference === "required",
           lenientFallbackMode: simpleSocialPrompt
             ? "genre-platform-and-multiplayer"
             : "genre-only"
@@ -732,8 +755,8 @@ export class GameDealService {
             ? {
                 collectRawCandidates: (deals) => {
                   mergeRawBrowseCandidates(deals);
-                  if (shouldCollectRawSteamDeckStrategyBrowseCandidates) {
-                    mergeRawSteamDeckStrategyBrowseCandidates(deals);
+                  if (shouldCollectRawSteamDeckOverlayBrowseCandidates) {
+                    mergeRawSteamDeckOverlayBrowseCandidates(deals);
                   }
                 }
               }
@@ -742,6 +765,8 @@ export class GameDealService {
             steamDeckRequest ||
             (hasStrongCatalogIntent &&
               executionBudget.remainingMs() < MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS),
+          allowDeckbuildingGenreFallback:
+            preferences.deckbuilding || constraints.deckPreference === "required",
           lenientFallbackMode: simpleSocialPrompt
             ? "genre-platform-and-multiplayer"
             : "genre-only"
@@ -905,11 +930,11 @@ export class GameDealService {
       socialPromptProfile &&
       hasSimpleSocialOverlayRecoverySignal(warnings) &&
       rawSocialBrowseCandidates.length > 0;
-    const useRawSteamDeckStrategyOverlayBase =
+    const useRawSteamDeckOverlayBase =
       hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings) &&
-      rawSteamDeckStrategyBrowseCandidates.length > 0 &&
+      rawSteamDeckOverlayBrowseCandidates.length > 0 &&
       sparseOverlayProfile !== null &&
-      isSteamDeckStrategyOverlayKind(sparseOverlayProfile.kind);
+      isWarningTriggeredSteamDeckOverlayKind(sparseOverlayProfile.kind);
     const useRawDeckbuildingOverlayBase =
       rawBrowseCandidates.length > 0 &&
       sparseOverlayProfile?.kind === "deckbuilding-card" &&
@@ -923,15 +948,15 @@ export class GameDealService {
         sparseOverlayProfile.kind === "non-steam-strategy-rating" ||
         isSteamDeckSparseRecoveryKind(sparseOverlayProfile.kind));
     const effectiveSparseOverlayProfile =
-      useRawSteamDeckStrategyOverlayBase && sparseOverlayProfile
-        ? widenSteamDeckStrategyOverlayProfile(sparseOverlayProfile)
+      useRawSteamDeckOverlayBase && sparseOverlayProfile
+        ? widenSteamDeckOverlayProfile(sparseOverlayProfile)
         : sparseOverlayProfile;
     const overlayBaseMatches = useRawStrategyOverlayBase
-      ? rawBrowseCandidates
+        ? rawBrowseCandidates
       : useRawSimpleSocialOverlayBase
         ? rawSocialBrowseCandidates
-        : useRawSteamDeckStrategyOverlayBase
-          ? rawSteamDeckStrategyBrowseCandidates
+        : useRawSteamDeckOverlayBase
+          ? rawSteamDeckOverlayBrowseCandidates
         : useRawDeckbuildingOverlayBase
           ? rawBrowseCandidates
         : useRawProviderOutageOverlayBase
@@ -953,13 +978,13 @@ export class GameDealService {
       (matches.length === 0 || providerOutageOverlayRequired) &&
       overlayBaseMatches.length > 0 &&
       this.providers.discoverTitles &&
-      (!steamDeckRequest ||
-        hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings) ||
-        useRawStrategyOverlayBase ||
-        useRawSimpleSocialOverlayBase ||
-        useRawSteamDeckStrategyOverlayBase ||
-        useRawDeckbuildingOverlayBase ||
-        useRawProviderOutageOverlayBase)
+        (!steamDeckRequest ||
+          hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings) ||
+          useRawStrategyOverlayBase ||
+          useRawSimpleSocialOverlayBase ||
+          useRawSteamDeckOverlayBase ||
+          useRawDeckbuildingOverlayBase ||
+          useRawProviderOutageOverlayBase)
     ) {
       if (effectiveSparseOverlayProfile) {
         try {
@@ -2253,6 +2278,7 @@ function rankDiscoverDealsWithLenientFallback(args: {
   preferredShops?: number[] | undefined;
   steamDeckRequest: boolean;
   warnings: string[];
+  allowDeckbuildingGenreFallback?: boolean | undefined;
   lenientFallbackMode:
     | "none"
     | "genre-only"
@@ -2280,7 +2306,36 @@ function rankDiscoverDealsWithLenientFallback(args: {
       }).filter(
         (deal) =>
           deal.genres.length === 0 ||
-          deal.genres.some((genre) => requestedGenres.has(genre.trim().toLowerCase()))
+          deal.genres.some((genre) => requestedGenres.has(genre.trim().toLowerCase())) ||
+          (args.allowDeckbuildingGenreFallback &&
+            matchesRequestedDeckbuildingHybridGenres(deal, args.filters.genres ?? []))
+      ),
+      args.steamDeckRequest
+    );
+  }
+
+  if (
+    rankedDeals.length === 0 &&
+    args.steamDeckRequest &&
+    hasWarningTriggeredSteamDeckMetadataRecoverySignal(args.warnings) &&
+    (args.filters.platforms?.length ?? 0) > 0
+  ) {
+    rankedDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(args.deals, {
+        ...args.filters,
+        platforms: undefined,
+        genres:
+          args.allowDeckbuildingGenreFallback && (args.filters.genres?.length ?? 0) > 0
+            ? undefined
+            : args.filters.genres,
+        preferredShops: args.preferredShops
+      }).filter(
+        (deal) =>
+          getDeckCompatibilityStatus(deal) !== "unsupported" &&
+          ((args.filters.genres?.length ?? 0) === 0 ||
+            matchesProviderOutageRequestedGenres(deal, args.filters.genres ?? []) ||
+            (args.allowDeckbuildingGenreFallback &&
+              matchesRequestedDeckbuildingHybridGenres(deal, args.filters.genres ?? [])))
       ),
       args.steamDeckRequest
     );
@@ -2366,6 +2421,15 @@ function rankDiscoverDealsWithLenientFallback(args: {
     );
   }
 
+  if (rankedDeals.length > 0 && hasRecommendationProviderOutageWarning(args.warnings)) {
+    rankedDeals = rankedDeals.filter((deal) =>
+      matchesProviderOutageBrowseCandidate(deal, {
+        filters: args.filters,
+        steamDeckRequest: args.steamDeckRequest
+      })
+    );
+  }
+
   return rankedDeals;
 }
 
@@ -2376,7 +2440,12 @@ function matchesProviderOutageBrowseCandidate(
     steamDeckRequest: boolean;
   }
 ): boolean {
-  if (deal.cut <= 0 || deal.price.amount <= 0 || isRecommendationOverlayBrowseJunk(deal)) {
+  if (
+    deal.cut <= 0 ||
+    deal.price.amount <= 0 ||
+    isRecommendationOverlayBrowseJunk(deal) ||
+    isMetadataLightStoryFiller(deal)
+  ) {
     return false;
   }
 
@@ -2473,6 +2542,198 @@ function matchesRequestedRecommendationPlatforms(
   }
 
   return candidatePlatforms.some((platform) => normalizePlatform(platform) === "pc");
+}
+
+function applySteamDeckHandheldPromptGuardrail(
+  deals: DealCandidate[],
+  args: {
+    rawPreferences: string;
+    preferences: {
+      genres: string[];
+      deckbuilding: boolean;
+      highRating: boolean;
+      shortSession: boolean;
+    };
+    constraints: RecommendationConstraints;
+    steamDeckRequest: boolean;
+    warnings: string[];
+  }
+): DealCandidate[] {
+  if (!shouldApplySteamDeckHandheldPromptGuardrail(args)) {
+    return deals;
+  }
+
+  const accepted = deals.filter((deal) => matchesSteamDeckHandheldPromptDeal(deal, args));
+  const supported = accepted.filter((deal) => {
+    const status = getDeckCompatibilityStatus(deal);
+    return status === "verified" || status === "playable";
+  });
+
+  if (supported.length > 0) {
+    return supported;
+  }
+
+  return hasWarningTriggeredSteamDeckMetadataRecoverySignal(args.warnings)
+    ? accepted.filter((deal) => getDeckCompatibilityStatus(deal) === "unknown")
+    : [];
+}
+
+function applySteamDeckLifestyleStoryFillerGuardrail(
+  deals: DealCandidate[],
+  args: {
+    rawPreferences: string;
+    preferences: {
+      genres: string[];
+      deckbuilding: boolean;
+      highRating: boolean;
+      shortSession: boolean;
+    };
+    constraints: RecommendationConstraints;
+    steamDeckRequest: boolean;
+  }
+): DealCandidate[] {
+  if (!shouldApplySteamDeckLifestyleStoryFillerGuardrail(args)) {
+    return deals;
+  }
+
+  return deals.filter(
+    (deal) =>
+      !isMetadataLightStoryFiller(deal) &&
+      !hasStoryAdventurePuzzleBrowseFiller(deal) &&
+      !hasLikelySingleplayerBrowseBias(deal)
+  );
+}
+
+function shouldApplySteamDeckHandheldPromptGuardrail(args: {
+  rawPreferences: string;
+  preferences: {
+    genres: string[];
+    deckbuilding: boolean;
+    highRating: boolean;
+    shortSession: boolean;
+  };
+  constraints: RecommendationConstraints;
+  steamDeckRequest: boolean;
+  warnings: string[];
+}): boolean {
+  if (
+    !args.steamDeckRequest ||
+    args.preferences.highRating ||
+    args.constraints.strategySignal ||
+    !hasWarningTriggeredSteamDeckMetadataRecoverySignal(args.warnings)
+  ) {
+    return false;
+  }
+
+  return (
+    args.preferences.deckbuilding ||
+    hasRoguelikeIntent(args.preferences.genres) ||
+    args.preferences.shortSession ||
+    /\b(handheld|portable|pad)\b/i.test(args.rawPreferences) ||
+    /핸드헬드|휴대용|휴대기|패드|출퇴근|스팀덱/.test(args.rawPreferences)
+  );
+}
+
+function shouldApplySteamDeckLifestyleStoryFillerGuardrail(args: {
+  rawPreferences: string;
+  preferences: {
+    genres: string[];
+    deckbuilding: boolean;
+    highRating: boolean;
+    shortSession: boolean;
+  };
+  constraints: RecommendationConstraints;
+  steamDeckRequest: boolean;
+}): boolean {
+  if (!args.steamDeckRequest || args.preferences.highRating || args.constraints.strategySignal) {
+    return false;
+  }
+
+  return (
+    args.preferences.shortSession ||
+    /\b(handheld|portable|pad|commute|travel)\b/i.test(args.rawPreferences) ||
+    /핸드헬드|휴대용|휴대기|패드|출퇴근|가볍게|잠깐/.test(args.rawPreferences)
+  );
+}
+
+function matchesSteamDeckHandheldPromptDeal(
+  deal: DealCandidate,
+  args: {
+    preferences: {
+      genres: string[];
+      deckbuilding: boolean;
+      shortSession: boolean;
+    };
+  }
+): boolean {
+  if (getDeckCompatibilityStatus(deal) === "unsupported") {
+    return false;
+  }
+
+  if (
+    isMetadataLightStoryFiller(deal) ||
+    hasStoryAdventurePuzzleBrowseFiller(deal) ||
+    hasLikelySingleplayerBrowseBias(deal)
+  ) {
+    return false;
+  }
+
+  if (args.preferences.deckbuilding && !hasDeckbuildingEvidence(deal)) {
+    return false;
+  }
+
+  if (
+    hasRoguelikeIntent(args.preferences.genres) &&
+    !hasRoguelikeDealEvidence(deal) &&
+    !hasPortableHandheldDealEvidence(deal)
+  ) {
+    return false;
+  }
+
+  if (
+    !hasPortableHandheldDealEvidence(deal) &&
+    !hasRoguelikeDealEvidence(deal) &&
+    !hasDeckbuildingEvidence(deal)
+  ) {
+    return false;
+  }
+
+  if (
+    args.preferences.shortSession &&
+    !hasShortSessionSparseShape(deal) &&
+    !hasPortableHandheldDealEvidence(deal)
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function hasPortableHandheldDealEvidence(deal: DealCandidate): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")}`;
+  return (
+    /\b(portable|handheld|steam deck|deck ready|commute|travel|short-session)\b/i.test(values) ||
+    /휴대|핸드헬드|출퇴근|스팀덱/.test(values) ||
+    hasShortSessionSparseShape(deal)
+  );
+}
+
+function isMetadataLightStoryFiller(deal: DealCandidate): boolean {
+  if (deal.metadataStatus !== "missing" && deal.metadataStatus !== "unavailable") {
+    return false;
+  }
+
+  if (!hasStoryAdventurePuzzleBrowseFiller(deal) && !hasLikelySingleplayerBrowseBias(deal)) {
+    return false;
+  }
+
+  return (
+    !hasRoguelikeDealEvidence(deal) &&
+    !hasDeckbuildingEvidence(deal) &&
+    !hasActionDealEvidence(deal) &&
+    !hasExplicitCoopDealEvidence(deal) &&
+    !hasBroadCoopFriendlyShape(deal)
+  );
 }
 
 function normalizeEnrichmentResult(result: DealCandidate[] | DealsEnrichment): DealsEnrichment {
@@ -2853,14 +3114,18 @@ function isSteamDeckSparseRecoveryKind(kind: RecommendationRecoveryKind): boolea
   );
 }
 
-function isSteamDeckStrategyOverlayKind(kind: RecommendationRecoveryKind): boolean {
-  return kind === "steam-deck-strategy" || kind === "steam-deck-strategy-roguelike";
+function isWarningTriggeredSteamDeckOverlayKind(kind: RecommendationRecoveryKind): boolean {
+  return (
+    kind === "steam-deck-roguelike" ||
+    kind === "steam-deck-strategy" ||
+    kind === "steam-deck-strategy-roguelike"
+  );
 }
 
-function widenSteamDeckStrategyOverlayProfile(
+function widenSteamDeckOverlayProfile(
   profile: RecommendationRecoveryProfile
 ): RecommendationRecoveryProfile {
-  if (!isSteamDeckStrategyOverlayKind(profile.kind)) {
+  if (!isWarningTriggeredSteamDeckOverlayKind(profile.kind)) {
     return profile;
   }
 
@@ -3293,7 +3558,11 @@ function applyRecommendationQualityGates(
     !hasActionRogueliteIntent(preferences.genres);
 
   if (preferences.genres.length > 1) {
-    filtered = filtered.filter((deal) => matchesAllRequestedGenres(deal, preferences.genres));
+    filtered = filtered.filter((deal) =>
+      preferences.deckbuilding
+        ? matchesRequestedDeckbuildingHybridGenres(deal, preferences.genres)
+        : matchesAllRequestedGenres(deal, preferences.genres)
+    );
   }
 
   if (preferences.multiplayer) {
@@ -3580,6 +3849,46 @@ function matchesAllRequestedGenres(deal: DealCandidate, requestedGenres: string[
   const normalizedGenres = new Set(deal.genres.map((genre) => genre.trim().toLowerCase()));
 
   return requestedGenres.every((genre) => normalizedGenres.has(genre.trim().toLowerCase()));
+}
+
+function matchesRequestedDeckbuildingHybridGenres(
+  deal: DealCandidate,
+  requestedGenres: string[]
+): boolean {
+  if (!hasDeckbuildingEvidence(deal)) {
+    return false;
+  }
+
+  return requestedGenres.every((genre) => {
+    const normalized = genre.trim().toLowerCase();
+    if (!normalized) {
+      return true;
+    }
+
+    if (normalized === "strategy") {
+      return true;
+    }
+
+    if (normalized === "action") {
+      return hasActionDealEvidence(deal);
+    }
+
+    if (normalized === "card" || normalized === "deckbuilder") {
+      return hasDeckbuildingEvidence(deal);
+    }
+
+    if (normalized === "roguelike" || normalized === "roguelite") {
+      return hasRoguelikeDealEvidence(deal);
+    }
+
+    return deal.genres.some((value) => value.trim().toLowerCase() === normalized);
+  });
+}
+
+function hasActionDealEvidence(deal: DealCandidate): boolean {
+  return /\b(action|combat|shooter|shooting|hack|slash|brawler|arcade)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
 }
 
 function hasActionRogueliteIntent(genres: string[]): boolean {
@@ -4046,7 +4355,10 @@ function finalizeSparseRecoveryMatches(
   },
   steamDeckRequest: boolean
 ): DealCandidate[] {
-  const ranked = scoreDealCandidates(dedupeDeals(matches), filters);
+  const ranked = scoreDealCandidates(
+    dedupeDeals(matches),
+    kind === "deckbuilding-card" ? { ...filters, genres: undefined } : filters
+  );
 
   if (
     kind === "steam-deck-roguelike" ||

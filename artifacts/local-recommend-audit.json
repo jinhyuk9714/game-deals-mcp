@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-03-14T09:33:03.142Z",
+  "generatedAt": "2026-03-14T21:39:33.910Z",
   "summary": {
     "total": 50,
-    "zeroMatches": 2,
-    "flagged": 2,
+    "zeroMatches": 4,
+    "flagged": 4,
     "timeouts": 0,
     "topCounts": [
       {
@@ -20,11 +20,15 @@
       },
       {
         "title": "Super Robot Taisen: Original Generation",
-        "count": 9
+        "count": 6
       },
       {
         "title": "Shining Force III",
         "count": 4
+      },
+      {
+        "title": "Dice & Fold",
+        "count": 1
       },
       {
         "title": "Dominions 5 - Warriors of the Faith",
@@ -38,7 +42,7 @@
   },
   "groups": {
     "steam-deck": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 4,
       "topCounts": [
         {
           "title": "BALL x PIT",
@@ -49,41 +53,45 @@
           "count": 4
         },
         {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "count": 1
+        },
+        {
           "title": "The King is Watching",
           "count": 1
         }
       ],
-      "flagged": 1,
+      "flagged": 0,
       "timeouts": 0
     },
     "deckbuilding-short": {
-      "uniqueTopPicks": 1,
+      "uniqueTopPicks": 2,
       "topCounts": [
         {
           "title": "Slay the Spire",
           "count": 9
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 1
         }
       ],
-      "flagged": 1,
+      "flagged": 0,
       "timeouts": 0
     },
     "strategy-rating": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 2,
       "topCounts": [
-        {
-          "title": "Super Robot Taisen: Original Generation",
-          "count": 5
-        },
         {
           "title": "Shining Force III",
           "count": 4
         },
         {
-          "title": "Dominions 5 - Warriors of the Faith",
-          "count": 1
+          "title": "Super Robot Taisen: Original Generation",
+          "count": 2
         }
       ],
-      "flagged": 0,
+      "flagged": 4,
       "timeouts": 0
     },
     "multiplayer": {
@@ -327,15 +335,29 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 75% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 75,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
       "timeout": false
     },
     {
@@ -415,11 +437,10 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Shogun Showdown (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 1,
       "topTitle": "The King is Watching",
@@ -437,7 +458,7 @@
           "Indie",
           "Roguelike"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -451,10 +472,9 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 1,
@@ -476,7 +496,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -490,10 +510,9 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 1,
@@ -515,7 +534,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -529,11 +548,9 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 1,
       "topTitle": "Slay the Spire",
@@ -554,7 +571,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -568,15 +585,34 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 1,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "flagged": false,
       "timeout": false
     },
     {
@@ -588,7 +624,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -611,7 +647,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -876,30 +912,16 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -911,29 +933,16 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -945,29 +954,16 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1012,29 +1008,16 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 2,
-      "topTitle": "Super Robot Taisen: Original Generation",
-      "topMatch": {
-        "title": "Super Robot Taisen: Original Generation",
-        "cut": 0,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.83,
-        "genres": [
-          "Strategy",
-          "Action"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -1488,10 +1471,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1523,10 +1503,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1558,10 +1535,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1593,10 +1567,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1628,9 +1599,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)"
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1662,9 +1631,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)"
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1696,9 +1663,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)"
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1730,9 +1695,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The Binding of Isaac: Rebirth (RAWG request failed with timeout after 1500ms)"
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {

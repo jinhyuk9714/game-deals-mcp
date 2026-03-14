@@ -1,29 +1,49 @@
 {
-  "generatedAt": "2026-03-14T09:31:31.084Z",
+  "generatedAt": "2026-03-14T21:40:12.958Z",
   "summary": {
-    "total": 35,
-    "zeroMatches": 7,
-    "flagged": 1,
+    "total": 65,
+    "zeroMatches": 12,
+    "flagged": 0,
     "timeouts": 0,
     "topCounts": [
+      {
+        "title": "Orbital Teamplay Co-op",
+        "count": 11
+      },
       {
         "title": "Party Brawler Heroes",
         "count": 6
       },
       {
-        "title": "Orbital Teamplay Co-op",
-        "count": 5
+        "title": "Rogue Deck Assault",
+        "count": 6
       },
       {
         "title": "Aces of Ruin Deluxe",
         "count": 4
       },
       {
+        "title": "Hangout Teamplay Deluxe",
+        "count": 4
+      },
+      {
+        "title": "Portable Arcana Deluxe",
+        "count": 4
+      },
+      {
+        "title": "Portable Rogue Tactics Deluxe",
+        "count": 3
+      },
+      {
         "title": "Deck Ready Tactics",
         "count": 2
       },
       {
-        "title": "Portable Rogue Tactics Deluxe",
+        "title": "Portable Lounge Brawler",
+        "count": 2
+      },
+      {
+        "title": "Portable Tactics Complete",
         "count": 2
       },
       {
@@ -39,7 +59,7 @@
         "count": 1
       },
       {
-        "title": "Portable Tactics Complete",
+        "title": "Portable Rogue Tactics Complete",
         "count": 1
       },
       {
@@ -62,10 +82,14 @@
   },
   "groups": {
     "local-guardrail": {
-      "uniqueTopPicks": 6,
+      "uniqueTopPicks": 11,
       "topCounts": [
         {
-          "title": "Party Brawler Heroes",
+          "title": "Orbital Teamplay Co-op",
+          "count": 2
+        },
+        {
+          "title": "Portable Arcana Deluxe",
           "count": 2
         },
         {
@@ -81,6 +105,22 @@
           "count": 1
         },
         {
+          "title": "Party Brawler Heroes",
+          "count": 1
+        },
+        {
+          "title": "Portable Rogue Tactics Complete",
+          "count": 1
+        },
+        {
+          "title": "Portable Tactics Complete",
+          "count": 1
+        },
+        {
+          "title": "Rogue Deck Assault",
+          "count": 1
+        },
+        {
           "title": "Shining Force III",
           "count": 1
         },
@@ -89,12 +129,16 @@
           "count": 1
         }
       ],
-      "flagged": 1,
+      "flagged": 0,
       "timeouts": 0
     },
     "provider-outage": {
-      "uniqueTopPicks": 5,
+      "uniqueTopPicks": 8,
       "topCounts": [
+        {
+          "title": "Orbital Teamplay Co-op",
+          "count": 2
+        },
         {
           "title": "Aces of Ruin Deluxe",
           "count": 1
@@ -104,7 +148,7 @@
           "count": 1
         },
         {
-          "title": "Orbital Teamplay Co-op",
+          "title": "Hangout Teamplay Deluxe",
           "count": 1
         },
         {
@@ -112,7 +156,15 @@
           "count": 1
         },
         {
+          "title": "Portable Arcana Deluxe",
+          "count": 1
+        },
+        {
           "title": "Reviewed Strategy Fallback",
+          "count": 1
+        },
+        {
+          "title": "Rogue Deck Assault",
           "count": 1
         }
       ],
@@ -120,10 +172,14 @@
       "timeouts": 0
     },
     "steam-deck-overlay": {
-      "uniqueTopPicks": 5,
+      "uniqueTopPicks": 7,
       "topCounts": [
         {
           "title": "Portable Rogue Tactics Deluxe",
+          "count": 3
+        },
+        {
+          "title": "Portable Lounge Brawler",
           "count": 2
         },
         {
@@ -132,6 +188,10 @@
         },
         {
           "title": "Deck Ready Tactics",
+          "count": 1
+        },
+        {
+          "title": "Portable Arcana Deluxe",
           "count": 1
         },
         {
@@ -147,14 +207,18 @@
       "timeouts": 0
     },
     "social-tiering": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 4,
       "topCounts": [
         {
-          "title": "Party Brawler Heroes",
-          "count": 3
+          "title": "Orbital Teamplay Co-op",
+          "count": 5
         },
         {
-          "title": "Orbital Teamplay Co-op",
+          "title": "Party Brawler Heroes",
+          "count": 4
+        },
+        {
+          "title": "Hangout Teamplay Deluxe",
           "count": 2
         },
         {
@@ -166,14 +230,22 @@
       "timeouts": 0
     },
     "junk-suppression": {
-      "uniqueTopPicks": 2,
+      "uniqueTopPicks": 4,
       "topCounts": [
+        {
+          "title": "Rogue Deck Assault",
+          "count": 4
+        },
         {
           "title": "Orbital Teamplay Co-op",
           "count": 2
         },
         {
           "title": "Aces of Ruin Deluxe",
+          "count": 1
+        },
+        {
+          "title": "Hangout Teamplay Deluxe",
           "count": 1
         }
       ],
@@ -916,36 +988,36 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [],
       "matchCount": 2,
-      "topTitle": "Party Brawler Heroes",
+      "topTitle": "Orbital Teamplay Co-op",
       "topMatch": {
-        "title": "Party Brawler Heroes",
-        "cut": 55,
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
         "price": {
-          "amount": 9900,
+          "amount": 13500,
           "currency": "KRW"
         },
         "multiplayer": true,
-        "rating": 4.1,
+        "rating": 4.12,
         "genres": [
           "Action",
           "Casual",
-          "Party"
+          "Co-op"
         ],
         "platforms": [
           "PC"
         ],
         "tags": [
-          "party",
+          "teamplay",
+          "co-op",
           "multiplayer"
         ],
         "steamDeckStatus": null
       },
-      "flagged": true,
-      "timeout": false,
-      "error": "expected topTitle=Orbital Teamplay Co-op, received Party Brawler Heroes; missing top genre: Co-op; missing top signal: teamplay; missing top signal: co-op"
+      "flagged": false,
+      "timeout": false
     },
     {
       "index": 23,
@@ -1412,6 +1484,1137 @@
         ],
         "platforms": [
           "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 36,
+      "caseId": "local-steam-deck-reviewed-strategy-warning-overlay",
+      "group": "local-guardrail",
+      "preferences": "스팀덱에서 평가 좋은 전략 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Tactics Complete를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Tactics Complete",
+      "topMatch": {
+        "title": "Portable Tactics Complete",
+        "cut": 50,
+        "price": {
+          "amount": 14900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.4,
+        "metacritic": 83,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 37,
+      "caseId": "local-steam-deck-deckbuilder-warning-overlay",
+      "group": "local-guardrail",
+      "preferences": "가볍게 할 카드 로그라이크",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Arcana Deluxe",
+      "topMatch": {
+        "title": "Portable Arcana Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 10900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 80,
+        "genres": [
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 38,
+      "caseId": "local-steam-deck-roguelike-warning-overlay",
+      "group": "local-guardrail",
+      "preferences": "스팀덱에서 할 만한 전략 로그라이크",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Rogue Tactics Complete를 추천합니다. 50% 할인, 현재가 16,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Rogue Tactics Complete",
+      "topMatch": {
+        "title": "Portable Rogue Tactics Complete",
+        "cut": 50,
+        "price": {
+          "amount": 16900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.3,
+        "metacritic": 82,
+        "genres": [
+          "Strategy",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 39,
+      "caseId": "outage-rawg-502-social-teamplay-recovers",
+      "group": "provider-outage",
+      "preferences": "teamplay 할인작인데 경쟁 냄새 적은 것",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG timeout"
+      ],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 40,
+      "caseId": "outage-price-overview-hybrid-two-axis-beats-filler",
+      "group": "provider-outage",
+      "preferences": "action deckbuilder bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "역대 최저가 정보를 가져오지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "deckbuilder",
+          "card",
+          "roguelike"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 41,
+      "caseId": "outage-itad-429-junk-remains-empty",
+      "group": "provider-outage",
+      "preferences": "friends-only fun bargain, not sports",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "ITAD request failed with 429",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 42,
+      "caseId": "steam-deck-rawg-timeout-playable-roguelike-recovers",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 할 만한 전략 로그라이크",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG timeout",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Rogue Tactics Deluxe",
+      "topMatch": {
+        "title": "Portable Rogue Tactics Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 16500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 43,
+      "caseId": "steam-deck-itad-429-unknown-deckbuilder-recovers",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 가볍게 할 카드 덱빌딩",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "ITAD request failed with 429",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Arcana Deluxe",
+      "topMatch": {
+        "title": "Portable Arcana Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 10900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 80,
+        "genres": [
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 44,
+      "caseId": "steam-deck-timeout-junk-stays-empty",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 할 만한 전략 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG timeout",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 45,
+      "caseId": "social-friends-first-teamplay-beats-racket-nx",
+      "group": "social-tiering",
+      "preferences": "friends-first co-op bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 46,
+      "caseId": "social-mixed-language-hangout-rejects-deponia",
+      "group": "social-tiering",
+      "preferences": "hangout-friendly game deal for friends, 스토리겜 말고",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Hangout Teamplay Deluxe",
+      "topMatch": {
+        "title": "Hangout Teamplay Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 12900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.05,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "hangout",
+          "teamplay",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 47,
+      "caseId": "social-budget-party-rejects-ai-games",
+      "group": "social-tiering",
+      "preferences": "15000원 이하 party game",
+      "budget": 15000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 55,
+        "price": {
+          "amount": 9900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.1,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "party",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 48,
+      "caseId": "junk-metadata-only-social-rejected",
+      "group": "junk-suppression",
+      "preferences": "party-friendly co-op on sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 49,
+      "caseId": "junk-course-and-demo-lose-to-valid-social",
+      "group": "junk-suppression",
+      "preferences": "hangout game for friends, not PvP",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Hangout Teamplay Deluxe",
+      "topMatch": {
+        "title": "Hangout Teamplay Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 12900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.05,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "hangout",
+          "teamplay",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 50,
+      "caseId": "junk-hybrid-two-axis-beats-filler",
+      "group": "junk-suppression",
+      "preferences": "short-session action deckbuilder",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "deckbuilder",
+          "card",
+          "roguelike"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 51,
+      "caseId": "local-non-sweaty-teamplay-clean-smoke",
+      "group": "local-guardrail",
+      "preferences": "non-sweaty multiplayer sale for PC",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 52,
+      "caseId": "local-hybrid-deckbuilder-clean-smoke",
+      "group": "local-guardrail",
+      "preferences": "action deckbuilder bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "deckbuilder",
+          "card",
+          "roguelike"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 53,
+      "caseId": "local-steam-deck-handheld-clean-smoke",
+      "group": "local-guardrail",
+      "preferences": "스팀덱으로 잠깐씩 할 카드 덱빌딩",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Portable Arcana Deluxe",
+      "topMatch": {
+        "title": "Portable Arcana Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 10900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "genres": [
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "card",
+          "deckbuilder",
+          "portable"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 54,
+      "caseId": "outage-rawg-timeout-mixed-language-social-recovers",
+      "group": "provider-outage",
+      "preferences": "friends-first co-op bargain, 스포츠 말고",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG timeout"
+      ],
+      "matchCount": 1,
+      "topTitle": "Hangout Teamplay Deluxe",
+      "topMatch": {
+        "title": "Hangout Teamplay Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 12900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.05,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "hangout",
+          "teamplay",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 55,
+      "caseId": "outage-price-history-missing-junk-stays-empty",
+      "group": "provider-outage",
+      "preferences": "genre hybrid bargain, story filler 말고",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "역대 최저가 정보를 가져오지 못했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 56,
+      "caseId": "outage-itad-429-handheld-recoverable-vs-junk",
+      "group": "provider-outage",
+      "preferences": "스팀덱으로 출퇴근길에 할 카드 로그라이크",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Arcana Deluxe를 추천합니다. 50% 할인, 현재가 10,900원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "ITAD request failed with 429",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Arcana Deluxe",
+      "topMatch": {
+        "title": "Portable Arcana Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 10900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 80,
+        "genres": [
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 57,
+      "caseId": "steam-deck-lifestyle-story-filler-rejected",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱으로 출퇴근길에 잠깐 할 세일 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Portable Lounge Brawler",
+      "topMatch": {
+        "title": "Portable Lounge Brawler",
+        "cut": 50,
+        "price": {
+          "amount": 12900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.01,
+        "genres": [
+          "Action",
+          "Casual"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "portable",
+          "handheld",
+          "short-session"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 58,
+      "caseId": "steam-deck-lifestyle-playable-recovers-under-partial-metadata",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱으로 가볍게 즐길 handheld bargain",
+      "budget": 18000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Lounge Brawler를 추천합니다. 50% 할인, 현재가 12,900원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Lounge Brawler",
+      "topMatch": {
+        "title": "Portable Lounge Brawler",
+        "cut": 50,
+        "price": {
+          "amount": 12900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "genres": [],
+        "platforms": [],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 59,
+      "caseId": "steam-deck-lifestyle-unsupported-stays-empty",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱으로 출퇴근길에 할 만한 할인 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "RAWG timeout",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 60,
+      "caseId": "social-budget-strict-teamplay-rejects-racket-nx",
+      "group": "social-tiering",
+      "preferences": "15000원 이하 teamplay 할인작, sports 말고",
+      "budget": 15000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 61,
+      "caseId": "social-constraint-heavy-non-sweaty-not-sports-teamplay",
+      "group": "social-tiering",
+      "preferences": "non-sweaty multiplayer sale for PC, not PvP, not sports",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 62,
+      "caseId": "social-mixed-language-friends-first-rejects-ai-games",
+      "group": "social-tiering",
+      "preferences": "hangout-friendly bargain, 팀플 느낌 강한 걸로, AI shovelware 말고",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Hangout Teamplay Deluxe를 추천합니다. 50% 할인, 현재가 12,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Hangout Teamplay Deluxe",
+      "topMatch": {
+        "title": "Hangout Teamplay Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 12900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.05,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "hangout",
+          "teamplay",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 63,
+      "caseId": "junk-genre-hybrid-cozy-filler-loses-to-two-axis-match",
+      "group": "junk-suppression",
+      "preferences": "action deckbuilder bargain, cozy filler 말고",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "deckbuilder",
+          "card",
+          "roguelike"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 64,
+      "caseId": "junk-hybrid-balatro-loses-when-action-axis-required",
+      "group": "junk-suppression",
+      "preferences": "action card roguelike bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "deckbuilder",
+          "card",
+          "roguelike"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 65,
+      "caseId": "junk-hybrid-ball-pit-loses-when-deck-axis-required",
+      "group": "junk-suppression",
+      "preferences": "deckbuilder action bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "deckbuilder",
+          "card",
+          "roguelike"
         ],
         "steamDeckStatus": null
       },

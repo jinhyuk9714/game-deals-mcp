@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-14T09:34:11.759Z",
+  "generatedAt": "2026-03-14T21:41:31.864Z",
   "summary": {
     "total": 100,
     "zeroMatches": 19,
@@ -7,12 +7,12 @@
     "timeouts": 0,
     "topCounts": [
       {
-        "title": "Deponia",
-        "count": 16
+        "title": "BALL x PIT",
+        "count": 14
       },
       {
-        "title": "BALL x PIT",
-        "count": 13
+        "title": "Deponia",
+        "count": 9
       },
       {
         "title": "Dice & Fold",
@@ -23,8 +23,12 @@
         "count": 9
       },
       {
+        "title": "AI Games",
+        "count": 7
+      },
+      {
         "title": "Balatro",
-        "count": 6
+        "count": 5
       },
       {
         "title": "Racket: Nx",
@@ -35,11 +39,11 @@
         "count": 5
       },
       {
-        "title": "Inscryption",
-        "count": 4
+        "title": "Cozy Grove",
+        "count": 3
       },
       {
-        "title": "Cozy Grove",
+        "title": "Inscryption",
         "count": 3
       },
       {
@@ -51,15 +55,19 @@
         "count": 2
       },
       {
+        "title": "Monster Train",
+        "count": 2
+      },
+      {
         "title": "Downfall",
         "count": 1
       },
       {
-        "title": "Monster Train",
+        "title": "ROUNDS",
         "count": 1
       },
       {
-        "title": "ROUNDS",
+        "title": "Shogun Showdown",
         "count": 1
       },
       {
@@ -69,10 +77,6 @@
       {
         "title": "Slay the Spire",
         "count": 1
-      },
-      {
-        "title": "Space Rangers HD: A War Apart",
-        "count": 1
       }
     ]
   },
@@ -81,7 +85,7 @@
       "uniqueTopPicks": 3,
       "topCounts": [
         {
-          "title": "Deponia",
+          "title": "AI Games",
           "count": 6
         },
         {
@@ -101,7 +105,11 @@
       "topCounts": [
         {
           "title": "Balatro",
-          "count": 4
+          "count": 3
+        },
+        {
+          "title": "Monster Train",
+          "count": 2
         },
         {
           "title": "BrightGunner",
@@ -116,11 +124,7 @@
           "count": 1
         },
         {
-          "title": "Inscryption",
-          "count": 1
-        },
-        {
-          "title": "Monster Train",
+          "title": "Shogun Showdown",
           "count": 1
         }
       ],
@@ -162,11 +166,11 @@
       "timeouts": 0
     },
     "action-roguelite": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
           "title": "BALL x PIT",
-          "count": 6
+          "count": 7
         },
         {
           "title": "Inscryption",
@@ -175,25 +179,25 @@
         {
           "title": "BrightGunner",
           "count": 1
-        },
-        {
-          "title": "Space Rangers HD: A War Apart",
-          "count": 1
         }
       ],
       "flagged": 4,
       "timeouts": 0
     },
     "constraint-heavy": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 4,
       "topCounts": [
-        {
-          "title": "Deponia",
-          "count": 3
-        },
         {
           "title": "BALL x PIT",
           "count": 2
+        },
+        {
+          "title": "Deponia",
+          "count": 2
+        },
+        {
+          "title": "AI Games",
+          "count": 1
         },
         {
           "title": "Dominions 5 - Warriors of the Faith",
@@ -334,38 +338,30 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -381,38 +377,30 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -431,8 +419,7 @@
       "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 9,
       "topTitle": "Dice & Fold",
@@ -473,38 +460,30 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -560,37 +539,30 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -606,37 +578,30 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -740,37 +705,30 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -788,9 +746,7 @@
       "country": "KR",
       "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Umm Oyoun - ام عيون (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)"
+        "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
       "topTitle": "Deponia",
@@ -835,9 +791,7 @@
       "country": "KR",
       "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Umm Oyoun - ام عيون (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)"
+        "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 5,
       "topTitle": "Balatro",
@@ -878,36 +832,35 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: HELLCARD (RAWG request failed with timeout after 1500ms)",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 1,
-      "topTitle": "Balatro",
+      "topTitle": "Shogun Showdown",
       "topMatch": {
-        "title": "Balatro",
-        "cut": 5,
+        "title": "Shogun Showdown",
+        "cut": 50,
         "price": {
-          "amount": 11077,
+          "amount": 11263,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.32,
+        "rating": 4.36,
         "genres": [
-          "Casual",
           "Strategy",
           "Indie",
+          "RPG",
           "Deckbuilder",
           "Card",
           "Roguelike"
         ],
         "platforms": [
           "PC",
-          "PlayStation 5",
-          "Nintendo Switch",
-          "iOS"
+          "macOS",
+          "Linux"
         ],
         "steamDeckStatus": null
       },
@@ -923,39 +876,34 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Monster Train를 추천합니다. 70% 할인, 현재가 8,100원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Meteorfall: Krumit's Tale (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Inscryption",
+      "matchCount": 1,
+      "topTitle": "Monster Train",
       "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
+        "title": "Monster Train",
+        "cut": 70,
         "price": {
-          "amount": 10285,
+          "amount": 8100,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 4.38,
+        "multiplayer": true,
+        "rating": 4.08,
         "metacritic": 86,
         "genres": [
-          "Indie",
+          "Card",
           "Strategy",
-          "Adventure",
           "Roguelike",
-          "Deckbuilder",
-          "Card"
+          "Deckbuilder"
         ],
         "platforms": [
           "PC",
-          "PlayStation 5",
-          "PlayStation 4",
+          "Xbox One",
           "Nintendo Switch",
-          "macOS",
-          "Linux"
+          "iOS"
         ],
         "steamDeckStatus": null
       },
@@ -973,6 +921,7 @@
       "country": "KR",
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: HELLCARD (RAWG request failed with timeout after 1500ms)",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
@@ -995,6 +944,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Super Robot Taisen: Original Generation (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 1,
@@ -1964,7 +1914,8 @@
       "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 4,
       "topTitle": "Inscryption",
@@ -2045,32 +1996,33 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Space Rangers HD: A War Apart를 추천합니다. 86% 할인, 현재가 2,228원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Bio Prototype (RAWG request failed with timeout after 1500ms)",
+        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
       ],
-      "matchCount": 3,
-      "topTitle": "Space Rangers HD: A War Apart",
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
       "topMatch": {
-        "title": "Space Rangers HD: A War Apart",
-        "cut": 86,
+        "title": "BALL x PIT",
+        "cut": 20,
         "price": {
-          "amount": 2228,
+          "amount": 13200,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.37,
-        "metacritic": 68,
+        "rating": 4.35,
         "genres": [
-          "Strategy",
-          "Adventure",
-          "RPG",
-          "Simulation",
+          "Indie",
+          "Action",
           "Roguelike"
         ],
         "platforms": [
-          "PC"
+          "PC",
+          "Nintendo Switch",
+          "macOS"
         ],
         "steamDeckStatus": null
       },
@@ -2163,7 +2115,8 @@
       "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 4,
       "topTitle": "Inscryption",
@@ -2486,37 +2439,30 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 8,
-      "topTitle": "Deponia",
+      "matchCount": 2,
+      "topTitle": "AI Games",
       "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
+        "title": "AI Games",
+        "cut": 95,
         "price": {
-          "amount": 0,
+          "amount": 3150,
           "currency": "KRW"
         },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
+        "multiplayer": true,
+        "rating": 0,
         "genres": [
+          "Casual",
           "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
+          "Sports"
         ],
         "platforms": [
           "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
+          "macOS"
         ],
         "steamDeckStatus": "unknown"
       },
@@ -2951,7 +2897,8 @@
       "country": "KR",
       "summary": "Downfall를 추천합니다. 16% 할인, 현재가 4,956원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Bio Prototype (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Downfall",
@@ -3772,12 +3719,8 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
-      ],
-      "matchCount": 4,
+      "warnings": [],
+      "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
         "title": "BALL x PIT",
@@ -3933,13 +3876,8 @@
       ],
       "country": "KR",
       "summary": "ROUNDS를 추천합니다. 50% 할인, 현재가 3,200원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다.",
-        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
-      ],
-      "matchCount": 2,
+      "warnings": [],
+      "matchCount": 1,
       "topTitle": "ROUNDS",
       "topMatch": {
         "title": "ROUNDS",
@@ -4023,7 +3961,7 @@
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 2,
+      "matchCount": 3,
       "topTitle": "Skullbreaker",
       "topMatch": {
         "title": "Skullbreaker",
