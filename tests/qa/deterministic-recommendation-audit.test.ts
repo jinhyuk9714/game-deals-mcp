@@ -20,10 +20,10 @@ import {
 } from "../../scripts/run-deterministic-recommend-audit.js";
 
 describe("deterministic recommendation audit fixtures", () => {
-  it("keeps 76 provider-backed cases across five stable groups", () => {
-    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(76);
+  it("keeps 81 provider-backed cases across five stable groups", () => {
+    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(81);
     expect(new Set(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.map((testCase) => testCase.caseId)).size).toBe(
-      76
+      81
     );
 
     const counts = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.reduce<Record<string, number>>(
@@ -35,11 +35,11 @@ describe("deterministic recommendation audit fixtures", () => {
     );
 
     expect(counts).toEqual({
-      "local-guardrail": 17,
+      "local-guardrail": 18,
       "provider-outage": 13,
       "steam-deck-overlay": 17,
       "social-tiering": 13,
-      "junk-suppression": 16
+      "junk-suppression": 20
     });
 
     for (const testCase of DETERMINISTIC_RECOMMENDATION_AUDIT_CASES) {
@@ -121,6 +121,23 @@ describe("deterministic recommendation audit fixtures", () => {
       (testCase) => testCase.caseId === "junk-deckbuilding-brightgunner-loses-to-card-synergy"
     );
     expect(deckbuildingFillerCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
+
+    const actionBrightgunnerCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-action-roguelite-brightgunner-loses-to-ball-pit"
+    );
+    expect(actionBrightgunnerCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
+
+    const shortSessionCozyCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-short-session-cozy-grove-loses-to-arcade-run"
+    );
+    expect(shortSessionCozyCase?.expectation.forbiddenTopTitles).toContain("Cozy Grove");
+
+    const strategyHeavyCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "local-strategy-rating-dominions-loses-to-tactics"
+    );
+    expect(strategyHeavyCase?.expectation.forbiddenTopTitles).toContain(
+      "Dominions 5 - Warriors of the Faith"
+    );
   });
 });
 

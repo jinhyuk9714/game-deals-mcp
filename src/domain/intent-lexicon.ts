@@ -54,7 +54,7 @@ const INTENT_PATTERNS = {
     /여럿이\s*같이\s*놀/i
   ],
   highRating: [
-    /평가 좋은|평 좋은|호평|리뷰 좋은|평점 높은|메타 좋은|검증된/i,
+    /평가 좋은|평 좋은|평이 단단한|호평|리뷰 좋은|평점 높은|메타 좋은|검증된/i,
     /high[- ]rated|highly rated|well-reviewed/i
   ],
   shortSession: [

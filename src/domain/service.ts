@@ -3002,6 +3002,53 @@ function buildRecommendationMatchEvidence(
     }
   }
 
+  if (context.constraints.excludeGameplay.includes("turn-based") && hasTurnBasedDealEvidence(deal)) {
+    return null;
+  }
+
+  if (context.constraints.excludeGenres.includes("card/deckbuilder") && hasDeckbuildingEvidence(deal)) {
+    return null;
+  }
+
+  if (context.constraints.excludeGenres.includes("strategy") && hasStrategyRecoveryDealEvidence(deal)) {
+    return null;
+  }
+
+  if (
+    (context.constraints.excludeGenres.includes("racing") ||
+      context.constraints.excludeGenres.includes("sports")) &&
+    hasRacingOrSportsShape(deal)
+  ) {
+    return null;
+  }
+
+  if (context.constraints.excludeGenres.includes("pvp") && hasPvPDealEvidence(deal)) {
+    return null;
+  }
+
+  if (context.constraints.excludeGenres.includes("horror") && hasHorrorDealEvidence(deal)) {
+    return null;
+  }
+
+  if (
+    context.constraints.avoidComplexity.includes("reading-heavy") &&
+    hasReadingHeavyDealEvidence(deal)
+  ) {
+    return null;
+  }
+
+  if (
+    (context.constraints.avoidComplexity.includes("long-session") ||
+      context.constraints.avoidComplexity.includes("complex-strategy")) &&
+    (hasLongSessionDealEvidence(deal) || hasHeavyStrategyDealEvidence(deal))
+  ) {
+    return null;
+  }
+
+  if (context.constraints.qualityIntent.includes("not-filler") && hasStoryAdventurePuzzleBrowseFiller(deal)) {
+    return null;
+  }
+
   if (
     context.preferences.highRating &&
     !hasStrongReviewSignal(deal)
@@ -3010,6 +3057,15 @@ function buildRecommendationMatchEvidence(
   }
 
   if (requiresStrategyRatingEvidence(context) && !hasStrategyRatingEvidence(deal)) {
+    return null;
+  }
+
+  if (
+    context.preferences.highRating &&
+    context.constraints.strategyPreference === "required" &&
+    hasHeavyStrategyDealEvidence(deal) &&
+    !hasTacticsDealEvidence(deal)
+  ) {
     return null;
   }
 
@@ -3023,7 +3079,7 @@ function buildRecommendationMatchEvidence(
 
   if (
     context.preferences.genres.length > 1 &&
-    !matchesEvidenceRequestedGenres(deal, context.preferences)
+    !matchesEvidenceRequestedGenres(deal, context.preferences, context)
   ) {
     return null;
   }
@@ -3289,12 +3345,28 @@ function getRecommendationRequiredSignals(context: RecommendationEvidenceContext
     requiredSignals.add("strategy");
   }
 
+  if (requiresExplicitTacticsEvidence(context)) {
+    requiredSignals.add("tactics");
+  }
+
   if (requiresDeckbuildingEvidence(context)) {
     requiredSignals.add("deckbuilder");
   }
 
+  if (requiresActionEvidence(context)) {
+    requiredSignals.add("action");
+  }
+
+  if (requiresRoguelikeEvidence(context)) {
+    requiredSignals.add("roguelike");
+  }
+
   if (context.preferences.multiplayer) {
     requiredSignals.add("multiplayer");
+  }
+
+  if (requiresShortSessionEvidence(context)) {
+    requiredSignals.add("short-session");
   }
 
   if (context.preferences.genres.length > 1) {
@@ -3367,6 +3439,10 @@ function getRecommendationMatchedSignals(
     signals.add("high-rating");
   }
 
+  if (hasShortSessionEvidence(deal)) {
+    signals.add("short-session");
+  }
+
   for (const genre of context.preferences.genres) {
     if (matchesEvidenceGenreSignal(deal, genre)) {
       signals.add(normalizeEvidenceSignal(genre));
@@ -3378,6 +3454,56 @@ function getRecommendationMatchedSignals(
 
 function normalizeEvidenceSignal(value: string): string {
   return value.trim().toLowerCase().replace(/\s+/g, "-");
+}
+
+function requiresExplicitTacticsEvidence(context: RecommendationEvidenceContext): boolean {
+  if (context.constraints.excludeGameplay.includes("turn-based")) {
+    return false;
+  }
+
+  return /\b(tactics?|tactical|turn-?based)\b|턴제/i.test(context.rawPreferences);
+}
+
+function requiresActionEvidence(context: RecommendationEvidenceContext): boolean {
+  const hasRequiredDeckCue = context.constraints.deckPreference === "required";
+  const explicitActionCue =
+    /\b(action|shooty|shooter|shooting|arcade|hack|slash|reflex)\b|액션|손맛|슈터|총질|빠른|템포/i.test(
+      context.rawPreferences
+    );
+  const combatCue = /\b(combat|fight|fights)\b|전투/i.test(context.rawPreferences);
+
+  return (
+    explicitActionCue ||
+    (context.constraints.actionBias && !hasRequiredDeckCue) ||
+    (combatCue && !hasRequiredDeckCue)
+  );
+}
+
+function requiresRoguelikeEvidence(context: RecommendationEvidenceContext): boolean {
+  return (
+    context.preferences.genres.some((genre) => /roguelike/i.test(genre)) ||
+    /\b(roguelike|roguelite|rogue)\b|로그라이크|로그라이트/i.test(context.rawPreferences)
+  );
+}
+
+function requiresShortSessionEvidence(context: RecommendationEvidenceContext): boolean {
+  const wantsShortSession =
+    context.preferences.shortSession || context.constraints.preferSession.includes("short");
+  if (!wantsShortSession) {
+    return false;
+  }
+
+  if (
+    context.steamDeckRequest &&
+    /\b(steam ?deck|handheld|portable|pad)\b|스팀덱|핸드헬드|휴대용|패드/i.test(context.rawPreferences) &&
+    !/\b(short session|quick|pick-?up|short-run)\b|짧게|잠깐|짬짬이|한 ?판/i.test(
+      context.rawPreferences
+    )
+  ) {
+    return false;
+  }
+
+  return true;
 }
 
 function matchesEvidenceRequestedPlatforms(
@@ -3445,13 +3571,28 @@ function hasAcceptedMultiplayerEvidence(
 
 function matchesEvidenceRequestedGenres(
   deal: RecommendationTaggedDeal,
-  preferences: RecommendationPreferences
+  preferences: RecommendationPreferences,
+  context: RecommendationEvidenceContext
 ): boolean {
+  const filteredGenres = preferences.genres.filter((genre) => {
+    const normalized = genre.trim().toLowerCase();
+
+    if (normalized === "action" && !requiresActionEvidence(context)) {
+      return false;
+    }
+
+    if ((normalized === "roguelike" || normalized === "roguelite") && !requiresRoguelikeEvidence(context)) {
+      return false;
+    }
+
+    return true;
+  });
+
   if (preferences.deckbuilding) {
-    return matchesRequestedDeckbuildingHybridGenres(deal, preferences.genres);
+    return matchesRequestedDeckbuildingHybridGenres(deal, filteredGenres);
   }
 
-  return preferences.genres.every((genre) => matchesEvidenceGenreSignal(deal, genre));
+  return filteredGenres.every((genre) => matchesEvidenceGenreSignal(deal, genre));
 }
 
 function matchesEvidenceGenreSignal(deal: RecommendationTaggedDeal, genre: string): boolean {
@@ -4722,7 +4863,9 @@ function getBroadIntentRankingScore(deal: DealCandidate, signals: BroadIntentSig
 
 function hasDeckbuildingEvidence(deal: DealCandidate): boolean {
   return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
@@ -4776,7 +4919,9 @@ function matchesRequestedDeckbuildingHybridGenres(
 
 function hasActionDealEvidence(deal: DealCandidate): boolean {
   return /\b(action|combat|shooter|shooting|hack|slash|brawler|arcade)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
@@ -4945,10 +5090,38 @@ function hasActionRogueliteDealEvidence(deal: DealCandidate): boolean {
 }
 
 function hasRoguelikeDealEvidence(deal: DealCandidate): boolean {
-  return deal.genres.some((genre) => {
-    const normalized = genre.trim().toLowerCase();
-    return normalized === "roguelike" || normalized === "roguelite";
-  });
+  const taggedValues = getRecommendationDealTags(deal as RecommendationTaggedDeal);
+  return (
+    deal.genres.some((genre) => {
+      const normalized = genre.trim().toLowerCase();
+      return normalized === "roguelike" || normalized === "roguelite";
+    }) ||
+    taggedValues.some((tag) => {
+      const normalized = tag.trim().toLowerCase();
+      return normalized.includes("roguelike") || normalized.includes("roguelite");
+    })
+  );
+}
+
+function hasShortSessionEvidence(deal: RecommendationTaggedDeal): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(deal).join(" ")}`;
+  return (
+    /\b(action|arcade|roguelike|roguelite|card|deckbuilder|short-run|pick-?up|snackable|brisk|quick)\b/i.test(
+      values
+    ) &&
+    !hasStoryAdventurePuzzleBrowseFiller(deal) &&
+    !hasReadingHeavyDealEvidence(deal) &&
+    !hasLongSessionDealEvidence(deal) &&
+    !hasHeavyStrategyDealEvidence(deal)
+  );
+}
+
+function hasHorrorDealEvidence(deal: DealCandidate): boolean {
+  return /\b(horror|공포)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
+  );
 }
 
 function hasBroadCoopFriendlyShape(deal: DealCandidate): boolean {
@@ -5467,9 +5640,10 @@ function hasLongSessionCandidateEvidence(candidate: CatalogCandidate): boolean {
 }
 
 function hasTurnBasedDealEvidence(deal: DealCandidate): boolean {
-  return /\b(turn-?based)\b/i.test(`${deal.title} ${deal.genres.join(" ")}`) || /턴제/.test(
-    `${deal.title} ${deal.genres.join(" ")}`
-  );
+  const values = `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+    deal as RecommendationTaggedDeal
+  ).join(" ")}`;
+  return /\b(turn-?based)\b/i.test(values) || /턴제/.test(values);
 }
 
 function hasHeavyStrategyCandidateEvidence(candidate: CatalogCandidate): boolean {
@@ -5480,7 +5654,9 @@ function hasHeavyStrategyCandidateEvidence(candidate: CatalogCandidate): boolean
 
 function hasHeavyStrategyDealEvidence(deal: DealCandidate): boolean {
   return /\b(grand strategy|4x|simulation|management|wargame)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
@@ -5491,19 +5667,25 @@ function hasTacticsDealEvidence(deal: DealCandidate): boolean {
 
 function hasReadingHeavyDealEvidence(deal: DealCandidate): boolean {
   return /\b(text-heavy|reading-heavy|story rich|visual novel|narrative)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
 function hasLongSessionDealEvidence(deal: DealCandidate): boolean {
   return /\b(grand strategy|4x|simulation|management|wargame|campaign)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
 function hasShortSessionSparseShape(deal: DealCandidate): boolean {
   return /\b(action|casual|arcade|party|roguelike|card|deckbuilder)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
@@ -5815,13 +5997,17 @@ function hasGenericCoopBrowseShape(deal: DealCandidate): boolean {
 
 function hasStoryAdventurePuzzleBrowseFiller(deal: DealCandidate): boolean {
   return /\b(adventure|puzzle|story|narrative)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 
 function hasLikelySingleplayerBrowseBias(deal: DealCandidate): boolean {
   return /\b(singleplayer|story rich|story-rich|narrative|solo)\b/i.test(
-    `${deal.title} ${deal.genres.join(" ")}`
+    `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+      deal as RecommendationTaggedDeal
+    ).join(" ")}`
   );
 }
 

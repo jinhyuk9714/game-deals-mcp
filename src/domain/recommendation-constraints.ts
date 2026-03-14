@@ -57,7 +57,7 @@ const COOP_PATTERNS =
 const ACTION_CUE_PATTERNS =
   /(액션성|손맛|real-?time|shooty|슈터|shooter|shooting|빠른|템포|tempo|fast)/i;
 const REVIEW_PATTERNS =
-  /(리뷰 좋(?:은|고)|평가 좋(?:은|고)|검증된|평점 높은|well-reviewed|high[- ]rated|highly rated)/i;
+  /(리뷰 좋(?:은|고)|평가 좋(?:은|고)|평\s*좋(?:은|고)|평이\s*단단한|검증된|평점 높은|well-reviewed|high[- ]rated|highly rated)/i;
 const POPULAR_PATTERNS = /(인기|유명|많이 하는|popular|well-known)/i;
 const NOT_FILLER_PATTERNS = /(filler\s*(?:아닌|말고)|잡게임\s*말고|뻔한\s*거\s*말고|not filler)/i;
 const SHORT_SESSION_PATTERNS =

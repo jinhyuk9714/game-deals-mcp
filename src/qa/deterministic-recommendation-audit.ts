@@ -272,8 +272,10 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       ]
     },
     expectation: {
-      expectMatchCount: 2,
-      expectedTopTitle: "Tactics Breakthrough"
+      expectMatchCount: 1,
+      expectedTopTitle: "Tactics Breakthrough",
+      forbiddenTopTitles: ["Dominions 5 - Warriors of the Faith"],
+      requiredTopSignals: ["strategy", "tactics", "high-rating"]
     }
   },
   {
@@ -4386,6 +4388,247 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       expectedTopTitle: "Dice & Fold",
       forbiddenTopTitles: ["BrightGunner"],
       requiredTopSignals: ["card", "deckbuilder"]
+    }
+  },
+  {
+    index: 77,
+    caseId: "junk-action-roguelite-brightgunner-loses-to-ball-pit",
+    group: "junk-suppression",
+    preferences: "real-time roguelite with strong combat",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "brightgunner-action-filler",
+              title: "BrightGunner",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: ["Action", "Shooter"],
+              tags: ["action", "shooter"],
+              multiplayer: false,
+              rating: 4.0,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "ball-pit-action-roguelite",
+              title: "BALL x PIT",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Roguelike"],
+              tags: ["action", "arcade", "roguelike"],
+              multiplayer: false,
+              rating: 4.08,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "BALL x PIT",
+      forbiddenTopTitles: ["BrightGunner"],
+      requiredTopSignals: ["action", "roguelike"]
+    }
+  },
+  {
+    index: 78,
+    caseId: "junk-action-card-inscryption-loses-when-action-axis-required",
+    group: "junk-suppression",
+    preferences: "action card roguelike bargain",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "inscryption-hybrid-filler",
+              title: "Inscryption",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "roguelike"],
+              multiplayer: false,
+              rating: 4.15,
+              metacritic: 85,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "rogue-deck-assault-action-card",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["action", "card", "deckbuilder", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Inscryption"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 79,
+    caseId: "junk-short-session-cozy-grove-loses-to-arcade-run",
+    group: "junk-suppression",
+    preferences: "짧은 세션용 shooter roguelite",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "cozy-grove-short-filler",
+              title: "Cozy Grove",
+              priceAmount: 11_900,
+              regularAmount: 23_800,
+              cut: 50,
+              genres: ["Adventure", "Casual", "Cozy"],
+              tags: ["cozy", "story-rich"],
+              multiplayer: false,
+              rating: 4.0,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "ball-pit-short-session",
+              title: "BALL x PIT",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Roguelike"],
+              tags: ["action", "arcade", "roguelike", "short-run"],
+              multiplayer: false,
+              rating: 4.08,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "BALL x PIT",
+      forbiddenTopTitles: ["Cozy Grove"],
+      requiredTopSignals: ["action", "roguelike"]
+    }
+  },
+  {
+    index: 80,
+    caseId: "junk-genre-hybrid-inscryption-loses-when-second-axis-missing",
+    group: "junk-suppression",
+    preferences: "action deckbuilder bargain, cozy filler 말고",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "inscryption-second-axis-missing",
+              title: "Inscryption",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "roguelike"],
+              multiplayer: false,
+              rating: 4.15,
+              metacritic: 85,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "rogue-deck-assault-two-axis",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["action", "card", "deckbuilder", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["Inscryption"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 81,
+    caseId: "local-strategy-rating-dominions-loses-to-tactics",
+    group: "local-guardrail",
+    preferences: "평이 단단한 전략 할인 게임",
+    budget: 25_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "dominions-heavy",
+              title: "Dominions 5 - Warriors of the Faith",
+              priceAmount: 16_500,
+              regularAmount: 33_000,
+              cut: 50,
+              genres: ["Strategy"],
+              tags: ["grand strategy", "wargame", "simulation", "reading-heavy"],
+              multiplayer: false,
+              rating: 4.25,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "tactics-breakthrough-reviewed",
+              title: "Tactics Breakthrough",
+              priceAmount: 17_900,
+              regularAmount: 35_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              tags: ["tactics", "turn-based"],
+              multiplayer: false,
+              rating: 4.3,
+              metacritic: 84,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Tactics Breakthrough",
+      forbiddenTopTitles: ["Dominions 5 - Warriors of the Faith"],
+      requiredTopSignals: ["strategy", "tactics", "high-rating"]
     }
   }
 ];

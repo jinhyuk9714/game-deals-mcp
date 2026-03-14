@@ -102,43 +102,39 @@
     "genre-hybrid-29",
     "genre-hybrid-20"
   ],
-  "generatedAt": "2026-03-14T23:04:31.560Z",
+  "generatedAt": "2026-03-14T23:34:13.511Z",
   "summary": {
     "total": 100,
-    "zeroMatches": 35,
-    "flagged": 11,
-    "groundlessRecommendations": 11,
+    "zeroMatches": 49,
+    "flagged": 4,
+    "groundlessRecommendations": 4,
     "recoverableButMissed": 0,
-    "evidenceRejected": 35,
+    "evidenceRejected": 49,
     "timeouts": 0,
     "topCounts": [
       {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "count": 17
+        "title": "BrightGunner",
+        "count": 14
       },
       {
         "title": "Balatro",
-        "count": 10
-      },
-      {
-        "title": "Cozy Grove",
-        "count": 10
+        "count": 9
       },
       {
         "title": "BALL x PIT",
         "count": 8
       },
       {
-        "title": "BrightGunner",
-        "count": 7
+        "title": "Dominions 5 - Warriors of the Faith",
+        "count": 8
       },
       {
         "title": "Dice & Fold",
-        "count": 6
+        "count": 7
       },
       {
-        "title": "Inscryption",
-        "count": 6
+        "title": "Shogun Showdown",
+        "count": 4
       },
       {
         "title": "ROUNDS",
@@ -152,13 +148,13 @@
       "topCounts": [
         {
           "title": "Dice & Fold",
-          "count": 3
+          "count": 4
         }
       ],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 7,
+      "evidenceRejected": 6,
       "timeouts": 0
     },
     "deckbuilding-card": {
@@ -166,17 +162,17 @@
       "topCounts": [
         {
           "title": "Balatro",
-          "count": 7
+          "count": 6
         },
         {
-          "title": "Inscryption",
+          "title": "Shogun Showdown",
           "count": 2
         }
       ],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 1,
+      "evidenceRejected": 2,
       "timeouts": 0
     },
     "strategy-rating": {
@@ -184,13 +180,13 @@
       "topCounts": [
         {
           "title": "Dominions 5 - Warriors of the Faith",
-          "count": 10
+          "count": 6
         }
       ],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 0,
+      "evidenceRejected": 4,
       "timeouts": 0
     },
     "multiplayer-social": {
@@ -203,7 +199,7 @@
       "timeouts": 0
     },
     "action-roguelite": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 2,
       "topCounts": [
         {
           "title": "BALL x PIT",
@@ -211,28 +207,20 @@
         },
         {
           "title": "BrightGunner",
-          "count": 4
-        },
-        {
-          "title": "Cozy Grove",
-          "count": 1
-        },
-        {
-          "title": "Inscryption",
-          "count": 1
+          "count": 3
         }
       ],
-      "flagged": 3,
-      "groundlessRecommendations": 3,
+      "flagged": 0,
+      "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 0,
+      "evidenceRejected": 3,
       "timeouts": 0
     },
     "constraint-heavy": {
       "uniqueTopPicks": 3,
       "topCounts": [
         {
-          "title": "Cozy Grove",
+          "title": "BrightGunner",
           "count": 4
         },
         {
@@ -251,7 +239,7 @@
       "timeouts": 0
     },
     "mixed-language": {
-      "uniqueTopPicks": 6,
+      "uniqueTopPicks": 4,
       "topCounts": [
         {
           "title": "Balatro",
@@ -262,112 +250,88 @@
           "count": 1
         },
         {
-          "title": "BrightGunner",
-          "count": 1
-        },
-        {
           "title": "Dice & Fold",
           "count": 1
         },
         {
           "title": "Dominions 5 - Warriors of the Faith",
-          "count": 1
-        },
-        {
-          "title": "Inscryption",
-          "count": 1
-        }
-      ],
-      "flagged": 1,
-      "groundlessRecommendations": 1,
-      "recoverableButMissed": 0,
-      "evidenceRejected": 4,
-      "timeouts": 0
-    },
-    "budget-strict": {
-      "uniqueTopPicks": 3,
-      "topCounts": [
-        {
-          "title": "Dominions 5 - Warriors of the Faith",
-          "count": 3
-        },
-        {
-          "title": "Balatro",
-          "count": 1
-        },
-        {
-          "title": "Dice & Fold",
           "count": 1
         }
       ],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 5,
+      "evidenceRejected": 6,
       "timeouts": 0
     },
-    "short-session": {
-      "uniqueTopPicks": 5,
+    "budget-strict": {
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
-          "title": "Cozy Grove",
-          "count": 4
+          "title": "Balatro",
+          "count": 1
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 1
         },
         {
           "title": "Dominions 5 - Warriors of the Faith",
-          "count": 2
+          "count": 1
+        }
+      ],
+      "flagged": 0,
+      "groundlessRecommendations": 0,
+      "recoverableButMissed": 0,
+      "evidenceRejected": 7,
+      "timeouts": 0
+    },
+    "short-session": {
+      "uniqueTopPicks": 3,
+      "topCounts": [
+        {
+          "title": "BrightGunner",
+          "count": 5
         },
         {
           "title": "Balatro",
           "count": 1
         },
         {
+          "title": "Shogun Showdown",
+          "count": 1
+        }
+      ],
+      "flagged": 0,
+      "groundlessRecommendations": 0,
+      "recoverableButMissed": 0,
+      "evidenceRejected": 3,
+      "timeouts": 0
+    },
+    "genre-hybrid": {
+      "uniqueTopPicks": 4,
+      "topCounts": [
+        {
           "title": "BrightGunner",
+          "count": 2
+        },
+        {
+          "title": "BALL x PIT",
           "count": 1
         },
         {
-          "title": "Inscryption",
+          "title": "ROUNDS",
+          "count": 1
+        },
+        {
+          "title": "Shogun Showdown",
           "count": 1
         }
       ],
       "flagged": 2,
       "groundlessRecommendations": 2,
       "recoverableButMissed": 0,
-      "evidenceRejected": 1,
-      "timeouts": 0
-    },
-    "genre-hybrid": {
-      "uniqueTopPicks": 6,
-      "topCounts": [
-        {
-          "title": "BALL x PIT",
-          "count": 1
-        },
-        {
-          "title": "BrightGunner",
-          "count": 1
-        },
-        {
-          "title": "Cozy Grove",
-          "count": 1
-        },
-        {
-          "title": "Dominions 5 - Warriors of the Faith",
-          "count": 1
-        },
-        {
-          "title": "Inscryption",
-          "count": 1
-        },
-        {
-          "title": "ROUNDS",
-          "count": 1
-        }
-      ],
-      "flagged": 3,
-      "groundlessRecommendations": 3,
-      "recoverableButMissed": 0,
-      "evidenceRejected": 4,
+      "evidenceRejected": 5,
       "timeouts": 0
     }
   },
@@ -488,25 +452,43 @@
       ],
       "country": "KR",
       "index": 4,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Shogun Showdown (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-steam-deck-evidence",
-      "missingEvidence": [
-        "Steam Deck verified/playable 근거",
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
-      ],
+      "matchCount": 1,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "tags": [],
+        "steamDeckStatus": "verified"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -732,44 +714,23 @@
       ],
       "country": "KR",
       "index": 11,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Shogun Showdown (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 3,
-      "topTitle": "Balatro",
-      "topMatch": {
-        "title": "Balatro",
-        "cut": 5,
-        "price": {
-          "amount": 11077,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.32,
-        "genres": [
-          "Casual",
-          "Strategy",
-          "Indie",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC",
-          "PlayStation 5",
-          "Nintendo Switch",
-          "iOS"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-deckbuilding-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "RAWG 카드·덱빌딩 메타데이터",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -783,38 +744,33 @@
       ],
       "country": "KR",
       "index": 12,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, 2game 판매, PC 지원, 장르 Indie/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Escape Dungeon 2 (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 2,
-      "topTitle": "Inscryption",
+      "matchCount": 1,
+      "topTitle": "Shogun Showdown",
       "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
+        "title": "Shogun Showdown",
+        "cut": 50,
         "price": {
-          "amount": 10285,
+          "amount": 11263,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
+        "rating": 4.36,
         "genres": [
-          "Indie",
           "Strategy",
-          "Adventure",
+          "Indie",
+          "RPG",
           "Roguelike",
           "Deckbuilder",
           "Card"
         ],
         "platforms": [
           "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
           "macOS",
           "Linux"
         ],
@@ -838,38 +794,33 @@
       ],
       "country": "KR",
       "index": 13,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, 2game 판매, PC 지원, 장르 Indie/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Escape Dungeon 2 (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 2,
-      "topTitle": "Inscryption",
+      "topTitle": "Shogun Showdown",
       "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
+        "title": "Shogun Showdown",
+        "cut": 50,
         "price": {
-          "amount": 10285,
+          "amount": 11263,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
+        "rating": 4.36,
         "genres": [
-          "Indie",
           "Strategy",
-          "Adventure",
+          "Indie",
+          "RPG",
           "Roguelike",
           "Deckbuilder",
           "Card"
         ],
         "platforms": [
           "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
           "macOS",
           "Linux"
         ],
@@ -995,7 +946,6 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Mass Effect Trilogy (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
@@ -1222,7 +1172,9 @@
       "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dominions 5 - Warriors of the Faith",
@@ -1267,7 +1219,9 @@
       "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dominions 5 - Warriors of the Faith",
@@ -1312,7 +1266,9 @@
       "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dominions 5 - Warriors of the Faith",
@@ -1354,38 +1310,24 @@
       ],
       "country": "KR",
       "index": 24,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -1402,7 +1344,8 @@
       "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dominions 5 - Warriors of the Faith",
@@ -1444,38 +1387,24 @@
       ],
       "country": "KR",
       "index": 26,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -1492,7 +1421,9 @@
       "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dominions 5 - Warriors of the Faith",
@@ -1534,38 +1465,24 @@
       ],
       "country": "KR",
       "index": 28,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dominions 5 - Warriors of the Faith (RAWG request failed with timeout after 1500ms)"
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -1579,37 +1496,21 @@
       ],
       "country": "KR",
       "index": 29,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -1626,7 +1527,8 @@
       "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Gemfire (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dominions 5 - Warriors of the Faith",
@@ -1670,8 +1572,7 @@
       "index": 31,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1696,16 +1597,17 @@
       ],
       "country": "KR",
       "index": 32,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-social-metadata",
       "missingEvidence": [
-        "RAWG 멀티플레이/co-op 메타데이터"
+        "RAWG 멀티플레이/co-op 메타데이터",
+        "ITAD 현재가/할인율 근거"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -1725,8 +1627,7 @@
       "index": 33,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1778,17 +1679,18 @@
       ],
       "country": "KR",
       "index": 35,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-social-metadata",
       "missingEvidence": [
-        "RAWG 멀티플레이/co-op 메타데이터"
+        "RAWG 멀티플레이/co-op 메타데이터",
+        "ITAD 현재가/할인율 근거"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -1806,17 +1708,18 @@
       ],
       "country": "KR",
       "index": 36,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-social-metadata",
       "missingEvidence": [
-        "RAWG 멀티플레이/co-op 메타데이터"
+        "RAWG 멀티플레이/co-op 메타데이터",
+        "ITAD 현재가/할인율 근거"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -1834,17 +1737,18 @@
       ],
       "country": "KR",
       "index": 37,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-social-metadata",
       "missingEvidence": [
-        "RAWG 멀티플레이/co-op 메타데이터"
+        "RAWG 멀티플레이/co-op 메타데이터",
+        "ITAD 현재가/할인율 근거"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -1946,47 +1850,22 @@
       ],
       "country": "KR",
       "index": 41,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, 2game 판매, PC 지원, 장르 Indie/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Inscryption",
-      "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
-        "price": {
-          "amount": 10285,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
-        "genres": [
-          "Indie",
-          "Strategy",
-          "Adventure",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
-        ],
-        "platforms": [
-          "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-price-evidence",
+      "missingEvidence": [
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -2042,7 +1921,7 @@
       ],
       "country": "KR",
       "index": 43,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -2085,37 +1964,22 @@
       ],
       "country": "KR",
       "index": 44,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BrightGunner",
-      "topMatch": {
-        "title": "BrightGunner",
-        "cut": 100,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 0,
-        "genres": [
-          "Indie",
-          "Action"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-price-evidence",
+      "missingEvidence": [
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -2257,7 +2121,7 @@
       ],
       "country": "KR",
       "index": 48,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -2300,43 +2164,21 @@
       ],
       "country": "KR",
       "index": 49,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Cozy Grove",
-      "topMatch": {
-        "title": "Cozy Grove",
-        "cut": 100,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 3.65,
-        "genres": [
-          "Casual",
-          "Indie",
-          "Adventure",
-          "Puzzle"
-        ],
-        "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-genre-evidence",
+      "missingEvidence": [
+        "RAWG 장르 메타데이터"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -2349,7 +2191,7 @@
       ],
       "country": "KR",
       "index": 50,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -2392,34 +2234,27 @@
       ],
       "country": "KR",
       "index": 51,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -2469,34 +2304,27 @@
       ],
       "country": "KR",
       "index": 53,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -2563,34 +2391,27 @@
       ],
       "country": "KR",
       "index": 55,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -2761,34 +2582,27 @@
       ],
       "country": "KR",
       "index": 60,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -3083,37 +2897,22 @@
       ],
       "country": "KR",
       "index": 68,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BrightGunner",
-      "topMatch": {
-        "title": "BrightGunner",
-        "cut": 100,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 0,
-        "genres": [
-          "Indie",
-          "Action"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-price-evidence",
+      "missingEvidence": [
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -3154,46 +2953,21 @@
       ],
       "country": "KR",
       "index": 70,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, 2game 판매, PC 지원, 장르 Indie/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Inscryption",
-      "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
-        "price": {
-          "amount": 10285,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
-        "genres": [
-          "Indie",
-          "Strategy",
-          "Adventure",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
-        ],
-        "platforms": [
-          "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-price-evidence",
+      "missingEvidence": [
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -3263,37 +3037,21 @@
       ],
       "country": "KR",
       "index": 73,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -3479,38 +3237,22 @@
       ],
       "country": "KR",
       "index": 78,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -3580,34 +3322,27 @@
       ],
       "country": "KR",
       "index": 81,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -3629,36 +3364,32 @@
       ],
       "country": "KR",
       "index": 82,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, 2game 판매, PC 지원, 장르 Indie/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Inscryption",
+      "topTitle": "Shogun Showdown",
       "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
+        "title": "Shogun Showdown",
+        "cut": 50,
         "price": {
-          "amount": 10285,
+          "amount": 11263,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
+        "rating": 4.36,
         "genres": [
-          "Indie",
           "Strategy",
-          "Adventure",
+          "Indie",
+          "RPG",
           "Roguelike",
           "Deckbuilder",
           "Card"
         ],
         "platforms": [
           "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
           "macOS",
           "Linux"
         ],
@@ -3682,34 +3413,27 @@
       ],
       "country": "KR",
       "index": 83,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -3731,39 +3455,23 @@
       ],
       "country": "KR",
       "index": 84,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -3776,7 +3484,7 @@
       ],
       "country": "KR",
       "index": 85,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -3819,39 +3527,23 @@
       ],
       "country": "KR",
       "index": 86,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -3864,34 +3556,27 @@
       ],
       "country": "KR",
       "index": 87,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -3962,34 +3647,27 @@
       ],
       "country": "KR",
       "index": 89,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -4039,7 +3717,7 @@
       ],
       "country": "KR",
       "index": 91,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
@@ -4130,8 +3808,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cobalt Core (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -4159,36 +3836,32 @@
       ],
       "country": "KR",
       "index": 94,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, 2game 판매, PC 지원, 장르 Indie/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 5,
-      "topTitle": "Inscryption",
+      "topTitle": "Shogun Showdown",
       "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
+        "title": "Shogun Showdown",
+        "cut": 50,
         "price": {
-          "amount": 10285,
+          "amount": 11263,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
+        "rating": 4.36,
         "genres": [
-          "Indie",
           "Strategy",
-          "Adventure",
+          "Indie",
+          "RPG",
           "Roguelike",
           "Deckbuilder",
           "Card"
         ],
         "platforms": [
           "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
           "macOS",
           "Linux"
         ],
@@ -4270,39 +3943,23 @@
       ],
       "country": "KR",
       "index": 97,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -4343,34 +4000,27 @@
       ],
       "country": "KR",
       "index": 99,
-      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Casual/Indie, 평점 3.6, 충족 신호 party.",
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 4,
-      "topTitle": "Cozy Grove",
+      "topTitle": "BrightGunner",
       "topMatch": {
-        "title": "Cozy Grove",
+        "title": "BrightGunner",
         "cut": 100,
         "price": {
           "amount": 0,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 3.65,
+        "rating": 0,
         "genres": [
-          "Casual",
           "Indie",
-          "Adventure",
-          "Puzzle"
+          "Action"
         ],
         "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -4393,9 +4043,7 @@
       "country": "KR",
       "index": 100,
       "summary": "ROUNDS를 추천합니다. 50% 할인, 현재가 3,200원, Dreamgame 판매, PC 지원, 장르 Indie/Action, 평점 3.7, 충족 신호 deckbuilder, card, roguelike.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Skautfold - Usurper (RAWG request failed with timeout after 1500ms)"
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "ROUNDS",
       "topMatch": {
