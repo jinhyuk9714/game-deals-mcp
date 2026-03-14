@@ -64,8 +64,18 @@ export interface CompareResult {
   summary: string;
   sources: string[];
   warnings: string[];
+  emptyReason?: RecommendationEmptyReason | undefined;
+  missingEvidence?: string[] | undefined;
 }
 export interface CompareResult extends Record<string, unknown> {}
+
+export type RecommendationEmptyReason =
+  | "missing-price-evidence"
+  | "missing-steam-deck-evidence"
+  | "missing-social-metadata"
+  | "missing-review-evidence"
+  | "missing-deckbuilding-evidence"
+  | "missing-genre-evidence";
 
 export interface RecommendationPriceEvidence {
   source: "ITAD";
@@ -1229,6 +1239,13 @@ export class GameDealService {
           summary: "조건에 맞는 할인 게임을 찾지 못했습니다.",
           warnings
         } as CompareResult);
+      const noRecommendation = buildNoRecommendationOutcome({
+        base: emptyBase,
+        preferences,
+        constraints,
+        steamDeckRequest,
+        socialProfile: effectiveSocialProfile
+      });
 
       return {
         query: {
@@ -1240,9 +1257,11 @@ export class GameDealService {
         },
         country,
         matches: [],
-        summary: buildNoRecommendationSummary(emptyBase),
+        summary: noRecommendation.summary,
         sources: ["IsThereAnyDeal", "RAWG"],
-        warnings: uniqueWarnings(warnings)
+        warnings: uniqueWarnings(warnings),
+        emptyReason: noRecommendation.emptyReason,
+        missingEvidence: noRecommendation.missingEvidence
       };
     }
 
@@ -1266,6 +1285,14 @@ export class GameDealService {
     });
     const top = evidenceMatches[0];
     if (!top) {
+      const noRecommendation = buildNoRecommendationOutcome({
+        base: base ?? ({ summary: "", warnings } as CompareResult),
+        preferences,
+        constraints,
+        steamDeckRequest,
+        socialProfile: effectiveSocialProfile
+      });
+
       return {
         query: {
           preferences: args.preferences,
@@ -1276,9 +1303,11 @@ export class GameDealService {
         },
         country,
         matches: [],
-        summary: buildNoRecommendationSummary(base ?? ({ summary: "", warnings } as CompareResult)),
+        summary: noRecommendation.summary,
         sources: base?.sources ?? ["IsThereAnyDeal", "RAWG"],
-        warnings: uniqueWarnings(warnings)
+        warnings: uniqueWarnings(warnings),
+        emptyReason: noRecommendation.emptyReason,
+        missingEvidence: noRecommendation.missingEvidence
       };
     }
 
@@ -3470,10 +3499,146 @@ function isRecommendationEvidenceJunk(deal: RecommendationTaggedDeal): boolean {
   return false;
 }
 
-function buildNoRecommendationSummary(base: CompareResult): string {
-  return base.summary.includes("메타데이터")
-    ? "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다."
-    : "조건에 맞는 추천 할인 게임을 찾지 못했습니다.";
+function buildNoRecommendationOutcome(args: {
+  base: CompareResult;
+  preferences: RecommendationPreferences;
+  constraints: RecommendationConstraints;
+  steamDeckRequest: boolean;
+  socialProfile?: RecommendationSocialPromptProfile | undefined;
+}): {
+  summary: string;
+  emptyReason: RecommendationEmptyReason;
+  missingEvidence: string[];
+} {
+  const missingEvidence = buildNoRecommendationMissingEvidence(args);
+  const emptyReason = inferNoRecommendationEmptyReason(args, missingEvidence);
+  const reason = buildNoRecommendationReason(emptyReason);
+  const extras = missingEvidence.filter((entry) => !reason.includes(entry));
+
+  return {
+    summary:
+      extras.length > 0
+        ? `조건에 맞는 추천 할인 게임을 찾지 못했습니다. ${reason} 추가로 ${extras.join(", ")}를 확인하지 못해 추천을 비웠습니다.`
+        : `조건에 맞는 추천 할인 게임을 찾지 못했습니다. ${reason}`,
+    emptyReason,
+    missingEvidence
+  };
+}
+
+function buildNoRecommendationMissingEvidence(args: {
+  base: CompareResult;
+  preferences: RecommendationPreferences;
+  constraints: RecommendationConstraints;
+  steamDeckRequest: boolean;
+  socialProfile?: RecommendationSocialPromptProfile | undefined;
+}): string[] {
+  const missing: string[] = [];
+  const summary = normalizeText(args.base.summary ?? "");
+  const warnings = (args.base.warnings ?? []).map((warning) => normalizeText(warning));
+  const haystack = `${summary}\n${warnings.join("\n")}`;
+
+  if (
+    args.steamDeckRequest ||
+    /\bsteam ?deck\b|스팀덱|핸드헬드|휴대용|portable|handheld|pad|패드/.test(haystack)
+  ) {
+    missing.push("Steam Deck verified/playable 근거");
+  }
+
+  if (
+    args.preferences.highRating ||
+    args.constraints.strategySignal ||
+    args.preferences.genres.some((genre) => /strategy|tactics/i.test(genre))
+  ) {
+    missing.push("RAWG 장르·평점 근거");
+  }
+
+  if (args.preferences.deckbuilding || args.constraints.deckPreference === "required") {
+    missing.push("RAWG 카드·덱빌딩 메타데이터");
+  }
+
+  if (args.socialProfile || args.preferences.multiplayer) {
+    missing.push("RAWG 멀티플레이/co-op 메타데이터");
+  }
+
+  if (
+    /가격 개요 정보가 없어 제목만 확인했습니다|현재 할인 가격을 찾지 못했습니다|가격 개요 정보를 가져오지 못했습니다|역대 최저가 정보를 가져오지 못했습니다/.test(
+      haystack
+    )
+  ) {
+    missing.push("ITAD 현재가/할인율 근거");
+  }
+
+  if (missing.length === 0) {
+    missing.push("RAWG 장르 메타데이터");
+  }
+
+  return uniqueValues(missing);
+}
+
+function inferNoRecommendationEmptyReason(
+  args: {
+    preferences: RecommendationPreferences;
+    constraints: RecommendationConstraints;
+    steamDeckRequest: boolean;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  },
+  missingEvidence: string[]
+): RecommendationEmptyReason {
+  if (
+    args.steamDeckRequest &&
+    missingEvidence.includes("Steam Deck verified/playable 근거")
+  ) {
+    return "missing-steam-deck-evidence";
+  }
+
+  if (
+    (args.preferences.highRating || args.constraints.strategySignal) &&
+    missingEvidence.includes("RAWG 장르·평점 근거")
+  ) {
+    return "missing-review-evidence";
+  }
+
+  if (
+    (args.socialProfile || args.preferences.multiplayer) &&
+    missingEvidence.includes("RAWG 멀티플레이/co-op 메타데이터")
+  ) {
+    return "missing-social-metadata";
+  }
+
+  if (
+    (args.preferences.deckbuilding || args.constraints.deckPreference === "required") &&
+    missingEvidence.includes("RAWG 카드·덱빌딩 메타데이터")
+  ) {
+    return "missing-deckbuilding-evidence";
+  }
+
+  if (missingEvidence.includes("ITAD 현재가/할인율 근거")) {
+    return "missing-price-evidence";
+  }
+
+  return "missing-genre-evidence";
+}
+
+function buildNoRecommendationReason(emptyReason: RecommendationEmptyReason): string {
+  switch (emptyReason) {
+    case "missing-steam-deck-evidence":
+      return "Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다.";
+    case "missing-review-evidence":
+      return "RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.";
+    case "missing-social-metadata":
+      return "RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.";
+    case "missing-deckbuilding-evidence":
+      return "RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.";
+    case "missing-price-evidence":
+      return "ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다.";
+    case "missing-genre-evidence":
+    default:
+      return "RAWG 장르 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.";
+  }
+}
+
+function normalizeText(value: string): string {
+  return value.toLowerCase();
 }
 
 function hasPriceOverview(deal: DealCandidate): boolean {

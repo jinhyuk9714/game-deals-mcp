@@ -1708,6 +1708,9 @@ describe("GameDealService.recommendSaleGames", () => {
 
     expect(result.matches).toHaveLength(0);
     expect(result.summary).toContain("조건에 맞는 추천 할인 게임을 찾지 못했습니다.");
+    expect(result.emptyReason).toBe("missing-review-evidence");
+    expect(result.summary).toContain("RAWG 장르·평점 근거");
+    expect(result.missingEvidence).toContain("RAWG 장르·평점 근거");
   });
 
   it("caps sparse Steam roguelike catalog resolution fan-out once enough matches are found", async () => {
@@ -2018,5 +2021,8 @@ describe("GameDealService.recommendSaleGames evidence-first contracts", () => {
 
     expect(result.matches).toEqual([]);
     expect(result.summary).toContain("조건에 맞는 추천 할인 게임을 찾지 못했습니다.");
+    expect(result.emptyReason).toBe("missing-steam-deck-evidence");
+    expect(result.summary).toContain("Steam Deck Verified/Playable 근거");
+    expect(result.missingEvidence).toContain("Steam Deck verified/playable 근거");
   });
 });

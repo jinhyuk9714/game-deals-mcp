@@ -81,7 +81,7 @@ describe("diverse recommendation audit flagging", () => {
           steamDeckStatus: "unknown"
         }
       )
-    ).toBe(false);
+    ).toBe(true);
 
     expect(
       isDiverseRecommendationAuditFlagged(
@@ -197,7 +197,7 @@ describe("diverse recommendation audit flagging", () => {
 });
 
 describe("diverse recommendation audit summary", () => {
-  it("aggregates top-pick concentration, flagged counts, and zero-match totals", () => {
+  it("tracks evidence-rejected zero matches separately from strict-evidence failures", () => {
     const run = summarizeDiverseRecommendationAuditResults([
       {
         index: 1,
@@ -249,7 +249,12 @@ describe("diverse recommendation audit summary", () => {
         matchCount: 0,
         topTitle: null,
         topMatch: null,
-        flagged: true,
+        emptyReason: "missing-review-evidence",
+        missingEvidence: ["RAWG 장르·평점 근거"],
+        groundlessRecommendation: false,
+        recoverableButMissed: false,
+        evidenceRejected: true,
+        flagged: false,
         timeout: true,
         error: "timeout:50"
       }
@@ -258,7 +263,10 @@ describe("diverse recommendation audit summary", () => {
     expect(run.summary).toEqual({
       total: 3,
       zeroMatches: 1,
-      flagged: 1,
+      flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 1,
       timeouts: 1,
       topCounts: [{ title: "Party Brawler Heroes", count: 2 }]
     });
@@ -267,13 +275,19 @@ describe("diverse recommendation audit summary", () => {
       uniqueTopPicks: 1,
       topCounts: [{ title: "Party Brawler Heroes", count: 2 }],
       flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 0,
       timeouts: 0
     });
 
     expect(run.groups["strategy-rating"]).toEqual({
       uniqueTopPicks: 0,
       topCounts: [],
-      flagged: 1,
+      flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 1,
       timeouts: 1
     });
   });
@@ -367,6 +381,51 @@ describe("runDiverseRecommendationAudit", () => {
     expect(run.summary.timeouts).toBe(1);
     expect(run.summary.flagged).toBe(2);
   });
+
+  it("keeps evidence-rejected empty results unflagged when official proof is missing", async () => {
+    const service: DiverseRecommendationAuditService = {
+      async recommendSaleGames() {
+        return {
+          query: {},
+          country: "KR",
+          matches: [],
+          summary:
+            "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.",
+          sources: ["IsThereAnyDeal", "RAWG"],
+          warnings: ["가격 개요 정보가 없어 제목만 확인했습니다."],
+          emptyReason: "missing-social-metadata",
+          missingEvidence: ["RAWG 멀티플레이/co-op 메타데이터"]
+        };
+      }
+    };
+
+    const run = await runDiverseRecommendationAudit(
+      service,
+      [
+        {
+          index: 1,
+          group: "multiplayer-social",
+          preferences: "hangout game for friends, not PvP",
+          budget: 20000,
+          platforms: ["PC"],
+          country: "KR"
+        }
+      ],
+      { timeoutMs: 100, concurrency: 1 }
+    );
+
+    expect(run.results[0]).toMatchObject({
+      matchCount: 0,
+      emptyReason: "missing-social-metadata",
+      evidenceRejected: true,
+      flagged: false
+    });
+    expect(run.summary).toMatchObject({
+      zeroMatches: 1,
+      flagged: 0,
+      evidenceRejected: 1
+    });
+  });
 });
 
 describe("run-diverse-recommend-audit CLI", () => {
@@ -385,25 +444,103 @@ describe("run-diverse-recommend-audit CLI", () => {
         total: 1,
         zeroMatches: 0,
         flagged: 0,
+        groundlessRecommendations: 0,
+        recoverableButMissed: 0,
+        evidenceRejected: 0,
         timeouts: 0,
         topCounts: [{ title: "Party Brawler Heroes", count: 1 }]
       },
       groups: {
-        "steam-deck-lifestyle": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "deckbuilding-card": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "strategy-rating": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
+        "steam-deck-lifestyle": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "deckbuilding-card": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "strategy-rating": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
         "multiplayer-social": {
           uniqueTopPicks: 1,
           topCounts: [{ title: "Party Brawler Heroes", count: 1 }],
           flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
           timeouts: 0
         },
-        "action-roguelite": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "constraint-heavy": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "mixed-language": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "budget-strict": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "short-session": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "genre-hybrid": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 }
+        "action-roguelite": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "constraint-heavy": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "mixed-language": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "budget-strict": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "short-session": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "genre-hybrid": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        }
       },
       results: []
     };

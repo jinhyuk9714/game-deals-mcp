@@ -83,7 +83,7 @@ describe("local recommendation audit flagging", () => {
         genres: ["Strategy"],
         steamDeckStatus: "unknown"
       })
-    ).toBe(false);
+    ).toBe(true);
 
     expect(
       isRecommendationAuditFlagged("steam-deck", {
@@ -96,7 +96,7 @@ describe("local recommendation audit flagging", () => {
 });
 
 describe("local recommendation audit summary", () => {
-  it("aggregates top-pick concentration, flagged counts, and timeouts", () => {
+  it("distinguishes policy-empty results from strict-evidence failures", () => {
     const run = summarizeRecommendationAuditResults([
       {
         index: 1,
@@ -148,7 +148,12 @@ describe("local recommendation audit summary", () => {
         matchCount: 0,
         topTitle: null,
         topMatch: null,
-        flagged: true,
+        emptyReason: "missing-review-evidence",
+        missingEvidence: ["RAWG 장르·평점 근거"],
+        groundlessRecommendation: false,
+        recoverableButMissed: false,
+        evidenceRejected: true,
+        flagged: false,
         timeout: true,
         error: "timeout:50"
       }
@@ -157,7 +162,10 @@ describe("local recommendation audit summary", () => {
     expect(run.summary).toEqual({
       total: 3,
       zeroMatches: 1,
-      flagged: 1,
+      flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 1,
       timeouts: 1,
       topCounts: [{ title: "Party Brawler Heroes", count: 2 }]
     });
@@ -166,13 +174,19 @@ describe("local recommendation audit summary", () => {
       uniqueTopPicks: 1,
       topCounts: [{ title: "Party Brawler Heroes", count: 2 }],
       flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 0,
       timeouts: 0
     });
 
     expect(run.groups["strategy-rating"]).toEqual({
       uniqueTopPicks: 0,
       topCounts: [],
-      flagged: 1,
+      flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 1,
       timeouts: 1
     });
   });
@@ -266,6 +280,53 @@ describe("runRecommendationAudit", () => {
     expect(run.summary.timeouts).toBe(1);
     expect(run.summary.flagged).toBe(2);
   });
+
+  it("treats empty results with official-evidence rejection reasons as non-flagged", async () => {
+    const service: RecommendationAuditService = {
+      async recommendSaleGames() {
+        return {
+          query: {},
+          country: "KR",
+          matches: [],
+          summary:
+            "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다.",
+          sources: ["IsThereAnyDeal", "Steam"],
+          warnings: ["Steam Deck 호환성 정보를 일부 확인하지 못했습니다."],
+          emptyReason: "missing-steam-deck-evidence",
+          missingEvidence: ["Steam Deck verified/playable 근거"]
+        };
+      }
+    };
+
+    const run = await runRecommendationAudit(
+      service,
+      [
+        {
+          index: 1,
+          group: "steam-deck",
+          preferences: "스팀덱에서 하기 좋은 로그라이크",
+          budget: 20000,
+          platforms: ["Steam Deck"],
+          country: "KR"
+        }
+      ],
+      { timeoutMs: 100, concurrency: 1 }
+    );
+
+    expect(run.results[0]).toMatchObject({
+      matchCount: 0,
+      topTitle: null,
+      emptyReason: "missing-steam-deck-evidence",
+      evidenceRejected: true,
+      flagged: false
+    });
+    expect(run.summary).toMatchObject({
+      zeroMatches: 1,
+      flagged: 0,
+      evidenceRejected: 1,
+      recoverableButMissed: 0
+    });
+  });
 });
 
 describe("run-local-recommend-audit CLI", () => {
@@ -284,20 +345,58 @@ describe("run-local-recommend-audit CLI", () => {
         total: 1,
         zeroMatches: 0,
         flagged: 0,
+        groundlessRecommendations: 0,
+        recoverableButMissed: 0,
+        evidenceRejected: 0,
         timeouts: 0,
         topCounts: [{ title: "Party Brawler Heroes", count: 1 }]
       },
       groups: {
-        "steam-deck": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "deckbuilding-short": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "strategy-rating": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
+        "steam-deck": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "deckbuilding-short": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "strategy-rating": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
         multiplayer: {
           uniqueTopPicks: 1,
           topCounts: [{ title: "Party Brawler Heroes", count: 1 }],
           flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
           timeouts: 0
         },
-        "action-roguelite": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 }
+        "action-roguelite": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        }
       },
       results: []
     };

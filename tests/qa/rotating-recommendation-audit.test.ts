@@ -150,7 +150,7 @@ describe("rotating recommendation audit flagging", () => {
 });
 
 describe("rotating recommendation audit summary", () => {
-  it("aggregates seeded results and keeps case ids", () => {
+  it("keeps seeded ids while separating evidence-rejected zero matches", () => {
     const run = summarizeRotatingRecommendationAuditResults("2026-03-14", [
       {
         caseId: "multiplayer-social-01",
@@ -185,7 +185,12 @@ describe("rotating recommendation audit summary", () => {
         matchCount: 0,
         topTitle: null,
         topMatch: null,
-        flagged: true,
+        emptyReason: "missing-review-evidence",
+        missingEvidence: ["RAWG 장르·평점 근거"],
+        groundlessRecommendation: false,
+        recoverableButMissed: false,
+        evidenceRejected: true,
+        flagged: false,
         timeout: true,
         error: "timeout:10"
       }
@@ -196,7 +201,10 @@ describe("rotating recommendation audit summary", () => {
     expect(run.summary).toEqual({
       total: 2,
       zeroMatches: 1,
-      flagged: 1,
+      flagged: 0,
+      groundlessRecommendations: 0,
+      recoverableButMissed: 0,
+      evidenceRejected: 1,
       timeouts: 1,
       topCounts: [{ title: "Party Brawler Heroes", count: 1 }]
     });
@@ -295,6 +303,53 @@ describe("runRotatingRecommendationAudit", () => {
       topTitle: "BALL x PIT"
     });
   });
+
+  it("marks evidence-first empty results as non-flagged in rotating runs", async () => {
+    const service: RotatingRecommendationAuditService = {
+      async recommendSaleGames() {
+        return {
+          query: {},
+          country: "KR",
+          matches: [],
+          summary:
+            "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+          sources: ["IsThereAnyDeal"],
+          warnings: ["가격 개요 정보가 없어 제목만 확인했습니다."],
+          emptyReason: "missing-price-evidence",
+          missingEvidence: ["ITAD 현재가/할인율 근거"]
+        };
+      }
+    };
+
+    const run = await runRotatingRecommendationAudit(service, {
+      seed: "2026-03-14",
+      cases: [
+        {
+          caseId: "multiplayer-social-01",
+          index: 1,
+          group: "multiplayer-social",
+          preferences: "hangout-friendly game deal for PC",
+          budget: 20000,
+          platforms: ["PC"],
+          country: "KR"
+        }
+      ],
+      timeoutMs: 100,
+      concurrency: 1
+    });
+
+    expect(run.results[0]).toMatchObject({
+      matchCount: 0,
+      emptyReason: "missing-price-evidence",
+      evidenceRejected: true,
+      flagged: false
+    });
+    expect(run.summary).toMatchObject({
+      zeroMatches: 1,
+      flagged: 0,
+      evidenceRejected: 1
+    });
+  });
 });
 
 describe("run-rotating-recommend-audit CLI", () => {
@@ -317,25 +372,103 @@ describe("run-rotating-recommend-audit CLI", () => {
         total: 1,
         zeroMatches: 0,
         flagged: 0,
+        groundlessRecommendations: 0,
+        recoverableButMissed: 0,
+        evidenceRejected: 0,
         timeouts: 0,
         topCounts: [{ title: "Party Brawler Heroes", count: 1 }]
       },
       groups: {
-        "steam-deck-lifestyle": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "deckbuilding-card": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "strategy-rating": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
+        "steam-deck-lifestyle": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "deckbuilding-card": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "strategy-rating": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
         "multiplayer-social": {
           uniqueTopPicks: 1,
           topCounts: [{ title: "Party Brawler Heroes", count: 1 }],
           flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
           timeouts: 0
         },
-        "action-roguelite": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "constraint-heavy": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "mixed-language": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "budget-strict": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "short-session": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 },
-        "genre-hybrid": { uniqueTopPicks: 0, topCounts: [], flagged: 0, timeouts: 0 }
+        "action-roguelite": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "constraint-heavy": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "mixed-language": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "budget-strict": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "short-session": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        },
+        "genre-hybrid": {
+          uniqueTopPicks: 0,
+          topCounts: [],
+          flagged: 0,
+          groundlessRecommendations: 0,
+          recoverableButMissed: 0,
+          evidenceRejected: 0,
+          timeouts: 0
+        }
       },
       results: []
     };

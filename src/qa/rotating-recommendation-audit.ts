@@ -3,6 +3,11 @@ import { createDefaultService } from "../server.js";
 import type { CompareResult } from "../domain/service.js";
 import type { DealCandidate } from "../domain/score.js";
 import {
+  classifyEvidenceFirstAuditResult,
+  extractRecommendationEmptyReason,
+  extractRecommendationMissingEvidence
+} from "./evidence-first-audit.js";
+import {
   isDiverseRecommendationAuditFlagged,
   type DiverseRecommendationAuditGroup,
   type DiverseRecommendationAuditGroupSummary,
@@ -36,6 +41,11 @@ export interface RotatingRecommendationAuditResult extends RotatingRecommendatio
   matchCount: number;
   topTitle: string | null;
   topMatch: RotatingRecommendationAuditTopMatch | null;
+  emptyReason?: string | undefined;
+  missingEvidence?: string[] | undefined;
+  groundlessRecommendation?: boolean | undefined;
+  recoverableButMissed?: boolean | undefined;
+  evidenceRejected?: boolean | undefined;
   flagged: boolean;
   timeout: boolean;
   error?: string | undefined;
@@ -573,6 +583,13 @@ export function summarizeRotatingRecommendationAuditResults(
           uniqueTopPicks: groupTopCounts.length,
           topCounts: groupTopCounts,
           flagged: groupResults.filter((result) => result.flagged).length,
+          groundlessRecommendations: groupResults.filter(
+            (result) => result.groundlessRecommendation
+          ).length,
+          recoverableButMissed: groupResults.filter(
+            (result) => result.recoverableButMissed
+          ).length,
+          evidenceRejected: groupResults.filter((result) => result.evidenceRejected).length,
           timeouts: groupResults.filter((result) => result.timeout).length
         } satisfies RotatingRecommendationAuditGroupSummary
       ];
@@ -586,6 +603,11 @@ export function summarizeRotatingRecommendationAuditResults(
       total: results.length,
       zeroMatches: results.filter((result) => result.matchCount === 0).length,
       flagged: results.filter((result) => result.flagged).length,
+      groundlessRecommendations: results.filter(
+        (result) => result.groundlessRecommendation
+      ).length,
+      recoverableButMissed: results.filter((result) => result.recoverableButMissed).length,
+      evidenceRejected: results.filter((result) => result.evidenceRejected).length,
       timeouts: results.filter((result) => result.timeout).length,
       topCounts
     },
@@ -620,6 +642,12 @@ async function runRotatingRecommendationAuditCase(
     const response = await withTimeout(service.recommendSaleGames(request), timeoutMs);
     const matches = Array.isArray(response.matches) ? response.matches : [];
     const topMatch = toAuditTopMatch(matches[0]);
+    const emptyReason = extractRecommendationEmptyReason(response);
+    const classification = classifyEvidenceFirstAuditResult({
+      topMatch,
+      invalidRecommendation: isRotatingRecommendationAuditFlagged(testCase, topMatch),
+      emptyReason
+    });
 
     return {
       ...testCase,
@@ -628,7 +656,12 @@ async function runRotatingRecommendationAuditCase(
       matchCount: matches.length,
       topTitle: topMatch?.title ?? null,
       topMatch,
-      flagged: isRotatingRecommendationAuditFlagged(testCase, topMatch),
+      emptyReason,
+      missingEvidence: extractRecommendationMissingEvidence(response),
+      groundlessRecommendation: classification.groundlessRecommendation,
+      recoverableButMissed: classification.recoverableButMissed,
+      evidenceRejected: classification.evidenceRejected,
+      flagged: classification.flagged,
       timeout: false
     };
   } catch (error) {
@@ -639,6 +672,9 @@ async function runRotatingRecommendationAuditCase(
       matchCount: 0,
       topTitle: null,
       topMatch: null,
+      groundlessRecommendation: false,
+      recoverableButMissed: true,
+      evidenceRejected: false,
       flagged: true,
       timeout: isTimeoutError(error),
       error: error instanceof Error ? error.message : String(error)

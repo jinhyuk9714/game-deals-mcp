@@ -107,12 +107,10 @@ describe("deterministic recommendation audit fixtures", () => {
     );
     expect(steamDeckLifestyleDriftCase?.expectation.forbiddenTopTitles).toContain("Deponia");
 
-    const localStrategyTimeoutCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
-      (testCase) => testCase.caseId === "local-strategy-rating-rawg-timeout-01"
+    const rejectedSocialCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-deponia-rejected"
     );
-    expect(localStrategyTimeoutCase?.expectation.requiredWarnings).toContain(
-      "RAWG request failed with timeout after 1500ms"
-    );
+    expect(rejectedSocialCase?.expectation.expectedEmptyReason).toBe("missing-social-metadata");
 
     const steamDeckLifestyleAiCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
       (testCase) => testCase.caseId === "steam-deck-lifestyle-ai-games-loses-to-playable-portable"
@@ -307,6 +305,7 @@ describe("runDeterministicRecommendationAudit", () => {
         },
         expectation: {
           expectMatchCount: 0,
+          expectedEmptyReason: "missing-social-metadata",
           forbiddenTopTitles: ["Deponia"]
         }
       }
@@ -331,7 +330,8 @@ describe("runDeterministicRecommendationAudit", () => {
     expect(first.results[1]).toMatchObject({
       flagged: false,
       topTitle: null,
-      matchCount: 0
+      matchCount: 0,
+      emptyReason: "missing-social-metadata"
     });
   });
 });

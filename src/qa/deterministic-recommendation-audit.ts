@@ -23,8 +23,10 @@ export interface DeterministicRecommendationExpectation {
   expectMatchCount?: number | undefined;
   maxMatchCount?: number | undefined;
   expectedTopTitle?: string | undefined;
+  expectedEmptyReason?: string | undefined;
   expectedTopGenres?: string[] | undefined;
   forbiddenTopTitles?: string[] | undefined;
+  forbiddenEmptyReasons?: string[] | undefined;
   requiredWarnings?: string[] | undefined;
   forbiddenWarnings?: string[] | undefined;
   requiredTopSignals?: string[] | undefined;
@@ -129,6 +131,7 @@ export interface DeterministicRecommendationAuditResult {
   matchCount: number;
   topTitle: string | null;
   topMatch: DeterministicRecommendationAuditTopMatch | null;
+  emptyReason?: string | undefined;
   flagged: boolean;
   timeout: boolean;
   error?: string | undefined;
@@ -1063,6 +1066,7 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
     },
     expectation: {
       expectMatchCount: 0,
+      expectedEmptyReason: "missing-social-metadata",
       forbiddenTopTitles: ["Deponia"]
     }
   },
@@ -4503,11 +4507,16 @@ async function runDeterministicRecommendationAuditCase(
     const response = await withTimeout(service.recommendSaleGames(request), timeoutMs);
     const matches = Array.isArray(response.matches) ? response.matches : [];
     const topMatch = toAuditTopMatch(matches[0]);
+    const emptyReason =
+      typeof response.emptyReason === "string" && response.emptyReason.length > 0
+        ? response.emptyReason
+        : undefined;
     const evaluation = evaluateDeterministicExpectation(
       testCase.expectation,
       matches.length,
       topMatch,
-      response.warnings ?? []
+      response.warnings ?? [],
+      emptyReason
     );
 
     return {
@@ -4523,6 +4532,7 @@ async function runDeterministicRecommendationAuditCase(
       matchCount: matches.length,
       topTitle: topMatch?.title ?? null,
       topMatch,
+      emptyReason,
       flagged: evaluation.flagged,
       timeout: false,
       ...(evaluation.failures.length > 0 ? { error: evaluation.failures.join("; ") } : {})
@@ -4615,7 +4625,8 @@ function evaluateDeterministicExpectation(
   expectation: DeterministicRecommendationExpectation,
   matchCount: number,
   topMatch: DeterministicRecommendationAuditTopMatch | null,
-  warnings: string[]
+  warnings: string[],
+  emptyReason?: string
 ): { flagged: boolean; failures: string[] } {
   const failures: string[] = [];
   const topTitle = topMatch?.title ?? null;
@@ -4669,6 +4680,15 @@ function evaluateDeterministicExpectation(
     );
   }
 
+  if (
+    typeof expectation.expectedEmptyReason === "string" &&
+    emptyReason !== expectation.expectedEmptyReason
+  ) {
+    failures.push(
+      `expected emptyReason=${expectation.expectedEmptyReason}, received ${emptyReason ?? "null"}`
+    );
+  }
+
   for (const expectedGenre of expectation.expectedTopGenres ?? []) {
     if (!topGenres.has(normalizeText(expectedGenre))) {
       failures.push(`missing top genre: ${expectedGenre}`);
@@ -4678,6 +4698,12 @@ function evaluateDeterministicExpectation(
   for (const forbidden of expectation.forbiddenTopTitles ?? []) {
     if (topTitle === forbidden) {
       failures.push(`forbidden top title selected: ${forbidden}`);
+    }
+  }
+
+  for (const forbiddenEmptyReason of expectation.forbiddenEmptyReasons ?? []) {
+    if (emptyReason === forbiddenEmptyReason) {
+      failures.push(`unexpected empty reason: ${forbiddenEmptyReason}`);
     }
   }
 

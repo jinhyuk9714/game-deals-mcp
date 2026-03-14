@@ -2,6 +2,11 @@ import type { ConfigSource } from "../config.js";
 import { createDefaultService } from "../server.js";
 import type { CompareResult } from "../domain/service.js";
 import type { DealCandidate } from "../domain/score.js";
+import {
+  classifyEvidenceFirstAuditResult,
+  extractRecommendationEmptyReason,
+  extractRecommendationMissingEvidence
+} from "./evidence-first-audit.js";
 
 export type DiverseRecommendationAuditGroup =
   | "steam-deck-lifestyle"
@@ -43,6 +48,11 @@ export interface DiverseRecommendationAuditResult extends DiverseRecommendationA
   matchCount: number;
   topTitle: string | null;
   topMatch: DiverseRecommendationAuditTopMatch | null;
+  emptyReason?: string | undefined;
+  missingEvidence?: string[] | undefined;
+  groundlessRecommendation?: boolean | undefined;
+  recoverableButMissed?: boolean | undefined;
+  evidenceRejected?: boolean | undefined;
   flagged: boolean;
   timeout: boolean;
   error?: string | undefined;
@@ -57,6 +67,9 @@ export interface DiverseRecommendationAuditSummary {
   total: number;
   zeroMatches: number;
   flagged: number;
+  groundlessRecommendations: number;
+  recoverableButMissed: number;
+  evidenceRejected: number;
   timeouts: number;
   topCounts: DiverseRecommendationAuditTopCount[];
 }
@@ -65,6 +78,9 @@ export interface DiverseRecommendationAuditGroupSummary {
   uniqueTopPicks: number;
   topCounts: DiverseRecommendationAuditTopCount[];
   flagged: number;
+  groundlessRecommendations: number;
+  recoverableButMissed: number;
+  evidenceRejected: number;
   timeouts: number;
 }
 
@@ -365,6 +381,13 @@ export function summarizeDiverseRecommendationAuditResults(
           uniqueTopPicks: groupTopCounts.length,
           topCounts: groupTopCounts,
           flagged: groupResults.filter((result) => result.flagged).length,
+          groundlessRecommendations: groupResults.filter(
+            (result) => result.groundlessRecommendation
+          ).length,
+          recoverableButMissed: groupResults.filter(
+            (result) => result.recoverableButMissed
+          ).length,
+          evidenceRejected: groupResults.filter((result) => result.evidenceRejected).length,
           timeouts: groupResults.filter((result) => result.timeout).length
         } satisfies DiverseRecommendationAuditGroupSummary
       ];
@@ -376,6 +399,11 @@ export function summarizeDiverseRecommendationAuditResults(
       total: results.length,
       zeroMatches: results.filter((result) => result.matchCount === 0).length,
       flagged: results.filter((result) => result.flagged).length,
+      groundlessRecommendations: results.filter(
+        (result) => result.groundlessRecommendation
+      ).length,
+      recoverableButMissed: results.filter((result) => result.recoverableButMissed).length,
+      evidenceRejected: results.filter((result) => result.evidenceRejected).length,
       timeouts: results.filter((result) => result.timeout).length,
       topCounts
     },
@@ -388,12 +416,16 @@ export function isDiverseRecommendationAuditFlagged(
   topMatch: DiverseRecommendationAuditTopMatch | null
 ): boolean {
   if (!topMatch) {
-    return true;
+    return false;
   }
 
   const requirements = inferPromptRequirements(testCase);
 
-  if (requirements.needsSteamDeckSafe && topMatch.steamDeckStatus === "unsupported") {
+  if (
+    requirements.needsSteamDeckSafe &&
+    topMatch.steamDeckStatus !== "verified" &&
+    topMatch.steamDeckStatus !== "playable"
+  ) {
     return true;
   }
 
@@ -523,6 +555,12 @@ async function runDiverseRecommendationAuditCase(
 
     const matches = Array.isArray(response.matches) ? response.matches : [];
     const topMatch = toAuditTopMatch(matches[0]);
+    const emptyReason = extractRecommendationEmptyReason(response);
+    const classification = classifyEvidenceFirstAuditResult({
+      topMatch,
+      invalidRecommendation: isDiverseRecommendationAuditFlagged(testCase, topMatch),
+      emptyReason
+    });
 
     return {
       ...testCase,
@@ -531,7 +569,12 @@ async function runDiverseRecommendationAuditCase(
       matchCount: matches.length,
       topTitle: topMatch?.title ?? null,
       topMatch,
-      flagged: isDiverseRecommendationAuditFlagged(testCase, topMatch),
+      emptyReason,
+      missingEvidence: extractRecommendationMissingEvidence(response),
+      groundlessRecommendation: classification.groundlessRecommendation,
+      recoverableButMissed: classification.recoverableButMissed,
+      evidenceRejected: classification.evidenceRejected,
+      flagged: classification.flagged,
       timeout: false
     };
   } catch (error) {
@@ -542,6 +585,9 @@ async function runDiverseRecommendationAuditCase(
       matchCount: 0,
       topTitle: null,
       topMatch: null,
+      groundlessRecommendation: false,
+      recoverableButMissed: true,
+      evidenceRejected: false,
       flagged: true,
       timeout: isTimeoutError(error),
       error: error instanceof Error ? error.message : String(error)

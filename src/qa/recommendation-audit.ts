@@ -2,6 +2,11 @@ import type { ConfigSource } from "../config.js";
 import { createDefaultService } from "../server.js";
 import type { CompareResult } from "../domain/service.js";
 import type { DealCandidate } from "../domain/score.js";
+import {
+  classifyEvidenceFirstAuditResult,
+  extractRecommendationEmptyReason,
+  extractRecommendationMissingEvidence
+} from "./evidence-first-audit.js";
 
 export type RecommendationAuditGroup =
   | "steam-deck"
@@ -36,6 +41,11 @@ export interface RecommendationAuditResult extends RecommendationAuditCase {
   matchCount: number;
   topTitle: string | null;
   topMatch: RecommendationAuditTopMatch | null;
+  emptyReason?: string | undefined;
+  missingEvidence?: string[] | undefined;
+  groundlessRecommendation?: boolean | undefined;
+  recoverableButMissed?: boolean | undefined;
+  evidenceRejected?: boolean | undefined;
   flagged: boolean;
   timeout: boolean;
   error?: string | undefined;
@@ -50,6 +60,9 @@ export interface RecommendationAuditSummary {
   total: number;
   zeroMatches: number;
   flagged: number;
+  groundlessRecommendations: number;
+  recoverableButMissed: number;
+  evidenceRejected: number;
   timeouts: number;
   topCounts: RecommendationAuditTopCount[];
 }
@@ -58,6 +71,9 @@ export interface RecommendationAuditGroupSummary {
   uniqueTopPicks: number;
   topCounts: RecommendationAuditTopCount[];
   flagged: number;
+  groundlessRecommendations: number;
+  recoverableButMissed: number;
+  evidenceRejected: number;
   timeouts: number;
 }
 
@@ -218,6 +234,13 @@ export function summarizeRecommendationAuditResults(results: RecommendationAudit
           uniqueTopPicks: groupTopCounts.length,
           topCounts: groupTopCounts,
           flagged: groupResults.filter((result) => result.flagged).length,
+          groundlessRecommendations: groupResults.filter(
+            (result) => result.groundlessRecommendation
+          ).length,
+          recoverableButMissed: groupResults.filter(
+            (result) => result.recoverableButMissed
+          ).length,
+          evidenceRejected: groupResults.filter((result) => result.evidenceRejected).length,
           timeouts: groupResults.filter((result) => result.timeout).length
         } satisfies RecommendationAuditGroupSummary
       ];
@@ -229,6 +252,9 @@ export function summarizeRecommendationAuditResults(results: RecommendationAudit
       total: results.length,
       zeroMatches: results.filter((result) => result.matchCount === 0).length,
       flagged: results.filter((result) => result.flagged).length,
+      groundlessRecommendations: results.filter((result) => result.groundlessRecommendation).length,
+      recoverableButMissed: results.filter((result) => result.recoverableButMissed).length,
+      evidenceRejected: results.filter((result) => result.evidenceRejected).length,
       timeouts: results.filter((result) => result.timeout).length,
       topCounts
     },
@@ -241,7 +267,7 @@ export function isRecommendationAuditFlagged(
   topMatch: RecommendationAuditTopMatch | null
 ): boolean {
   if (!topMatch) {
-    return true;
+    return false;
   }
 
   switch (group) {
@@ -254,7 +280,7 @@ export function isRecommendationAuditFlagged(
     case "action-roguelite":
       return !hasActionRogueliteEvidence(topMatch);
     case "steam-deck":
-      return topMatch.steamDeckStatus === "unsupported";
+      return topMatch.steamDeckStatus !== "verified" && topMatch.steamDeckStatus !== "playable";
   }
 }
 
@@ -289,6 +315,12 @@ async function runRecommendationAuditCase(
 
     const matches = Array.isArray(response.matches) ? response.matches : [];
     const topMatch = toAuditTopMatch(matches[0]);
+    const emptyReason = extractRecommendationEmptyReason(response);
+    const classification = classifyEvidenceFirstAuditResult({
+      topMatch,
+      invalidRecommendation: isRecommendationAuditFlagged(testCase.group, topMatch),
+      emptyReason
+    });
 
     return {
       ...testCase,
@@ -297,7 +329,12 @@ async function runRecommendationAuditCase(
       matchCount: matches.length,
       topTitle: topMatch?.title ?? null,
       topMatch,
-      flagged: isRecommendationAuditFlagged(testCase.group, topMatch),
+      emptyReason,
+      missingEvidence: extractRecommendationMissingEvidence(response),
+      groundlessRecommendation: classification.groundlessRecommendation,
+      recoverableButMissed: classification.recoverableButMissed,
+      evidenceRejected: classification.evidenceRejected,
+      flagged: classification.flagged,
       timeout: false
     };
   } catch (error) {
@@ -308,6 +345,9 @@ async function runRecommendationAuditCase(
       matchCount: 0,
       topTitle: null,
       topMatch: null,
+      groundlessRecommendation: false,
+      recoverableButMissed: true,
+      evidenceRejected: false,
       flagged: true,
       timeout: isTimeoutError(error),
       error: error instanceof Error ? error.message : String(error)
