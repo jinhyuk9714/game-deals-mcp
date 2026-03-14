@@ -20,10 +20,10 @@ import {
 } from "../../scripts/run-deterministic-recommend-audit.js";
 
 describe("deterministic recommendation audit fixtures", () => {
-  it("keeps 65 provider-backed cases across five stable groups", () => {
-    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(65);
+  it("keeps 76 provider-backed cases across five stable groups", () => {
+    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(76);
     expect(new Set(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.map((testCase) => testCase.caseId)).size).toBe(
-      65
+      76
     );
 
     const counts = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.reduce<Record<string, number>>(
@@ -35,11 +35,11 @@ describe("deterministic recommendation audit fixtures", () => {
     );
 
     expect(counts).toEqual({
-      "local-guardrail": 13,
+      "local-guardrail": 17,
       "provider-outage": 13,
-      "steam-deck-overlay": 13,
+      "steam-deck-overlay": 17,
       "social-tiering": 13,
-      "junk-suppression": 13
+      "junk-suppression": 16
     });
 
     for (const testCase of DETERMINISTIC_RECOMMENDATION_AUDIT_CASES) {
@@ -104,6 +104,23 @@ describe("deterministic recommendation audit fixtures", () => {
       (testCase) => testCase.caseId === "steam-deck-lifestyle-story-filler-rejected"
     );
     expect(steamDeckLifestyleDriftCase?.expectation.forbiddenTopTitles).toContain("Deponia");
+
+    const localStrategyTimeoutCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "local-strategy-rating-rawg-timeout-01"
+    );
+    expect(localStrategyTimeoutCase?.expectation.requiredWarnings).toContain(
+      "RAWG request failed with timeout after 1500ms"
+    );
+
+    const steamDeckLifestyleAiCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "steam-deck-lifestyle-ai-games-loses-to-playable-portable"
+    );
+    expect(steamDeckLifestyleAiCase?.expectation.forbiddenTopTitles).toContain("AI Games");
+
+    const deckbuildingFillerCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-deckbuilding-brightgunner-loses-to-card-synergy"
+    );
+    expect(deckbuildingFillerCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
   });
 });
 

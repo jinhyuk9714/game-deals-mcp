@@ -1563,6 +1563,62 @@ describe("GameDealService recommendation regressions", () => {
     });
   });
 
+  for (const prompt of [
+    "평가 좋은 전략 할인 게임",
+    "리뷰 좋은 전략 세일겜",
+    "평 좋은 전략겜 세일 중인 것만",
+    "평점 높은 전략 게임"
+  ]) {
+    it(`keeps local strategy-rating prompt ${prompt} from dropping to empty when sparse RAWG recovery times out`, async () => {
+      const service = new GameDealService({
+        async findDeals() {
+          return [
+            {
+              id: "reviewed-tactics-reserve",
+              title: "Reviewed Tactics Reserve",
+              price: { amount: 14_900, currency: "KRW" },
+              regular: { amount: 29_800, currency: "KRW" },
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.4,
+              metacritic: 84,
+              metadataStatus: "missing"
+            }
+          ];
+        },
+        async enrichDeals(deals) {
+          return {
+            deals,
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "가격 개요 정보가 없어 제목만 확인했습니다."
+            ]
+          };
+        },
+        async discoverTitles() {
+          throw new Error("RAWG request failed with timeout after 1500ms");
+        }
+      });
+
+      const result = await service.recommendSaleGames({
+        preferences: prompt,
+        budget: 20_000,
+        platforms: ["PC"],
+        country: "KR"
+      });
+
+      expect(result.matches[0]).toMatchObject({
+        title: "Reviewed Tactics Reserve",
+        cut: 50,
+        genres: expect.arrayContaining(["Strategy", "Tactics"]),
+        metacritic: 84
+      });
+      expect(result.warnings).toContain("가격 개요 정보가 없어 제목만 확인했습니다.");
+    });
+  }
+
   it("keeps genre-and-platform lenient browse fallback scoped to structured multiplayer recovery", async () => {
     const browseOptions: Array<{ genres?: string[] | undefined; options?: unknown }> = [];
 

@@ -3790,6 +3790,597 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       expectedTopGenres: ["Action", "Card", "Deckbuilder"],
       requiredTopSignals: ["action", "card", "deckbuilder"]
     }
+  },
+  {
+    index: 66,
+    caseId: "local-strategy-rating-rawg-timeout-01",
+    group: "local-guardrail",
+    preferences: "평가 좋은 전략 할인 게임",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "reviewed-tactics-reserve-01",
+              title: "Reviewed Tactics Reserve",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              multiplayer: false,
+              rating: 4.4,
+              metacritic: 84,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "reviewed-tactics-reserve-01",
+                title: "Reviewed Tactics Reserve",
+                priceAmount: 14_900,
+                regularAmount: 29_800,
+                cut: 50,
+                genres: ["Strategy", "Tactics"],
+                multiplayer: false,
+                rating: 4.4,
+                metacritic: 84,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "가격 개요 정보가 없어 제목만 확인했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [{ error: "RAWG request failed with timeout after 1500ms" }]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Reviewed Tactics Reserve",
+      expectedTopGenres: ["Strategy", "Tactics"],
+      requiredWarnings: [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG request failed with timeout after 1500ms"
+      ],
+      requiredTopSignals: ["strategy", "tactics"]
+    }
+  },
+  {
+    index: 67,
+    caseId: "local-strategy-rating-rawg-timeout-02",
+    group: "local-guardrail",
+    preferences: "리뷰 좋은 전략 세일겜",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "reviewed-tactics-reserve-02",
+              title: "Reviewed Tactics Reserve",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              multiplayer: false,
+              rating: 4.4,
+              metacritic: 84,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "reviewed-tactics-reserve-02",
+                title: "Reviewed Tactics Reserve",
+                priceAmount: 14_900,
+                regularAmount: 29_800,
+                cut: 50,
+                genres: ["Strategy", "Tactics"],
+                multiplayer: false,
+                rating: 4.4,
+                metacritic: 84,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "가격 개요 정보가 없어 제목만 확인했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [{ error: "RAWG request failed with timeout after 1500ms" }]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Reviewed Tactics Reserve",
+      expectedTopGenres: ["Strategy", "Tactics"],
+      requiredWarnings: [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG request failed with timeout after 1500ms"
+      ],
+      requiredTopSignals: ["strategy", "tactics"]
+    }
+  },
+  {
+    index: 68,
+    caseId: "local-strategy-rating-rawg-timeout-03",
+    group: "local-guardrail",
+    preferences: "평 좋은 전략겜 세일 중인 것만",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "reviewed-tactics-reserve-03",
+              title: "Reviewed Tactics Reserve",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              multiplayer: false,
+              rating: 4.4,
+              metacritic: 84,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "reviewed-tactics-reserve-03",
+                title: "Reviewed Tactics Reserve",
+                priceAmount: 14_900,
+                regularAmount: 29_800,
+                cut: 50,
+                genres: ["Strategy", "Tactics"],
+                multiplayer: false,
+                rating: 4.4,
+                metacritic: 84,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "가격 개요 정보가 없어 제목만 확인했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [{ error: "RAWG request failed with timeout after 1500ms" }]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Reviewed Tactics Reserve",
+      expectedTopGenres: ["Strategy", "Tactics"],
+      requiredWarnings: [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG request failed with timeout after 1500ms"
+      ],
+      requiredTopSignals: ["strategy", "tactics"]
+    }
+  },
+  {
+    index: 69,
+    caseId: "local-strategy-rating-rawg-timeout-04",
+    group: "local-guardrail",
+    preferences: "평점 높은 전략 게임",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "reviewed-tactics-reserve-04",
+              title: "Reviewed Tactics Reserve",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              multiplayer: false,
+              rating: 4.4,
+              metacritic: 84,
+              metadataStatus: "missing"
+            })
+          ]
+        }
+      ],
+      enrichDeals: [
+        {
+          result: {
+            deals: [
+              buildDeal({
+                id: "reviewed-tactics-reserve-04",
+                title: "Reviewed Tactics Reserve",
+                priceAmount: 14_900,
+                regularAmount: 29_800,
+                cut: 50,
+                genres: ["Strategy", "Tactics"],
+                multiplayer: false,
+                rating: 4.4,
+                metacritic: 84,
+                metadataStatus: "missing"
+              })
+            ],
+            warnings: [
+              "일부 메타데이터를 생략했습니다.",
+              "가격 개요 정보가 없어 제목만 확인했습니다."
+            ]
+          }
+        }
+      ],
+      discoverTitles: [{ error: "RAWG request failed with timeout after 1500ms" }]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Reviewed Tactics Reserve",
+      expectedTopGenres: ["Strategy", "Tactics"],
+      requiredWarnings: [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG request failed with timeout after 1500ms"
+      ],
+      requiredTopSignals: ["strategy", "tactics"]
+    }
+  },
+  {
+    index: 70,
+    caseId: "steam-deck-lifestyle-ai-games-loses-to-playable-portable",
+    group: "steam-deck-overlay",
+    preferences: "침대에서 눕겜으로 하기 좋은 스팀덱 할인 게임",
+    budget: 18_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-lounge-brawler-ai",
+              title: "Portable Lounge Brawler",
+              priceAmount: 12_900,
+              regularAmount: 25_800,
+              cut: 50,
+              genres: ["Action", "Casual"],
+              tags: ["portable", "handheld", "short-session"],
+              multiplayer: false,
+              rating: 4.05,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            }),
+            buildDeal({
+              id: "steamdeck-ai-games",
+              title: "AI Games",
+              priceAmount: 7_500,
+              regularAmount: 15_000,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Lounge Brawler",
+      forbiddenTopTitles: ["AI Games"],
+      requiredTopSignals: ["playable", "portable"]
+    }
+  },
+  {
+    index: 71,
+    caseId: "steam-deck-lifestyle-deckbuilder-beats-ball-x-pit",
+    group: "steam-deck-overlay",
+    preferences: "easy-to-read portable deckbuilder discount",
+    budget: 18_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-arcana-readable",
+              title: "Portable Arcana Deluxe",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "portable", "readable"],
+              multiplayer: false,
+              rating: 4.2,
+              metacritic: 81,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            }),
+            buildDeal({
+              id: "ball-x-pit-readable",
+              title: "BALL x PIT",
+              priceAmount: 11_250,
+              regularAmount: 22_500,
+              cut: 50,
+              genres: ["Action", "Roguelike"],
+              tags: ["action", "arcade"],
+              multiplayer: false,
+              rating: 4.1,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Arcana Deluxe",
+      forbiddenTopTitles: ["BALL x PIT"],
+      requiredTopSignals: ["deckbuilder", "portable", "playable"]
+    }
+  },
+  {
+    index: 72,
+    caseId: "steam-deck-lifestyle-controller-friendly-portable-wins",
+    group: "steam-deck-overlay",
+    preferences: "컨트롤러만으로 막힘 없이 하는 handheld bargain",
+    budget: 18_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-controller-ready",
+              title: "Portable Controller Ready",
+              priceAmount: 13_200,
+              regularAmount: 26_400,
+              cut: 50,
+              genres: ["Action", "Casual"],
+              tags: ["portable", "controller-friendly", "handheld"],
+              multiplayer: false,
+              rating: 4.04,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            }),
+            buildDeal({
+              id: "steamdeck-ai-games-controller",
+              title: "AI Games",
+              priceAmount: 6_900,
+              regularAmount: 13_800,
+              cut: 50,
+              genres: [],
+              platforms: [],
+              multiplayer: false,
+              metadataStatus: "missing",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Controller Ready",
+      forbiddenTopTitles: ["AI Games"],
+      requiredTopSignals: ["portable", "playable"]
+    }
+  },
+  {
+    index: 73,
+    caseId: "steam-deck-lifestyle-readability-story-filler-loses",
+    group: "steam-deck-overlay",
+    preferences: "글자 너무 작지 않은 스팀덱용 로그라이크",
+    budget: 18_000,
+    platforms: ["Steam Deck"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "portable-readable-roguelite",
+              title: "Portable Readable Roguelite",
+              priceAmount: 14_200,
+              regularAmount: 28_400,
+              cut: 50,
+              genres: ["Action", "Roguelike"],
+              tags: ["portable", "handheld", "readable"],
+              multiplayer: false,
+              rating: 4.08,
+              metadataStatus: "rawg",
+              steamDeckStatus: "playable"
+            }),
+            buildDeal({
+              id: "deponia-readable",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "rawg",
+              steamDeckStatus: "unknown"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Portable Readable Roguelite",
+      forbiddenTopTitles: ["Deponia"],
+      requiredTopSignals: ["playable", "portable", "roguelike"]
+    }
+  },
+  {
+    index: 74,
+    caseId: "junk-deckbuilding-brightgunner-loses-to-card-synergy",
+    group: "junk-suppression",
+    preferences: "핸드 관리 위주 카드 전투 세일작",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "brightgunner-filler",
+              title: "BrightGunner",
+              priceAmount: 11_800,
+              regularAmount: 23_600,
+              cut: 50,
+              genres: ["Action", "Shooter"],
+              tags: ["action", "shooter"],
+              multiplayer: false,
+              rating: 4.1,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "card-deckbuilder-expedition",
+              title: "Card Deckbuilder Expedition",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Strategy", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "hand-management"],
+              multiplayer: false,
+              rating: 4.32,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Card Deckbuilder Expedition",
+      forbiddenTopTitles: ["BrightGunner"],
+      requiredTopSignals: ["card", "deckbuilder"]
+    }
+  },
+  {
+    index: 75,
+    caseId: "junk-deckbuilding-deponia-loses-to-deckbuilder",
+    group: "junk-suppression",
+    preferences: "덱 굴리는 맛 좋은 할인 게임",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "deponia-deck-junk",
+              title: "Deponia",
+              priceAmount: 9_900,
+              regularAmount: 19_800,
+              cut: 50,
+              genres: ["Adventure", "Puzzle"],
+              multiplayer: false,
+              metadataStatus: "missing"
+            }),
+            buildDeal({
+              id: "monster-train-raw",
+              title: "Monster Train",
+              priceAmount: 15_200,
+              regularAmount: 30_400,
+              cut: 50,
+              genres: ["Strategy", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "deck"],
+              multiplayer: false,
+              rating: 4.3,
+              metacritic: 86,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Monster Train",
+      forbiddenTopTitles: ["Deponia"],
+      requiredTopSignals: ["card", "deckbuilder"]
+    }
+  },
+  {
+    index: 76,
+    caseId: "junk-deckbuilding-two-axis-beats-single-axis-filler",
+    group: "junk-suppression",
+    preferences: "전투는 카드로 풀지만 너무 무겁지 않은 세일작",
+    budget: 18_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "single-axis-filler",
+              title: "BrightGunner",
+              priceAmount: 10_900,
+              regularAmount: 21_800,
+              cut: 50,
+              genres: ["Action", "Shooter"],
+              tags: ["action"],
+              multiplayer: false,
+              rating: 4.0,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "dice-fold-two-axis",
+              title: "Dice & Fold",
+              priceAmount: 14_900,
+              regularAmount: 29_800,
+              cut: 50,
+              genres: ["Card", "Deckbuilder", "Roguelike"],
+              tags: ["card", "deckbuilder", "lightweight"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 80,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectMatchCount: 1,
+      expectedTopTitle: "Dice & Fold",
+      forbiddenTopTitles: ["BrightGunner"],
+      requiredTopSignals: ["card", "deckbuilder"]
+    }
   }
 ];
 

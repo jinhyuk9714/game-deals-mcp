@@ -102,12 +102,12 @@
     "genre-hybrid-29",
     "genre-hybrid-20"
   ],
-  "generatedAt": "2026-03-14T21:42:40.126Z",
+  "generatedAt": "2026-03-14T22:20:30.353Z",
   "summary": {
     "total": 100,
-    "zeroMatches": 21,
-    "flagged": 48,
-    "timeouts": 0,
+    "zeroMatches": 24,
+    "flagged": 50,
+    "timeouts": 2,
     "topCounts": [
       {
         "title": "Dominions 5 - Warriors of the Faith",
@@ -123,14 +123,10 @@
       },
       {
         "title": "BrightGunner",
-        "count": 8
-      },
-      {
-        "title": "Deponia",
         "count": 7
       },
       {
-        "title": "Inscryption",
+        "title": "Deponia",
         "count": 7
       },
       {
@@ -139,6 +135,10 @@
       },
       {
         "title": "AI Games",
+        "count": 5
+      },
+      {
+        "title": "Inscryption",
         "count": 5
       },
       {
@@ -177,38 +177,34 @@
         },
         {
           "title": "Dice & Fold",
-          "count": 3
+          "count": 4
         },
         {
           "title": "BALL x PIT",
           "count": 1
         }
       ],
-      "flagged": 6,
+      "flagged": 5,
       "timeouts": 0
     },
     "deckbuilding-card": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
           "title": "Balatro",
           "count": 4
         },
         {
-          "title": "Inscryption",
-          "count": 3
-        },
-        {
           "title": "Dice & Fold",
-          "count": 2
+          "count": 1
         },
         {
-          "title": "BrightGunner",
+          "title": "Inscryption",
           "count": 1
         }
       ],
-      "flagged": 1,
-      "timeouts": 0
+      "flagged": 4,
+      "timeouts": 2
     },
     "strategy-rating": {
       "uniqueTopPicks": 2,
@@ -421,11 +417,7 @@
       "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Skullbreaker (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: EmberStride (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Ammo Bounce (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 2,
       "topTitle": "AI Games",
@@ -465,11 +457,7 @@
       "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Skullbreaker (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: EmberStride (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Ammo Bounce (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 2,
       "topTitle": "AI Games",
@@ -506,78 +494,7 @@
       ],
       "country": "KR",
       "index": 3,
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Skullbreaker (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: EmberStride (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Ammo Bounce (RAWG request failed with timeout after 1500ms)"
-      ],
-      "matchCount": 9,
-      "topTitle": "Dice & Fold",
-      "topMatch": {
-        "title": "Dice & Fold",
-        "cut": 55,
-        "price": {
-          "amount": 6520,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4,
-        "genres": [
-          "Casual",
-          "Strategy",
-          "Indie",
-          "RPG",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "steamDeckStatus": "verified"
-      },
-      "flagged": false,
-      "timeout": false
-    },
-    {
-      "caseId": "steam-deck-lifestyle-27",
-      "group": "steam-deck-lifestyle",
-      "preferences": "easy-to-read portable deckbuilder discount",
-      "budget": 22000,
-      "platforms": [
-        "Steam Deck"
-      ],
-      "country": "KR",
-      "index": 4,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
-      "warnings": [
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: HELLCARD (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
-      "timeout": false
-    },
-    {
-      "caseId": "steam-deck-lifestyle-22",
-      "group": "steam-deck-lifestyle",
-      "preferences": "battery-conscious Steam Deck deal",
-      "budget": 22000,
-      "platforms": [
-        "Steam Deck"
-      ],
-      "country": "KR",
-      "index": 5,
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -607,7 +524,97 @@
           "macOS",
           "Linux"
         ],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-27",
+      "group": "steam-deck-lifestyle",
+      "preferences": "easy-to-read portable deckbuilder discount",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 4,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-22",
+      "group": "steam-deck-lifestyle",
+      "preferences": "battery-conscious Steam Deck deal",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 5,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 9,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -703,7 +710,7 @@
       ],
       "country": "KR",
       "index": 8,
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -733,7 +740,7 @@
           "macOS",
           "Linux"
         ],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -828,38 +835,15 @@
       ],
       "country": "KR",
       "index": 11,
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 3,
-      "topTitle": "Dice & Fold",
-      "topMatch": {
-        "title": "Dice & Fold",
-        "cut": 55,
-        "price": {
-          "amount": 6520,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4,
-        "genres": [
-          "Casual",
-          "Strategy",
-          "Indie",
-          "RPG",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
       "timeout": false
     },
     {
@@ -872,44 +856,14 @@
       ],
       "country": "KR",
       "index": 12,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
-      "matchCount": 4,
-      "topTitle": "Inscryption",
-      "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
-        "price": {
-          "amount": 10285,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
-        "genres": [
-          "Indie",
-          "Strategy",
-          "Adventure",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
-        ],
-        "platforms": [
-          "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "macOS",
-          "Linux"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
-      "timeout": false
+      "summary": "",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": true,
+      "error": "timeout:15000"
     },
     {
       "caseId": "deckbuilding-card-03",
@@ -921,44 +875,14 @@
       ],
       "country": "KR",
       "index": 13,
-      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
-      "matchCount": 4,
-      "topTitle": "Inscryption",
-      "topMatch": {
-        "title": "Inscryption",
-        "cut": 64,
-        "price": {
-          "amount": 10285,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.38,
-        "metacritic": 86,
-        "genres": [
-          "Indie",
-          "Strategy",
-          "Adventure",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
-        ],
-        "platforms": [
-          "PC",
-          "PlayStation 5",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "macOS",
-          "Linux"
-        ],
-        "steamDeckStatus": null
-      },
-      "flagged": false,
-      "timeout": false
+      "summary": "",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": true,
+      "error": "timeout:15000"
     },
     {
       "caseId": "deckbuilding-card-04",
@@ -974,7 +898,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -1018,7 +942,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -1058,32 +982,16 @@
       ],
       "country": "KR",
       "index": 16,
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Godzilla - Save the Earth (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BrightGunner",
-      "topMatch": {
-        "title": "BrightGunner",
-        "cut": 100,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 0,
-        "genres": [
-          "Indie",
-          "Action"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": null
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": true,
       "timeout": false
     },
@@ -1103,7 +1011,7 @@
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 2,
       "topTitle": "Inscryption",
       "topMatch": {
         "title": "Inscryption",
@@ -1150,7 +1058,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -1238,7 +1146,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -1699,8 +1607,7 @@
       "index": 32,
       "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Racket: Nx (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 1,
       "topTitle": "Racket: Nx",
@@ -1780,7 +1687,8 @@
       "index": 35,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1800,7 +1708,8 @@
       "index": 36,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1820,7 +1729,8 @@
       "index": 37,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1861,7 +1771,8 @@
       "index": 39,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1881,8 +1792,7 @@
       "index": 40,
       "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Racket: Nx (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 1,
       "topTitle": "Racket: Nx",
@@ -3185,7 +3095,7 @@
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Dice & Fold",
       "topMatch": {
         "title": "Dice & Fold",
@@ -3913,9 +3823,10 @@
       "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Inscryption",
       "topMatch": {
         "title": "Inscryption",

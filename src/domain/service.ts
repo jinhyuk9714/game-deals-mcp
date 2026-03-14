@@ -119,6 +119,7 @@ export class GameDealService {
       maxRawgLookups?: number;
       collectRawCandidates?: ((deals: DealCandidate[]) => void) | undefined;
       allowDeckbuildingGenreFallback?: boolean;
+      preferDeckbuildingSignal?: boolean;
       lenientFallbackMode?:
         | "none"
         | "genre-only"
@@ -162,6 +163,7 @@ export class GameDealService {
     const allowLenientPlatformFallback =
       lenientFallbackMode === "genre-and-platform" ||
       lenientFallbackMode === "genre-platform-and-multiplayer";
+    const preferDeckbuildingSignal = Boolean(options?.preferDeckbuildingSignal);
 
     try {
       const enrichmentOptions = {
@@ -191,6 +193,7 @@ export class GameDealService {
       steamDeckRequest,
       warnings,
       allowDeckbuildingGenreFallback: options?.allowDeckbuildingGenreFallback,
+      preferDeckbuildingSignal,
       lenientFallbackMode
     });
 
@@ -261,6 +264,7 @@ export class GameDealService {
             preferredShops,
             steamDeckRequest,
             warnings,
+            preferDeckbuildingSignal,
             lenientFallbackMode
           });
           warnings.push(...fallback.warnings);
@@ -378,6 +382,10 @@ export class GameDealService {
       strictSocialProfile || !simpleSocialPrompt ? socialPromptProfile ?? undefined : undefined;
     const effectiveSocialGuardrailProfile =
       strictSocialProfile || !simpleSocialPrompt ? socialPromptProfile : null;
+    const strictDeckCuePrompt =
+      !steamDeckRequest &&
+      constraints.deckPreference !== "avoid" &&
+      hasRecommendationDeckCuePrompt(args.preferences);
     let base: CompareResult | null = null;
     let matches: DealCandidate[] = [];
     let degradedCandidates: DealCandidate[] = [];
@@ -456,12 +464,24 @@ export class GameDealService {
         )
       );
     };
+    const applyRequiredConstraintSignalGates = (deals: DealCandidate[]): DealCandidate[] => {
+      let filtered = [...deals];
+
+      if (strictDeckCuePrompt) {
+        const deckbuildingMatches = filtered.filter(hasDeckbuildingEvidence);
+        filtered = deckbuildingMatches.length > 0 ? deckbuildingMatches : [];
+      }
+
+      return filtered;
+    };
     const finalizeRecommendationMatches = (deals: DealCandidate[]): DealCandidate[] =>
       applyRecommendationSocialPromptGuardrail(
         applySteamDeckHandheldPromptGuardrail(
           applySteamDeckLifestyleStoryFillerGuardrail(
             applyRecommendationQualityGates(
-              applySteamDeckCompatibilityPreference(applyHardConstraints(deals), steamDeckRequest),
+              applyRequiredConstraintSignalGates(
+                applySteamDeckCompatibilityPreference(applyHardConstraints(deals), steamDeckRequest)
+              ),
               preferences
             ),
             {
@@ -660,6 +680,7 @@ export class GameDealService {
               executionBudget.remainingMs() < MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS),
           allowDeckbuildingGenreFallback:
             preferences.deckbuilding || constraints.deckPreference === "required",
+          preferDeckbuildingSignal: strictDeckCuePrompt,
           lenientFallbackMode: simpleSocialPrompt
             ? "genre-platform-and-multiplayer"
             : "genre-only"
@@ -767,6 +788,7 @@ export class GameDealService {
               executionBudget.remainingMs() < MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS),
           allowDeckbuildingGenreFallback:
             preferences.deckbuilding || constraints.deckPreference === "required",
+          preferDeckbuildingSignal: strictDeckCuePrompt,
           lenientFallbackMode: simpleSocialPrompt
             ? "genre-platform-and-multiplayer"
             : "genre-only"
@@ -1064,6 +1086,24 @@ export class GameDealService {
       }
     }
 
+    if (
+      matches.length === 0 &&
+      shouldApplyRawNonSteamStrategyOutageRescue({
+        nonSteamHighRatingStrategyRequest,
+        warnings,
+        rawBrowseCandidates
+      })
+    ) {
+      matches = finalizeRecommendationMatches(
+        recoverRawNonSteamStrategyOutageMatches({
+          deals: rawBrowseCandidates,
+          filters: discoverArgs,
+          constraints,
+          preferences
+        })
+      );
+    }
+
     if (matches.length > 0 && !sparseRecoveryApplied) {
       try {
         if (executionBudget.has(executionProfile.mixingMinMs)) {
@@ -1079,9 +1119,11 @@ export class GameDealService {
           });
 
           matches = applyRecommendationQualityGates(
-            applySteamDeckCompatibilityPreference(
-              applyRecommendationHardConstraints(mixed.matches, constraints),
-              steamDeckRequest
+            applyRequiredConstraintSignalGates(
+              applySteamDeckCompatibilityPreference(
+                applyRecommendationHardConstraints(mixed.matches, constraints),
+                steamDeckRequest
+              )
             ),
             preferences
           );
@@ -2131,6 +2173,17 @@ function hasRecommendationProviderOutageWarning(warnings: string[]): boolean {
   );
 }
 
+function hasRecommendationRawgTimeoutWarning(warnings: string[]): boolean {
+  return warnings.some((warning) => {
+    const normalized = warning.trim();
+    return (
+      normalized.includes("RAWG timeout") ||
+      normalized.includes("RAWG request failed") ||
+      normalized.includes("RAWG 메타데이터를 일부 불러오지 못했습니다")
+    );
+  });
+}
+
 function hasNonSteamStrategyOverlayRecoverySignal(warnings: string[]): boolean {
   return (
     hasMetadataOmissionWarning(warnings) ||
@@ -2147,6 +2200,20 @@ function hasSimpleSocialOverlayRecoverySignal(warnings: string[]): boolean {
 
 function hasSocialEvidenceRescueSignal(warnings: string[]): boolean {
   return hasSimpleSocialOverlayRecoverySignal(warnings);
+}
+
+function shouldApplyRawNonSteamStrategyOutageRescue(args: {
+  nonSteamHighRatingStrategyRequest: boolean;
+  warnings: string[];
+  rawBrowseCandidates: DealCandidate[];
+}): boolean {
+  return (
+    args.nonSteamHighRatingStrategyRequest &&
+    args.rawBrowseCandidates.length > 0 &&
+    hasMetadataOmissionWarning(args.warnings) &&
+    hasRecommendationProviderOutageWarning(args.warnings) &&
+    hasRecommendationRawgTimeoutWarning(args.warnings)
+  );
 }
 
 function isRecommendationOverlayBrowseJunk(deal: DealCandidate): boolean {
@@ -2279,6 +2346,7 @@ function rankDiscoverDealsWithLenientFallback(args: {
   steamDeckRequest: boolean;
   warnings: string[];
   allowDeckbuildingGenreFallback?: boolean | undefined;
+  preferDeckbuildingSignal?: boolean | undefined;
   lenientFallbackMode:
     | "none"
     | "genre-only"
@@ -2289,6 +2357,19 @@ function rankDiscoverDealsWithLenientFallback(args: {
     scoreDealCandidates(args.deals, { ...args.filters, preferredShops: args.preferredShops }),
     args.steamDeckRequest
   );
+
+  if (args.preferDeckbuildingSignal) {
+    const deckbuildingPreferredDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(args.deals, {
+        ...args.filters,
+        genres: undefined,
+        preferredShops: args.preferredShops
+      }).filter(hasDeckbuildingEvidence),
+      args.steamDeckRequest
+    );
+
+    rankedDeals = deckbuildingPreferredDeals.length > 0 ? deckbuildingPreferredDeals : [];
+  }
 
   if (
     rankedDeals.length === 0 &&
@@ -3105,6 +3186,34 @@ function matchesProviderOutageOverlayDeal(
   );
 }
 
+function recoverRawNonSteamStrategyOutageMatches(args: {
+  deals: DealCandidate[];
+  filters: DiscoverFilters;
+  constraints: RecommendationConstraints;
+  preferences: {
+    shortSession: boolean;
+  };
+}): DealCandidate[] {
+  const narrowed = dedupeDeals(args.deals).filter((deal) =>
+    matchesProviderOutageOverlayDeal(deal, {
+      kind: "non-steam-strategy-rating",
+      constraints: args.constraints,
+      preferences: args.preferences,
+      steamDeckRequest: false,
+      requestedPlatforms: args.filters.platforms,
+      budget: args.filters.budget
+    })
+  );
+
+  return finalizeSparseRecoveryMatches(
+    narrowed,
+    "non-steam-strategy-rating",
+    args.filters,
+    args.preferences,
+    false
+  );
+}
+
 function isSteamDeckSparseRecoveryKind(kind: RecommendationRecoveryKind): boolean {
   return (
     kind === "steam-deck-roguelike" ||
@@ -3839,6 +3948,10 @@ function hasDeckbuildingEvidence(deal: DealCandidate): boolean {
   return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(
     `${deal.title} ${deal.genres.join(" ")}`
   );
+}
+
+function hasRecommendationDeckCuePrompt(rawPreferences: string): boolean {
+  return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(rawPreferences) || /덱|카드|손패/.test(rawPreferences);
 }
 
 function hasStrongReviewSignal(deal: DealCandidate): boolean {

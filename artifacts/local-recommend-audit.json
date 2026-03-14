@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-03-14T21:39:33.910Z",
+  "generatedAt": "2026-03-14T22:18:22.529Z",
   "summary": {
     "total": 50,
-    "zeroMatches": 4,
-    "flagged": 4,
+    "zeroMatches": 0,
+    "flagged": 0,
     "timeouts": 0,
     "topCounts": [
       {
@@ -15,12 +15,12 @@
         "count": 10
       },
       {
-        "title": "Slay the Spire",
-        "count": 9
+        "title": "Super Robot Taisen: Original Generation",
+        "count": 10
       },
       {
-        "title": "Super Robot Taisen: Original Generation",
-        "count": 6
+        "title": "Slay the Spire",
+        "count": 9
       },
       {
         "title": "Shining Force III",
@@ -83,15 +83,15 @@
       "uniqueTopPicks": 2,
       "topCounts": [
         {
-          "title": "Shining Force III",
-          "count": 4
+          "title": "Super Robot Taisen: Original Generation",
+          "count": 6
         },
         {
-          "title": "Super Robot Taisen: Original Generation",
-          "count": 2
+          "title": "Shining Force III",
+          "count": 4
         }
       ],
-      "flagged": 4,
+      "flagged": 0,
       "timeouts": 0
     },
     "multiplayer": {
@@ -335,7 +335,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 75% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 75% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -355,7 +355,7 @@
           "Strategy",
           "Indie"
         ],
-        "steamDeckStatus": "playable"
+        "steamDeckStatus": "unknown"
       },
       "flagged": false,
       "timeout": false
@@ -437,7 +437,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
@@ -458,7 +458,7 @@
           "Indie",
           "Roguelike"
         ],
-        "steamDeckStatus": "unknown"
+        "steamDeckStatus": "playable"
       },
       "flagged": false,
       "timeout": false
@@ -472,7 +472,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
@@ -496,7 +496,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "unknown"
+        "steamDeckStatus": "verified"
       },
       "flagged": false,
       "timeout": false
@@ -510,7 +510,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
@@ -534,7 +534,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "unknown"
+        "steamDeckStatus": "verified"
       },
       "flagged": false,
       "timeout": false
@@ -548,7 +548,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -571,7 +571,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "unknown"
+        "steamDeckStatus": "verified"
       },
       "flagged": false,
       "timeout": false
@@ -624,7 +624,7 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
@@ -647,7 +647,7 @@
           "RPG",
           "Deckbuilder"
         ],
-        "steamDeckStatus": "unknown"
+        "steamDeckStatus": "verified"
       },
       "flagged": false,
       "timeout": false
@@ -912,16 +912,29 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 2,
+      "topTitle": "Super Robot Taisen: Original Generation",
+      "topMatch": {
+        "title": "Super Robot Taisen: Original Generation",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.83,
+        "genres": [
+          "Strategy",
+          "Action"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
       "timeout": false
     },
     {
@@ -933,16 +946,29 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 2,
+      "topTitle": "Super Robot Taisen: Original Generation",
+      "topMatch": {
+        "title": "Super Robot Taisen: Original Generation",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.83,
+        "genres": [
+          "Strategy",
+          "Action"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
       "timeout": false
     },
     {
@@ -954,16 +980,29 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 2,
+      "topTitle": "Super Robot Taisen: Original Generation",
+      "topMatch": {
+        "title": "Super Robot Taisen: Original Generation",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.83,
+        "genres": [
+          "Strategy",
+          "Action"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
       "timeout": false
     },
     {
@@ -1008,16 +1047,29 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 2,
+      "topTitle": "Super Robot Taisen: Original Generation",
+      "topMatch": {
+        "title": "Super Robot Taisen: Original Generation",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.83,
+        "genres": [
+          "Strategy",
+          "Action"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
       "timeout": false
     },
     {

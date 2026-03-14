@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-03-14T21:41:31.864Z",
+  "generatedAt": "2026-03-14T22:19:19.519Z",
   "summary": {
     "total": 100,
-    "zeroMatches": 19,
-    "flagged": 57,
+    "zeroMatches": 20,
+    "flagged": 56,
     "timeouts": 0,
     "topCounts": [
       {
         "title": "BALL x PIT",
-        "count": 14
-      },
-      {
-        "title": "Deponia",
-        "count": 9
+        "count": 13
       },
       {
         "title": "Dice & Fold",
-        "count": 9
+        "count": 10
       },
       {
         "title": "Dominions 5 - Warriors of the Faith",
         "count": 9
+      },
+      {
+        "title": "Deponia",
+        "count": 8
       },
       {
         "title": "AI Games",
@@ -28,7 +28,7 @@
       },
       {
         "title": "Balatro",
-        "count": 5
+        "count": 6
       },
       {
         "title": "Racket: Nx",
@@ -51,12 +51,12 @@
         "count": 3
       },
       {
-        "title": "BrightGunner",
+        "title": "Monster Train",
         "count": 2
       },
       {
-        "title": "Monster Train",
-        "count": 2
+        "title": "BrightGunner",
+        "count": 1
       },
       {
         "title": "Downfall",
@@ -67,15 +67,15 @@
         "count": 1
       },
       {
-        "title": "Shogun Showdown",
-        "count": 1
-      },
-      {
         "title": "Skullbreaker",
         "count": 1
       },
       {
         "title": "Slay the Spire",
+        "count": 1
+      },
+      {
+        "title": "Space Rangers HD: A War Apart",
         "count": 1
       }
     ]
@@ -101,34 +101,22 @@
       "timeouts": 0
     },
     "deckbuilding-card": {
-      "uniqueTopPicks": 6,
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
           "title": "Balatro",
-          "count": 3
+          "count": 4
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 2
         },
         {
           "title": "Monster Train",
           "count": 2
-        },
-        {
-          "title": "BrightGunner",
-          "count": 1
-        },
-        {
-          "title": "Deponia",
-          "count": 1
-        },
-        {
-          "title": "Dice & Fold",
-          "count": 1
-        },
-        {
-          "title": "Shogun Showdown",
-          "count": 1
         }
       ],
-      "flagged": 3,
+      "flagged": 2,
       "timeouts": 0
     },
     "strategy-rating": {
@@ -166,11 +154,11 @@
       "timeouts": 0
     },
     "action-roguelite": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 4,
       "topCounts": [
         {
           "title": "BALL x PIT",
-          "count": 7
+          "count": 6
         },
         {
           "title": "Inscryption",
@@ -178,6 +166,10 @@
         },
         {
           "title": "BrightGunner",
+          "count": 1
+        },
+        {
+          "title": "Space Rangers HD: A War Apart",
           "count": 1
         }
       ],
@@ -744,39 +736,13 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 4,
-      "topTitle": "Deponia",
-      "topMatch": {
-        "title": "Deponia",
-        "cut": 100,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 3.85,
-        "metacritic": 74,
-        "genres": [
-          "Indie",
-          "Adventure",
-          "RPG",
-          "Puzzle"
-        ],
-        "platforms": [
-          "PC",
-          "Xbox One",
-          "PlayStation 4",
-          "Nintendo Switch",
-          "iOS",
-          "macOS",
-          "Linux"
-        ],
-        "steamDeckStatus": null
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": true,
       "timeout": false
     },
@@ -793,7 +759,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -832,24 +798,23 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: HELLCARD (RAWG request failed with timeout after 1500ms)",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Shogun Showdown",
+      "matchCount": 3,
+      "topTitle": "Dice & Fold",
       "topMatch": {
-        "title": "Shogun Showdown",
-        "cut": 50,
+        "title": "Dice & Fold",
+        "cut": 55,
         "price": {
-          "amount": 11263,
+          "amount": 6520,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.36,
+        "rating": 4,
         "genres": [
+          "Casual",
           "Strategy",
           "Indie",
           "RPG",
@@ -877,10 +842,7 @@
       ],
       "country": "KR",
       "summary": "Monster Train를 추천합니다. 70% 할인, 현재가 8,100원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
-      "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Meteorfall: Krumit's Tale (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "Monster Train",
       "topMatch": {
@@ -919,16 +881,40 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: HELLCARD (RAWG request failed with timeout after 1500ms)",
+        "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "flagged": true,
+      "matchCount": 1,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
       "timeout": false
     },
     {
@@ -940,33 +926,15 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Super Robot Taisen: Original Generation (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BrightGunner",
-      "topMatch": {
-        "title": "BrightGunner",
-        "cut": 100,
-        "price": {
-          "amount": 0,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 0,
-        "genres": [
-          "Indie",
-          "Action"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "steamDeckStatus": null
-      },
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
       "flagged": true,
       "timeout": false
     },
@@ -983,7 +951,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -1109,7 +1077,7 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
-      "matchCount": 5,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -1914,8 +1882,7 @@
       "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 4,
       "topTitle": "Inscryption",
@@ -1996,33 +1963,33 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "summary": "Space Rangers HD: A War Apart를 추천합니다. 86% 할인, 현재가 2,228원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Bio Prototype (RAWG request failed with timeout after 1500ms)",
-        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
+      "matchCount": 3,
+      "topTitle": "Space Rangers HD: A War Apart",
       "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
+        "title": "Space Rangers HD: A War Apart",
+        "cut": 86,
         "price": {
-          "amount": 13200,
+          "amount": 2228,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.35,
+        "rating": 4.37,
+        "metacritic": 68,
         "genres": [
-          "Indie",
-          "Action",
+          "Strategy",
+          "Adventure",
+          "RPG",
+          "Simulation",
           "Roguelike"
         ],
         "platforms": [
-          "PC",
-          "Nintendo Switch",
-          "macOS"
+          "PC"
         ],
         "steamDeckStatus": null
       },
@@ -2115,8 +2082,7 @@
       "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 4,
       "topTitle": "Inscryption",
@@ -2897,8 +2863,7 @@
       "country": "KR",
       "summary": "Downfall를 추천합니다. 16% 할인, 현재가 4,956원, PC 지원 조건과 잘 맞습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Bio Prototype (RAWG request failed with timeout after 1500ms)"
+        "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 1,
       "topTitle": "Downfall",
@@ -3679,7 +3644,7 @@
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
@@ -3917,7 +3882,7 @@
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Balatro",
       "topMatch": {
         "title": "Balatro",
