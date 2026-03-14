@@ -194,4 +194,122 @@ describe("SteamStoreClient.enrichDeals", () => {
     });
     expect(result.warnings).toEqual([expect.stringContaining("Steam Deck 호환성 정보를 확인하지 못했습니다.")]);
   });
+
+  it("falls back to unknown when the per-deal lookup deadline expires", async () => {
+    const client = new SteamStoreClient({
+      lookupTimeoutMs: 10,
+      fetch: vi.fn(
+        async () =>
+          await new Promise<Response>((resolve) => {
+            setTimeout(() => {
+              resolve(
+                new Response(
+                  `<div id="application_config" data-deckcompatibility="{&quot;appid&quot;:588650,&quot;resolved_category&quot;:3}"></div>`,
+                  { status: 200 }
+                )
+              );
+            }, 50);
+          })
+      )
+    });
+
+    const result = await client.enrichDeals([
+      {
+        id: "1",
+        title: "Slow Deck Lookup",
+        price: { amount: 10320, currency: "KRW" },
+        regular: { amount: 25800, currency: "KRW" },
+        cut: 60,
+        genres: ["Action", "Roguelike"],
+        platforms: ["PC"],
+        multiplayer: false,
+        stores: [
+          {
+            store: "Steam",
+            price: { amount: 10320, currency: "KRW" },
+            url: "https://store.steampowered.com/app/588650/Slow_Deck_Lookup/"
+          }
+        ]
+      }
+    ]);
+
+    expect(result.deals[0]).toMatchObject({
+      title: "Slow Deck Lookup",
+      steamDeckCompatibility: {
+        status: "unknown",
+        source: "steam"
+      }
+    });
+    expect(result.warnings).toEqual([expect.stringContaining("Steam Deck 호환성 정보를 확인하지 못했습니다.")]);
+  });
+
+  it("preserves input order while allowing partial timeout fallbacks", async () => {
+    const client = new SteamStoreClient({
+      concurrency: 2,
+      lookupTimeoutMs: 100,
+      fetch: vi.fn(async (input: URL | string | Request) => {
+        const url = String(input);
+
+        if (url.includes("/app/111/")) {
+          return await new Promise<Response>((resolve) => {
+            setTimeout(() => {
+              resolve(
+                new Response(
+                  `<div id="application_config" data-deckcompatibility="{&quot;appid&quot;:111,&quot;resolved_category&quot;:3}"></div>`,
+                  { status: 200 }
+                )
+              );
+            }, 250);
+          });
+        }
+
+        return new Response(
+          `<div id="application_config" data-deckcompatibility="{&quot;appid&quot;:222,&quot;resolved_category&quot;:2}"></div>`,
+          { status: 200 }
+        );
+      })
+    });
+
+    const result = await client.enrichDeals([
+      {
+        id: "slow",
+        title: "Slow Lookup",
+        price: { amount: 10000, currency: "KRW" },
+        regular: { amount: 20000, currency: "KRW" },
+        cut: 50,
+        genres: ["Action"],
+        platforms: ["PC"],
+        multiplayer: false,
+        stores: [
+          {
+            store: "Steam",
+            price: { amount: 10000, currency: "KRW" },
+            url: "https://store.steampowered.com/app/111/Slow_Lookup/"
+          }
+        ]
+      },
+      {
+        id: "fast",
+        title: "Fast Lookup",
+        price: { amount: 10000, currency: "KRW" },
+        regular: { amount: 20000, currency: "KRW" },
+        cut: 50,
+        genres: ["Action"],
+        platforms: ["PC"],
+        multiplayer: false,
+        stores: [
+          {
+            store: "Steam",
+            price: { amount: 10000, currency: "KRW" },
+            url: "https://store.steampowered.com/app/222/Fast_Lookup/"
+          }
+        ]
+      }
+    ]);
+
+    expect(result.deals.map((deal) => deal.title)).toEqual(["Slow Lookup", "Fast Lookup"]);
+    expect(result.deals[0]?.steamDeckCompatibility?.status).toBe("unknown");
+    expect(result.deals[1]?.steamDeckCompatibility?.status).toBe("playable");
+    expect(result.warnings).toHaveLength(1);
+  });
 });

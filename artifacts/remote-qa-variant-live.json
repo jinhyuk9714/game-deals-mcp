@@ -1,0 +1,806 @@
+{
+  "generatedAt": "2026-03-12T19:59:55.332Z",
+  "url": "https://game-deals-mcp.jinhyuk9714.workers.dev/mcp",
+  "summary": {
+    "total": 20,
+    "transportErrors": 1,
+    "errorResults": 0,
+    "zeroMatches": 0,
+    "noisyWarnings": 0,
+    "tooManySubrequests": 0
+  },
+  "results": [
+    {
+      "index": 1,
+      "category": "recommend",
+      "prompt": "스팀덱에서 굴리기 괜찮은 로그라이크 세일작 뭐 있어?",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+        "budget": 20000,
+        "platforms": [
+          "Steam Deck"
+        ],
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "The King is Watching",
+          "cut": 35,
+          "price": {
+            "amount": 9680,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.36,
+          "metacritic": null,
+          "genres": [
+            "Strategy",
+            "Indie",
+            "Roguelike"
+          ],
+          "deck": "playable"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "category": "discover",
+      "prompt": "2만원 안쪽으로 스팀덱 로그라이트 할인가만 보여줘",
+      "tool": "discover_deals",
+      "arguments": {
+        "budget": 20000,
+        "genres": [
+          "Roguelike"
+        ],
+        "platforms": [
+          "Steam Deck"
+        ],
+        "sort": "best-value",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "조건에 맞는 할인 게임 1개를 찾았습니다. The King is Watching 현재가 9,680원 (Steam Deck 정보 없음)",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "The King is Watching",
+          "cut": 35,
+          "price": {
+            "amount": 9680,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.36,
+          "metacritic": null,
+          "genres": [
+            "Strategy",
+            "Indie",
+            "Roguelike"
+          ],
+          "deck": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "category": "discover",
+      "prompt": "만원 이하로 친구랑 같이할 액션 세일겜 골라줘",
+      "tool": "discover_deals",
+      "arguments": {
+        "budget": 10000,
+        "genres": [
+          "Action"
+        ],
+        "multiplayer": true,
+        "platforms": [
+          "PC"
+        ],
+        "sort": "biggest-discount",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "조건에 맞는 할인 게임 1개를 찾았습니다. Trailblazers 현재가 1,776원",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Trailblazers",
+          "cut": 96,
+          "price": {
+            "amount": 1776,
+            "currency": "KRW"
+          },
+          "multiplayer": true,
+          "rating": 3.17,
+          "metacritic": null,
+          "genres": [
+            "Racing",
+            "Action",
+            "Casual",
+            "Sports",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "category": "recommend",
+      "prompt": "덱빌딩 쪽으로 짧게 한 판 하기 좋은 할인작 있어?",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "짧게 하기 좋은 덱빌딩 게임",
+        "budget": 15000,
+        "platforms": [
+          "Steam Deck"
+        ],
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "warnings": [
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Slay the Spire",
+          "cut": 75,
+          "price": {
+            "amount": 6750,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.37,
+          "metacritic": 86,
+          "genres": [
+            "Card",
+            "Strategy",
+            "Indie",
+            "RPG",
+            "Deckbuilder"
+          ],
+          "deck": "verified"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "category": "recommend",
+      "prompt": "평 좋은 전략겜 세일 중인 것만 추려줘",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "전략 게임 좋아하고 평가 좋은 작품 우선",
+        "budget": 25000,
+        "platforms": [
+          "PC"
+        ],
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "cut": 78,
+          "price": {
+            "amount": 9450,
+            "currency": "KRW"
+          },
+          "multiplayer": true,
+          "rating": 4.67,
+          "metacritic": null,
+          "genres": [
+            "Strategy",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "category": "compare",
+      "prompt": "Balatro 최저가 어디야?",
+      "tool": "compare_game_price",
+      "arguments": {
+        "title": "Balatro",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Balatro 현재 최저가는 9,968원이며 정가 대비 15% 할인 중입니다. 판매처 1곳 기준 최저가는 PlanetPlay입니다. 역대 최저가는 9,838원입니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Balatro",
+          "cut": 15,
+          "price": {
+            "amount": 9968,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.32,
+          "metacritic": null,
+          "genres": [
+            "Casual",
+            "Strategy",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "category": "compare",
+      "prompt": "Dead Cells 지금 어디서 사는 게 제일 싸?",
+      "tool": "compare_game_price",
+      "arguments": {
+        "title": "Dead Cells",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Dead Cells 현재 최저가는 17,896원이며 정가 대비 52% 할인 중입니다. 판매처 1곳 기준 최저가는 GameBillet입니다. 역대 최저가는 10,320원입니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Dead Cells",
+          "cut": 52,
+          "price": {
+            "amount": 17896,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.23,
+          "metacritic": 88,
+          "genres": [
+            "Platformer",
+            "Indie",
+            "Action",
+            "RPG"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "category": "explain",
+      "prompt": "Slay the Spire 이번 세일 타이밍 괜찮음?",
+      "tool": "explain_deal_value",
+      "arguments": {
+        "title": "Slay the Spire",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Slay the Spire는 현재 6,750원이며 역대 최저가 2,700원보다 비쌉니다. 급하지 않다면 더 기다려볼 만합니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Slay the Spire",
+          "cut": 75,
+          "price": {
+            "amount": 6750,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.37,
+          "metacritic": 86,
+          "genres": [
+            "Card",
+            "Strategy",
+            "Indie",
+            "RPG"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "category": "explain",
+      "prompt": "Into the Breach 지금 바로 사도 후회 없을까?",
+      "tool": "explain_deal_value",
+      "arguments": {
+        "title": "Into the Breach",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Into the Breach는 현재 5,420원이며 역대 최저가 3,100원보다 비쌉니다. 급하지 않다면 더 기다려볼 만합니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Into the Breach",
+          "cut": 65,
+          "price": {
+            "amount": 5420,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.31,
+          "metacritic": 90,
+          "genres": [
+            "Strategy",
+            "Indie",
+            "RPG"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "category": "recommend",
+      "prompt": "가볍게 즐길 액션 로그라이트 뭐가 괜찮아?",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "가볍게 즐길 액션 로그라이트",
+        "budget": 18000,
+        "platforms": [
+          "PC"
+        ],
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "BALL x PIT",
+          "cut": 20,
+          "price": {
+            "amount": 13200,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.35,
+          "metacritic": null,
+          "genres": [
+            "Indie",
+            "Action",
+            "Roguelike"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "category": "discover",
+      "prompt": "2만5천원 밑으로 RPG 할인작 좀",
+      "tool": "discover_deals",
+      "arguments": {
+        "budget": 25000,
+        "genres": [
+          "RPG"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "sort": "best-value",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "조건에 맞는 할인 게임 2개를 찾았습니다. The Book of Legends 현재가 881원 / Deponia 현재가 0원",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 2,
+      "topMatches": [
+        {
+          "title": "The Book of Legends",
+          "cut": 96,
+          "price": {
+            "amount": 881,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 2,
+          "metacritic": null,
+          "genres": [
+            "Indie",
+            "Adventure",
+            "RPG"
+          ]
+        },
+        {
+          "title": "Deponia",
+          "cut": 100,
+          "price": {
+            "amount": 0,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 3.85,
+          "metacritic": 74,
+          "genres": [
+            "Indie",
+            "Adventure",
+            "RPG",
+            "Puzzle"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "category": "discover",
+      "prompt": "스팀덱에서 돌릴 수 있는 저렴한 할인겜부터 보여줘",
+      "tool": "discover_deals",
+      "arguments": {
+        "budget": 8000,
+        "platforms": [
+          "Steam Deck"
+        ],
+        "sort": "lowest-price",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "조건에 맞는 할인 게임 11개를 찾았습니다. AI: Rampage 현재가 550원 (Steam Deck 정보 없음) / Deponia 현재가 0원 (Steam Deck 정보 없음) / Abduction Bit 현재가 550원 (Steam Deck 정보 없음)",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 11,
+      "topMatches": [
+        {
+          "title": "AI: Rampage",
+          "cut": 50,
+          "price": {
+            "amount": 550,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 1.61,
+          "metacritic": null,
+          "genres": [
+            "Strategy",
+            "Indie",
+            "Action"
+          ]
+        },
+        {
+          "title": "Deponia",
+          "cut": 100,
+          "price": {
+            "amount": 0,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 3.85,
+          "metacritic": 74,
+          "genres": [
+            "Indie",
+            "Adventure",
+            "RPG",
+            "Puzzle"
+          ],
+          "deck": "unknown"
+        },
+        {
+          "title": "Abduction Bit",
+          "cut": 50,
+          "price": {
+            "amount": 550,
+            "currency": "KRW"
+          },
+          "multiplayer": true,
+          "rating": 0,
+          "metacritic": null,
+          "genres": [
+            "Indie",
+            "Action"
+          ],
+          "deck": "unknown"
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "category": "recommend",
+      "prompt": "친구랑 같이 켜서 놀기 좋은 할인 게임 뭐 있어?",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "친구와 같이 할 협동 게임",
+        "budget": 20000,
+        "platforms": [
+          "PC"
+        ],
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Trailblazers를 추천합니다. 96% 할인, 현재가 1,776원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Trailblazers",
+          "cut": 96,
+          "price": {
+            "amount": 1776,
+            "currency": "KRW"
+          },
+          "multiplayer": true,
+          "rating": 3.17,
+          "metacritic": null,
+          "genres": [
+            "Racing",
+            "Action",
+            "Casual",
+            "Sports",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "category": "compare",
+      "prompt": "Hades 가격 비교 한 번 해줘",
+      "tool": "compare_game_price",
+      "arguments": {
+        "title": "Hades",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Hades 현재 최저가는 27,000원이며 정가 대비 0% 할인 중입니다. 판매처 1곳 기준 최저가는 Epic Game Store입니다. 역대 최저가는 6,750원입니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Hades",
+          "cut": 0,
+          "price": {
+            "amount": 27000,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.42,
+          "metacritic": 93,
+          "genres": [
+            "Indie",
+            "Adventure",
+            "Action",
+            "RPG"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "category": "explain",
+      "prompt": "Balatro 지금 사는 거 메리트 있어?",
+      "tool": "explain_deal_value",
+      "arguments": {
+        "title": "Balatro",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Balatro는 현재 9,968원로 역대 최저가에 근접했습니다. 역대 최저가는 9,838원입니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Balatro",
+          "cut": 15,
+          "price": {
+            "amount": 9968,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.32,
+          "metacritic": null,
+          "genres": [
+            "Casual",
+            "Strategy",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "category": "recommend",
+      "prompt": "리뷰 괜찮은 전략 세일겜, 너무 마이너한 건 말고",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "전략 게임 좋아하고 평가 좋은 작품 우선",
+        "budget": 25000,
+        "platforms": [
+          "PC"
+        ],
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "cut": 78,
+          "price": {
+            "amount": 9450,
+            "currency": "KRW"
+          },
+          "multiplayer": true,
+          "rating": 4.67,
+          "metacritic": null,
+          "genres": [
+            "Strategy",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "category": "discover",
+      "prompt": "평점 높은 전략 할인겜만 보고 싶어",
+      "tool": "discover_deals",
+      "arguments": {
+        "budget": 15000,
+        "genres": [
+          "Strategy"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "sort": "highest-rating",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "조건에 맞는 할인 게임 2개를 찾았습니다. Dominions 5 - Warriors of the Faith 현재가 9,450원 / Cyber Avenger 현재가 1,060원",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 2,
+      "topMatches": [
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "cut": 78,
+          "price": {
+            "amount": 9450,
+            "currency": "KRW"
+          },
+          "multiplayer": true,
+          "rating": 4.67,
+          "metacritic": null,
+          "genres": [
+            "Strategy",
+            "Indie"
+          ]
+        },
+        {
+          "title": "Cyber Avenger",
+          "cut": 96,
+          "price": {
+            "amount": 1060,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 0,
+          "metacritic": null,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Casual",
+            "Strategy",
+            "Sports",
+            "Indie"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "category": "compare",
+      "prompt": "Vampire Survivors 어디가 싼지 알려줘",
+      "tool": "compare_game_price",
+      "arguments": {
+        "title": "Vampire Survivors",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Vampire Survivors 현재 최저가는 5,000원이며 정가 대비 0% 할인 중입니다. 판매처 1곳 기준 최저가는 Steam입니다. 역대 최저가는 3,500원입니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Vampire Survivors",
+          "cut": 0,
+          "price": {
+            "amount": 5000,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.19,
+          "metacritic": null,
+          "genres": [
+            "Casual",
+            "Indie",
+            "Action",
+            "RPG"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "category": "explain",
+      "prompt": "Dead Cells 이번 할인, 역사적으로 보면 어때?",
+      "tool": "explain_deal_value",
+      "arguments": {
+        "title": "Dead Cells",
+        "country": "KR"
+      },
+      "isError": false,
+      "summary": "Dead Cells는 현재 17,896원이며 역대 최저가 10,320원보다 비쌉니다. 급하지 않다면 더 기다려볼 만합니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topMatches": [
+        {
+          "title": "Dead Cells",
+          "cut": 52,
+          "price": {
+            "amount": 17896,
+            "currency": "KRW"
+          },
+          "multiplayer": false,
+          "rating": 4.23,
+          "metacritic": 88,
+          "genres": [
+            "Platformer",
+            "Indie",
+            "Action",
+            "RPG"
+          ]
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "category": "recommend",
+      "prompt": "스팀덱에서 패드로 하기 편한 로그라이크 할인작 추천해줘",
+      "tool": "recommend_sale_games",
+      "arguments": {
+        "preferences": "스팀덱에서 하기 좋은 로그라이크/로그라이트 위주",
+        "budget": 20000,
+        "platforms": [
+          "Steam Deck"
+        ],
+        "country": "KR"
+      },
+      "isError": true,
+      "summary": "QA case 20 timed out",
+      "warnings": [],
+      "matchCount": 0,
+      "topMatches": [],
+      "transportError": true
+    }
+  ]
+}

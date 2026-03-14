@@ -2,6 +2,37 @@ import type { DealsEnrichment, DiscoverFilters, DealCandidate } from "./score.js
 import { filterJunkCandidates, scoreDealCandidates } from "./score.js";
 import { formatKoreanPriceSummary, formatPrice } from "../presentation/summary.js";
 import type { DealResolution, ResolveDealOptions } from "../providers/itad-client.js";
+import { parseRecommendationIntent } from "./intent-lexicon.js";
+import {
+  applyRecommendationConstraintOverrides,
+  applyRecommendationHardConstraints,
+  parseRecommendationConstraints,
+  type RecommendationConstraints
+} from "./recommendation-constraints.js";
+import {
+  createRecommendationExecutionBudget,
+  type RecommendationExecutionBudget
+} from "./recommendation-execution-budget.js";
+import {
+  buildRecommendationCatalogMixPlan,
+  filterRecommendationCatalogCandidates,
+  splitRecommendationCatalogResolvedDeals
+} from "./recommendation-candidate-mixer.js";
+import {
+  applyRecommendationDegradedMode,
+  RECOMMENDATION_DEGRADED_MODE_WARNING
+} from "./recommendation-degraded-mode.js";
+import {
+  buildRecommendationSparseRecoveryProfile,
+  type RecommendationRecoveryKind,
+  type RecommendationRecoveryProfile
+} from "./recommendation-recovery-profile.js";
+import {
+  rankRecommendationRecoveryCandidates,
+  type RecommendationRecoveryRankingProfile
+} from "./recommendation-recovery-ranking.js";
+import { applyRecommendationReranker } from "./recommendation-reranker.js";
+import { findBestRecommendationTitleMatch } from "./recommendation-title-matcher.js";
 
 export interface SearchCandidate {
   id: string;
@@ -44,6 +75,9 @@ interface BroadIntentSignals {
   requestedGenres: string[];
 }
 
+type RecommendationSocialPromptProfile = "generic-coop" | "party-hangout";
+type RecommendationSocialCandidateTier = "strict" | "rescue" | "reject";
+
 export interface GameProviders {
   findDeals(args: DiscoverFilters & { country: string }): Promise<DealCandidate[]>;
   enrichDeals(
@@ -62,10 +96,35 @@ export interface GameProviders {
   discoverTitles?(input: CatalogDiscoveryInput): Promise<CatalogCandidate[]>;
 }
 
+interface GameDealServiceOptions {
+  recommendationTimeBudgetMs?: number | undefined;
+  now?: (() => number) | undefined;
+}
+
 export class GameDealService {
-  constructor(private readonly providers: GameProviders) {}
+  constructor(
+    private readonly providers: GameProviders,
+    private readonly options: GameDealServiceOptions = {}
+  ) {}
 
   async discoverDeals(args: DiscoverFilters & { country: string }): Promise<CompareResult> {
+    return this.discoverDealsInternal(args);
+  }
+
+  private async discoverDealsInternal(
+    args: DiscoverFilters & { country: string },
+    options?: {
+      maxSteamLookups?: number;
+      skipCatalogFallback?: boolean;
+      maxRawgLookups?: number;
+      collectRawCandidates?: ((deals: DealCandidate[]) => void) | undefined;
+      lenientFallbackMode?:
+        | "none"
+        | "genre-only"
+        | "genre-and-platform"
+        | "genre-platform-and-multiplayer";
+    }
+  ): Promise<CompareResult> {
     const country = args.country || "KR";
     const preferredShops = preferredShopsFromContext(args.platforms);
     const steamContext = (preferredShops?.length ?? 0) > 0;
@@ -97,12 +156,19 @@ export class GameDealService {
     const candidateDeals = filterJunkCandidates(baseDeals);
     let deals = candidateDeals;
     const broadIntentSignals = buildDiscoverBroadIntentSignals(args);
+    const lenientFallbackMode = options?.lenientFallbackMode ?? "none";
+    const allowLenientGenreFallback = lenientFallbackMode !== "none";
+    const allowLenientPlatformFallback =
+      lenientFallbackMode === "genre-and-platform" ||
+      lenientFallbackMode === "genre-platform-and-multiplayer";
 
     try {
       const enrichmentOptions = {
         includeSteamDeckCompatibility: steamContext,
-        maxRawgLookups: MAX_RAWG_ENRICHMENT,
-        ...(steamContext ? { maxSteamLookups: MAX_STEAM_ENRICHMENT } : {})
+        maxRawgLookups: options?.maxRawgLookups ?? MAX_RAWG_ENRICHMENT,
+        ...(steamContext
+          ? { maxSteamLookups: options?.maxSteamLookups ?? MAX_STEAM_ENRICHMENT }
+          : {})
       };
       const enrichment = normalizeEnrichmentResult(
         await this.providers.enrichDeals(candidateDeals, enrichmentOptions)
@@ -113,12 +179,21 @@ export class GameDealService {
       warnings.push(toWarning(error, "RAWG 메타데이터를 불러오지 못해 가격 정보만 표시했습니다."));
     }
 
-    let rankedDeals = applySteamDeckCompatibilityPreference(
-      scoreDealCandidates(deals, { ...args, preferredShops }),
-      steamDeckRequest
+    options?.collectRawCandidates?.(
+      deals.filter((deal) => deal.cut > 0 && !isRecommendationOverlayBrowseJunk(deal))
     );
 
+    let rankedDeals = rankDiscoverDealsWithLenientFallback({
+      deals,
+      filters: args,
+      preferredShops,
+      steamDeckRequest,
+      warnings,
+      lenientFallbackMode
+    });
+
     if (
+      !options?.skipCatalogFallback &&
       rankedDeals.length === 0 &&
       steamDeckRequest &&
       hasRoguelikeIntent(args.genres ?? []) &&
@@ -159,7 +234,12 @@ export class GameDealService {
       }
     }
 
-    if (rankedDeals.length < 5 && this.providers.discoverTitles && this.providers.resolveDeal) {
+    if (
+      !options?.skipCatalogFallback &&
+      rankedDeals.length < 5 &&
+      this.providers.discoverTitles &&
+      this.providers.resolveDeal
+    ) {
       const fallbackSignals = catalogSignalsFromFilters(args);
       if (fallbackSignals.tags.length > 0 || fallbackSignals.rawgGenres.length > 0) {
         try {
@@ -173,13 +253,14 @@ export class GameDealService {
           maxMatches: 5,
           maxResolutions: 8
         });
-          rankedDeals = applySteamDeckCompatibilityPreference(
-            scoreDealCandidates(dedupeDeals([...rankedDeals, ...fallback.matches]), {
-              ...args,
-              preferredShops
-            }),
-            steamDeckRequest
-          );
+          rankedDeals = rankDiscoverDealsWithLenientFallback({
+            deals: dedupeDeals([...rankedDeals, ...fallback.matches]),
+            filters: args,
+            preferredShops,
+            steamDeckRequest,
+            warnings,
+            lenientFallbackMode
+          });
           warnings.push(...fallback.warnings);
         } catch (error) {
           warnings.push(
@@ -228,11 +309,29 @@ export class GameDealService {
     country: string;
   }): Promise<CompareResult> {
     const country = args.country || "KR";
-    const preferences = parsePreferenceSignals(args.preferences);
-    const multiplayer = preferences.multiplayer || /협동|co-?op|멀티/i.test(args.preferences);
+    const constraints = parseRecommendationConstraints(args.preferences);
+    const parsedPreferences = parsePreferenceSignals(args.preferences, constraints);
+    const multiplayer =
+      parsedPreferences.multiplayer ||
+      constraints.coopMode.length > 0 ||
+      /협동|co-?op|멀티|teamplay|multiplayer/i.test(args.preferences);
+    const preferences = {
+      ...parsedPreferences,
+      multiplayer
+    };
     const effectivePlatforms = uniqueValues([...(args.platforms ?? []), ...preferences.platforms]);
     const preferredShops = preferredShopsFromContext(effectivePlatforms, args.preferences);
     const steamDeckRequest = hasSteamDeckRequest(effectivePlatforms);
+    const executionProfile = buildRecommendationExecutionProfile({
+      rawPreferences: args.preferences,
+      preferences,
+      constraints,
+      steamDeckRequest
+    });
+    const executionBudget = createRecommendationExecutionBudget({
+      totalMs: this.options.recommendationTimeBudgetMs ?? executionProfile.totalBudgetMs,
+      now: this.options.now
+    });
     const discoverArgs: DiscoverFilters & { country: string } = {
       country,
       sort: "best-value",
@@ -262,17 +361,50 @@ export class GameDealService {
       effectivePlatforms,
       multiplayer
     );
+    const socialPromptProfile = buildRecommendationSocialPromptProfile({
+      rawPreferences: args.preferences,
+      multiplayer,
+      constraints
+    });
+    const simpleSocialPrompt = executionProfile.simpleSocialPrompt;
+    const strictSocialProfile = shouldUseStrictSocialPromptProfile({
+      rawPreferences: args.preferences,
+      constraints,
+      socialProfile: socialPromptProfile
+    });
+    const effectiveSocialProfile =
+      strictSocialProfile || !simpleSocialPrompt ? socialPromptProfile ?? undefined : undefined;
+    const effectiveSocialGuardrailProfile =
+      strictSocialProfile || !simpleSocialPrompt ? socialPromptProfile : null;
     let base: CompareResult | null = null;
     let matches: DealCandidate[] = [];
+    let degradedCandidates: DealCandidate[] = [];
+    let rawBrowseCandidates: DealCandidate[] = [];
+    let rawSteamDeckStrategyBrowseCandidates: DealCandidate[] = [];
+    let rawSocialBrowseCandidates: DealCandidate[] = [];
     const warnings: string[] = [];
     let attemptedTargetedRecovery = false;
+    let sparseRecoveryApplied = false;
+    const nonSteamHighRatingStrategyRequest =
+      !steamDeckRequest &&
+      preferences.highRating &&
+      preferences.rawgGenres.includes("strategy");
     const hasStrongCatalogIntent =
-      preferences.deckbuilding || hasActionRogueliteIntent(preferences.genres);
+      preferences.deckbuilding ||
+      hasActionRogueliteIntent(preferences.genres) ||
+      nonSteamHighRatingStrategyRequest;
     const genericSteamRoguelikeRequest =
       steamDeckRequest &&
       hasRoguelikeIntent(preferences.genres) &&
       !preferences.deckbuilding &&
       !hasActionRogueliteIntent(preferences.genres);
+    const preferSteamDeckBrowseFirst = steamDeckRequest && !hasStrongCatalogIntent;
+    const strategyBrowseRawgBudget =
+      !steamDeckRequest &&
+      preferences.highRating &&
+      preferences.rawgGenres.includes("strategy")
+        ? RECOMMENDATION_STRATEGY_RAWG_ENRICHMENT
+        : executionProfile.baseBrowseRawgLookups;
 
     const canUseCatalogFirst =
       hasStrongCatalogIntent &&
@@ -280,8 +412,143 @@ export class GameDealService {
       this.providers.resolveDeal &&
       (preferences.tags.length > 0 || preferences.rawgGenres.length > 0);
 
+    const applyHardConstraints = (deals: DealCandidate[]): DealCandidate[] =>
+      applyRecommendationHardConstraints(deals, constraints);
+    const mergeDegradedCandidates = (incoming: DealCandidate[]): void => {
+      degradedCandidates = mergeRecommendationCandidates(
+        degradedCandidates,
+        applyHardConstraints(incoming)
+      );
+    };
+    const mergeRawBrowseCandidates = (incoming: DealCandidate[]): void => {
+      rawBrowseCandidates = mergeRecommendationCandidates(
+        rawBrowseCandidates,
+        incoming.filter(
+          (deal) =>
+            deal.cut > 0 &&
+            !deal.genres.some((genre) => excluded.has(genre.trim().toLowerCase())) &&
+            !isRecommendationOverlayBrowseJunk(deal)
+        )
+      );
+    };
+    const mergeRawSteamDeckStrategyBrowseCandidates = (incoming: DealCandidate[]): void => {
+      rawSteamDeckStrategyBrowseCandidates = mergeRecommendationCandidates(
+        rawSteamDeckStrategyBrowseCandidates,
+        incoming.filter((deal) => deal.cut > 0 && !isRecommendationOverlayBrowseJunk(deal))
+      );
+    };
+    const mergeRawSocialBrowseCandidates = (incoming: DealCandidate[]): void => {
+      if (!socialPromptProfile) {
+        return;
+      }
+
+      rawSocialBrowseCandidates = mergeRecommendationCandidates(
+        rawSocialBrowseCandidates,
+        incoming.filter((deal) =>
+          matchesRecommendationRawSocialBrowseCandidate(deal, {
+            requestedPlatforms: effectivePlatforms,
+            budget: args.budget,
+            constraints,
+            socialProfile: effectiveSocialProfile
+          })
+        )
+      );
+    };
+    const finalizeRecommendationMatches = (deals: DealCandidate[]): DealCandidate[] =>
+      applyRecommendationSocialPromptGuardrail(
+        applyRecommendationQualityGates(
+          applySteamDeckCompatibilityPreference(applyHardConstraints(deals), steamDeckRequest),
+          preferences
+        ),
+        {
+          socialProfile: effectiveSocialGuardrailProfile,
+          requestedPlatforms: effectivePlatforms,
+          budget: args.budget,
+          constraints,
+          allowRescueTier: hasSocialEvidenceRescueSignal(warnings)
+        }
+      );
+    const runSparseRecoveryProfile = async (
+      profile: RecommendationRecoveryProfile
+    ): Promise<{ matches: DealCandidate[]; warnings: string[]; applied: boolean }> => {
+      if (!executionBudget || executionBudget.has(MIN_RECOMMENDATION_RECOVERY_BUDGET_MS)) {
+        const recovery = await this.recoverSparseRecommendationMatches({
+          profile,
+          rawPreferences: args.preferences,
+          country,
+          filters: discoverArgs,
+          preferences,
+          constraints,
+          excluded,
+          preferredShops,
+          steamDeckRequest,
+          simpleSocialPrompt,
+          socialPromptProfile: effectiveSocialProfile,
+          executionBudget
+        });
+
+        return {
+          matches: recovery.matches,
+          warnings: recovery.warnings,
+          applied: recovery.matches.length > 0
+        };
+      }
+
+      if (
+        executionBudget.has(executionProfile.lastChanceRecoveryMinMs) &&
+        supportsLastChanceSparseRecovery(profile.kind)
+      ) {
+        const recovery = await this.recoverSparseRecommendationMatches({
+          profile: buildLastChanceSparseRecoveryProfile(profile, simpleSocialPrompt),
+          rawPreferences: args.preferences,
+          country,
+          filters: discoverArgs,
+          preferences,
+            constraints,
+            excluded,
+            preferredShops,
+            steamDeckRequest,
+            simpleSocialPrompt,
+            socialPromptProfile: effectiveSocialProfile,
+            executionBudget
+          });
+
+        return {
+          matches: recovery.matches,
+          warnings: [
+            ...takeBudgetWarning(executionBudget, "recommendation-recovery"),
+            ...recovery.warnings
+          ],
+          applied: recovery.matches.length > 0
+        };
+      }
+
+      return {
+        matches: [],
+        warnings: takeBudgetWarning(executionBudget, "recommendation-recovery"),
+        applied: false
+      };
+    };
+    const shouldCollectRawSteamDeckStrategyBrowseCandidates =
+      steamDeckRequest &&
+      (preferences.rawgGenres.includes("strategy") || constraints.strategySignal);
+    const shouldCollectRawOverlayBrowseCandidates =
+      shouldCollectRawSteamDeckStrategyBrowseCandidates ||
+      nonSteamHighRatingStrategyRequest ||
+      preferences.deckbuilding ||
+      constraints.deckPreference === "required" ||
+      constraints.deckSignal;
+
     if (canUseCatalogFirst) {
       try {
+        const strategyRecoveryRankingProfile = nonSteamHighRatingStrategyRequest
+          ? buildRecommendationRecoveryRankingProfile(
+              "non-steam-strategy-rating",
+              args.preferences,
+              preferences,
+              constraints
+            )
+          : null;
         const catalogMatches = await this.resolveCatalogCandidates({
           country,
           filters: discoverArgs,
@@ -289,30 +556,59 @@ export class GameDealService {
           rawgGenres: preferences.rawgGenres,
           excluded,
           preferredShops,
-          maxMatches: 3,
-          maxResolutions: (preferredShops?.length ?? 0) > 0 ? 3 : 5
+          executionBudget,
+          skipWarningKey: "recommendation-recovery",
+          maxMatches: nonSteamHighRatingStrategyRequest ? 2 : 3,
+          maxResolutions: nonSteamHighRatingStrategyRequest
+            ? 6
+            : (preferredShops?.length ?? 0) > 0
+              ? 3
+              : 5,
+          catalogLimit: nonSteamHighRatingStrategyRequest ? 8 : undefined,
+          candidateSorter: strategyRecoveryRankingProfile
+            ? (candidates) =>
+                rankRecommendationRecoveryCandidates(candidates, strategyRecoveryRankingProfile)
+            : undefined,
+          acceptedDealFilter: strategyRecoveryRankingProfile
+            ? (deal) =>
+                matchesSparseRecoveryDeal(
+                  deal,
+                  "non-steam-strategy-rating",
+                  constraints,
+                  preferences,
+                  false
+                )
+            : undefined
         });
 
-        matches = applyRecommendationQualityGates(
-          applySteamDeckCompatibilityPreference(catalogMatches.matches, steamDeckRequest),
-          preferences
-        );
+        matches = finalizeRecommendationMatches(catalogMatches.matches);
+        mergeDegradedCandidates(catalogMatches.matches);
         warnings.push(...catalogMatches.warnings);
 
         if (matches.length === 0) {
-          attemptedTargetedRecovery = true;
-          const recovery = await this.recoverRecommendationMatches({
-            country,
-            filters: discoverArgs,
-            preferences,
-            excluded,
-            preferredShops,
-            steamDeckRequest,
-            skipPrimaryAttempt: true
-          });
+          if (nonSteamHighRatingStrategyRequest) {
+            attemptedTargetedRecovery = true;
+          } else {
+            attemptedTargetedRecovery = true;
+            if (!executionBudget || executionBudget.has(MIN_RECOMMENDATION_RECOVERY_BUDGET_MS)) {
+              const recovery = await this.recoverRecommendationMatches({
+                country,
+                filters: discoverArgs,
+                preferences,
+                excluded,
+                preferredShops,
+                steamDeckRequest,
+                skipPrimaryAttempt: true,
+                executionBudget
+              });
 
-          matches = recovery.matches;
-          warnings.push(...recovery.warnings);
+              matches = recovery.matches;
+              mergeDegradedCandidates(recovery.matches);
+              warnings.push(...recovery.warnings);
+            } else {
+              warnings.push(...takeBudgetWarning(executionBudget, "recommendation-recovery"));
+            }
+          }
         }
       } catch (error) {
         warnings.push(
@@ -321,26 +617,83 @@ export class GameDealService {
       }
     }
 
-    matches = applyRecommendationQualityGates(
-      applySteamDeckCompatibilityPreference(matches, steamDeckRequest),
-      preferences
-    );
+    matches = finalizeRecommendationMatches(matches);
 
-    if (matches.length === 0 && genericSteamRoguelikeRequest && !attemptedTargetedRecovery) {
-      try {
-        const recovery = await this.recoverRecommendationMatches({
-          country,
-          filters: discoverArgs,
-          preferences,
-          excluded,
-          preferredShops,
-          steamDeckRequest,
-          skipPrimaryAttempt: false
+    if (matches.length === 0 && preferSteamDeckBrowseFirst) {
+      if (executionBudget.has(executionProfile.baseBrowseMinMs)) {
+        base = await this.discoverDealsInternal(discoverArgs, {
+          maxSteamLookups: RECOMMENDATION_STEAM_ENRICHMENT,
+          ...(shouldCollectRawOverlayBrowseCandidates
+            ? {
+                collectRawCandidates: (deals) => {
+                  mergeRawBrowseCandidates(deals);
+                  if (shouldCollectRawSteamDeckStrategyBrowseCandidates) {
+                    mergeRawSteamDeckStrategyBrowseCandidates(deals);
+                  }
+                }
+              }
+            : {}),
+          skipCatalogFallback:
+            steamDeckRequest ||
+            (hasStrongCatalogIntent &&
+              executionBudget.remainingMs() < MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS),
+          lenientFallbackMode: simpleSocialPrompt
+            ? "genre-platform-and-multiplayer"
+            : "genre-only"
         });
+        mergeRawSocialBrowseCandidates(base.matches as DealCandidate[]);
+        matches = (base.matches as DealCandidate[]).filter(
+          (deal) => !deal.genres.some((genre) => excluded.has(genre.trim().toLowerCase()))
+        );
+        mergeRawBrowseCandidates(matches);
+        mergeDegradedCandidates(matches);
+        warnings.push(...base.warnings);
 
-        matches = recovery.matches;
-        warnings.push(...recovery.warnings);
+        matches = finalizeRecommendationMatches(matches);
+      } else {
+        warnings.push(...takeBudgetWarning(executionBudget, "recommendation-browse"));
+      }
+    }
+
+    let pendingSparseRecoveryProfile =
+      this.providers.discoverTitles && this.providers.resolveDeal
+        ? buildRecommendationSparseRecoveryProfile({
+            currentMatches: matches,
+            preferences,
+            constraints,
+            steamDeckRequest,
+            simpleSocialPrompt
+          })
+        : null;
+    const pendingSparseRecoveryKind = pendingSparseRecoveryProfile?.kind ?? null;
+    let sparseRecoveryAttempted = false;
+
+    if (
+      matches.length === 0 &&
+      genericSteamRoguelikeRequest &&
+      !attemptedTargetedRecovery &&
+      pendingSparseRecoveryKind == null
+    ) {
+      try {
         attemptedTargetedRecovery = true;
+        if (!executionBudget || executionBudget.has(MIN_GENERIC_STEAM_RECOVERY_BUDGET_MS)) {
+          const recovery = await this.recoverRecommendationMatches({
+            country,
+            filters: discoverArgs,
+            preferences,
+            excluded,
+            preferredShops,
+            steamDeckRequest,
+            skipPrimaryAttempt: false,
+            executionBudget
+          });
+
+          matches = recovery.matches;
+          mergeDegradedCandidates(recovery.matches);
+          warnings.push(...recovery.warnings);
+        } else {
+          warnings.push(...takeBudgetWarning(executionBudget, "recommendation-recovery"));
+        }
       } catch (error) {
         warnings.push(
           toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
@@ -348,37 +701,389 @@ export class GameDealService {
       }
     }
 
-    if (matches.length === 0) {
-      base = await this.discoverDeals(discoverArgs);
-      matches = (base.matches as DealCandidate[]).filter(
-        (deal) => !deal.genres.some((genre) => excluded.has(genre.trim().toLowerCase()))
-      );
-      warnings.push(...base.warnings);
-
-      matches = applyRecommendationQualityGates(
-        applySteamDeckCompatibilityPreference(matches, steamDeckRequest),
-        preferences
-      );
-    }
-
-    if (matches.length === 0 && !attemptedTargetedRecovery) {
+    if (
+      matches.length === 0 &&
+      !steamDeckRequest &&
+      simpleSocialPrompt &&
+      pendingSparseRecoveryProfile?.kind === "broad-multiplayer"
+    ) {
       try {
-        const recovery = await this.recoverRecommendationMatches({
-          country,
-          filters: discoverArgs,
-          preferences,
-          excluded,
-          preferredShops,
-          steamDeckRequest,
-          skipPrimaryAttempt: false
-        });
-
-        matches = recovery.matches;
+        sparseRecoveryAttempted = true;
+        const recovery = await runSparseRecoveryProfile(pendingSparseRecoveryProfile);
+        matches = finalizeRecommendationMatches(
+          mergeRecommendationCandidates(matches, recovery.matches)
+        );
+        mergeDegradedCandidates(recovery.matches);
         warnings.push(...recovery.warnings);
+        sparseRecoveryApplied = recovery.applied;
       } catch (error) {
         warnings.push(
           toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
         );
+      }
+    }
+
+    if (matches.length === 0 && !preferSteamDeckBrowseFirst) {
+      if (executionBudget.has(executionProfile.baseBrowseMinMs)) {
+        base = await this.discoverDealsInternal(discoverArgs, {
+          ...(strategyBrowseRawgBudget ? { maxRawgLookups: strategyBrowseRawgBudget } : {}),
+          maxSteamLookups: RECOMMENDATION_STEAM_ENRICHMENT,
+          ...(shouldCollectRawOverlayBrowseCandidates
+            ? {
+                collectRawCandidates: (deals) => {
+                  mergeRawBrowseCandidates(deals);
+                  if (shouldCollectRawSteamDeckStrategyBrowseCandidates) {
+                    mergeRawSteamDeckStrategyBrowseCandidates(deals);
+                  }
+                }
+              }
+            : {}),
+          skipCatalogFallback:
+            steamDeckRequest ||
+            (hasStrongCatalogIntent &&
+              executionBudget.remainingMs() < MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS),
+          lenientFallbackMode: simpleSocialPrompt
+            ? "genre-platform-and-multiplayer"
+            : "genre-only"
+        });
+        mergeRawSocialBrowseCandidates(base.matches as DealCandidate[]);
+        matches = (base.matches as DealCandidate[]).filter(
+          (deal) => !deal.genres.some((genre) => excluded.has(genre.trim().toLowerCase()))
+        );
+        mergeRawBrowseCandidates(matches);
+        mergeDegradedCandidates(matches);
+        warnings.push(...base.warnings);
+
+        matches = finalizeRecommendationMatches(matches);
+      } else {
+        warnings.push(...takeBudgetWarning(executionBudget, "recommendation-browse"));
+      }
+    }
+
+    if (matches.length === 0 && !attemptedTargetedRecovery && pendingSparseRecoveryKind == null) {
+      try {
+        attemptedTargetedRecovery = true;
+        if (!executionBudget || executionBudget.has(MIN_RECOMMENDATION_RECOVERY_BUDGET_MS)) {
+          const recovery = await this.recoverRecommendationMatches({
+            country,
+            filters: discoverArgs,
+            preferences,
+            excluded,
+            preferredShops,
+            steamDeckRequest,
+            skipPrimaryAttempt: false,
+            executionBudget
+          });
+
+          matches = recovery.matches;
+          mergeDegradedCandidates(recovery.matches);
+          warnings.push(...recovery.warnings);
+        } else {
+          warnings.push(...takeBudgetWarning(executionBudget, "recommendation-recovery"));
+        }
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+        );
+      }
+    }
+
+    if (
+      this.providers.discoverTitles &&
+      this.providers.resolveDeal &&
+      shouldAttemptShapeAwareRecovery({
+        rawPreferences: args.preferences,
+        currentMatches: matches,
+        preferences,
+        constraints
+      })
+    ) {
+      try {
+        if (!executionBudget || executionBudget.has(MIN_RECOMMENDATION_RECOVERY_BUDGET_MS)) {
+          const recovery = await this.recoverShapeAwareRecommendationMatches({
+            rawPreferences: args.preferences,
+            currentMatches: matches,
+            country,
+            filters: discoverArgs,
+            preferences,
+            constraints,
+            excluded,
+            preferredShops,
+            executionBudget
+          });
+
+          matches = finalizeRecommendationMatches(
+            mergeRecommendationCandidates(matches, recovery.matches)
+          );
+          mergeDegradedCandidates(recovery.matches);
+          warnings.push(...recovery.warnings);
+        } else {
+          warnings.push(...takeBudgetWarning(executionBudget, "recommendation-recovery"));
+        }
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+        );
+      }
+    }
+
+    if (this.providers.discoverTitles && this.providers.resolveDeal) {
+      const sparseRecoveryProfile =
+        sparseRecoveryAttempted && pendingSparseRecoveryProfile?.kind === "broad-multiplayer"
+          ? null
+          : pendingSparseRecoveryProfile ??
+            buildRecommendationSparseRecoveryProfile({
+              currentMatches: matches,
+              preferences,
+              constraints,
+              steamDeckRequest,
+              simpleSocialPrompt
+            });
+
+      if (sparseRecoveryProfile) {
+        try {
+          const recovery = await runSparseRecoveryProfile(sparseRecoveryProfile);
+          matches = finalizeRecommendationMatches(
+            mergeRecommendationCandidates(matches, recovery.matches)
+          );
+          mergeDegradedCandidates(recovery.matches);
+          warnings.push(...recovery.warnings);
+          sparseRecoveryApplied = recovery.applied;
+        } catch (error) {
+          warnings.push(
+            toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+          );
+        }
+      }
+    }
+
+    if (matches.length === 0 && !steamDeckRequest && preferences.multiplayer) {
+      try {
+        if (executionBudget.has(executionProfile.structuredBrowseMinMs)) {
+          const browseRecovery = await this.recoverStructuredMultiplayerBrowseMatches({
+            rawPreferences: args.preferences,
+            country,
+            budget: args.budget,
+            platforms: effectivePlatforms,
+            constraints,
+            executionBudget,
+            maxRawgLookups: executionProfile.structuredBrowseRawgLookups,
+            maxQueriesWhenTight: executionProfile.structuredBrowseTightQueryLimit,
+            fullBrowseMinMs: executionProfile.structuredBrowseFullMinMs,
+            socialProfile: effectiveSocialProfile
+          });
+
+          mergeRawSocialBrowseCandidates(browseRecovery.rawMatches);
+          matches = finalizeRecommendationMatches(
+            mergeRecommendationCandidates(matches, browseRecovery.matches)
+          );
+          mergeDegradedCandidates(browseRecovery.matches);
+          warnings.push(...browseRecovery.warnings);
+        } else {
+          warnings.push(...takeBudgetWarning(executionBudget, "recommendation-recovery"));
+        }
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+        );
+      }
+    }
+
+    const sparseOverlayProfile = buildRecommendationSparseRecoveryProfile({
+      currentMatches: matches,
+      preferences,
+      constraints,
+      steamDeckRequest,
+      simpleSocialPrompt
+    });
+    const providerOutageProfile = hasRecommendationProviderOutageWarning(warnings);
+    const useRawStrategyOverlayBase =
+      nonSteamHighRatingStrategyRequest &&
+      hasNonSteamStrategyOverlayRecoverySignal(warnings) &&
+      rawBrowseCandidates.length > 0;
+    const useRawSimpleSocialOverlayBase =
+      socialPromptProfile &&
+      hasSimpleSocialOverlayRecoverySignal(warnings) &&
+      rawSocialBrowseCandidates.length > 0;
+    const useRawSteamDeckStrategyOverlayBase =
+      hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings) &&
+      rawSteamDeckStrategyBrowseCandidates.length > 0 &&
+      sparseOverlayProfile !== null &&
+      isSteamDeckStrategyOverlayKind(sparseOverlayProfile.kind);
+    const useRawDeckbuildingOverlayBase =
+      rawBrowseCandidates.length > 0 &&
+      sparseOverlayProfile?.kind === "deckbuilding-card" &&
+      (hasMetadataOmissionWarning(warnings) ||
+        hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings));
+    const useRawProviderOutageOverlayBase =
+      providerOutageProfile &&
+      rawBrowseCandidates.length > 0 &&
+      sparseOverlayProfile !== null &&
+      (sparseOverlayProfile.kind === "deckbuilding-card" ||
+        sparseOverlayProfile.kind === "non-steam-strategy-rating" ||
+        isSteamDeckSparseRecoveryKind(sparseOverlayProfile.kind));
+    const effectiveSparseOverlayProfile =
+      useRawSteamDeckStrategyOverlayBase && sparseOverlayProfile
+        ? widenSteamDeckStrategyOverlayProfile(sparseOverlayProfile)
+        : sparseOverlayProfile;
+    const overlayBaseMatches = useRawStrategyOverlayBase
+      ? rawBrowseCandidates
+      : useRawSimpleSocialOverlayBase
+        ? rawSocialBrowseCandidates
+        : useRawSteamDeckStrategyOverlayBase
+          ? rawSteamDeckStrategyBrowseCandidates
+        : useRawDeckbuildingOverlayBase
+          ? rawBrowseCandidates
+        : useRawProviderOutageOverlayBase
+          ? rawBrowseCandidates
+        : degradedCandidates;
+    const providerOutageOverlayRequired =
+      providerOutageProfile &&
+      effectiveSparseOverlayProfile !== null &&
+      shouldAttemptProviderOutageOverlay({
+        matches,
+        kind: effectiveSparseOverlayProfile.kind,
+        constraints,
+        preferences,
+        steamDeckRequest,
+        socialProfile: effectiveSocialProfile
+      });
+
+    if (
+      (matches.length === 0 || providerOutageOverlayRequired) &&
+      overlayBaseMatches.length > 0 &&
+      this.providers.discoverTitles &&
+      (!steamDeckRequest ||
+        hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings) ||
+        useRawStrategyOverlayBase ||
+        useRawSimpleSocialOverlayBase ||
+        useRawSteamDeckStrategyOverlayBase ||
+        useRawDeckbuildingOverlayBase ||
+        useRawProviderOutageOverlayBase)
+    ) {
+      if (effectiveSparseOverlayProfile) {
+        try {
+          if (executionBudget.has(executionProfile.metadataOverlayMinMs)) {
+            const overlay = await this.overlaySparseRecoveryCatalogMetadata({
+              profile: effectiveSparseOverlayProfile,
+              baseMatches: overlayBaseMatches,
+              filters: discoverArgs,
+              constraints,
+              preferences,
+              steamDeckRequest,
+              socialProfile: effectiveSocialProfile,
+              executionBudget
+            });
+
+            const overlayMatches = providerOutageProfile
+              ? overlay.matches.filter((deal) =>
+                  matchesProviderOutageOverlayDeal(deal, {
+                    kind: effectiveSparseOverlayProfile.kind,
+                    constraints,
+                    preferences,
+                    steamDeckRequest,
+                    requestedPlatforms: effectivePlatforms,
+                    budget: args.budget,
+                    socialProfile: effectiveSocialProfile
+                  })
+                )
+              : overlay.matches;
+            const overlaidMatches = providerOutageOverlayRequired
+              ? mergeRecommendationCandidates(overlayMatches, matches)
+              : mergeRecommendationCandidates(matches, overlayMatches);
+            const strictOverlayMatches = finalizeRecommendationMatches(overlaidMatches);
+            matches =
+              strictOverlayMatches.length === 0 &&
+              shouldApplyWarningTriggeredSteamDeckOverlayFallback({
+                steamDeckRequest,
+                warnings: [...warnings, ...overlay.warnings],
+                kind: effectiveSparseOverlayProfile.kind
+              })
+                ? applyWarningTriggeredSteamDeckOverlayFallback({
+                    matches: overlaidMatches,
+                    kind: effectiveSparseOverlayProfile.kind,
+                    filters: discoverArgs,
+                    preferences,
+                    constraints
+                  }).slice(0, effectiveSparseOverlayProfile.maxMatches)
+                : strictOverlayMatches;
+            mergeDegradedCandidates(overlayMatches);
+            warnings.push(...overlay.warnings);
+          } else {
+            warnings.push(...takeBudgetWarning(executionBudget, "recommendation-recovery"));
+          }
+        } catch (error) {
+          warnings.push(
+            toWarning(error, "추가 추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+          );
+        }
+      }
+    }
+
+    if (
+      matches.length === 0 &&
+      strictSocialProfile &&
+      effectiveSocialProfile &&
+      hasSocialEvidenceRescueSignal(warnings)
+    ) {
+      const richSocialRescue = recoverRichSocialPromptMatches({
+        deals: mergeRecommendationCandidates(rawSocialBrowseCandidates, degradedCandidates),
+        requestedPlatforms: effectivePlatforms,
+        budget: args.budget,
+        constraints,
+        socialProfile: effectiveSocialProfile
+      });
+
+      if (richSocialRescue.length > 0) {
+        matches = richSocialRescue;
+      }
+    }
+
+    if (matches.length > 0 && !sparseRecoveryApplied) {
+      try {
+        if (executionBudget.has(executionProfile.mixingMinMs)) {
+          const mixed = await this.mixRecommendationCatalogCandidates({
+            currentMatches: matches,
+            rawPreferences: args.preferences,
+            preferences,
+            platforms: effectivePlatforms,
+            constraints,
+            country,
+            preferredShops,
+            executionBudget
+          });
+
+          matches = applyRecommendationQualityGates(
+            applySteamDeckCompatibilityPreference(
+              applyRecommendationHardConstraints(mixed.matches, constraints),
+              steamDeckRequest
+            ),
+            preferences
+          );
+          mergeDegradedCandidates(mixed.matches);
+          warnings.push(...mixed.warnings);
+        } else {
+          warnings.push(...takeBudgetWarning(executionBudget, "recommendation-mixing"));
+        }
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+        );
+      }
+    }
+
+    if (matches.length === 0) {
+      const degraded = applyRecommendationDegradedMode({
+        deals: degradedCandidates,
+        warnings,
+        preferences,
+        steamDeckRequest,
+        constraints
+      });
+
+      if (degraded.applied && degraded.matches.length > 0) {
+        matches = degraded.matches;
+        warnings.push(RECOMMENDATION_DEGRADED_MODE_WARNING);
       }
     }
 
@@ -407,6 +1112,12 @@ export class GameDealService {
     }
 
     matches = applyBroadIntentRanking(matches, broadIntentSignals);
+    matches = applyRecommendationReranker(matches, {
+      rawPreferences: args.preferences,
+      preferences,
+      platforms: effectivePlatforms,
+      constraints
+    });
 
     const top = matches[0];
     if (!top) {
@@ -565,17 +1276,31 @@ export class GameDealService {
   private async resolveCatalogCandidates(args: {
     country: string;
     filters: DiscoverFilters & { country: string };
-    tags: string[];
-    rawgGenres: string[];
+    tags?: string[] | undefined;
+    rawgGenres?: string[] | undefined;
     excluded: Set<string>;
     preferredShops?: number[] | undefined;
     candidateFilter?: ((candidate: CatalogCandidate) => boolean) | undefined;
+    candidateSorter?: ((candidates: CatalogCandidate[]) => CatalogCandidate[]) | undefined;
+    acceptedDealFilter?: ((deal: DealCandidate) => boolean) | undefined;
+    stopAfterAcceptedMatch?: boolean | undefined;
+    executionBudget?: RecommendationExecutionBudget | undefined;
+    skipWarningKey?: string | undefined;
     maxMatches?: number | undefined;
     maxResolutions?: number | undefined;
     catalogLimit?: number | undefined;
-  }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
+    seenCandidateKeys?: Set<string> | undefined;
+  }): Promise<{ matches: DealCandidate[]; warnings: string[]; resolvedCount: number }> {
     if (!this.providers.discoverTitles || !this.providers.resolveDeal) {
-      return { matches: [], warnings: [] };
+      return { matches: [], warnings: [], resolvedCount: 0 };
+    }
+
+    if (args.executionBudget && !args.executionBudget.has(MIN_RESOLVE_DEAL_BUDGET_MS)) {
+      return {
+        matches: [],
+        warnings: takeBudgetWarning(args.executionBudget, args.skipWarningKey ?? "catalog-resolution"),
+        resolvedCount: 0
+      };
     }
 
     const catalog = await this.providers.discoverTitles({
@@ -585,13 +1310,35 @@ export class GameDealService {
     });
 
     const warnings: string[] = [];
-    const filteredCatalog = filterCatalogCandidates(catalog).filter(
-      (candidate) => args.candidateFilter?.(candidate) ?? true
-    );
-    const matches: DealCandidate[] = [];
+    const filteredCatalog = filterCatalogCandidates(catalog).filter((candidate) => {
+      if (!(args.candidateFilter?.(candidate) ?? true)) {
+        return false;
+      }
 
-    for (const candidate of filteredCatalog.slice(0, args.maxResolutions ?? MAX_CATALOG_RESOLUTIONS)) {
+      if (!args.seenCandidateKeys) {
+        return true;
+      }
+
+      const key = candidate.title.trim().toLowerCase();
+      if (args.seenCandidateKeys.has(key)) {
+        return false;
+      }
+
+      args.seenCandidateKeys.add(key);
+      return true;
+    });
+    const rankedCatalog = args.candidateSorter ? args.candidateSorter(filteredCatalog) : filteredCatalog;
+    const matches: DealCandidate[] = [];
+    let resolvedCount = 0;
+
+    for (const candidate of rankedCatalog.slice(0, args.maxResolutions ?? MAX_CATALOG_RESOLUTIONS)) {
+      if (args.executionBudget && !args.executionBudget.has(MIN_RESOLVE_DEAL_BUDGET_MS)) {
+        warnings.push(...takeBudgetWarning(args.executionBudget, args.skipWarningKey ?? "catalog-resolution"));
+        break;
+      }
+
       let resolution: DealResolution;
+      resolvedCount += 1;
       try {
         resolution = await this.providers.resolveDeal!(candidate.title, args.country, {
           preferredShops: args.preferredShops,
@@ -613,17 +1360,26 @@ export class GameDealService {
         continue;
       }
 
-      matches.push(
-        ...((resolution.matches ?? [])
-          .filter(
-            (deal) =>
-              deal.cut > 0 &&
-              !deal.genres.some((genre) => args.excluded.has(genre.trim().toLowerCase()))
-          )
-          .map((deal) => mergeCatalogMetadata(deal, candidate, args.tags)))
+      const acceptedMatches = (resolution.matches ?? [])
+        .filter(
+          (deal) =>
+            deal.cut > 0 &&
+            !deal.genres.some((genre) => args.excluded.has(genre.trim().toLowerCase()))
+        )
+        .map((deal) => mergeCatalogMetadata(deal, candidate, args.tags))
+        .filter((deal) => (args.acceptedDealFilter?.(deal) ?? true));
+
+      matches.push(...acceptedMatches);
+      const viableMatches = scoreDealCandidates(dedupeDeals(matches), args.filters).slice(
+        0,
+        args.maxMatches ?? Number.POSITIVE_INFINITY
       );
 
-      if ((args.maxMatches ?? 0) > 0 && dedupeDeals(matches).length >= args.maxMatches!) {
+      if (
+        acceptedMatches.length > 0 &&
+        ((args.stopAfterAcceptedMatch && viableMatches.length > 0) ||
+          ((args.maxMatches ?? 0) > 0 && viableMatches.length >= args.maxMatches!))
+      ) {
         break;
       }
     }
@@ -633,7 +1389,8 @@ export class GameDealService {
         0,
         args.maxMatches ?? Number.POSITIVE_INFINITY
       ),
-      warnings
+      warnings,
+      resolvedCount
     };
   }
 
@@ -654,6 +1411,7 @@ export class GameDealService {
     preferredShops?: number[] | undefined;
     steamDeckRequest: boolean;
     skipPrimaryAttempt: boolean;
+    executionBudget?: RecommendationExecutionBudget | undefined;
   }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
     if (!this.providers.discoverTitles || !this.providers.resolveDeal) {
       return { matches: [], warnings: [] };
@@ -675,6 +1433,16 @@ export class GameDealService {
       !args.preferences.deckbuilding &&
       !hasActionRogueliteIntent(args.preferences.genres);
     const maxResolutions = broadSteamRoguelikeRecovery ? 8 : steamOnly ? 3 : 5;
+    const minimumBudget = broadSteamRoguelikeRecovery
+      ? MIN_GENERIC_STEAM_RECOVERY_BUDGET_MS
+      : MIN_RECOMMENDATION_RECOVERY_BUDGET_MS;
+
+    if (args.executionBudget && !args.executionBudget.has(minimumBudget)) {
+      return {
+        matches: [],
+        warnings: takeBudgetWarning(args.executionBudget, "recommendation-recovery")
+      };
+    }
 
     if (broadSteamRoguelikeRecovery) {
       const broadRecovery = await this.recoverBroadSteamRoguelikeDeals(args);
@@ -693,6 +1461,8 @@ export class GameDealService {
         rawgGenres: recoverySignals.rawgGenres,
         excluded: args.excluded,
         preferredShops: args.preferredShops,
+        executionBudget: args.executionBudget,
+        skipWarningKey: "recommendation-recovery",
         maxMatches: 3,
         maxResolutions,
         candidateFilter: (candidate) =>
@@ -716,6 +1486,368 @@ export class GameDealService {
 
     return { matches: [], warnings };
   }
+
+  private async recoverShapeAwareRecommendationMatches(args: {
+    rawPreferences: string;
+    currentMatches: DealCandidate[];
+    country: string;
+    filters: DiscoverFilters & { country: string };
+    preferences: {
+      genres: string[];
+      rawgGenres: string[];
+      platforms: string[];
+      tags: string[];
+      multiplayer: boolean;
+      deckbuilding: boolean;
+      highRating: boolean;
+      shortSession: boolean;
+    };
+    constraints: RecommendationConstraints;
+    excluded: Set<string>;
+    preferredShops?: number[] | undefined;
+    executionBudget?: RecommendationExecutionBudget | undefined;
+  }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
+    const warnings: string[] = [];
+    let matches: DealCandidate[] = [];
+
+    if (
+      shouldAttemptActionRecovery(args.currentMatches, args.preferences, args.constraints)
+    ) {
+      const recovered = await this.resolveCatalogCandidates({
+        country: args.country,
+        filters: args.filters,
+        tags: ["roguelike", "roguelite"],
+        rawgGenres: ["action"],
+        excluded: args.excluded,
+        preferredShops: args.preferredShops,
+        executionBudget: args.executionBudget,
+        skipWarningKey: "recommendation-recovery",
+        maxMatches: 2,
+        maxResolutions: 4,
+        catalogLimit: 8,
+        candidateFilter: (candidate) =>
+          matchesActionRecoveryCandidate(candidate, args.constraints)
+      });
+
+      warnings.push(...recovered.warnings);
+      matches = mergeRecommendationCandidates(
+        matches,
+        recovered.matches.filter((deal) => matchesActionRecoveryDeal(deal, args.constraints))
+      );
+    }
+
+    return { matches, warnings };
+  }
+
+  private async recoverSparseRecommendationMatches(args: {
+    profile: RecommendationRecoveryProfile;
+    rawPreferences: string;
+    country: string;
+    filters: DiscoverFilters & { country: string };
+    preferences: {
+      genres: string[];
+      rawgGenres: string[];
+      platforms: string[];
+      tags: string[];
+      multiplayer: boolean;
+      deckbuilding: boolean;
+      highRating: boolean;
+      shortSession: boolean;
+    };
+    constraints: RecommendationConstraints;
+    excluded: Set<string>;
+    preferredShops?: number[] | undefined;
+    steamDeckRequest: boolean;
+    simpleSocialPrompt?: boolean | undefined;
+    socialPromptProfile?: RecommendationSocialPromptProfile | null | undefined;
+    executionBudget?: RecommendationExecutionBudget | undefined;
+  }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
+    const warnings: string[] = [];
+    let matches: DealCandidate[] = [];
+    let remainingResolutions = args.profile.maxResolutions;
+    const seenCandidateKeys = new Set<string>();
+    const rankingProfile: RecommendationRecoveryRankingProfile = {
+      ...buildRecommendationRecoveryRankingProfile(
+        args.profile.kind,
+        args.rawPreferences,
+        args.preferences,
+        args.constraints,
+        args.filters.platforms ?? args.preferences.platforms,
+        args.simpleSocialPrompt,
+        args.socialPromptProfile ?? undefined
+      ),
+      shortSession: args.preferences.shortSession
+    };
+
+    for (const query of args.profile.queries.slice(0, args.profile.maxDiscoverCalls)) {
+      if (remainingResolutions <= 0) {
+        break;
+      }
+
+      const recovered = await this.resolveCatalogCandidates({
+        country: args.country,
+        filters: args.filters,
+        tags: query.tags,
+        rawgGenres: query.rawgGenres,
+        excluded: args.excluded,
+        preferredShops: args.preferredShops,
+        executionBudget: args.executionBudget,
+        skipWarningKey: "recommendation-recovery",
+        maxMatches: args.profile.maxMatches,
+        maxResolutions: remainingResolutions,
+        catalogLimit: query.limit,
+        seenCandidateKeys,
+        candidateSorter: (candidates) =>
+          rankRecommendationRecoveryCandidates(candidates, rankingProfile),
+        acceptedDealFilter: (deal) =>
+          matchesSparseRecoveryDeal(
+            deal,
+            args.profile.kind,
+            args.constraints,
+            args.preferences,
+            args.steamDeckRequest,
+            args.socialPromptProfile ?? undefined
+          ),
+        stopAfterAcceptedMatch: isDiscountSeekingSparseRecoveryKind(args.profile.kind),
+        candidateFilter: (candidate) =>
+          matchesSparseRecoveryCandidate(
+            candidate,
+            args.profile.kind,
+            args.constraints,
+            args.filters.platforms ?? args.preferences.platforms,
+            args.socialPromptProfile ?? undefined
+          )
+      });
+
+      warnings.push(...recovered.warnings);
+      remainingResolutions = Math.max(0, remainingResolutions - recovered.resolvedCount);
+      matches = mergeRecommendationCandidates(matches, recovered.matches);
+
+      if (recovered.matches.length > 0 && isDiscountSeekingSparseRecoveryKind(args.profile.kind)) {
+        break;
+      }
+
+      if (dedupeDeals(matches).length >= args.profile.maxMatches) {
+        break;
+      }
+    }
+
+    return {
+      matches: finalizeSparseRecoveryMatches(
+        matches,
+        args.profile.kind,
+        args.filters,
+        args.preferences,
+        args.steamDeckRequest
+      ).slice(0, args.profile.maxMatches),
+      warnings
+    };
+  }
+
+  private async overlaySparseRecoveryCatalogMetadata(args: {
+    profile: RecommendationRecoveryProfile;
+    baseMatches: DealCandidate[];
+    filters: DiscoverFilters & { country: string };
+    constraints: RecommendationConstraints;
+    preferences: {
+      shortSession: boolean;
+      platforms: string[];
+    };
+    steamDeckRequest: boolean;
+    socialProfile?: RecommendationSocialPromptProfile | null | undefined;
+    executionBudget?: RecommendationExecutionBudget | undefined;
+  }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
+    if (!this.providers.discoverTitles) {
+      return { matches: [], warnings: [] };
+    }
+
+    const warnings: string[] = [];
+    const seenCandidateKeys = new Set<string>();
+    const usedBaseKeys = new Set<string>();
+    let matches: DealCandidate[] = [];
+
+    for (const query of args.profile.queries.slice(0, args.profile.maxDiscoverCalls)) {
+      if (args.executionBudget && !args.executionBudget.has(MIN_CATALOG_METADATA_OVERLAY_BUDGET_MS)) {
+        warnings.push(...takeBudgetWarning(args.executionBudget, "recommendation-recovery"));
+        break;
+      }
+
+      const catalog = await this.providers.discoverTitles({
+        tags: query.tags,
+        genres: query.rawgGenres,
+        limit: query.limit
+      });
+
+      for (const candidate of filterCatalogCandidates(catalog)) {
+        if (
+          !matchesSparseRecoveryCandidate(
+            candidate,
+            args.profile.kind,
+            args.constraints,
+            args.filters.platforms ?? args.preferences.platforms,
+            args.socialProfile ?? undefined
+          )
+        ) {
+          continue;
+        }
+
+        const key = candidate.title.trim().toLowerCase();
+        if (seenCandidateKeys.has(key)) {
+          continue;
+        }
+
+        seenCandidateKeys.add(key);
+        const availableBaseMatches = args.baseMatches.filter(
+          (deal) => !usedBaseKeys.has(getRecommendationRecoveryDealKey(deal))
+        );
+        const titleMatch = findBestRecommendationTitleMatch(candidate.title, availableBaseMatches);
+        if (!titleMatch) {
+          continue;
+        }
+
+        const baseMatch = titleMatch.candidate;
+        const merged = mergeCatalogMetadata(baseMatch, candidate, query.tags);
+        if (
+          !matchesSparseRecoveryDeal(
+            merged,
+            args.profile.kind,
+            args.constraints,
+            args.preferences,
+            args.steamDeckRequest,
+            args.socialProfile ?? undefined
+          )
+        ) {
+          continue;
+        }
+
+        usedBaseKeys.add(getRecommendationRecoveryDealKey(baseMatch));
+        matches = mergeRecommendationCandidates(matches, [merged]);
+        if (dedupeDeals(matches).length >= 1) {
+          break;
+        }
+      }
+
+      if (dedupeDeals(matches).length >= 1) {
+        break;
+      }
+    }
+
+    return {
+      matches: finalizeSparseRecoveryMatches(
+        matches,
+        args.profile.kind,
+        args.filters,
+        args.preferences,
+        args.steamDeckRequest
+      ).slice(0, args.profile.maxMatches),
+      warnings
+    };
+  }
+
+  private async recoverStructuredMultiplayerBrowseMatches(args: {
+    rawPreferences: string;
+    country: string;
+    budget?: number | undefined;
+    platforms: string[];
+    constraints: RecommendationConstraints;
+    executionBudget?: RecommendationExecutionBudget | undefined;
+    maxRawgLookups: number;
+    maxQueriesWhenTight: number;
+    fullBrowseMinMs: number;
+    socialProfile?: RecommendationSocialPromptProfile | null | undefined;
+  }): Promise<{ matches: DealCandidate[]; rawMatches: DealCandidate[]; warnings: string[] }> {
+    const warnings: string[] = [];
+    let matches: DealCandidate[] = [];
+    let rawMatches: DealCandidate[] = [];
+    const queries = buildStructuredMultiplayerBrowseQueries(
+      args.rawPreferences,
+      args.constraints,
+      args.socialProfile ?? undefined
+    );
+    const limitedQueries =
+      args.executionBudget && !args.executionBudget.has(args.fullBrowseMinMs)
+        ? queries.slice(0, args.maxQueriesWhenTight)
+        : queries;
+
+    for (const query of limitedQueries) {
+      if (args.executionBudget && !args.executionBudget.has(MIN_RECOMMENDATION_BASE_BROWSE_BUDGET_MS)) {
+        warnings.push(...takeBudgetWarning(args.executionBudget, "recommendation-recovery"));
+        break;
+      }
+
+      const browse = await this.discoverDealsInternal(
+        {
+          country: args.country,
+          budget: args.budget,
+          platforms: args.platforms,
+          multiplayer: true,
+          sort: query.sort,
+          ...(query.genres ? { genres: query.genres } : {})
+        },
+        {
+          skipCatalogFallback: true,
+          lenientFallbackMode:
+            args.maxQueriesWhenTight > 2
+              ? "genre-platform-and-multiplayer"
+              : "genre-and-platform",
+          maxRawgLookups: args.maxRawgLookups
+        }
+      );
+
+      rawMatches = mergeRecommendationCandidates(rawMatches, browse.matches as DealCandidate[]);
+      warnings.push(...browse.warnings);
+
+      const accepted = rankStructuredMultiplayerBrowseDeals(
+        (browse.matches as DealCandidate[]).filter((deal) =>
+          matchesStructuredMultiplayerBrowseDeal(deal, {
+            requestedPlatforms: args.platforms,
+            budget: args.budget,
+            constraints: args.constraints,
+            partyPrompt: query.mode === "party",
+            reviewBacked: args.constraints.qualityIntent.includes("review-backed"),
+            socialProfile: args.socialProfile ?? undefined
+          })
+        ),
+        {
+          partyPrompt: query.mode === "party",
+          reviewBacked: args.constraints.qualityIntent.includes("review-backed"),
+          nonCompetitive:
+            args.constraints.coopMode.includes("non-competitive") ||
+            args.constraints.excludeGenres.includes("pvp"),
+          excludeRacingOrSports:
+            args.constraints.excludeGenres.includes("racing") ||
+            args.constraints.excludeGenres.includes("sports"),
+          budget: args.budget,
+          socialProfile: args.socialProfile ?? undefined
+        }
+      );
+
+      if (accepted.length === 0) {
+        continue;
+      }
+
+      matches = mergeRecommendationCandidates(matches, accepted.slice(0, 2));
+      break;
+    }
+
+    if (
+      matches.length === 0 &&
+      args.socialProfile &&
+      hasSocialEvidenceRescueSignal(warnings)
+    ) {
+      matches = recoverStructuredMultiplayerBrowseSocialMatches({
+        deals: rawMatches,
+        requestedPlatforms: args.platforms,
+        budget: args.budget,
+        constraints: args.constraints,
+        reviewBacked: args.constraints.qualityIntent.includes("review-backed"),
+        socialProfile: args.socialProfile
+      });
+    }
+
+    return { matches: dedupeDeals(matches).slice(0, 2), rawMatches, warnings };
+  }
+
   private async recoverBroadSteamRoguelikeDeals(args: {
     country: string;
     filters: DiscoverFilters & { country: string };
@@ -732,6 +1864,7 @@ export class GameDealService {
     excluded: Set<string>;
     preferredShops?: number[] | undefined;
     steamDeckRequest: boolean;
+    executionBudget?: RecommendationExecutionBudget | undefined;
   }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
     const broadFilters: DiscoverFilters & { country: string } = {
       ...args.filters,
@@ -759,6 +1892,8 @@ export class GameDealService {
       rawgGenres: [],
       excluded: args.excluded,
       preferredShops: args.preferredShops,
+      executionBudget: args.executionBudget,
+      skipWarningKey: "recommendation-recovery",
       maxMatches: 3,
       maxResolutions: 4,
       candidateFilter: (candidate) =>
@@ -775,6 +1910,143 @@ export class GameDealService {
         ),
         args.preferences
       ),
+      warnings
+    };
+  }
+
+  private async mixRecommendationCatalogCandidates(args: {
+    currentMatches: DealCandidate[];
+    rawPreferences: string;
+    preferences: {
+      genres: string[];
+      rawgGenres: string[];
+      platforms: string[];
+      tags: string[];
+      multiplayer: boolean;
+      deckbuilding: boolean;
+      highRating: boolean;
+      shortSession: boolean;
+    };
+    platforms: string[];
+    constraints: RecommendationConstraints;
+    country: string;
+    preferredShops?: number[] | undefined;
+    executionBudget?: RecommendationExecutionBudget | undefined;
+  }): Promise<{ matches: DealCandidate[]; warnings: string[] }> {
+    if (!this.providers.discoverTitles || !this.providers.resolveDeal) {
+      return { matches: args.currentMatches, warnings: [] };
+    }
+
+    const { signals, profiles } = buildRecommendationCatalogMixPlan({
+      rawPreferences: args.rawPreferences,
+      preferences: args.preferences,
+      platforms: args.platforms,
+      currentMatches: args.currentMatches,
+      constraints: args.constraints
+    });
+
+    if (profiles.length === 0) {
+      return { matches: args.currentMatches, warnings: [] };
+    }
+
+    const warnings: string[] = [];
+    let combinedMatches = [...args.currentMatches];
+
+    for (const profile of profiles) {
+      if (args.executionBudget && !args.executionBudget.has(MIN_RESOLVE_DEAL_BUDGET_MS)) {
+        warnings.push(...takeBudgetWarning(args.executionBudget, "recommendation-mixing"));
+        return { matches: combinedMatches, warnings };
+      }
+
+      let catalog: CatalogCandidate[];
+
+      try {
+        catalog = await this.providers.discoverTitles({
+          tags: profile.tags,
+          genres: profile.rawgGenres,
+          limit: profile.limit
+        });
+      } catch (error) {
+        warnings.push(
+          toWarning(error, "추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다.")
+        );
+        continue;
+      }
+
+      const candidateQueue = filterRecommendationCatalogCandidates(
+        filterCatalogCandidates(catalog),
+        profile,
+        signals,
+        args.constraints
+      ).slice(0, profile.maxResolutions);
+
+      if (candidateQueue.length === 0) {
+        continue;
+      }
+
+      const accepted: DealCandidate[] = [];
+      const unknownFallback: DealCandidate[] = [];
+
+      for (const candidate of candidateQueue) {
+        if (args.executionBudget && !args.executionBudget.has(MIN_RESOLVE_DEAL_BUDGET_MS)) {
+          warnings.push(...takeBudgetWarning(args.executionBudget, "recommendation-mixing"));
+          return {
+            matches: appendRecommendationMixAdditions(combinedMatches, accepted, unknownFallback, profile),
+            warnings
+          };
+        }
+
+        let resolution: DealResolution;
+
+        try {
+          resolution = await this.providers.resolveDeal(candidate.title, args.country, {
+            preferredShops: args.preferredShops,
+            dealsOnly: (args.preferredShops?.length ?? 0) > 0
+          });
+        } catch (error) {
+          warnings.push(
+            toWarning(
+              error,
+              `추천 후보를 보강하는 중 일부 메타데이터를 생략했습니다: ${candidate.title}`
+            )
+          );
+          continue;
+        }
+
+        warnings.push(...(resolution.warnings ?? []));
+
+        if (resolution.kind !== "match") {
+          continue;
+        }
+
+        const resolvedDeals = (resolution.matches ?? []).map((deal) =>
+          mergeCatalogMetadata(deal, candidate, profile.tags)
+        );
+        const buckets = splitRecommendationCatalogResolvedDeals(
+          resolvedDeals,
+          profile,
+          signals,
+          args.constraints
+        );
+
+        accepted.push(...buckets.accepted);
+        unknownFallback.push(...buckets.unknownFallback);
+
+        if (dedupeDeals(accepted).length >= profile.maxMatches) {
+          break;
+        }
+      }
+
+      combinedMatches = appendRecommendationMixAdditions(
+        combinedMatches,
+        accepted,
+        unknownFallback,
+        profile
+      );
+    }
+
+    return {
+      matches: combinedMatches,
       warnings
     };
   }
@@ -820,6 +2092,389 @@ function toWarning(error: unknown, fallback: string): string {
   return fallback;
 }
 
+function hasMetadataOmissionWarning(warnings: string[]): boolean {
+  return warnings.some((warning) => /메타데이터.*생략/i.test(warning));
+}
+
+function hasRecommendationProviderOutageWarning(warnings: string[]): boolean {
+  return warnings.some(
+    (warning) =>
+      warning.includes("ITAD request failed with 429") ||
+      warning.includes("가격 개요 정보를 가져오지 못해") ||
+      warning.includes("역대 최저가 정보를 가져오지 못해") ||
+      warning.includes("가격 개요 정보가 없어 제목만 확인했습니다.")
+  );
+}
+
+function hasNonSteamStrategyOverlayRecoverySignal(warnings: string[]): boolean {
+  return (
+    hasMetadataOmissionWarning(warnings) ||
+    hasRecommendationProviderOutageWarning(warnings)
+  );
+}
+
+function hasSimpleSocialOverlayRecoverySignal(warnings: string[]): boolean {
+  return (
+    hasMetadataOmissionWarning(warnings) ||
+    hasRecommendationProviderOutageWarning(warnings)
+  );
+}
+
+function hasSocialEvidenceRescueSignal(warnings: string[]): boolean {
+  return hasSimpleSocialOverlayRecoverySignal(warnings);
+}
+
+function isRecommendationOverlayBrowseJunk(deal: DealCandidate): boolean {
+  return /\b(bundle|collection|course|tutorial|certification|e-?learning|music|sfx|asset pack|royalty free|demo|ai games?)\b/i.test(
+    deal.title
+  );
+}
+
+function matchesRecommendationRawSocialBrowseCandidate(
+  deal: DealCandidate,
+  options: {
+    requestedPlatforms: string[];
+    budget?: number | undefined;
+    constraints: RecommendationConstraints;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  }
+): boolean {
+  if (deal.cut <= 0 || !deal.multiplayer || isRecommendationOverlayBrowseJunk(deal)) {
+    return false;
+  }
+
+  if (typeof options.budget === "number" && deal.price.amount > options.budget) {
+    return false;
+  }
+
+  if (
+    options.requestedPlatforms.length > 0 &&
+    deal.platforms.length > 0 &&
+    !matchesRequestedPlatforms(deal.platforms, options.requestedPlatforms)
+  ) {
+    return false;
+  }
+
+  if (
+    (options.constraints.excludeGenres.includes("pvp") ||
+      options.constraints.coopMode.includes("non-competitive")) &&
+    hasPvPDealEvidence(deal)
+  ) {
+    return false;
+  }
+
+  if (
+    (options.constraints.excludeGenres.includes("racing") ||
+      options.constraints.excludeGenres.includes("sports")) &&
+    hasRacingOrSportsShape(deal)
+  ) {
+    return false;
+  }
+
+  return (
+    !options.socialProfile ||
+    classifyRecommendationSocialCandidateTier(deal, options.socialProfile) !== "reject"
+  );
+}
+
+function applyRecommendationSocialPromptGuardrail(
+  deals: DealCandidate[],
+  options: {
+    socialProfile: RecommendationSocialPromptProfile | null;
+    requestedPlatforms: string[];
+    budget?: number | undefined;
+    constraints: RecommendationConstraints;
+    allowRescueTier?: boolean | undefined;
+  }
+): DealCandidate[] {
+  const socialProfile = options.socialProfile;
+  if (!socialProfile) {
+    return deals;
+  }
+
+  const strict: DealCandidate[] = [];
+  const rescue: DealCandidate[] = [];
+
+  for (const deal of deals) {
+    if (deal.cut <= 0 || isRecommendationOverlayBrowseJunk(deal) || !deal.multiplayer) {
+      continue;
+    }
+
+    if (typeof options.budget === "number" && deal.price.amount > options.budget) {
+      continue;
+    }
+
+    if (
+      options.requestedPlatforms.length > 0 &&
+      deal.platforms.length > 0 &&
+      !matchesRequestedPlatforms(deal.platforms, options.requestedPlatforms)
+    ) {
+      continue;
+    }
+
+    if (
+      (options.constraints.excludeGenres.includes("pvp") ||
+        options.constraints.coopMode.includes("non-competitive")) &&
+      hasPvPDealEvidence(deal)
+    ) {
+      continue;
+    }
+
+    if (
+      (options.constraints.excludeGenres.includes("racing") ||
+        options.constraints.excludeGenres.includes("sports")) &&
+      hasRacingOrSportsShape(deal)
+    ) {
+      continue;
+    }
+
+    const tier = classifyRecommendationSocialCandidateTier(deal, socialProfile);
+
+    if (tier === "strict") {
+      strict.push(deal);
+      continue;
+    }
+
+    if (tier === "rescue") {
+      rescue.push(deal);
+    }
+  }
+
+  if (strict.length > 0) {
+    return strict;
+  }
+
+  return options.allowRescueTier ? rescue : [];
+}
+
+function rankDiscoverDealsWithLenientFallback(args: {
+  deals: DealCandidate[];
+  filters: DiscoverFilters;
+  preferredShops?: number[] | undefined;
+  steamDeckRequest: boolean;
+  warnings: string[];
+  lenientFallbackMode:
+    | "none"
+    | "genre-only"
+    | "genre-and-platform"
+    | "genre-platform-and-multiplayer";
+}): DealCandidate[] {
+  let rankedDeals = applySteamDeckCompatibilityPreference(
+    scoreDealCandidates(args.deals, { ...args.filters, preferredShops: args.preferredShops }),
+    args.steamDeckRequest
+  );
+
+  if (
+    rankedDeals.length === 0 &&
+    args.lenientFallbackMode !== "none" &&
+    (args.filters.genres?.length ?? 0) > 0
+  ) {
+    const requestedGenres = new Set(
+      (args.filters.genres ?? []).map((genre) => genre.trim().toLowerCase())
+    );
+    rankedDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(args.deals, {
+        ...args.filters,
+        genres: undefined,
+        preferredShops: args.preferredShops
+      }).filter(
+        (deal) =>
+          deal.genres.length === 0 ||
+          deal.genres.some((genre) => requestedGenres.has(genre.trim().toLowerCase()))
+      ),
+      args.steamDeckRequest
+    );
+  }
+
+  if (
+    rankedDeals.length === 0 &&
+    args.lenientFallbackMode === "genre-and-platform" &&
+    hasMetadataOmissionWarning(args.warnings) &&
+    ((args.filters.genres?.length ?? 0) > 0 || (args.filters.platforms?.length ?? 0) > 0)
+  ) {
+    const requestedGenres = new Set(
+      (args.filters.genres ?? []).map((genre) => genre.trim().toLowerCase())
+    );
+    rankedDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(args.deals, {
+        ...args.filters,
+        genres: undefined,
+        platforms: undefined,
+        preferredShops: args.preferredShops
+      }).filter(
+        (deal) =>
+          (requestedGenres.size === 0 ||
+            deal.genres.length === 0 ||
+            deal.genres.some((genre) => requestedGenres.has(genre.trim().toLowerCase()))) &&
+          ((args.filters.platforms?.length ?? 0) === 0 ||
+            deal.platforms.length === 0 ||
+            matchesRequestedPlatforms(deal.platforms, args.filters.platforms ?? []))
+      ),
+      args.steamDeckRequest
+    );
+  }
+
+  if (
+    rankedDeals.length === 0 &&
+    args.lenientFallbackMode === "genre-platform-and-multiplayer" &&
+    hasMetadataOmissionWarning(args.warnings) &&
+    (args.filters.multiplayer === true ||
+      (args.filters.genres?.length ?? 0) > 0 ||
+      (args.filters.platforms?.length ?? 0) > 0)
+  ) {
+    const requestedGenres = new Set(
+      (args.filters.genres ?? []).map((genre) => genre.trim().toLowerCase())
+    );
+    rankedDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(args.deals, {
+        ...args.filters,
+        genres: undefined,
+        platforms: undefined,
+        multiplayer: undefined,
+        preferredShops: args.preferredShops
+      }).filter(
+        (deal) =>
+          (requestedGenres.size === 0 ||
+            deal.genres.length === 0 ||
+            deal.genres.some((genre) => requestedGenres.has(genre.trim().toLowerCase()))) &&
+          ((args.filters.platforms?.length ?? 0) === 0 ||
+            deal.platforms.length === 0 ||
+            matchesRequestedPlatforms(deal.platforms, args.filters.platforms ?? []))
+      ),
+      args.steamDeckRequest
+    );
+  }
+
+  if (
+    rankedDeals.length === 0 &&
+    hasRecommendationProviderOutageWarning(args.warnings)
+  ) {
+    rankedDeals = applySteamDeckCompatibilityPreference(
+      scoreDealCandidates(args.deals, {
+        ...args.filters,
+        genres: undefined,
+        platforms: undefined,
+        multiplayer: undefined,
+        preferredShops: args.preferredShops
+      }).filter((deal) =>
+        matchesProviderOutageBrowseCandidate(deal, {
+          filters: args.filters,
+          steamDeckRequest: args.steamDeckRequest
+        })
+      ),
+      args.steamDeckRequest
+    );
+  }
+
+  return rankedDeals;
+}
+
+function matchesProviderOutageBrowseCandidate(
+  deal: DealCandidate,
+  options: {
+    filters: DiscoverFilters;
+    steamDeckRequest: boolean;
+  }
+): boolean {
+  if (deal.cut <= 0 || deal.price.amount <= 0 || isRecommendationOverlayBrowseJunk(deal)) {
+    return false;
+  }
+
+  if (
+    typeof options.filters.budget === "number" &&
+    deal.price.amount > options.filters.budget
+  ) {
+    return false;
+  }
+
+  if (
+    (options.filters.platforms?.length ?? 0) > 0 &&
+    deal.platforms.length > 0 &&
+    !matchesRequestedRecommendationPlatforms(
+      deal.platforms,
+      options.filters.platforms ?? [],
+      options.steamDeckRequest
+    )
+  ) {
+    return false;
+  }
+
+  if (
+    options.filters.multiplayer === true &&
+    !(
+      deal.multiplayer ||
+      hasExplicitCoopDealEvidence(deal) ||
+      hasLocalSocialDealEvidence(deal) ||
+      hasStrongPartyDealEvidence(deal)
+    )
+  ) {
+    return false;
+  }
+
+  const requestedGenres = options.filters.genres ?? [];
+  if (
+    requestedGenres.length > 0 &&
+    !matchesProviderOutageRequestedGenres(deal, requestedGenres)
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function matchesProviderOutageRequestedGenres(
+  deal: DealCandidate,
+  requestedGenres: string[]
+): boolean {
+  if (requestedGenres.length === 0) {
+    return true;
+  }
+
+  return requestedGenres.some((genre) => {
+    const normalized = genre.trim().toLowerCase();
+    if (!normalized) {
+      return false;
+    }
+
+    if (deal.genres.some((value) => value.trim().toLowerCase() === normalized)) {
+      return true;
+    }
+
+    const values = `${deal.title} ${deal.genres.join(" ")}`;
+    switch (normalized) {
+      case "strategy":
+        return /\b(strategy|strategic|tactics?|tactical|turn-?based)\b/i.test(values) || /전략|전술|턴제/.test(values);
+      case "card":
+        return /\b(card|deck|deckbuilder|deckbuilding|battler|hand)\b/i.test(values) || /카드|덱/.test(values);
+      case "action":
+        return /\b(action|shooter|brawler|combat|arcade)\b/i.test(values) || /액션|슈터|전투/.test(values);
+      case "casual":
+        return /\b(casual|party|arcade|fun)\b/i.test(values) || /캐주얼|파티/.test(values);
+      case "roguelike":
+      case "roguelite":
+        return /\b(roguelike|roguelite)\b/i.test(values) || /로그라이트|로그라이크/.test(values);
+      default:
+        return new RegExp(`\\b${escapeRecommendationRegex(normalized)}\\b`, "i").test(values);
+    }
+  });
+}
+
+function matchesRequestedRecommendationPlatforms(
+  candidatePlatforms: string[],
+  requestedPlatforms: string[],
+  steamDeckRequest: boolean
+): boolean {
+  if (matchesRequestedPlatforms(candidatePlatforms, requestedPlatforms)) {
+    return true;
+  }
+
+  if (!steamDeckRequest) {
+    return false;
+  }
+
+  return candidatePlatforms.some((platform) => normalizePlatform(platform) === "pc");
+}
+
 function normalizeEnrichmentResult(result: DealCandidate[] | DealsEnrichment): DealsEnrichment {
   if (Array.isArray(result)) {
     return { deals: result, warnings: [] };
@@ -828,7 +2483,10 @@ function normalizeEnrichmentResult(result: DealCandidate[] | DealsEnrichment): D
   return result;
 }
 
-function parsePreferenceSignals(preferences: string): {
+function parsePreferenceSignals(
+  preferences: string,
+  constraints?: RecommendationConstraints
+): {
   genres: string[];
   rawgGenres: string[];
   platforms: string[];
@@ -838,54 +2496,8 @@ function parsePreferenceSignals(preferences: string): {
   highRating: boolean;
   shortSession: boolean;
 } {
-  const genres = new Set<string>();
-  const rawgGenres = new Set<string>();
-  const platforms = new Set<string>();
-  const tags = new Set<string>();
-  const deckbuilding = /덱빌딩|deck ?build|deckbuilder|card battler/i.test(preferences);
-  const highRating = /평가 좋은|평 좋은|호평|high[- ]rated|highly rated|well-reviewed/i.test(preferences);
-  const shortSession = /짧게|가볍게|부담 없이|quick|short session|pick-?up/i.test(preferences);
-
-  if (/로그라이크|로그라이트|roguelike|roguelite/i.test(preferences)) {
-    genres.add("Roguelike");
-    tags.add("roguelike");
-    tags.add("roguelite");
-  }
-
-  if (deckbuilding) {
-    genres.add("Strategy");
-    rawgGenres.add("card");
-    tags.add("roguelike-deckbuilder");
-  }
-
-  if (/전략|strategy|tactics/i.test(preferences)) {
-    genres.add("Strategy");
-    rawgGenres.add("strategy");
-  }
-
-  if (/액션|action/i.test(preferences)) {
-    genres.add("Action");
-    rawgGenres.add("action");
-  }
-
-  if (/스팀덱|steam ?deck/i.test(preferences)) {
-    platforms.add("Steam Deck");
-  }
-
-  if (/\bpc\b|스팀(?!덱)|\bsteam\b/i.test(preferences)) {
-    platforms.add("PC");
-  }
-
-  return {
-    genres: [...genres],
-    rawgGenres: [...rawgGenres],
-    platforms: [...platforms],
-    tags: [...tags],
-    multiplayer: /협동|co-?op|coop|멀티/i.test(preferences),
-    deckbuilding,
-    highRating,
-    shortSession
-  };
+  const intent = parseRecommendationIntent(preferences);
+  return constraints ? applyRecommendationConstraintOverrides(intent, constraints) : intent;
 }
 
 function uniqueValues(values: string[]): string[] {
@@ -972,8 +2584,13 @@ function preferredShopsFromContext(
 function mergeCatalogMetadata(
   deal: DealCandidate,
   candidate: CatalogCandidate,
-  requestedTags: string[]
+  requestedTags?: string[]
 ): DealCandidate {
+  const metadataStatus =
+    deal.metadataStatus && deal.metadataStatus !== "missing" && deal.metadataStatus !== "unavailable"
+      ? deal.metadataStatus
+      : "rawg";
+
   return {
     ...deal,
     genres: mergeStrings(deal.genres, candidate.genres, inferCatalogGenres(candidate, requestedTags)),
@@ -982,13 +2599,15 @@ function mergeCatalogMetadata(
     metacritic: deal.metacritic ?? candidate.metacritic,
     multiplayer: deal.multiplayer || candidate.multiplayer,
     released: deal.released ?? candidate.released,
-    metadataStatus: deal.metadataStatus ?? "rawg"
+    metadataStatus
   };
 }
 
-function inferCatalogGenres(candidate: CatalogCandidate, requestedTags: string[]): string[] {
+function inferCatalogGenres(candidate: CatalogCandidate, requestedTags?: string[]): string[] {
   const genres = new Set<string>();
-  const normalizedTags = [...requestedTags, ...(candidate.tags ?? [])].map((tag) => tag.toLowerCase());
+  const normalizedTags = [...(requestedTags ?? []), ...(candidate.tags ?? [])].map((tag) =>
+    tag.toLowerCase()
+  );
   const normalizedGenres = candidate.genres.map((genre) => genre.toLowerCase());
 
   for (const tag of normalizedTags) {
@@ -1056,6 +2675,17 @@ function dedupeDeals(deals: DealCandidate[]): DealCandidate[] {
   return unique;
 }
 
+function mergeRecommendationCandidates(
+  current: DealCandidate[],
+  incoming: DealCandidate[]
+): DealCandidate[] {
+  if (incoming.length === 0) {
+    return current;
+  }
+
+  return dedupeDeals([...current, ...incoming]);
+}
+
 function uniqueWarnings(warnings: string[]): string[] {
   const seen = new Set<string>();
   const unique: string[] = [];
@@ -1104,9 +2734,443 @@ function uniqueWarnings(warnings: string[]): string[] {
   return unique;
 }
 
+function hasWarningTriggeredSteamDeckMetadataRecoverySignal(warnings: string[]): boolean {
+  return (
+    warnings.some(isRecommendationMetadataWarning) ||
+    warnings.some(isRecommendationSteamDeckWarning) ||
+    hasRecommendationProviderOutageWarning(warnings)
+  );
+}
+
+function isRecommendationMetadataWarning(warning: string): boolean {
+  const normalized = warning.trim();
+  return (
+    normalized.includes("RAWG 보강 한도") ||
+    normalized.includes("메타데이터를 생략") ||
+    normalized.includes("RAWG 메타데이터를 불러오지 못해 가격 정보만 표시했습니다.")
+  );
+}
+
+function isRecommendationSteamDeckWarning(warning: string): boolean {
+  const normalized = warning.trim();
+  return (
+    normalized.includes("Steam Deck 호환성 정보를 확인하지 못했습니다") ||
+    normalized.includes("Steam Deck 호환성 정보를 일부 확인하지 못했습니다") ||
+    normalized.includes("Steam Deck 호환성 보강 한도")
+  );
+}
+
+function shouldApplyWarningTriggeredSteamDeckOverlayFallback(args: {
+  steamDeckRequest: boolean;
+  warnings: string[];
+  kind: RecommendationRecoveryKind;
+}): boolean {
+  return (
+    args.steamDeckRequest &&
+    isSteamDeckSparseRecoveryKind(args.kind) &&
+    hasWarningTriggeredSteamDeckMetadataRecoverySignal(args.warnings)
+  );
+}
+
+function shouldAttemptProviderOutageOverlay(args: {
+  matches: DealCandidate[];
+  kind: RecommendationRecoveryKind;
+  constraints: RecommendationConstraints;
+  preferences: {
+    shortSession: boolean;
+  };
+  steamDeckRequest: boolean;
+  socialProfile?: RecommendationSocialPromptProfile | undefined;
+}): boolean {
+  if (args.matches.length === 0) {
+    return true;
+  }
+
+  return !args.matches.some((deal) =>
+    matchesProviderOutageOverlayDeal(deal, {
+      kind: args.kind,
+      constraints: args.constraints,
+      preferences: args.preferences,
+      steamDeckRequest: args.steamDeckRequest,
+      socialProfile: args.socialProfile
+    })
+  );
+}
+
+function matchesProviderOutageOverlayDeal(
+  deal: DealCandidate,
+  options: {
+    kind: RecommendationRecoveryKind;
+    constraints: RecommendationConstraints;
+    preferences: {
+      shortSession: boolean;
+    };
+    steamDeckRequest: boolean;
+    requestedPlatforms?: string[] | undefined;
+    budget?: number | undefined;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  }
+): boolean {
+  if (deal.cut <= 0 || deal.price.amount <= 0 || isRecommendationOverlayBrowseJunk(deal)) {
+    return false;
+  }
+
+  if (
+    typeof options.budget === "number" &&
+    deal.price.amount > options.budget
+  ) {
+    return false;
+  }
+
+  if (
+    (options.requestedPlatforms?.length ?? 0) > 0 &&
+    deal.platforms.length > 0 &&
+    !matchesRequestedRecommendationPlatforms(
+      deal.platforms,
+      options.requestedPlatforms ?? [],
+      options.steamDeckRequest
+    )
+  ) {
+    return false;
+  }
+
+  return matchesSparseRecoveryDeal(
+    deal,
+    options.kind,
+    options.constraints,
+    options.preferences,
+    options.steamDeckRequest,
+    options.socialProfile
+  );
+}
+
+function isSteamDeckSparseRecoveryKind(kind: RecommendationRecoveryKind): boolean {
+  return (
+    kind === "steam-deck-roguelike" ||
+    kind === "steam-deck-strategy-roguelike" ||
+    kind === "steam-deck-strategy" ||
+    kind === "deckbuilding-card"
+  );
+}
+
+function isSteamDeckStrategyOverlayKind(kind: RecommendationRecoveryKind): boolean {
+  return kind === "steam-deck-strategy" || kind === "steam-deck-strategy-roguelike";
+}
+
+function widenSteamDeckStrategyOverlayProfile(
+  profile: RecommendationRecoveryProfile
+): RecommendationRecoveryProfile {
+  if (!isSteamDeckStrategyOverlayKind(profile.kind)) {
+    return profile;
+  }
+
+  return {
+    ...profile,
+    queries: profile.queries.map((query) => ({
+      ...query,
+      limit: Math.max(query.limit, 16)
+    }))
+  };
+}
+
+function applyWarningTriggeredSteamDeckOverlayFallback(args: {
+  matches: DealCandidate[];
+  kind: RecommendationRecoveryKind;
+  filters: DiscoverFilters;
+  preferences: {
+    shortSession: boolean;
+  };
+  constraints: RecommendationConstraints;
+}): DealCandidate[] {
+  const narrowed = dedupeDeals(args.matches).filter((deal) => {
+    if (getDeckCompatibilityStatus(deal) === "unsupported") {
+      return false;
+    }
+
+    switch (args.kind) {
+      case "steam-deck-roguelike":
+        return (
+          hasRoguelikeDealEvidence(deal) &&
+          (!args.preferences.shortSession || hasShortSessionSparseShape(deal))
+        );
+      case "steam-deck-strategy-roguelike":
+        return (
+          hasStrongReviewSignal(deal) &&
+          hasRoguelikeDealEvidence(deal) &&
+          hasStrategyRecoveryDealEvidence(deal) &&
+          (!args.preferences.shortSession || hasShortSessionSparseShape(deal))
+        );
+      case "steam-deck-strategy":
+        return (
+          hasStrongReviewSignal(deal) &&
+          hasStrategyRecoveryDealEvidence(deal) &&
+          (!args.preferences.shortSession || hasShortSessionSparseShape(deal))
+        );
+      case "deckbuilding-card":
+        return (
+          hasDeckbuildingEvidence(deal) &&
+          (!args.constraints.excludeGenres.includes("strategy") || !hasHeavyStrategyDealEvidence(deal))
+        );
+      case "broad-multiplayer":
+        return false;
+    }
+  });
+
+  return finalizeSparseRecoveryMatches(
+    narrowed,
+    args.kind,
+    args.filters,
+    args.preferences,
+    true
+  );
+}
+
+function recoverRichSocialPromptMatches(args: {
+  deals: DealCandidate[];
+  requestedPlatforms: string[];
+  budget?: number | undefined;
+  constraints: RecommendationConstraints;
+  socialProfile: RecommendationSocialPromptProfile;
+}): DealCandidate[] {
+  const rescueConstraints: RecommendationConstraints = {
+    ...args.constraints,
+    excludeGenres: uniqueValues([
+      ...args.constraints.excludeGenres,
+      "racing",
+      "sports"
+    ]) as RecommendationConstraints["excludeGenres"]
+  };
+  const reviewBacked = args.constraints.qualityIntent.includes("review-backed");
+  const partyPrompt = args.socialProfile === "party-hangout";
+  const rankOptions = {
+    partyPrompt,
+    reviewBacked,
+    nonCompetitive:
+      args.constraints.coopMode.includes("non-competitive") ||
+      args.constraints.excludeGenres.includes("pvp"),
+    excludeRacingOrSports: true,
+    budget: args.budget,
+    socialProfile: args.socialProfile
+  } as const;
+  const classify = (deal: DealCandidate) =>
+    classifyStructuredMultiplayerBrowseDealTier(deal, {
+      requestedPlatforms: args.requestedPlatforms,
+      budget: args.budget,
+      constraints: rescueConstraints,
+      partyPrompt,
+      reviewBacked,
+      socialProfile: args.socialProfile
+    });
+
+  const strict = rankStructuredMultiplayerBrowseDeals(
+    args.deals.filter((deal) => classify(deal) === "strict"),
+    rankOptions
+  );
+
+  if (strict.length > 0) {
+    return strict.slice(0, 2);
+  }
+
+  return rankStructuredMultiplayerBrowseDeals(
+    args.deals.filter((deal) => classify(deal) === "rescue"),
+    rankOptions
+  ).slice(0, 2);
+}
+
+function takeBudgetWarning(
+  budget: RecommendationExecutionBudget | undefined,
+  key: string
+): string[] {
+  if (!budget) {
+    return [];
+  }
+
+  const warning = budget.skipWithWarning(key);
+  return warning ? [warning] : [];
+}
+
+function buildRecommendationExecutionProfile(args: {
+  rawPreferences: string;
+  preferences: {
+    genres: string[];
+    rawgGenres: string[];
+    platforms: string[];
+    tags: string[];
+    multiplayer: boolean;
+    deckbuilding: boolean;
+    highRating: boolean;
+    shortSession: boolean;
+  };
+  constraints: RecommendationConstraints;
+  steamDeckRequest: boolean;
+}): {
+  totalBudgetMs: number;
+  baseBrowseMinMs: number;
+  mixingMinMs: number;
+  metadataOverlayMinMs: number;
+  lastChanceRecoveryMinMs: number;
+  baseBrowseRawgLookups: number;
+  structuredBrowseMinMs: number;
+  structuredBrowseFullMinMs: number;
+  structuredBrowseRawgLookups: number;
+  structuredBrowseTightQueryLimit: number;
+  simpleSocialPrompt: boolean;
+} {
+  if (args.steamDeckRequest) {
+    return {
+      totalBudgetMs: DEFAULT_RECOMMENDATION_TIME_BUDGET_MS,
+      baseBrowseMinMs: MIN_RECOMMENDATION_BASE_BROWSE_BUDGET_MS,
+      mixingMinMs: MIN_RECOMMENDATION_MIX_BUDGET_MS,
+      metadataOverlayMinMs: MIN_CATALOG_METADATA_OVERLAY_BUDGET_MS,
+      lastChanceRecoveryMinMs: MIN_RESOLVE_DEAL_BUDGET_MS,
+      baseBrowseRawgLookups: MAX_RAWG_ENRICHMENT,
+      structuredBrowseMinMs: MIN_MULTIPLAYER_STRUCTURED_BROWSE_BUDGET_MS,
+      structuredBrowseFullMinMs: MIN_MULTIPLAYER_STRUCTURED_BROWSE_FULL_BUDGET_MS,
+      structuredBrowseRawgLookups: RECOMMENDATION_MULTIPLAYER_BROWSE_RAWG_ENRICHMENT,
+      structuredBrowseTightQueryLimit: 2,
+      simpleSocialPrompt: false
+    };
+  }
+
+  const isMixedLanguage = /[a-z]/i.test(args.rawPreferences) && /[가-힣]/.test(args.rawPreferences);
+  const simpleSocialPrompt = isSimpleSocialRecommendationPrompt({
+    rawPreferences: args.rawPreferences,
+    preferences: args.preferences,
+    constraints: args.constraints,
+    isMixedLanguage
+  });
+  const timeoutSensitive =
+    !simpleSocialPrompt &&
+    (args.constraints.excludeGenres.length > 0 ||
+      args.constraints.avoidComplexity.length > 0 ||
+      args.constraints.qualityIntent.length > 0 ||
+      args.constraints.coopMode.length > 0 ||
+      isMixedLanguage ||
+      args.preferences.shortSession ||
+      args.preferences.genres.length >= 2 ||
+      args.preferences.rawgGenres.length >= 2 ||
+      args.preferences.tags.length >= 2);
+
+  if (simpleSocialPrompt) {
+    return {
+      totalBudgetMs: DEFAULT_SIMPLE_NON_STEAM_RECOMMENDATION_TIME_BUDGET_MS,
+      baseBrowseMinMs: MIN_RECOMMENDATION_BASE_BROWSE_BUDGET_MS,
+      mixingMinMs: MIN_SIMPLE_SOCIAL_RECOMMENDATION_MIX_BUDGET_MS,
+      metadataOverlayMinMs: MIN_SIMPLE_SOCIAL_METADATA_OVERLAY_BUDGET_MS,
+      lastChanceRecoveryMinMs: MIN_SIMPLE_SOCIAL_LAST_CHANCE_RECOVERY_BUDGET_MS,
+      baseBrowseRawgLookups: RECOMMENDATION_NON_STEAM_BROWSE_RAWG_ENRICHMENT,
+      structuredBrowseMinMs: MIN_SIMPLE_MULTIPLAYER_STRUCTURED_BROWSE_BUDGET_MS,
+      structuredBrowseFullMinMs: MIN_SIMPLE_SOCIAL_STRUCTURED_BROWSE_FULL_BUDGET_MS,
+      structuredBrowseRawgLookups: RECOMMENDATION_MULTIPLAYER_BROWSE_RAWG_ENRICHMENT,
+      structuredBrowseTightQueryLimit: 4,
+      simpleSocialPrompt: true
+    };
+  }
+
+  return {
+    totalBudgetMs: timeoutSensitive
+      ? DEFAULT_NON_STEAM_RECOMMENDATION_TIME_BUDGET_MS
+      : DEFAULT_SIMPLE_NON_STEAM_RECOMMENDATION_TIME_BUDGET_MS,
+    baseBrowseMinMs: MIN_RECOMMENDATION_BASE_BROWSE_BUDGET_MS,
+    mixingMinMs: timeoutSensitive
+      ? MIN_NON_STEAM_RECOMMENDATION_MIX_BUDGET_MS
+      : MIN_RECOMMENDATION_MIX_BUDGET_MS,
+    metadataOverlayMinMs: timeoutSensitive
+      ? MIN_NON_STEAM_METADATA_OVERLAY_BUDGET_MS
+      : MIN_CATALOG_METADATA_OVERLAY_BUDGET_MS,
+    lastChanceRecoveryMinMs: timeoutSensitive
+      ? MIN_NON_STEAM_LAST_CHANCE_RECOVERY_BUDGET_MS
+      : MIN_RESOLVE_DEAL_BUDGET_MS,
+    baseBrowseRawgLookups: timeoutSensitive
+      ? RECOMMENDATION_TIGHT_NON_STEAM_BROWSE_RAWG_ENRICHMENT
+      : RECOMMENDATION_NON_STEAM_BROWSE_RAWG_ENRICHMENT,
+    structuredBrowseMinMs: timeoutSensitive
+      ? MIN_MULTIPLAYER_STRUCTURED_BROWSE_BUDGET_MS
+      : MIN_SIMPLE_MULTIPLAYER_STRUCTURED_BROWSE_BUDGET_MS,
+    structuredBrowseFullMinMs: MIN_MULTIPLAYER_STRUCTURED_BROWSE_FULL_BUDGET_MS,
+    structuredBrowseRawgLookups: RECOMMENDATION_MULTIPLAYER_BROWSE_RAWG_ENRICHMENT,
+    structuredBrowseTightQueryLimit: 2,
+    simpleSocialPrompt: false
+  };
+}
+
+function appendRecommendationMixAdditions(
+  combinedMatches: DealCandidate[],
+  accepted: DealCandidate[],
+  unknownFallback: DealCandidate[],
+  profile: ReturnType<typeof buildRecommendationCatalogMixPlan>["profiles"][number]
+): DealCandidate[] {
+  const additions =
+    profile.kind === "steam-deck-overlay" && dedupeDeals(accepted).length === 0
+      ? dedupeDeals(unknownFallback).slice(0, profile.maxMatches)
+      : dedupeDeals(accepted).slice(0, profile.maxMatches);
+
+  if (additions.length === 0) {
+    return combinedMatches;
+  }
+
+  return dedupeDeals([...combinedMatches, ...additions]);
+}
+
+const DEFAULT_RECOMMENDATION_TIME_BUDGET_MS = 12_000;
+const DEFAULT_NON_STEAM_RECOMMENDATION_TIME_BUDGET_MS = 10_000;
+const DEFAULT_SIMPLE_NON_STEAM_RECOMMENDATION_TIME_BUDGET_MS = 14_000;
+const MIN_GENERIC_STEAM_RECOVERY_BUDGET_MS = 4_500;
+const MIN_RECOMMENDATION_RECOVERY_BUDGET_MS = 3_500;
+const MIN_RECOMMENDATION_MIX_BUDGET_MS = 2_000;
+const MIN_NON_STEAM_RECOMMENDATION_MIX_BUDGET_MS = 2_500;
+const MIN_SIMPLE_SOCIAL_RECOMMENDATION_MIX_BUDGET_MS = 1_200;
+const MIN_RESOLVE_DEAL_BUDGET_MS = 1_200;
+const MIN_CATALOG_METADATA_OVERLAY_BUDGET_MS = 600;
+const MIN_NON_STEAM_METADATA_OVERLAY_BUDGET_MS = 2_500;
+const MIN_SIMPLE_SOCIAL_METADATA_OVERLAY_BUDGET_MS = 600;
+const MIN_NON_STEAM_LAST_CHANCE_RECOVERY_BUDGET_MS = 2_500;
+const MIN_SIMPLE_SOCIAL_LAST_CHANCE_RECOVERY_BUDGET_MS = 1_200;
+const MIN_RECOMMENDATION_BASE_BROWSE_BUDGET_MS = 2_500;
+const MIN_BASE_BROWSE_CATALOG_FALLBACK_BUDGET_MS = 3_000;
+const MIN_SIMPLE_MULTIPLAYER_STRUCTURED_BROWSE_BUDGET_MS = 2_000;
+const MIN_MULTIPLAYER_STRUCTURED_BROWSE_BUDGET_MS = 2_500;
+const MIN_MULTIPLAYER_STRUCTURED_BROWSE_FULL_BUDGET_MS = 5_000;
+const MIN_SIMPLE_SOCIAL_STRUCTURED_BROWSE_FULL_BUDGET_MS = 2_500;
 const MAX_RAWG_ENRICHMENT = 12;
 const MAX_STEAM_ENRICHMENT = 8;
+const RECOMMENDATION_STEAM_ENRICHMENT = 4;
+const RECOMMENDATION_NON_STEAM_BROWSE_RAWG_ENRICHMENT = 6;
+const RECOMMENDATION_TIGHT_NON_STEAM_BROWSE_RAWG_ENRICHMENT = 4;
+const RECOMMENDATION_STRATEGY_RAWG_ENRICHMENT = 6;
+const RECOMMENDATION_MULTIPLAYER_BROWSE_RAWG_ENRICHMENT = 6;
 const MAX_CATALOG_RESOLUTIONS = 8;
+
+function isSimpleSocialRecommendationPrompt(args: {
+  rawPreferences: string;
+  preferences: {
+    genres: string[];
+    rawgGenres: string[];
+    tags: string[];
+    multiplayer: boolean;
+    deckbuilding: boolean;
+    highRating: boolean;
+    shortSession: boolean;
+  };
+  constraints: RecommendationConstraints;
+  isMixedLanguage: boolean;
+}): boolean {
+  return (
+    args.preferences.multiplayer &&
+    !args.preferences.deckbuilding &&
+    !args.preferences.highRating &&
+    !args.preferences.shortSession &&
+    !args.constraints.actionBias &&
+    args.constraints.excludeGenres.length === 0 &&
+    args.constraints.excludeGameplay.length === 0 &&
+    args.constraints.avoidComplexity.length === 0 &&
+    args.constraints.qualityIntent.length === 0 &&
+    !args.isMixedLanguage &&
+    args.preferences.genres.length <= 1 &&
+    args.preferences.rawgGenres.length <= 1 &&
+    args.preferences.tags.length <= 1
+  );
+}
 
 function filterCatalogCandidates<
   T extends {
@@ -1323,6 +3387,79 @@ function buildRecommendationBroadIntentSignals(
   };
 }
 
+function buildRecommendationSocialPromptProfile(args: {
+  rawPreferences: string;
+  multiplayer: boolean;
+  constraints: RecommendationConstraints;
+}): RecommendationSocialPromptProfile | null {
+  if (!args.multiplayer) {
+    return null;
+  }
+
+  if (
+    args.constraints.coopMode.includes("party") ||
+    /party|party-friendly|party night|hangout|game night|shared-?screen|friends-?first|친구\s*모임(?:용)?|웃으면서|떠들면서|웃긴|chill co-?op/i.test(
+      args.rawPreferences
+    )
+  ) {
+    return "party-hangout";
+  }
+
+  return "generic-coop";
+}
+
+function shouldUseStrictSocialPromptProfile(args: {
+  rawPreferences: string;
+  constraints: RecommendationConstraints;
+  socialProfile: RecommendationSocialPromptProfile | null;
+}): boolean {
+  if (!args.socialProfile) {
+    return false;
+  }
+
+  if (args.constraints.coopMode.includes("non-competitive")) {
+    return true;
+  }
+
+  return /party-friendly|party night|hangout|game night|shared-?screen|friends-?first|friends-?only|non-?sweaty|teamplay|친구\s*모임(?:용)?|모임용/i.test(
+    args.rawPreferences
+  );
+}
+
+function buildRecommendationRecoveryRankingProfile(
+  kind: RecommendationRecoveryKind,
+  rawPreferences: string,
+  preferences: {
+    shortSession: boolean;
+  },
+  constraints: RecommendationConstraints,
+  requestedPlatforms: string[] = [],
+  simpleSocialPrompt = false,
+  socialProfile?: RecommendationSocialPromptProfile | undefined
+): RecommendationRecoveryRankingProfile {
+  return {
+    kind,
+    shortSession: preferences.shortSession,
+    tacticsPrompt: /전술|tactics|turn-?based|턴제/i.test(rawPreferences),
+    partyPrompt:
+      socialProfile === "party-hangout" ||
+      /파티|party|party-friendly|party night|hangout|웃긴|떠들|같이 웃으면서|friends?/i.test(
+        rawPreferences
+      ),
+    socialProfile,
+    nonCompetitive:
+      constraints.coopMode.includes("non-competitive") ||
+      constraints.excludeGenres.includes("pvp"),
+    excludeRacingOrSports:
+      constraints.excludeGenres.includes("racing") ||
+      constraints.excludeGenres.includes("sports"),
+    requestedPlatforms,
+    simpleSocialPrompt,
+    avoidComplexity: constraints.avoidComplexity,
+    qualityIntent: constraints.qualityIntent
+  };
+}
+
 function applyBroadIntentRanking(
   deals: DealCandidate[],
   signals: BroadIntentSignals
@@ -1518,6 +3655,61 @@ function matchesDealRecoveryIntent(
   return true;
 }
 
+function shouldAttemptShapeAwareRecovery(args: {
+  rawPreferences: string;
+  currentMatches: DealCandidate[];
+  preferences: {
+    genres: string[];
+    multiplayer: boolean;
+  };
+  constraints: RecommendationConstraints;
+}): boolean {
+  return shouldAttemptActionRecovery(args.currentMatches, args.preferences, args.constraints);
+}
+
+function shouldAttemptPartyRecovery(
+  rawPreferences: string,
+  currentMatches: DealCandidate[],
+  preferences: {
+    multiplayer: boolean;
+  },
+  constraints: RecommendationConstraints
+): boolean {
+  const explicitPartyPrompt =
+    constraints.coopMode.includes("party") ||
+    constraints.coopMode.includes("non-competitive") ||
+    /party|friends?|with friends|play together|친구(?:들이)?랑|여럿이|같이 놀기|떠들/i.test(
+      rawPreferences
+    );
+  if (!preferences.multiplayer || !explicitPartyPrompt) {
+    return false;
+  }
+
+  const top = currentMatches[0];
+  return !top || !matchesPartyRecoveryDeal(top, constraints);
+}
+
+function shouldAttemptActionRecovery(
+  currentMatches: DealCandidate[],
+  preferences: {
+    genres: string[];
+  },
+  constraints: RecommendationConstraints
+): boolean {
+  const actionRecoveryIntent =
+    hasRoguelikeIntent(preferences.genres) &&
+    (constraints.actionBias ||
+      constraints.excludeGenres.includes("card/deckbuilder") ||
+      constraints.excludeGenres.includes("strategy") ||
+      constraints.excludeGameplay.includes("turn-based"));
+  if (!actionRecoveryIntent) {
+    return false;
+  }
+
+  const top = currentMatches[0];
+  return !top || !matchesActionRecoveryDeal(top, constraints);
+}
+
 function hasDeckbuildingCandidateEvidence(candidate: CatalogCandidate): boolean {
   const values = `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`;
   return /\b(deck|deckbuilder|deckbuilding|card|cards|hand)\b/i.test(values);
@@ -1586,6 +3778,534 @@ function hasCatalogReviewSignal(candidate: CatalogCandidate): boolean {
   return (candidate.rating ?? 0) >= 4 || (candidate.metacritic ?? 0) >= 75;
 }
 
+function matchesPartyRecoveryCandidate(
+  candidate: CatalogCandidate,
+  constraints: RecommendationConstraints
+): boolean {
+  return (
+    candidate.multiplayer &&
+    hasCatalogReviewSignal(candidate) &&
+    hasPartyRecoveryCandidateShape(candidate) &&
+    (!constraints.excludeGenres.includes("racing") && !constraints.excludeGenres.includes("sports")
+      ? true
+      : !hasRacingOrSportsCandidateShape(candidate)) &&
+    (!constraints.excludeGenres.includes("pvp") || !hasPvPCandidateEvidence(candidate))
+  );
+}
+
+function matchesPartyRecoveryDeal(
+  deal: DealCandidate,
+  constraints: RecommendationConstraints
+): boolean {
+  return (
+    deal.multiplayer &&
+    hasBroadCoopFriendlyShape(deal) &&
+    (!constraints.excludeGenres.includes("racing") && !constraints.excludeGenres.includes("sports")
+      ? true
+      : !hasRacingOrSportsShape(deal)) &&
+    (!constraints.excludeGenres.includes("pvp") || !hasPvPDealEvidence(deal))
+  );
+}
+
+function matchesActionRecoveryCandidate(
+  candidate: CatalogCandidate,
+  constraints: RecommendationConstraints
+): boolean {
+  if (!hasActionRogueliteCandidateEvidence(candidate)) {
+    return false;
+  }
+
+  if (constraints.excludeGenres.includes("card/deckbuilder") && hasDeckbuildingCandidateEvidence(candidate)) {
+    return false;
+  }
+
+  if (constraints.excludeGenres.includes("strategy") && hasStrategyCandidateEvidence(candidate)) {
+    return false;
+  }
+
+  if (constraints.excludeGameplay.includes("turn-based") && hasTurnBasedCandidateEvidence(candidate)) {
+    return false;
+  }
+
+  return true;
+}
+
+function matchesActionRecoveryDeal(
+  deal: DealCandidate,
+  constraints: RecommendationConstraints
+): boolean {
+  if (!hasActionRogueliteDealEvidence(deal)) {
+    return false;
+  }
+
+  if (constraints.excludeGenres.includes("card/deckbuilder") && hasDeckbuildingEvidence(deal)) {
+    return false;
+  }
+
+  if (constraints.excludeGenres.includes("strategy") && deal.genres.some((genre) => genre.trim().toLowerCase() === "strategy")) {
+    return false;
+  }
+
+  if (constraints.excludeGameplay.includes("turn-based") && hasTurnBasedDealEvidence(deal)) {
+    return false;
+  }
+
+  return true;
+}
+
+function supportsLastChanceSparseRecovery(kind: RecommendationRecoveryKind): boolean {
+  return (
+    kind === "broad-multiplayer" ||
+    kind === "steam-deck-roguelike" ||
+    kind === "steam-deck-strategy-roguelike" ||
+    kind === "steam-deck-strategy" ||
+    kind === "deckbuilding-card" ||
+    kind === "non-steam-strategy-rating"
+  );
+}
+
+function isDiscountSeekingSparseRecoveryKind(kind: RecommendationRecoveryKind): boolean {
+  return (
+    kind === "broad-multiplayer" ||
+    kind === "steam-deck-roguelike" ||
+    kind === "steam-deck-strategy-roguelike" ||
+    kind === "steam-deck-strategy" ||
+    kind === "deckbuilding-card" ||
+    kind === "non-steam-strategy-rating"
+  );
+}
+
+function buildLastChanceSparseRecoveryProfile(
+  profile: RecommendationRecoveryProfile,
+  simpleSocialPrompt = false
+): RecommendationRecoveryProfile {
+  return {
+    ...profile,
+    queries: profile.queries.slice(0, 1),
+    maxDiscoverCalls: 1,
+    maxResolutions: Math.min(
+      profile.maxResolutions,
+      isSteamDeckSparseRecoveryKind(profile.kind) ||
+        profile.kind === "non-steam-strategy-rating" ||
+        profile.kind === "broad-multiplayer"
+        ? profile.kind === "broad-multiplayer" && simpleSocialPrompt
+          ? 6
+          : 4
+        : 2
+    ),
+    maxMatches: 1
+  };
+}
+
+function matchesSparseRecoveryCandidate(
+  candidate: CatalogCandidate,
+  kind: RecommendationRecoveryKind,
+  constraints: RecommendationConstraints,
+  requestedPlatforms: string[] = [],
+  socialProfile?: RecommendationSocialPromptProfile | undefined
+): boolean {
+  switch (kind) {
+    case "broad-multiplayer":
+      return socialProfile
+        ? candidate.multiplayer &&
+            matchesRequestedPlatforms(candidate.platforms, requestedPlatforms) &&
+            matchesSocialPromptCandidateShape(candidate, socialProfile) &&
+            (!constraints.excludeGenres.includes("racing") ||
+              !hasRacingOrSportsCandidateShape(candidate)) &&
+            (!constraints.excludeGenres.includes("sports") ||
+              !hasRacingOrSportsCandidateShape(candidate)) &&
+            (!(constraints.excludeGenres.includes("pvp") ||
+              constraints.coopMode.includes("non-competitive")) ||
+              !hasPvPCandidateEvidence(candidate)) &&
+            (!constraints.qualityIntent.includes("review-backed") || hasCatalogReviewSignal(candidate))
+        : candidate.multiplayer &&
+            matchesRequestedPlatforms(candidate.platforms, requestedPlatforms) &&
+            (!requiresPartyRecoveryShape(constraints) ||
+              hasPartyRecoveryCandidateShape(candidate) ||
+              hasExplicitCoopCandidateEvidence(candidate)) &&
+            (!constraints.excludeGenres.includes("racing") ||
+              !hasRacingOrSportsCandidateShape(candidate)) &&
+            (!constraints.excludeGenres.includes("sports") ||
+              !hasRacingOrSportsCandidateShape(candidate)) &&
+            (!(constraints.excludeGenres.includes("pvp") ||
+              constraints.coopMode.includes("non-competitive")) ||
+              !hasPvPCandidateEvidence(candidate)) &&
+            (!constraints.qualityIntent.includes("review-backed") || hasCatalogReviewSignal(candidate));
+    case "steam-deck-roguelike":
+      return hasRoguelikeCandidateEvidence(candidate);
+    case "steam-deck-strategy-roguelike":
+      return (
+        hasRoguelikeCandidateEvidence(candidate) &&
+        hasStrategyCandidateEvidence(candidate) &&
+        hasCatalogReviewSignal(candidate)
+      );
+    case "steam-deck-strategy":
+      return hasStrategyCandidateEvidence(candidate) && hasCatalogReviewSignal(candidate);
+    case "non-steam-strategy-rating":
+      return (
+        hasStrategyCandidateEvidence(candidate) &&
+        hasCatalogReviewSignal(candidate) &&
+        (!constraints.excludeGenres.includes("strategy") || !hasStrategyCandidateEvidence(candidate)) &&
+        (!constraints.avoidComplexity.includes("complex-strategy") ||
+          !hasHeavyStrategyCandidateEvidence(candidate) ||
+          hasTacticsCandidateEvidence(candidate)) &&
+        (!constraints.avoidComplexity.includes("reading-heavy") ||
+          !hasReadingHeavyCandidateEvidence(candidate)) &&
+        (!constraints.avoidComplexity.includes("long-session") ||
+          !hasLongSessionCandidateEvidence(candidate))
+      );
+    case "deckbuilding-card":
+      return (
+        hasDeckbuildingCandidateEvidence(candidate) &&
+        (!constraints.excludeGenres.includes("strategy") || !hasHeavyStrategyCandidateEvidence(candidate))
+      );
+  }
+}
+
+function matchesSparseRecoveryDeal(
+  deal: DealCandidate,
+  kind: RecommendationRecoveryKind,
+  constraints: RecommendationConstraints,
+  preferences: {
+    shortSession: boolean;
+  },
+  steamDeckRequest: boolean,
+  socialProfile?: RecommendationSocialPromptProfile | undefined
+): boolean {
+  switch (kind) {
+    case "broad-multiplayer":
+      return socialProfile
+        ? deal.multiplayer &&
+            matchesSocialPromptDealShape(deal, socialProfile) &&
+            (!constraints.excludeGenres.includes("racing") || !hasRacingOrSportsShape(deal)) &&
+            (!constraints.excludeGenres.includes("sports") || !hasRacingOrSportsShape(deal)) &&
+            (!(constraints.excludeGenres.includes("pvp") ||
+              constraints.coopMode.includes("non-competitive")) ||
+              !hasPvPDealEvidence(deal)) &&
+            (!constraints.qualityIntent.includes("review-backed") || hasStrongReviewSignal(deal))
+        : deal.multiplayer &&
+            (!requiresPartyRecoveryShape(constraints) || hasBroadCoopFriendlyShape(deal)) &&
+            (!constraints.excludeGenres.includes("racing") || !hasRacingOrSportsShape(deal)) &&
+            (!constraints.excludeGenres.includes("sports") || !hasRacingOrSportsShape(deal)) &&
+            (!(constraints.excludeGenres.includes("pvp") ||
+              constraints.coopMode.includes("non-competitive")) ||
+              !hasPvPDealEvidence(deal)) &&
+            (!constraints.qualityIntent.includes("review-backed") || hasStrongReviewSignal(deal));
+    case "steam-deck-roguelike":
+      return (
+        getDeckCompatibilityStatus(deal) !== "unsupported" &&
+        hasRoguelikeDealEvidence(deal) &&
+        (!preferences.shortSession || hasShortSessionSparseShape(deal))
+      );
+    case "steam-deck-strategy-roguelike":
+      return (
+        getDeckCompatibilityStatus(deal) !== "unsupported" &&
+        hasStrongReviewSignal(deal) &&
+        hasRoguelikeDealEvidence(deal) &&
+        hasStrategyRecoveryDealEvidence(deal) &&
+        (!preferences.shortSession || hasShortSessionSparseShape(deal))
+      );
+    case "steam-deck-strategy":
+      return (
+        getDeckCompatibilityStatus(deal) !== "unsupported" &&
+        hasStrongReviewSignal(deal) &&
+        hasStrategyRecoveryDealEvidence(deal) &&
+        (!preferences.shortSession || hasShortSessionSparseShape(deal))
+      );
+    case "non-steam-strategy-rating":
+      return (
+        hasStrongReviewSignal(deal) &&
+        hasStrategyRecoveryDealEvidence(deal) &&
+        !(
+          (constraints.excludeGenres.includes("strategy") || constraints.strategyPreference === "avoid") &&
+          hasStrategyRecoveryDealEvidence(deal)
+        ) &&
+        (!constraints.avoidComplexity.includes("complex-strategy") ||
+          !hasHeavyStrategyDealEvidence(deal) ||
+          hasTacticsDealEvidence(deal)) &&
+        (!constraints.avoidComplexity.includes("reading-heavy") ||
+          !hasReadingHeavyDealEvidence(deal)) &&
+        (!constraints.avoidComplexity.includes("long-session") ||
+          !hasLongSessionDealEvidence(deal))
+      );
+    case "deckbuilding-card":
+      return (
+        hasDeckbuildingEvidence(deal) &&
+        (!constraints.excludeGenres.includes("strategy") || !hasHeavyStrategyDealEvidence(deal)) &&
+        (!steamDeckRequest || getDeckCompatibilityStatus(deal) !== "unsupported")
+      );
+  }
+}
+
+function finalizeSparseRecoveryMatches(
+  matches: DealCandidate[],
+  kind: RecommendationRecoveryKind,
+  filters: DiscoverFilters,
+  preferences: {
+    shortSession: boolean;
+  },
+  steamDeckRequest: boolean
+): DealCandidate[] {
+  const ranked = scoreDealCandidates(dedupeDeals(matches), filters);
+
+  if (
+    kind === "steam-deck-roguelike" ||
+    kind === "steam-deck-strategy-roguelike" ||
+    kind === "steam-deck-strategy" ||
+    (kind === "deckbuilding-card" && steamDeckRequest)
+  ) {
+    const supported = ranked.filter((deal) => {
+      const status = getDeckCompatibilityStatus(deal);
+      return status === "verified" || status === "playable";
+    });
+    const unknown = ranked.filter((deal) => getDeckCompatibilityStatus(deal) === "unknown");
+
+    return supported.length > 0 ? [...supported, ...unknown] : unknown;
+  }
+
+  if (kind === "broad-multiplayer" && preferences.shortSession) {
+    return [...ranked].sort((left, right) => {
+      const delta = getShortSessionScore(right) - getShortSessionScore(left);
+      return delta !== 0 ? delta : 0;
+    });
+  }
+
+  if (kind === "non-steam-strategy-rating" && preferences.shortSession) {
+    return [...ranked].sort((left, right) => {
+      const delta = getShortSessionScore(right) - getShortSessionScore(left);
+      return delta !== 0 ? delta : 0;
+    });
+  }
+
+  return ranked;
+}
+
+function hasPartyRecoveryCandidateShape(candidate: CatalogCandidate): boolean {
+  const normalizedGenres = new Set(candidate.genres.map((genre) => genre.trim().toLowerCase()));
+  const normalizedTags = new Set((candidate.tags ?? []).map((tag) => tag.trim().toLowerCase()));
+
+  return (
+    normalizedGenres.has("action") ||
+    normalizedGenres.has("casual") ||
+    normalizedGenres.has("arcade") ||
+    normalizedGenres.has("party") ||
+    normalizedTags.has("party")
+  );
+}
+
+function hasExplicitCoopCandidateEvidence(candidate: CatalogCandidate): boolean {
+  const values = `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`.toLowerCase();
+  return /\b(co-?op|coop|cooperative|teamplay|team-based|multiplayer)\b/.test(values);
+}
+
+function hasLocalSocialCandidateEvidence(candidate: CatalogCandidate): boolean {
+  const values = `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`.toLowerCase();
+  return /\b(local[ -]?co-?op|couch[ -]?co-?op|split[ -]?screen|same[ -]?screen|shared[ -]?screen|cooperative)\b/.test(
+    values
+  );
+}
+
+function hasStrongPartyCandidateEvidence(candidate: CatalogCandidate): boolean {
+  const values = `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`.toLowerCase();
+  return /\b(party|casual|arcade|brawler|fun|hangout|co-?op|coop)\b/.test(values);
+}
+
+function matchesSocialPromptCandidateShape(
+  candidate: CatalogCandidate,
+  socialProfile: RecommendationSocialPromptProfile
+): boolean {
+  if (socialProfile === "party-hangout") {
+    return hasStrongPartyCandidateEvidence(candidate);
+  }
+
+  return (
+    hasExplicitCoopCandidateEvidence(candidate) ||
+    hasLocalSocialCandidateEvidence(candidate) ||
+    hasStrongPartyCandidateEvidence(candidate)
+  );
+}
+
+function requiresPartyRecoveryShape(constraints: RecommendationConstraints): boolean {
+  return constraints.coopMode.includes("party");
+}
+
+function hasRacingOrSportsCandidateShape(candidate: CatalogCandidate): boolean {
+  const normalizedGenres = new Set(candidate.genres.map((genre) => genre.trim().toLowerCase()));
+  return normalizedGenres.has("racing") || normalizedGenres.has("sports");
+}
+
+function hasRacingOrSportsShape(deal: DealCandidate): boolean {
+  const normalizedGenres = new Set(deal.genres.map((genre) => genre.trim().toLowerCase()));
+  return normalizedGenres.has("racing") || normalizedGenres.has("sports");
+}
+
+function hasPvPCandidateEvidence(candidate: CatalogCandidate): boolean {
+  const values = `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`.toLowerCase();
+  return /\b(pvp|versus|vs|competitive|battle royale)\b/.test(values);
+}
+
+function hasPvPDealEvidence(deal: DealCandidate): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")}`.toLowerCase();
+  return /\b(pvp|versus|vs|competitive|battle royale)\b/.test(values);
+}
+
+function hasLocalSocialDealEvidence(deal: DealCandidate): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")}`.toLowerCase();
+  return /\b(local[ -]?co-?op|couch[ -]?co-?op|split[ -]?screen|same[ -]?screen|shared[ -]?screen|cooperative)\b/.test(
+    values
+  );
+}
+
+function hasStrongPartyDealEvidence(deal: DealCandidate): boolean {
+  return /\b(party|casual|arcade|brawler|fun|hangout|co-?op|coop)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasSocialRescueDealEvidence(deal: DealCandidate): boolean {
+  return /\b(action|casual|arcade|party|brawler|fun|hangout|co-?op|coop)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function classifyRecommendationSocialCandidateTier(
+  deal: DealCandidate,
+  socialProfile: RecommendationSocialPromptProfile
+): RecommendationSocialCandidateTier {
+  if (!deal.multiplayer) {
+    return "reject";
+  }
+
+  if (hasStoryAdventurePuzzleBrowseFiller(deal) || hasLikelySingleplayerBrowseBias(deal)) {
+    return "reject";
+  }
+
+  if (socialProfile === "party-hangout") {
+    if (hasRacingOrSportsShape(deal) || hasPvPDealEvidence(deal)) {
+      return "reject";
+    }
+
+    if (hasStrongPartyDealEvidence(deal)) {
+      return "strict";
+    }
+
+    if (hasSocialRescueDealEvidence(deal)) {
+      return "rescue";
+    }
+
+    return "reject";
+  }
+
+  if (hasExplicitCoopDealEvidence(deal) || hasLocalSocialDealEvidence(deal)) {
+    return "strict";
+  }
+
+  if (
+    hasStrongPartyDealEvidence(deal) &&
+    hasBroadCoopFriendlyShape(deal) &&
+    !hasRacingOrSportsShape(deal) &&
+    !hasPvPDealEvidence(deal)
+  ) {
+    return "strict";
+  }
+
+  if (hasSocialRescueDealEvidence(deal) || hasBroadCoopFriendlyShape(deal)) {
+    return "rescue";
+  }
+
+  return "reject";
+}
+
+function matchesSocialPromptDealShape(
+  deal: DealCandidate,
+  socialProfile: RecommendationSocialPromptProfile
+): boolean {
+  return classifyRecommendationSocialCandidateTier(deal, socialProfile) !== "reject";
+}
+
+function hasStrategyCandidateEvidence(candidate: CatalogCandidate): boolean {
+  return /\b(strategy|strategic|tactics?|tactical|turn-?based)\b/i.test(
+    `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`
+  );
+}
+
+function hasTacticsCandidateEvidence(candidate: CatalogCandidate): boolean {
+  return /\b(tactics?|tactical|turn-?based)\b/i.test(
+    `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`
+  );
+}
+
+function hasStrategyRecoveryDealEvidence(deal: DealCandidate): boolean {
+  return hasStrategyCandidateEvidence({
+    title: deal.title,
+    genres: deal.genres,
+    platforms: deal.platforms,
+    tags: [],
+    rating: deal.rating,
+    metacritic: deal.metacritic,
+    multiplayer: deal.multiplayer
+  });
+}
+
+function hasTurnBasedCandidateEvidence(candidate: CatalogCandidate): boolean {
+  return /\b(turn-?based)\b/i.test(
+    `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`
+  );
+}
+
+function hasReadingHeavyCandidateEvidence(candidate: CatalogCandidate): boolean {
+  return /\b(text-heavy|reading-heavy|story rich|visual novel|narrative)\b/i.test(
+    `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`
+  );
+}
+
+function hasLongSessionCandidateEvidence(candidate: CatalogCandidate): boolean {
+  return /\b(grand strategy|4x|simulation|management|wargame|campaign)\b/i.test(
+    `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`
+  );
+}
+
+function hasTurnBasedDealEvidence(deal: DealCandidate): boolean {
+  return /\b(turn-?based)\b/i.test(`${deal.title} ${deal.genres.join(" ")}`) || /턴제/.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasHeavyStrategyCandidateEvidence(candidate: CatalogCandidate): boolean {
+  return /\b(grand strategy|4x|simulation|management|wargame)\b/i.test(
+    `${candidate.title} ${candidate.genres.join(" ")} ${(candidate.tags ?? []).join(" ")}`
+  );
+}
+
+function hasHeavyStrategyDealEvidence(deal: DealCandidate): boolean {
+  return /\b(grand strategy|4x|simulation|management|wargame)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasTacticsDealEvidence(deal: DealCandidate): boolean {
+  return /\b(tactics?|tactical|turn-?based)\b/i.test(`${deal.title} ${deal.genres.join(" ")}`) ||
+    /전술|턴제/.test(`${deal.title} ${deal.genres.join(" ")}`);
+}
+
+function hasReadingHeavyDealEvidence(deal: DealCandidate): boolean {
+  return /\b(text-heavy|reading-heavy|story rich|visual novel|narrative)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasLongSessionDealEvidence(deal: DealCandidate): boolean {
+  return /\b(grand strategy|4x|simulation|management|wargame|campaign)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasShortSessionSparseShape(deal: DealCandidate): boolean {
+  return /\b(action|casual|arcade|party|roguelike|card|deckbuilder)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
 function getShortSessionScore(deal: DealCandidate): number {
   const titleBonus = /\b(deck|card|arcade|survivor|survivors|roguelike|roguelite)\b/i.test(deal.title)
     ? 2
@@ -1608,6 +4328,319 @@ function normalizePlatform(value: string): string {
   }
 }
 
+function buildStructuredMultiplayerBrowseQueries(
+  rawPreferences: string,
+  constraints: RecommendationConstraints,
+  socialProfile?: RecommendationSocialPromptProfile | undefined
+): Array<{
+  genres?: string[] | undefined;
+  sort: "best-value" | "highest-rating";
+  mode: "party" | "generic";
+}> {
+  const partyPrompt =
+    socialProfile === "party-hangout" ||
+    constraints.coopMode.includes("party") ||
+    /파티|party|party-friendly|party night|hangout|웃긴|떠들|같이 웃으면서|friends?/i.test(
+      rawPreferences
+    );
+
+  return [
+    { genres: ["Action"], sort: "best-value", mode: partyPrompt ? "party" : "generic" },
+    { genres: ["Casual"], sort: "best-value", mode: partyPrompt ? "party" : "generic" },
+    { genres: ["Indie"], sort: "best-value", mode: partyPrompt ? "party" : "generic" },
+    { sort: "highest-rating", mode: "generic" }
+  ];
+}
+
+function matchesStructuredMultiplayerBrowseDeal(
+  deal: DealCandidate,
+  options: {
+    requestedPlatforms: string[];
+    budget?: number | undefined;
+    constraints: RecommendationConstraints;
+    partyPrompt: boolean;
+    reviewBacked: boolean;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  }
+): boolean {
+  return classifyStructuredMultiplayerBrowseDealTier(deal, options) === "strict";
+}
+
+function classifyStructuredMultiplayerBrowseDealTier(
+  deal: DealCandidate,
+  options: {
+    requestedPlatforms: string[];
+    budget?: number | undefined;
+    constraints: RecommendationConstraints;
+    partyPrompt: boolean;
+    reviewBacked: boolean;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  }
+): RecommendationSocialCandidateTier {
+  if (deal.cut <= 0 || !deal.multiplayer) {
+    return "reject";
+  }
+
+  if (
+    typeof options.budget === "number" &&
+    deal.price.amount > options.budget
+  ) {
+    return "reject";
+  }
+
+  if (
+    options.requestedPlatforms.length > 0 &&
+    deal.platforms.length > 0 &&
+    !matchesRequestedPlatforms(deal.platforms, options.requestedPlatforms)
+  ) {
+    return "reject";
+  }
+
+  if (
+    (options.constraints.excludeGenres.includes("pvp") ||
+      options.constraints.coopMode.includes("non-competitive")) &&
+    hasPvPDealEvidence(deal)
+  ) {
+    return "reject";
+  }
+
+  if (
+    (options.constraints.excludeGenres.includes("racing") ||
+      options.constraints.excludeGenres.includes("sports")) &&
+    hasRacingOrSportsShape(deal)
+  ) {
+    return "reject";
+  }
+
+  if (options.reviewBacked && !hasStrongReviewSignal(deal)) {
+    return "reject";
+  }
+
+  if (options.partyPrompt) {
+    return classifyRecommendationSocialCandidateTier(
+      deal,
+      options.socialProfile ?? "party-hangout"
+    );
+  }
+
+  if (!options.socialProfile) {
+    return hasGenericCoopBrowseShape(deal) ? "strict" : "reject";
+  }
+
+  if (options.socialProfile === "generic-coop") {
+    if (hasExplicitCoopDealEvidence(deal) || hasLocalSocialDealEvidence(deal)) {
+      return "strict";
+    }
+
+    return matchesSocialPromptDealShape(deal, options.socialProfile) ? "rescue" : "reject";
+  }
+
+  return classifyRecommendationSocialCandidateTier(deal, options.socialProfile);
+}
+
+function recoverStructuredMultiplayerBrowseSocialMatches(args: {
+  deals: DealCandidate[];
+  requestedPlatforms: string[];
+  budget?: number | undefined;
+  constraints: RecommendationConstraints;
+  reviewBacked: boolean;
+  socialProfile: RecommendationSocialPromptProfile;
+}): DealCandidate[] {
+  const strict = rankStructuredMultiplayerBrowseDeals(
+    args.deals.filter(
+      (deal) =>
+        classifyStructuredMultiplayerBrowseDealTier(deal, {
+          requestedPlatforms: args.requestedPlatforms,
+          budget: args.budget,
+          constraints: args.constraints,
+          partyPrompt: args.socialProfile === "party-hangout",
+          reviewBacked: args.reviewBacked,
+          socialProfile: args.socialProfile
+        }) === "strict"
+    ),
+    {
+      partyPrompt: args.socialProfile === "party-hangout",
+      reviewBacked: args.reviewBacked,
+      nonCompetitive:
+        args.constraints.coopMode.includes("non-competitive") ||
+        args.constraints.excludeGenres.includes("pvp"),
+      excludeRacingOrSports:
+        args.constraints.excludeGenres.includes("racing") ||
+        args.constraints.excludeGenres.includes("sports"),
+      budget: args.budget,
+      socialProfile: args.socialProfile
+    }
+  );
+
+  if (strict.length > 0) {
+    return strict.slice(0, 2);
+  }
+
+  return rankStructuredMultiplayerBrowseDeals(
+    args.deals.filter(
+      (deal) =>
+        classifyStructuredMultiplayerBrowseDealTier(deal, {
+          requestedPlatforms: args.requestedPlatforms,
+          budget: args.budget,
+          constraints: args.constraints,
+          partyPrompt: args.socialProfile === "party-hangout",
+          reviewBacked: args.reviewBacked,
+          socialProfile: args.socialProfile
+        }) === "rescue"
+    ),
+    {
+      partyPrompt: args.socialProfile === "party-hangout",
+      reviewBacked: args.reviewBacked,
+      nonCompetitive:
+        args.constraints.coopMode.includes("non-competitive") ||
+        args.constraints.excludeGenres.includes("pvp"),
+      excludeRacingOrSports:
+        args.constraints.excludeGenres.includes("racing") ||
+        args.constraints.excludeGenres.includes("sports"),
+      budget: args.budget,
+      socialProfile: args.socialProfile
+    }
+  ).slice(0, 2);
+}
+
+function rankStructuredMultiplayerBrowseDeals(
+  deals: DealCandidate[],
+  options: {
+    partyPrompt: boolean;
+    reviewBacked: boolean;
+    nonCompetitive: boolean;
+    excludeRacingOrSports: boolean;
+    budget?: number | undefined;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  }
+): DealCandidate[] {
+  return [...deals].sort((left, right) => {
+    const delta =
+      getStructuredMultiplayerBrowseScore(right, options) -
+      getStructuredMultiplayerBrowseScore(left, options);
+    return delta !== 0 ? delta : left.title.localeCompare(right.title);
+  });
+}
+
+function getStructuredMultiplayerBrowseScore(
+  deal: DealCandidate,
+  options: {
+    partyPrompt: boolean;
+    reviewBacked: boolean;
+    nonCompetitive: boolean;
+    excludeRacingOrSports: boolean;
+    budget?: number | undefined;
+    socialProfile?: RecommendationSocialPromptProfile | undefined;
+  }
+): number {
+  let score = 0;
+
+  if (deal.multiplayer) {
+    score += 140;
+  }
+
+  if (hasExplicitCoopDealEvidence(deal)) {
+    score += options.partyPrompt ? 50 : 90;
+  }
+
+  if (
+    (options.socialProfile &&
+      matchesSocialPromptDealShape(deal, options.socialProfile)) ||
+    (!options.socialProfile && hasGenericCoopBrowseShape(deal))
+  ) {
+    score += 70;
+  }
+
+  if (options.partyPrompt && hasStrongPartyDealEvidence(deal)) {
+    score += 120;
+  }
+
+  if (
+    options.socialProfile === "generic-coop" &&
+    hasStrongPartyDealEvidence(deal) &&
+    !hasExplicitCoopDealEvidence(deal) &&
+    !hasLocalSocialDealEvidence(deal)
+  ) {
+    score -= 90;
+  }
+
+  if (hasStoryAdventurePuzzleBrowseFiller(deal)) {
+    score -= options.partyPrompt ? 260 : 120;
+  }
+
+  if (hasLikelySingleplayerBrowseBias(deal)) {
+    score -= options.partyPrompt ? 180 : 80;
+  }
+
+  if (options.excludeRacingOrSports && hasRacingOrSportsShape(deal)) {
+    score -= 260;
+  }
+
+  if (options.nonCompetitive && hasPvPDealEvidence(deal)) {
+    score -= 280;
+  }
+
+  if (options.reviewBacked) {
+    score += hasStrongReviewSignal(deal) ? 120 : -140;
+  } else if (hasStrongReviewSignal(deal)) {
+    score += 50;
+  }
+
+  if (
+    typeof options.budget === "number" &&
+    deal.price.amount <= options.budget
+  ) {
+    score += deal.price.amount <= options.budget * 0.6 ? 35 : 15;
+  }
+
+  return score;
+}
+
+function hasExplicitCoopDealEvidence(deal: DealCandidate): boolean {
+  return /\b(co-?op|coop|cooperative|teamplay|team-based|multiplayer)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasPartyOrFunBrowseShape(deal: DealCandidate): boolean {
+  return /\b(party|brawler|fun|hangout|arcade|casual|action|co-?op|coop)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasGenericCoopBrowseShape(deal: DealCandidate): boolean {
+  return hasExplicitCoopDealEvidence(deal) || hasBroadCoopFriendlyShape(deal);
+}
+
+function hasStoryAdventurePuzzleBrowseFiller(deal: DealCandidate): boolean {
+  return /\b(adventure|puzzle|story|narrative)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function hasLikelySingleplayerBrowseBias(deal: DealCandidate): boolean {
+  return /\b(singleplayer|story rich|story-rich|narrative|solo)\b/i.test(
+    `${deal.title} ${deal.genres.join(" ")}`
+  );
+}
+
+function matchesRequestedPlatforms(candidatePlatforms: string[], requestedPlatforms: string[]): boolean {
+  if (requestedPlatforms.length === 0 || candidatePlatforms.length === 0) {
+    return true;
+  }
+
+  const requested = new Set(requestedPlatforms.map((platform) => normalizePlatform(platform)));
+  return candidatePlatforms.some((platform) => requested.has(normalizePlatform(platform)));
+}
+
 function normalizeTitleKey(value: string): string {
   return value.trim().toLowerCase();
+}
+
+function escapeRecommendationRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getRecommendationRecoveryDealKey(deal: DealCandidate): string {
+  return deal.id || normalizeTitleKey(deal.title);
 }

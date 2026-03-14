@@ -1369,6 +1369,60 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(discoverCallCount).toBe(1);
   });
 
+  it("does not start warning-triggered Steam Deck metadata recovery when metadata warnings are absent", async () => {
+    let discoverCallCount = 0;
+
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "deck-runner",
+            title: "Deck Runner",
+            price: { amount: 11800, currency: "KRW" },
+            regular: { amount: 23600, currency: "KRW" },
+            cut: 50,
+            genres: [],
+            platforms: ["PC"],
+            multiplayer: false,
+            metadataStatus: "missing",
+            steamDeckCompatibility: {
+              status: "playable",
+              details: [],
+              source: "steam"
+            }
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      },
+      async discoverTitles() {
+        discoverCallCount += 1;
+        return [
+          {
+            title: "Deck Runner",
+            genres: ["Action", "Roguelike"],
+            platforms: ["PC"],
+            tags: ["roguelike"],
+            rating: 4.2,
+            metacritic: 80,
+            multiplayer: false
+          }
+        ];
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "스팀덱에서 하기 좋은 로그라이크",
+      budget: 20_000,
+      platforms: ["Steam Deck"],
+      country: "KR"
+    });
+
+    expect(discoverCallCount).toBe(0);
+    expect(result.matches).toEqual([]);
+  });
+
   it("recovers generic Steam Deck roguelike recommendations from broader Steam deals when strict genre search is empty", async () => {
     const findDealsCalls: Array<{
       genres: string[] | undefined;
@@ -1490,7 +1544,9 @@ describe("GameDealService.recommendSaleGames", () => {
 
     expect(result.matches).toHaveLength(1);
     expect(result.matches[0]).toMatchObject({ title: "The King is Watching" });
-    expect(findDealsCalls).toEqual([{ genres: undefined, preferredShops: [61] }]);
+    expect(findDealsCalls).toEqual([
+      { genres: ["Roguelike"], preferredShops: [61] }
+    ]);
     expect(discoverTitleCalls).toBe(2);
     expect(resolvedTitles).toEqual(["Hades", "The King is Watching"]);
   });
@@ -1657,7 +1713,7 @@ describe("GameDealService.recommendSaleGames", () => {
     expect(result.summary).toContain("조건에 맞는 추천 할인 게임을 찾지 못했습니다.");
   });
 
-  it("caps generic Steam roguelike catalog resolution fan-out at three calls", async () => {
+  it("caps sparse Steam roguelike catalog resolution fan-out once enough matches are found", async () => {
     let resolveCount = 0;
 
     const service = new GameDealService({
@@ -1709,7 +1765,7 @@ describe("GameDealService.recommendSaleGames", () => {
       country: "KR"
     });
 
-    expect(resolveCount).toBe(3);
+    expect(resolveCount).toBe(1);
   });
 
   it("deduplicates already compacted Steam Deck warnings in recommendation results", async () => {

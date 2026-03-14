@@ -86,4 +86,24 @@ describe("RawgClient.searchGames", () => {
       }
     ]);
   });
+
+  it("aborts slow RAWG requests after the configured timeout", async () => {
+    const fetchMock = vi.fn((_input: URL | string | Request, init?: RequestInit) => {
+      return new Promise<Response>((_resolve, reject) => {
+        init?.signal?.addEventListener("abort", () => {
+          reject(new Error("aborted by signal"));
+        });
+      });
+    });
+
+    const client = new RawgClient({
+      apiKey: "rawg-key",
+      fetch: fetchMock as typeof fetch,
+      requestTimeoutMs: 20
+    });
+
+    await expect(client.searchGames("slow game")).rejects.toThrow(
+      "RAWG request failed with timeout"
+    );
+  });
 });

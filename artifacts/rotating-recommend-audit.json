@@ -1,0 +1,4198 @@
+{
+  "seed": "2026-03-14",
+  "caseIds": [
+    "steam-deck-lifestyle-09",
+    "steam-deck-lifestyle-06",
+    "steam-deck-lifestyle-07",
+    "steam-deck-lifestyle-27",
+    "steam-deck-lifestyle-22",
+    "steam-deck-lifestyle-17",
+    "steam-deck-lifestyle-16",
+    "steam-deck-lifestyle-25",
+    "steam-deck-lifestyle-14",
+    "steam-deck-lifestyle-01",
+    "deckbuilding-card-12",
+    "deckbuilding-card-17",
+    "deckbuilding-card-03",
+    "deckbuilding-card-04",
+    "deckbuilding-card-11",
+    "deckbuilding-card-28",
+    "deckbuilding-card-08",
+    "deckbuilding-card-05",
+    "deckbuilding-card-07",
+    "deckbuilding-card-30",
+    "strategy-rating-26",
+    "strategy-rating-06",
+    "strategy-rating-28",
+    "strategy-rating-21",
+    "strategy-rating-01",
+    "strategy-rating-08",
+    "strategy-rating-20",
+    "strategy-rating-13",
+    "strategy-rating-03",
+    "strategy-rating-10",
+    "multiplayer-social-23",
+    "multiplayer-social-27",
+    "multiplayer-social-15",
+    "multiplayer-social-08",
+    "multiplayer-social-07",
+    "multiplayer-social-05",
+    "multiplayer-social-13",
+    "multiplayer-social-22",
+    "multiplayer-social-18",
+    "multiplayer-social-19",
+    "action-roguelite-12",
+    "action-roguelite-05",
+    "action-roguelite-13",
+    "action-roguelite-10",
+    "action-roguelite-02",
+    "action-roguelite-21",
+    "action-roguelite-01",
+    "action-roguelite-09",
+    "action-roguelite-18",
+    "action-roguelite-27",
+    "constraint-heavy-11",
+    "constraint-heavy-14",
+    "constraint-heavy-03",
+    "constraint-heavy-02",
+    "constraint-heavy-25",
+    "constraint-heavy-28",
+    "constraint-heavy-23",
+    "constraint-heavy-22",
+    "constraint-heavy-08",
+    "constraint-heavy-19",
+    "mixed-language-26",
+    "mixed-language-18",
+    "mixed-language-10",
+    "mixed-language-05",
+    "mixed-language-03",
+    "mixed-language-22",
+    "mixed-language-17",
+    "mixed-language-23",
+    "mixed-language-21",
+    "mixed-language-28",
+    "budget-strict-26",
+    "budget-strict-20",
+    "budget-strict-19",
+    "budget-strict-09",
+    "budget-strict-11",
+    "budget-strict-05",
+    "budget-strict-27",
+    "budget-strict-25",
+    "budget-strict-12",
+    "budget-strict-03",
+    "short-session-08",
+    "short-session-22",
+    "short-session-17",
+    "short-session-13",
+    "short-session-04",
+    "short-session-05",
+    "short-session-18",
+    "short-session-19",
+    "short-session-26",
+    "short-session-10",
+    "genre-hybrid-21",
+    "genre-hybrid-02",
+    "genre-hybrid-13",
+    "genre-hybrid-14",
+    "genre-hybrid-22",
+    "genre-hybrid-06",
+    "genre-hybrid-09",
+    "genre-hybrid-18",
+    "genre-hybrid-29",
+    "genre-hybrid-20"
+  ],
+  "generatedAt": "2026-03-14T09:34:16.646Z",
+  "summary": {
+    "total": 100,
+    "zeroMatches": 21,
+    "flagged": 49,
+    "timeouts": 0,
+    "topCounts": [
+      {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "count": 13
+      },
+      {
+        "title": "Deponia",
+        "count": 12
+      },
+      {
+        "title": "Dice & Fold",
+        "count": 11
+      },
+      {
+        "title": "BALL x PIT",
+        "count": 8
+      },
+      {
+        "title": "BrightGunner",
+        "count": 8
+      },
+      {
+        "title": "Inscryption",
+        "count": 7
+      },
+      {
+        "title": "Racket: Nx",
+        "count": 6
+      },
+      {
+        "title": "Balatro",
+        "count": 5
+      },
+      {
+        "title": "Cozy Grove",
+        "count": 3
+      },
+      {
+        "title": "Shining Force III",
+        "count": 2
+      },
+      {
+        "title": "Super Robot Taisen: Original Generation",
+        "count": 2
+      },
+      {
+        "title": "AI Games",
+        "count": 1
+      },
+      {
+        "title": "ROUNDS",
+        "count": 1
+      }
+    ]
+  },
+  "groups": {
+    "steam-deck-lifestyle": {
+      "uniqueTopPicks": 4,
+      "topCounts": [
+        {
+          "title": "Deponia",
+          "count": 4
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 3
+        },
+        {
+          "title": "AI Games",
+          "count": 1
+        },
+        {
+          "title": "BALL x PIT",
+          "count": 1
+        }
+      ],
+      "flagged": 6,
+      "timeouts": 0
+    },
+    "deckbuilding-card": {
+      "uniqueTopPicks": 4,
+      "topCounts": [
+        {
+          "title": "Balatro",
+          "count": 4
+        },
+        {
+          "title": "Inscryption",
+          "count": 3
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 2
+        },
+        {
+          "title": "BrightGunner",
+          "count": 1
+        }
+      ],
+      "flagged": 1,
+      "timeouts": 0
+    },
+    "strategy-rating": {
+      "uniqueTopPicks": 2,
+      "topCounts": [
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "count": 9
+        },
+        {
+          "title": "Shining Force III",
+          "count": 1
+        }
+      ],
+      "flagged": 1,
+      "timeouts": 0
+    },
+    "multiplayer-social": {
+      "uniqueTopPicks": 1,
+      "topCounts": [
+        {
+          "title": "Racket: Nx",
+          "count": 2
+        }
+      ],
+      "flagged": 10,
+      "timeouts": 0
+    },
+    "action-roguelite": {
+      "uniqueTopPicks": 4,
+      "topCounts": [
+        {
+          "title": "BALL x PIT",
+          "count": 4
+        },
+        {
+          "title": "BrightGunner",
+          "count": 4
+        },
+        {
+          "title": "Cozy Grove",
+          "count": 1
+        },
+        {
+          "title": "Inscryption",
+          "count": 1
+        }
+      ],
+      "flagged": 3,
+      "timeouts": 0
+    },
+    "constraint-heavy": {
+      "uniqueTopPicks": 3,
+      "topCounts": [
+        {
+          "title": "Deponia",
+          "count": 4
+        },
+        {
+          "title": "BALL x PIT",
+          "count": 2
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 1
+        }
+      ],
+      "flagged": 5,
+      "timeouts": 0
+    },
+    "mixed-language": {
+      "uniqueTopPicks": 5,
+      "topCounts": [
+        {
+          "title": "Dice & Fold",
+          "count": 2
+        },
+        {
+          "title": "BALL x PIT",
+          "count": 1
+        },
+        {
+          "title": "BrightGunner",
+          "count": 1
+        },
+        {
+          "title": "Inscryption",
+          "count": 1
+        },
+        {
+          "title": "Super Robot Taisen: Original Generation",
+          "count": 1
+        }
+      ],
+      "flagged": 6,
+      "timeouts": 0
+    },
+    "budget-strict": {
+      "uniqueTopPicks": 6,
+      "topCounts": [
+        {
+          "title": "Dice & Fold",
+          "count": 2
+        },
+        {
+          "title": "Racket: Nx",
+          "count": 2
+        },
+        {
+          "title": "Deponia",
+          "count": 1
+        },
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "count": 1
+        },
+        {
+          "title": "Shining Force III",
+          "count": 1
+        },
+        {
+          "title": "Super Robot Taisen: Original Generation",
+          "count": 1
+        }
+      ],
+      "flagged": 5,
+      "timeouts": 0
+    },
+    "short-session": {
+      "uniqueTopPicks": 7,
+      "topCounts": [
+        {
+          "title": "Cozy Grove",
+          "count": 2
+        },
+        {
+          "title": "Deponia",
+          "count": 2
+        },
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "count": 2
+        },
+        {
+          "title": "BrightGunner",
+          "count": 1
+        },
+        {
+          "title": "Dice & Fold",
+          "count": 1
+        },
+        {
+          "title": "Inscryption",
+          "count": 1
+        },
+        {
+          "title": "Racket: Nx",
+          "count": 1
+        }
+      ],
+      "flagged": 4,
+      "timeouts": 0
+    },
+    "genre-hybrid": {
+      "uniqueTopPicks": 7,
+      "topCounts": [
+        {
+          "title": "Balatro",
+          "count": 1
+        },
+        {
+          "title": "BrightGunner",
+          "count": 1
+        },
+        {
+          "title": "Deponia",
+          "count": 1
+        },
+        {
+          "title": "Dominions 5 - Warriors of the Faith",
+          "count": 1
+        },
+        {
+          "title": "Inscryption",
+          "count": 1
+        },
+        {
+          "title": "Racket: Nx",
+          "count": 1
+        },
+        {
+          "title": "ROUNDS",
+          "count": 1
+        }
+      ],
+      "flagged": 8,
+      "timeouts": 0
+    }
+  },
+  "results": [
+    {
+      "caseId": "steam-deck-lifestyle-09",
+      "group": "steam-deck-lifestyle",
+      "preferences": "출근길 15분씩 하기 좋은 스팀덱 게임",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 1,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 8,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-06",
+      "group": "steam-deck-lifestyle",
+      "preferences": "컨트롤러만으로 막힘 없이 하는 handheld bargain",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 2,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 8,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-07",
+      "group": "steam-deck-lifestyle",
+      "preferences": "눕겜용으로 복잡하지 않은 Steam Deck deal",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 3,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 9,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-27",
+      "group": "steam-deck-lifestyle",
+      "preferences": "easy-to-read portable deckbuilder discount",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 4,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-22",
+      "group": "steam-deck-lifestyle",
+      "preferences": "battery-conscious Steam Deck deal",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 5,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 9,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-17",
+      "group": "steam-deck-lifestyle",
+      "preferences": "패드만으로 메뉴 조작 쉬운 스팀덱 세일작",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 6,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 8,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-16",
+      "group": "steam-deck-lifestyle",
+      "preferences": "기차에서 켜기 좋은 handheld roguelite deal",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 7,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-25",
+      "group": "steam-deck-lifestyle",
+      "preferences": "snackable Steam Deck roguelite on sale",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 8,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-14",
+      "group": "steam-deck-lifestyle",
+      "preferences": "휴대용에서 UI 큰 세일 게임",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 9,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 8,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "steam-deck-lifestyle-01",
+      "group": "steam-deck-lifestyle",
+      "preferences": "침대 맡에 두고 짧게 켜기 좋은 스팀덱 할인작",
+      "budget": 22000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 10,
+      "summary": "AI Games를 추천합니다. 95% 할인, 현재가 3,150원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 8,
+      "topTitle": "AI Games",
+      "topMatch": {
+        "title": "AI Games",
+        "cut": 95,
+        "price": {
+          "amount": 3150,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 0,
+        "genres": [
+          "Casual",
+          "Indie",
+          "Sports"
+        ],
+        "platforms": [
+          "PC",
+          "macOS"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-12",
+      "group": "deckbuilding-card",
+      "preferences": "energy curve 보는 맛 있는 deckbuilder",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 11,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 3,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-17",
+      "group": "deckbuilding-card",
+      "preferences": "덱을 가볍게 굴리기 좋은 카드 로그라이트",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 12,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Umm Oyoun - ام عيون (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-03",
+      "group": "deckbuilding-card",
+      "preferences": "덱 압축과 제거가 중요한 카드 로그라이크",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 13,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Umm Oyoun - ام عيون (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-04",
+      "group": "deckbuilding-card",
+      "preferences": "짧은 run 안에 콤보 보는 카드 세일작",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 14,
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Umm Oyoun - ام عيون (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)"
+      ],
+      "matchCount": 5,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-11",
+      "group": "deckbuilding-card",
+      "preferences": "초반 카드 업그레이드 선택이 재밌는 할인작",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 15,
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 5,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-28",
+      "group": "deckbuilding-card",
+      "preferences": "핸드 관리 위주 카드 전투 세일작",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 16,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-08",
+      "group": "deckbuilding-card",
+      "preferences": "roguelike run인데 카드 선택 재미가 큰 게임",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 17,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 5,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-05",
+      "group": "deckbuilding-card",
+      "preferences": "build order보다 카드 연계가 중요한 할인 게임",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 18,
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 5,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-07",
+      "group": "deckbuilding-card",
+      "preferences": "패를 쥐고 계산하는 맛 좋은 deckbuilding sale",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 19,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 3,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "deckbuilding-card-30",
+      "group": "deckbuilding-card",
+      "preferences": "card-driven run builder on sale",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 20,
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 5,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-26",
+      "group": "strategy-rating",
+      "preferences": "메타와 유저 평 둘 다 괜찮은 전략 세일",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 21,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-06",
+      "group": "strategy-rating",
+      "preferences": "메타 점수 괜찮은 전략 세일작",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 22,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-28",
+      "group": "strategy-rating",
+      "preferences": "안전하게 고를 수 있는 전략 할인 게임",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 23,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-21",
+      "group": "strategy-rating",
+      "preferences": "trusted tactics sale for PC",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 24,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-01",
+      "group": "strategy-rating",
+      "preferences": "평이 단단한 전략 할인 게임",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 25,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-08",
+      "group": "strategy-rating",
+      "preferences": "review strong tactics pick on sale",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 26,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-20",
+      "group": "strategy-rating",
+      "preferences": "전술 맛 있으면서 평가도 좋은 할인작",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 27,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-13",
+      "group": "strategy-rating",
+      "preferences": "평가 안정적인 tactics 할인 게임",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 28,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-03",
+      "group": "strategy-rating",
+      "preferences": "high-rated tactics game discount",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 29,
+      "summary": "Shining Force III를 추천합니다. 0% 할인, 현재가 0원, SEGA Saturn 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 2,
+      "topTitle": "Shining Force III",
+      "topMatch": {
+        "title": "Shining Force III",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "RPG"
+        ],
+        "platforms": [
+          "SEGA Saturn"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "strategy-rating-10",
+      "group": "strategy-rating",
+      "preferences": "popular strategy game bargain",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 30,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-23",
+      "group": "multiplayer-social",
+      "preferences": "non-sweaty multiplayer sale for PC",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 31,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-27",
+      "group": "multiplayer-social",
+      "preferences": "협동 느낌 강한 파티 할인 게임",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 32,
+      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Racket: Nx",
+      "topMatch": {
+        "title": "Racket: Nx",
+        "cut": 50,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.5,
+        "genres": [
+          "Indie",
+          "Action",
+          "Sports"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-15",
+      "group": "multiplayer-social",
+      "preferences": "teamplay 할인작인데 경쟁 냄새 적은 것",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 33,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-08",
+      "group": "multiplayer-social",
+      "preferences": "racing 빼고 웃으면서 할 팀플 세일작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 34,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-07",
+      "group": "multiplayer-social",
+      "preferences": "hangout-friendly game deal for PC",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 35,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-05",
+      "group": "multiplayer-social",
+      "preferences": "친구 모임용으로 바로 설명 가능한 할인작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 36,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-13",
+      "group": "multiplayer-social",
+      "preferences": "friends-first co-op bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 37,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-22",
+      "group": "multiplayer-social",
+      "preferences": "친구집에서 바로 켜기 좋은 co-op bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 38,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-18",
+      "group": "multiplayer-social",
+      "preferences": "party-friendly multiplayer bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 39,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "multiplayer-social-19",
+      "group": "multiplayer-social",
+      "preferences": "같이 하면서 실수해도 웃기는 할인 게임",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 40,
+      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Racket: Nx",
+      "topMatch": {
+        "title": "Racket: Nx",
+        "cut": 50,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.5,
+        "genres": [
+          "Indie",
+          "Action",
+          "Sports"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-12",
+      "group": "action-roguelite",
+      "preferences": "총질 또는 베기 맛이 좋은 할인 로그라이크",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 41,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-05",
+      "group": "action-roguelite",
+      "preferences": "fast dodge-heavy roguelite on sale",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 42,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-13",
+      "group": "action-roguelite",
+      "preferences": "빠르게 restart하고 다시 도전할 액션 할인작",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 43,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-10",
+      "group": "action-roguelite",
+      "preferences": "arcade-action rogue bargain",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 44,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-02",
+      "group": "action-roguelite",
+      "preferences": "real-time combat roguelite bargain",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 45,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-21",
+      "group": "action-roguelite",
+      "preferences": "combat loop가 빠른 세일 roguelike",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 46,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-01",
+      "group": "action-roguelite",
+      "preferences": "손이 바쁘게 움직이는 액션 로그라이트 할인작",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 47,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-09",
+      "group": "action-roguelite",
+      "preferences": "회피와 공격 템포가 빠른 세일작",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 48,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-18",
+      "group": "action-roguelite",
+      "preferences": "quick reflex rogue sale",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 49,
+      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Cozy Grove",
+      "topMatch": {
+        "title": "Cozy Grove",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.65,
+        "genres": [
+          "Casual",
+          "Indie",
+          "Adventure",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "action-roguelite-27",
+      "group": "action-roguelite",
+      "preferences": "판마다 전투 리듬이 확실한 세일 게임",
+      "budget": 19000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 50,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-11",
+      "group": "constraint-heavy",
+      "preferences": "폭력성은 괜찮지만 점프 scare 없는 할인작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 51,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-14",
+      "group": "constraint-heavy",
+      "preferences": "competitive 말고 협동 중심 세일 게임",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 52,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-03",
+      "group": "constraint-heavy",
+      "preferences": "grand strategy는 아닌데 생각할 맛 있는 세일작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 53,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-02",
+      "group": "constraint-heavy",
+      "preferences": "카드 느낌은 빼고 액션성은 남는 로그라이트",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 54,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-25",
+      "group": "constraint-heavy",
+      "preferences": "고어는 괜찮지만 horror 연출은 없는 할인 게임",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 55,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-28",
+      "group": "constraint-heavy",
+      "preferences": "party 감성인데 경쟁 스트레스는 덜한 세일작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 56,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-23",
+      "group": "constraint-heavy",
+      "preferences": "handheld 각은 있는데 Steam Deck 전용은 아닌 bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 57,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 9,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-22",
+      "group": "constraint-heavy",
+      "preferences": "shooty하지만 PvP는 아닌 할인 로그라이트",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 58,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Downfall (RAWG request failed with timeout after 1500ms)",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-08",
+      "group": "constraint-heavy",
+      "preferences": "턴제는 아닌데 로그라이크 느낌은 나는 세일작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 59,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "constraint-heavy-19",
+      "group": "constraint-heavy",
+      "preferences": "long campaign 말고 한두 판 가능한 할인 게임",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 60,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-26",
+      "group": "mixed-language",
+      "preferences": "friends-only fun bargain, not sports",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 61,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-18",
+      "group": "mixed-language",
+      "preferences": "highly rated 전략 bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 62,
+      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 2,
+      "topTitle": "Super Robot Taisen: Original Generation",
+      "topMatch": {
+        "title": "Super Robot Taisen: Original Generation",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.83,
+        "genres": [
+          "Strategy",
+          "Action"
+        ],
+        "platforms": [
+          "Game Boy Advance"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-10",
+      "group": "mixed-language",
+      "preferences": "sports 말고 casual multiplayer bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 63,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-05",
+      "group": "mixed-language",
+      "preferences": "not PvP party bargain for friends",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 64,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-03",
+      "group": "mixed-language",
+      "preferences": "Steam Deck vibe 말고 desktop card roguelike sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 65,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-22",
+      "group": "mixed-language",
+      "preferences": "review-backed deckbuilder bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 66,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 3,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-17",
+      "group": "mixed-language",
+      "preferences": "Steam Deck-friendly 아닌 PC shooter roguelite",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 67,
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "warnings": [
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-23",
+      "group": "mixed-language",
+      "preferences": "turn-based 말고 shooty rogue 세일",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 68,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-21",
+      "group": "mixed-language",
+      "preferences": "party-friendly 할인 game for a duo",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 69,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "mixed-language-28",
+      "group": "mixed-language",
+      "preferences": "read less fight more 로그라이트 sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 70,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-26",
+      "group": "budget-strict",
+      "preferences": "cheap handheld bargain within 10000",
+      "budget": 10000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "index": 71,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 8,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-20",
+      "group": "budget-strict",
+      "preferences": "cheap co-op for two below 11000",
+      "budget": 11000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 72,
+      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Racket: Nx",
+      "topMatch": {
+        "title": "Racket: Nx",
+        "cut": 50,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.5,
+        "genres": [
+          "Indie",
+          "Action",
+          "Sports"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-19",
+      "group": "budget-strict",
+      "preferences": "under 13000 well-reviewed tactics game",
+      "budget": 13000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 73,
+      "summary": "Shining Force III를 추천합니다. 0% 할인, 현재가 0원, SEGA Saturn 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 2,
+      "topTitle": "Shining Force III",
+      "topMatch": {
+        "title": "Shining Force III",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "RPG"
+        ],
+        "platforms": [
+          "SEGA Saturn"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-09",
+      "group": "budget-strict",
+      "preferences": "cheap deckbuilder under 14000",
+      "budget": 14000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 74,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 3,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-11",
+      "group": "budget-strict",
+      "preferences": "8500원 예산의 카드 로그라이트",
+      "budget": 8500,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 75,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 2,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-05",
+      "group": "budget-strict",
+      "preferences": "20000 이하로 고를 well-reviewed strategy sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 76,
+      "summary": "Super Robot Taisen: Original Generation를 추천합니다. 0% 할인, 현재가 0원, Game Boy Advance 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 2,
+      "topTitle": "Super Robot Taisen: Original Generation",
+      "topMatch": {
+        "title": "Super Robot Taisen: Original Generation",
+        "cut": 0,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.83,
+        "genres": [
+          "Strategy",
+          "Action"
+        ],
+        "platforms": [
+          "Game Boy Advance"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-27",
+      "group": "budget-strict",
+      "preferences": "예산 빡빡한 party 할인 게임",
+      "budget": 12000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 77,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-25",
+      "group": "budget-strict",
+      "preferences": "under 20000 Korean-budget tactics bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 78,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-12",
+      "group": "budget-strict",
+      "preferences": "co-op deal below 18000 KRW",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 79,
+      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Racket: Nx",
+      "topMatch": {
+        "title": "Racket: Nx",
+        "cut": 50,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.5,
+        "genres": [
+          "Indie",
+          "Action",
+          "Sports"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "budget-strict-03",
+      "group": "budget-strict",
+      "preferences": "15000원 이내 co-op discount for friends",
+      "budget": 15000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 80,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-08",
+      "group": "short-session",
+      "preferences": "run 하나만 해도 만족감 있는 bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 81,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-22",
+      "group": "short-session",
+      "preferences": "minute-friendly roguelite sale",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 82,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-17",
+      "group": "short-session",
+      "preferences": "퇴근 버스 기다리며 한 판 할 할인 게임",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 83,
+      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Cozy Grove",
+      "topMatch": {
+        "title": "Cozy Grove",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.65,
+        "genres": [
+          "Casual",
+          "Indie",
+          "Adventure",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-13",
+      "group": "short-session",
+      "preferences": "quick session tactics bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 84,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-04",
+      "group": "short-session",
+      "preferences": "잠깐 켜도 손맛 남는 할인 게임",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 85,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-05",
+      "group": "short-session",
+      "preferences": "짧은 집중으로 끝내기 좋은 tactics sale",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 86,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-18",
+      "group": "short-session",
+      "preferences": "save point 압박 덜한 짧은 세션 세일작",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 87,
+      "summary": "Cozy Grove를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Cozy Grove",
+      "topMatch": {
+        "title": "Cozy Grove",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.65,
+        "genres": [
+          "Casual",
+          "Indie",
+          "Adventure",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-19",
+      "group": "short-session",
+      "preferences": "run length 짧은 deckbuilder bargain",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 88,
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 3,
+      "topTitle": "Dice & Fold",
+      "topMatch": {
+        "title": "Dice & Fold",
+        "cut": 55,
+        "price": {
+          "amount": 6520,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-26",
+      "group": "short-session",
+      "preferences": "20분 안에 기승전결 있는 할인 게임",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 89,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "short-session-10",
+      "group": "short-session",
+      "preferences": "short loop co-op deal",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 90,
+      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Racket: Nx",
+      "topMatch": {
+        "title": "Racket: Nx",
+        "cut": 50,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.5,
+        "genres": [
+          "Indie",
+          "Action",
+          "Sports"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-21",
+      "group": "genre-hybrid",
+      "preferences": "arcade action plus buildcraft hybrid deal",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 91,
+      "summary": "BrightGunner를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "BrightGunner",
+      "topMatch": {
+        "title": "BrightGunner",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 0,
+        "genres": [
+          "Indie",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-02",
+      "group": "genre-hybrid",
+      "preferences": "action roguelite with deckbuilding edges",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 92,
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
+        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-13",
+      "group": "genre-hybrid",
+      "preferences": "brawler deckbuilder bargain",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 93,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-14",
+      "group": "genre-hybrid",
+      "preferences": "전략과 로그라이트가 반반 섞인 할인작",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 94,
+      "summary": "Inscryption를 추천합니다. 64% 할인, 현재가 10,285원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 5,
+      "topTitle": "Inscryption",
+      "topMatch": {
+        "title": "Inscryption",
+        "cut": 64,
+        "price": {
+          "amount": 10285,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.38,
+        "metacritic": 86,
+        "genres": [
+          "Indie",
+          "Strategy",
+          "Adventure",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-22",
+      "group": "genre-hybrid",
+      "preferences": "전략성 있는 협동 액션 세일작",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 95,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-06",
+      "group": "genre-hybrid",
+      "preferences": "party-action game with roguelite progression",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 96,
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-09",
+      "group": "genre-hybrid",
+      "preferences": "strategy-heavy rogue discount",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 97,
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 78,
+        "price": {
+          "amount": 9450,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "platforms": [
+          "PC",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-18",
+      "group": "genre-hybrid",
+      "preferences": "survival-ish co-op discount with lighter pressure",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 98,
+      "summary": "Racket: Nx를 추천합니다. 50% 할인, 현재가 10,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Racket: Nx",
+      "topMatch": {
+        "title": "Racket: Nx",
+        "cut": 50,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.5,
+        "genres": [
+          "Indie",
+          "Action",
+          "Sports"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-29",
+      "group": "genre-hybrid",
+      "preferences": "systems-heavy but not oppressive hybrid bargain",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 99,
+      "summary": "Deponia를 추천합니다. 100% 할인, 현재가 0원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다."
+      ],
+      "matchCount": 4,
+      "topTitle": "Deponia",
+      "topMatch": {
+        "title": "Deponia",
+        "cut": 100,
+        "price": {
+          "amount": 0,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 3.85,
+        "metacritic": 74,
+        "genres": [
+          "Indie",
+          "Adventure",
+          "RPG",
+          "Puzzle"
+        ],
+        "platforms": [
+          "PC",
+          "Xbox One",
+          "PlayStation 4",
+          "Nintendo Switch",
+          "iOS",
+          "macOS",
+          "Linux"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false
+    },
+    {
+      "caseId": "genre-hybrid-20",
+      "group": "genre-hybrid",
+      "preferences": "shooty deckbuilder on sale for PC",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "index": 100,
+      "summary": "ROUNDS를 추천합니다. 50% 할인, 현재가 3,200원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다.",
+        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
+      ],
+      "matchCount": 2,
+      "topTitle": "ROUNDS",
+      "topMatch": {
+        "title": "ROUNDS",
+        "cut": 50,
+        "price": {
+          "amount": 3200,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 3.72,
+        "genres": [
+          "Indie",
+          "Action",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    }
+  ]
+}

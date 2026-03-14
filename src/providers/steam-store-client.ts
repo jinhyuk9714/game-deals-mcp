@@ -6,6 +6,8 @@ interface SteamStoreClientOptions {
   fetch?: typeof fetch;
   baseUrl?: string;
   cache?: TtlCache<string, unknown>;
+  lookupTimeoutMs?: number;
+  concurrency?: number;
 }
 
 interface SteamSearchResponse {
@@ -22,44 +24,38 @@ export class SteamStoreClient {
   private readonly fetchImpl: typeof fetch;
   private readonly baseUrl: string;
   private readonly cache: TtlCache<string, unknown>;
+  private readonly lookupTimeoutMs: number;
+  private readonly concurrency: number;
 
   constructor(options: SteamStoreClientOptions = {}) {
     this.fetchImpl = bindFetchImplementation(options.fetch);
     this.baseUrl = options.baseUrl ?? "https://store.steampowered.com";
     this.cache = options.cache ?? new TtlCache<string, unknown>();
+    this.lookupTimeoutMs = normalizePositiveInt(options.lookupTimeoutMs, 2_500);
+    this.concurrency = normalizePositiveInt(options.concurrency, 2);
   }
 
   async enrichDeals(deals: DealCandidate[]): Promise<DealsEnrichment> {
-    const results: Array<{ deal: DealCandidate; warning?: string }> = [];
+    const results = new Array<{ deal: DealCandidate; warning?: string }>(deals.length);
+    let cursor = 0;
 
-    for (const deal of deals) {
-      try {
-        const compatibility = await this.resolveCompatibility(deal);
-        const warning =
-          compatibility.status === "unknown"
-            ? "Steam Deck 호환성 정보를 확인하지 못했습니다."
-            : undefined;
-        results.push({
-          deal: {
-            ...deal,
-            steamDeckCompatibility: compatibility
-          },
-          ...(warning ? { warning } : {})
-        });
-      } catch {
-        results.push({
-          deal: {
-            ...deal,
-            steamDeckCompatibility: {
-              status: "unknown",
-              details: [],
-              source: "steam"
-            } satisfies SteamDeckCompatibility
-          },
-          warning: "Steam Deck 호환성 정보를 확인하지 못했습니다."
-        });
+    const workers = Array.from(
+      { length: Math.min(this.concurrency, Math.max(deals.length, 1)) },
+      async () => {
+        while (true) {
+          const current = cursor;
+          cursor += 1;
+
+          if (current >= deals.length) {
+            return;
+          }
+
+          results[current] = await this.enrichDeal(deals[current]!);
+        }
       }
-    }
+    );
+
+    await Promise.all(workers);
 
     return {
       deals: results.map((result) => result.deal),
@@ -67,8 +63,42 @@ export class SteamStoreClient {
     };
   }
 
-  private async resolveCompatibility(deal: DealCandidate): Promise<SteamDeckCompatibility> {
-    const appId = (await this.resolveAppId(deal)) ?? undefined;
+  private async enrichDeal(deal: DealCandidate): Promise<{ deal: DealCandidate; warning?: string }> {
+    try {
+      const budget = createLookupBudget(this.lookupTimeoutMs);
+      const compatibility = await this.resolveCompatibility(deal, budget);
+      const warning =
+        compatibility.status === "unknown"
+          ? "Steam Deck 호환성 정보를 확인하지 못했습니다."
+          : undefined;
+
+      return {
+        deal: {
+          ...deal,
+          steamDeckCompatibility: compatibility
+        },
+        ...(warning ? { warning } : {})
+      };
+    } catch {
+      return {
+        deal: {
+          ...deal,
+          steamDeckCompatibility: {
+            status: "unknown",
+            details: [],
+            source: "steam"
+          } satisfies SteamDeckCompatibility
+        },
+        warning: "Steam Deck 호환성 정보를 확인하지 못했습니다."
+      };
+    }
+  }
+
+  private async resolveCompatibility(
+    deal: DealCandidate,
+    budget: LookupBudget
+  ): Promise<SteamDeckCompatibility> {
+    const appId = (await this.resolveAppId(deal, budget)) ?? undefined;
 
     if (!appId) {
       return {
@@ -80,7 +110,8 @@ export class SteamStoreClient {
 
     const html = await this.fetchText(
       new URL(`/app/${appId}/?cc=kr&l=koreana`, this.baseUrl),
-      600_000
+      600_000,
+      budget
     );
     const payload = extractDeckCompatibility(html);
 
@@ -104,7 +135,7 @@ export class SteamStoreClient {
     };
   }
 
-  private async resolveAppId(deal: DealCandidate): Promise<number | null> {
+  private async resolveAppId(deal: DealCandidate, budget: LookupBudget): Promise<number | null> {
     for (const offer of deal.stores ?? []) {
       if (offer.store.toLowerCase() !== "steam") {
         continue;
@@ -115,7 +146,7 @@ export class SteamStoreClient {
         return appId;
       }
 
-      const redirectedAppId = await this.resolveRedirectedSteamAppId(offer.url);
+      const redirectedAppId = await this.resolveRedirectedSteamAppId(offer.url, budget);
       if (redirectedAppId) {
         return redirectedAppId;
       }
@@ -129,66 +160,144 @@ export class SteamStoreClient {
     searchUrl.searchParams.set("l", "koreana");
     searchUrl.searchParams.set("infinite", "1");
 
-    const response = await this.fetchJson<SteamSearchResponse>(searchUrl, 600_000);
+    const response = await this.fetchJson<SteamSearchResponse>(searchUrl, 600_000, budget);
     return findBestSteamSearchMatch(response.results_html ?? "", deal.title);
   }
 
-  private async resolveRedirectedSteamAppId(url?: string | null): Promise<number | null> {
+  private async resolveRedirectedSteamAppId(
+    url: string | null | undefined,
+    budget: LookupBudget
+  ): Promise<number | null> {
     if (!url) {
       return null;
     }
 
-    const firstLocation = await this.fetchRedirectLocation(url);
+    const firstLocation = await this.fetchRedirectLocation(url, budget);
     const directAppId = extractSteamAppId(firstLocation);
     if (directAppId) {
       return directAppId;
     }
 
     if (firstLocation) {
-      const secondLocation = await this.fetchRedirectLocation(firstLocation);
+      const secondLocation = await this.fetchRedirectLocation(firstLocation, budget);
       return extractSteamAppId(secondLocation);
     }
 
     return null;
   }
 
-  private async fetchJson<T>(url: URL, ttlMs: number): Promise<T> {
-    return this.cache.getOrLoad(url.toString(), ttlMs, async () => {
-      const response = await this.fetchImpl(url, {
-        headers: buildSteamHeaders()
-      });
-      if (!response.ok) {
-        throw new Error(`Steam request failed with ${response.status}`);
-      }
+  private async fetchJson<T>(url: URL, ttlMs: number, budget: LookupBudget): Promise<T> {
+    return this.withLookupDeadline(
+      this.cache.getOrLoad(url.toString(), ttlMs, async () => {
+        const response = await this.fetchWithBudget(url, budget, {
+          headers: buildSteamHeaders()
+        });
+        if (!response.ok) {
+          throw new Error(`Steam request failed with ${response.status}`);
+        }
 
-      return (await response.json()) as T;
-    }) as Promise<T>;
+        return (await response.json()) as T;
+      }) as Promise<T>,
+      budget
+    );
   }
 
-  private async fetchText(url: URL, ttlMs: number): Promise<string> {
-    return this.cache.getOrLoad(url.toString(), ttlMs, async () => {
-      const response = await this.fetchImpl(url, {
-        headers: buildSteamHeaders()
-      });
-      if (!response.ok) {
-        throw new Error(`Steam request failed with ${response.status}`);
-      }
+  private async fetchText(url: URL, ttlMs: number, budget: LookupBudget): Promise<string> {
+    return this.withLookupDeadline(
+      this.cache.getOrLoad(url.toString(), ttlMs, async () => {
+        const response = await this.fetchWithBudget(url, budget, {
+          headers: buildSteamHeaders()
+        });
+        if (!response.ok) {
+          throw new Error(`Steam request failed with ${response.status}`);
+        }
 
-      return await response.text();
-    }) as Promise<string>;
+        return await response.text();
+      }) as Promise<string>,
+      budget
+    );
   }
 
-  private async fetchRedirectLocation(url: string, ttlMs = 600_000): Promise<string | null> {
+  private async fetchRedirectLocation(
+    url: string,
+    budget: LookupBudget,
+    ttlMs = 600_000
+  ): Promise<string | null> {
     const cacheKey = `steam-redirect:${url}`;
 
-    return this.cache.getOrLoad(cacheKey, ttlMs, async () => {
-      const response = await this.fetchImpl(url, {
-        headers: buildSteamHeaders(),
-        redirect: "manual"
-      });
+    return this.withLookupDeadline(
+      this.cache.getOrLoad(cacheKey, ttlMs, async () => {
+        const response = await this.fetchWithBudget(url, budget, {
+          headers: buildSteamHeaders(),
+          redirect: "manual"
+        });
 
-      return response.headers.get("location");
-    }) as Promise<string | null>;
+        return response.headers.get("location");
+      }) as Promise<string | null>,
+      budget
+    );
+  }
+
+  private async withLookupDeadline<T>(promise: Promise<T>, budget: LookupBudget): Promise<T> {
+    const remainingMs = getRemainingLookupMs(budget);
+    if (remainingMs <= 0) {
+      throw new SteamLookupTimeoutError();
+    }
+
+    return await new Promise<T>((resolve, reject) => {
+      const timer = setTimeout(() => reject(new SteamLookupTimeoutError()), remainingMs);
+
+      void promise.then(
+        (value) => {
+          clearTimeout(timer);
+          resolve(value);
+        },
+        (error) => {
+          clearTimeout(timer);
+          reject(error);
+        }
+      );
+    });
+  }
+
+  private async fetchWithBudget(
+    input: URL | string,
+    budget: LookupBudget,
+    init: RequestInit
+  ): Promise<Response> {
+    const remainingMs = getRemainingLookupMs(budget);
+    if (remainingMs <= 0) {
+      throw new SteamLookupTimeoutError();
+    }
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), remainingMs);
+
+    try {
+      return await this.fetchImpl(input, {
+        ...init,
+        signal: controller.signal
+      });
+    } catch (error) {
+      if (isAbortError(error)) {
+        throw new SteamLookupTimeoutError();
+      }
+
+      throw error;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+}
+
+interface LookupBudget {
+  deadlineAt: number;
+}
+
+class SteamLookupTimeoutError extends Error {
+  constructor() {
+    super("Steam lookup timed out");
+    this.name = "SteamLookupTimeoutError";
   }
 }
 
@@ -259,6 +368,26 @@ function mapDeckStatus(category?: number): SteamDeckCompatibility["status"] {
     default:
       return "unknown";
   }
+}
+
+function createLookupBudget(timeoutMs: number): LookupBudget {
+  return {
+    deadlineAt: Date.now() + timeoutMs
+  };
+}
+
+function getRemainingLookupMs(budget: LookupBudget): number {
+  return budget.deadlineAt - Date.now();
+}
+
+function normalizePositiveInt(value: number | undefined, fallback: number): number {
+  return typeof value === "number" && Number.isFinite(value) && value > 0
+    ? Math.floor(value)
+    : fallback;
+}
+
+function isAbortError(error: unknown): boolean {
+  return error instanceof Error && error.name === "AbortError";
 }
 
 function formatDeckDetail(token: string): string {

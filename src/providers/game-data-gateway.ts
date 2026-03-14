@@ -31,9 +31,7 @@ export class GameDataGateway implements GameProviders {
     const maxRawgLookups = options?.maxRawgLookups ?? deals.length;
     const rawgEligibleDeals = deals.slice(0, maxRawgLookups);
     const skippedRawgDeals = deals.slice(maxRawgLookups);
-    const rawgResults: Array<{ deal: DealCandidate; warning?: string }> = [];
-
-    for (const deal of rawgEligibleDeals) {
+    const rawgResults = await mapWithConcurrency(rawgEligibleDeals, DEFAULT_RAWG_ENRICHMENT_CONCURRENCY, async (deal) => {
       try {
         const candidates = await this.rawg.searchGames(deal.title);
         const bestMatch = findBestRawgMatch(
@@ -42,16 +40,15 @@ export class GameDataGateway implements GameProviders {
         );
 
         if (!bestMatch.candidate) {
-          rawgResults.push({
+          return {
             deal: {
               ...deal,
               metadataStatus: deal.metadataStatus ?? "missing"
             }
-          });
-          continue;
+          };
         }
 
-        rawgResults.push({
+        return {
           deal: {
             ...deal,
             genres: bestMatch.candidate.genres.length > 0 ? bestMatch.candidate.genres : deal.genres,
@@ -65,17 +62,17 @@ export class GameDataGateway implements GameProviders {
             released: bestMatch.candidate.released ?? deal.released,
             metadataStatus: "rawg" as const
           }
-        });
+        };
       } catch (error) {
-        rawgResults.push({
+        return {
           deal: {
             ...deal,
             metadataStatus: "unavailable" as const
           },
           warning: toWarning(error, `RAWG 메타데이터를 일부 불러오지 못했습니다: ${deal.title}`)
-        });
+        };
       }
-    }
+    });
 
     let enriched: DealsEnrichment = {
       deals: [...rawgResults.map((result) => result.deal), ...skippedRawgDeals],
@@ -137,10 +134,38 @@ export class GameDataGateway implements GameProviders {
   }
 }
 
+const DEFAULT_RAWG_ENRICHMENT_CONCURRENCY = 3;
+
 function toWarning(error: unknown, fallback: string): string {
   if (error instanceof Error && error.message) {
     return `${fallback} (${error.message})`;
   }
 
   return fallback;
+}
+
+async function mapWithConcurrency<Input, Output>(
+  values: Input[],
+  concurrency: number,
+  mapper: (value: Input, index: number) => Promise<Output>
+): Promise<Output[]> {
+  const results = new Array<Output>(values.length);
+  let cursor = 0;
+
+  const workers = Array.from({ length: Math.min(Math.max(concurrency, 1), values.length) }, async () => {
+    while (true) {
+      const current = cursor;
+      cursor += 1;
+
+      if (current >= values.length) {
+        return;
+      }
+
+      results[current] = await mapper(values[current]!, current);
+    }
+  });
+
+  await Promise.all(workers);
+
+  return results;
 }

@@ -1,0 +1,1422 @@
+{
+  "generatedAt": "2026-03-14T09:31:31.084Z",
+  "summary": {
+    "total": 35,
+    "zeroMatches": 7,
+    "flagged": 1,
+    "timeouts": 0,
+    "topCounts": [
+      {
+        "title": "Party Brawler Heroes",
+        "count": 6
+      },
+      {
+        "title": "Orbital Teamplay Co-op",
+        "count": 5
+      },
+      {
+        "title": "Aces of Ruin Deluxe",
+        "count": 4
+      },
+      {
+        "title": "Deck Ready Tactics",
+        "count": 2
+      },
+      {
+        "title": "Portable Rogue Tactics Deluxe",
+        "count": 2
+      },
+      {
+        "title": "Teamplay Co-op Deluxe",
+        "count": 2
+      },
+      {
+        "title": "BALL x PIT",
+        "count": 1
+      },
+      {
+        "title": "Fallback Tactics Gold",
+        "count": 1
+      },
+      {
+        "title": "Portable Tactics Complete",
+        "count": 1
+      },
+      {
+        "title": "Portable Unknown Tactics",
+        "count": 1
+      },
+      {
+        "title": "Reviewed Strategy Fallback",
+        "count": 1
+      },
+      {
+        "title": "Shining Force III",
+        "count": 1
+      },
+      {
+        "title": "Tactics Breakthrough",
+        "count": 1
+      }
+    ]
+  },
+  "groups": {
+    "local-guardrail": {
+      "uniqueTopPicks": 6,
+      "topCounts": [
+        {
+          "title": "Party Brawler Heroes",
+          "count": 2
+        },
+        {
+          "title": "Aces of Ruin Deluxe",
+          "count": 1
+        },
+        {
+          "title": "BALL x PIT",
+          "count": 1
+        },
+        {
+          "title": "Deck Ready Tactics",
+          "count": 1
+        },
+        {
+          "title": "Shining Force III",
+          "count": 1
+        },
+        {
+          "title": "Tactics Breakthrough",
+          "count": 1
+        }
+      ],
+      "flagged": 1,
+      "timeouts": 0
+    },
+    "provider-outage": {
+      "uniqueTopPicks": 5,
+      "topCounts": [
+        {
+          "title": "Aces of Ruin Deluxe",
+          "count": 1
+        },
+        {
+          "title": "Fallback Tactics Gold",
+          "count": 1
+        },
+        {
+          "title": "Orbital Teamplay Co-op",
+          "count": 1
+        },
+        {
+          "title": "Party Brawler Heroes",
+          "count": 1
+        },
+        {
+          "title": "Reviewed Strategy Fallback",
+          "count": 1
+        }
+      ],
+      "flagged": 0,
+      "timeouts": 0
+    },
+    "steam-deck-overlay": {
+      "uniqueTopPicks": 5,
+      "topCounts": [
+        {
+          "title": "Portable Rogue Tactics Deluxe",
+          "count": 2
+        },
+        {
+          "title": "Aces of Ruin Deluxe",
+          "count": 1
+        },
+        {
+          "title": "Deck Ready Tactics",
+          "count": 1
+        },
+        {
+          "title": "Portable Tactics Complete",
+          "count": 1
+        },
+        {
+          "title": "Portable Unknown Tactics",
+          "count": 1
+        }
+      ],
+      "flagged": 0,
+      "timeouts": 0
+    },
+    "social-tiering": {
+      "uniqueTopPicks": 3,
+      "topCounts": [
+        {
+          "title": "Party Brawler Heroes",
+          "count": 3
+        },
+        {
+          "title": "Orbital Teamplay Co-op",
+          "count": 2
+        },
+        {
+          "title": "Teamplay Co-op Deluxe",
+          "count": 2
+        }
+      ],
+      "flagged": 0,
+      "timeouts": 0
+    },
+    "junk-suppression": {
+      "uniqueTopPicks": 2,
+      "topCounts": [
+        {
+          "title": "Orbital Teamplay Co-op",
+          "count": 2
+        },
+        {
+          "title": "Aces of Ruin Deluxe",
+          "count": 1
+        }
+      ],
+      "flagged": 0,
+      "timeouts": 0
+    }
+  },
+  "results": [
+    {
+      "index": 1,
+      "caseId": "local-multiplayer-party-brawler",
+      "group": "local-guardrail",
+      "preferences": "친구들이랑 웃기게 떠들면서 할 협동 할인 게임",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 55,
+        "price": {
+          "amount": 9900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.05,
+        "metacritic": 78,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party",
+          "Indie"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 2,
+      "caseId": "local-strategy-tactics-reviewed",
+      "group": "local-guardrail",
+      "preferences": "highly rated turn-based tactics",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Tactics Breakthrough를 추천합니다. 35% 할인, 현재가 14,500원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Tactics Breakthrough",
+      "topMatch": {
+        "title": "Tactics Breakthrough",
+        "cut": 35,
+        "price": {
+          "amount": 14500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.6,
+        "metacritic": 74,
+        "genres": [
+          "Strategy",
+          "Tactics",
+          "Indie"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 3,
+      "caseId": "local-deckbuilder-short-run",
+      "group": "local-guardrail",
+      "preferences": "가볍게 할 카드 로그라이크",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Aces of Ruin Deluxe",
+      "topMatch": {
+        "title": "Aces of Ruin Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 11900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 4,
+      "caseId": "local-action-roguelite-combat",
+      "group": "local-guardrail",
+      "preferences": "빠른 템포 로그라이트",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "BALL x PIT를 추천합니다. 50% 할인, 현재가 11,250원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 50,
+        "price": {
+          "amount": 11250,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.1,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 5,
+      "caseId": "outage-rawg-timeout-reviewed-strategy",
+      "group": "provider-outage",
+      "preferences": "평가 좋은 전략 할인 게임",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Reviewed Strategy Fallback를 추천합니다. 50% 할인, 현재가 15,900원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "RAWG 메타데이터를 불러오지 못해 가격 정보만 표시했습니다. (RAWG timeout)"
+      ],
+      "matchCount": 1,
+      "topTitle": "Reviewed Strategy Fallback",
+      "topMatch": {
+        "title": "Reviewed Strategy Fallback",
+        "cut": 50,
+        "price": {
+          "amount": 15900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.25,
+        "metacritic": 80,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 6,
+      "caseId": "outage-itad-partial-teamplay-survives",
+      "group": "provider-outage",
+      "preferences": "teamplay 할인작인데 경쟁 냄새 적은 것",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "ITAD request failed with 429",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 7,
+      "caseId": "outage-price-overview-missing-deckbuilder",
+      "group": "provider-outage",
+      "preferences": "잠깐씩 즐길 카드게임",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Aces of Ruin Deluxe",
+      "topMatch": {
+        "title": "Aces of Ruin Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 11900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "genres": [
+          "Strategy",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 8,
+      "caseId": "outage-title-only-junk-stays-empty",
+      "group": "provider-outage",
+      "preferences": "party-friendly co-op on sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 9,
+      "caseId": "steam-deck-reviewed-strategy-overlay",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 평가 좋은 전략 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Tactics Complete를 추천합니다. 50% 할인, 현재가 14,900원, PC 지원, Steam Deck Verified 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Tactics Complete",
+      "topMatch": {
+        "title": "Portable Tactics Complete",
+        "cut": 50,
+        "price": {
+          "amount": 14900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.4,
+        "metacritic": 83,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 10,
+      "caseId": "steam-deck-strategy-roguelike-overlay",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 할 만한 전략 로그라이크",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Rogue Tactics Deluxe",
+      "topMatch": {
+        "title": "Portable Rogue Tactics Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 16500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 11,
+      "caseId": "steam-deck-unsupported-remains-rejected",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 할 만한 전략 로그라이크",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. 일부 게임은 메타데이터가 부족했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 12,
+      "caseId": "steam-deck-deckbuilder-overlay",
+      "group": "steam-deck-overlay",
+      "preferences": "가볍게 할 카드 로그라이크",
+      "budget": 15000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Aces of Ruin Deluxe",
+      "topMatch": {
+        "title": "Aces of Ruin Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 11900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 13,
+      "caseId": "social-party-friendly-coop",
+      "group": "social-tiering",
+      "preferences": "party-friendly co-op on sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 55,
+        "price": {
+          "amount": 9900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.1,
+        "metacritic": 77,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "party",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 14,
+      "caseId": "social-teamplay-explicit-wins",
+      "group": "social-tiering",
+      "preferences": "teamplay 할인작인데 경쟁 냄새 적은 것",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 15,
+      "caseId": "social-hangout-not-pvp",
+      "group": "social-tiering",
+      "preferences": "hangout game for friends, not PvP",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Teamplay Co-op Deluxe를 추천합니다. 50% 할인, 현재가 12,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Teamplay Co-op Deluxe",
+      "topMatch": {
+        "title": "Teamplay Co-op Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 12500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.08,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 16,
+      "caseId": "social-party-budget-cap",
+      "group": "social-tiering",
+      "preferences": "15000원 이하 party game",
+      "budget": 15000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 32% 할인, 현재가 14,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 32,
+        "price": {
+          "amount": 14900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.1,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "party",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 17,
+      "caseId": "junk-deponia-rejected",
+      "group": "junk-suppression",
+      "preferences": "party-friendly co-op on sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 18,
+      "caseId": "junk-ai-games-rejected",
+      "group": "junk-suppression",
+      "preferences": "hangout game for friends, not PvP",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 19,
+      "caseId": "junk-bundle-demo-rejected",
+      "group": "junk-suppression",
+      "preferences": "friends-first co-op bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 20,
+      "caseId": "junk-good-vs-bad-prefers-good",
+      "group": "junk-suppression",
+      "preferences": "non-sweaty multiplayer sale for PC",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 21,
+      "caseId": "local-steam-deck-supported-beats-unknown",
+      "group": "local-guardrail",
+      "preferences": "스팀덱에서 할 전략 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Deck Ready Tactics를 추천합니다. 50% 할인, 현재가 12,000원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Deck Ready Tactics",
+      "topMatch": {
+        "title": "Deck Ready Tactics",
+        "cut": 50,
+        "price": {
+          "amount": 12000,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 82,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 22,
+      "caseId": "local-social-teamplay-beats-party-only",
+      "group": "local-guardrail",
+      "preferences": "co-op game for friends",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 55,
+        "price": {
+          "amount": 9900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.1,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "party",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": true,
+      "timeout": false,
+      "error": "expected topTitle=Orbital Teamplay Co-op, received Party Brawler Heroes; missing top genre: Co-op; missing top signal: teamplay; missing top signal: co-op"
+    },
+    {
+      "index": 23,
+      "caseId": "local-strategy-warning-free-top-pick",
+      "group": "local-guardrail",
+      "preferences": "well-reviewed strategy game on sale",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Shining Force III를 추천합니다. 50% 할인, 현재가 17,900원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Shining Force III",
+      "topMatch": {
+        "title": "Shining Force III",
+        "cut": 50,
+        "price": {
+          "amount": 17900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.25,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 24,
+      "caseId": "outage-itad-429-strategy-still-recovers",
+      "group": "provider-outage",
+      "preferences": "리뷰 좋은 전략 세일겜",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Fallback Tactics Gold를 추천합니다. 50% 할인, 현재가 16,900원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "ITAD request failed with 429",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Fallback Tactics Gold",
+      "topMatch": {
+        "title": "Fallback Tactics Gold",
+        "cut": 50,
+        "price": {
+          "amount": 16900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.3,
+        "metacritic": 82,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 25,
+      "caseId": "outage-rawg-timeout-social-rescue",
+      "group": "provider-outage",
+      "preferences": "party-friendly co-op on sale",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG timeout"
+      ],
+      "matchCount": 1,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 55,
+        "price": {
+          "amount": 9900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.1,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "party",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 26,
+      "caseId": "outage-junk-partial-stays-empty",
+      "group": "provider-outage",
+      "preferences": "hangout game for friends, not PvP",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [
+        "ITAD request failed with 429",
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 27,
+      "caseId": "steam-deck-supported-beats-unknown-overlay",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 할 전략 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Deck Ready Tactics를 추천합니다. 50% 할인, 현재가 12,000원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Deck Ready Tactics",
+      "topMatch": {
+        "title": "Deck Ready Tactics",
+        "cut": 50,
+        "price": {
+          "amount": 12000,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 82,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 28,
+      "caseId": "steam-deck-unknown-allowed-after-strict-zero",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 평가 좋은 전략 게임",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Unknown Tactics를 추천합니다. 50% 할인, 현재가 14,500원, PC 지원 조건과 잘 맞습니다. Steam Deck 호환성 정보는 아직 확인하지 못했습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Portable Unknown Tactics",
+      "topMatch": {
+        "title": "Portable Unknown Tactics",
+        "cut": 50,
+        "price": {
+          "amount": 14500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 80,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "unknown"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 29,
+      "caseId": "steam-deck-playable-beats-unsupported",
+      "group": "steam-deck-overlay",
+      "preferences": "스팀덱에서 할 만한 전략 로그라이크",
+      "budget": 20000,
+      "platforms": [
+        "Steam Deck"
+      ],
+      "country": "KR",
+      "summary": "Portable Rogue Tactics Deluxe를 추천합니다. 50% 할인, 현재가 16,500원, PC 지원, Steam Deck Playable 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Portable Rogue Tactics Deluxe",
+      "topMatch": {
+        "title": "Portable Rogue Tactics Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 16500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 30,
+      "caseId": "social-generic-coop-rejects-racket-nx",
+      "group": "social-tiering",
+      "preferences": "friends-first co-op bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 31,
+      "caseId": "social-party-hangout-rejects-sports-outlier",
+      "group": "social-tiering",
+      "preferences": "party night bargain that is not about sweaty PvP",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Party Brawler Heroes를 추천합니다. 55% 할인, 현재가 9,900원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Party Brawler Heroes",
+      "topMatch": {
+        "title": "Party Brawler Heroes",
+        "cut": 55,
+        "price": {
+          "amount": 9900,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.1,
+        "genres": [
+          "Action",
+          "Casual",
+          "Party"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "party",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 32,
+      "caseId": "social-metadata-light-rescue-keeps-teamplay",
+      "group": "social-tiering",
+      "preferences": "shared-screen vibe 나는 multiplayer bargain",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Teamplay Co-op Deluxe를 추천합니다. 50% 할인, 현재가 12,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [
+        "가격 개요 정보가 없어 제목만 확인했습니다."
+      ],
+      "matchCount": 1,
+      "topTitle": "Teamplay Co-op Deluxe",
+      "topMatch": {
+        "title": "Teamplay Co-op Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 12500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.08,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "shared-screen",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 33,
+      "caseId": "junk-collection-rejected",
+      "group": "junk-suppression",
+      "preferences": "친구 모임용으로 바로 설명 가능한 할인작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다.",
+      "warnings": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 34,
+      "caseId": "junk-good-teamplay-beats-ai-and-demo",
+      "group": "junk-suppression",
+      "preferences": "hangout-friendly game deal for PC",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Orbital Teamplay Co-op를 추천합니다. 50% 할인, 현재가 13,500원, 협동 플레이 지원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Orbital Teamplay Co-op",
+      "topMatch": {
+        "title": "Orbital Teamplay Co-op",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.12,
+        "genres": [
+          "Action",
+          "Casual",
+          "Co-op"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "teamplay",
+          "co-op",
+          "multiplayer"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 35,
+      "caseId": "junk-deckbuilder-good-beats-bundle",
+      "group": "junk-suppression",
+      "preferences": "짧게 돌리기 좋은 roguelike deckbuilder",
+      "budget": 18000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Aces of Ruin Deluxe를 추천합니다. 50% 할인, 현재가 11,900원, PC 지원 조건과 잘 맞습니다.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Aces of Ruin Deluxe",
+      "topMatch": {
+        "title": "Aces of Ruin Deluxe",
+        "cut": 50,
+        "price": {
+          "amount": 11900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.2,
+        "metacritic": 81,
+        "genres": [
+          "Strategy",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "steamDeckStatus": null
+      },
+      "flagged": false,
+      "timeout": false
+    }
+  ]
+}

@@ -16,6 +16,7 @@ interface RawgClientOptions {
   fetch?: typeof fetch;
   baseUrl?: string;
   cache?: TtlCache<string, unknown>;
+  requestTimeoutMs?: number;
 }
 
 export class RawgClient {
@@ -23,12 +24,14 @@ export class RawgClient {
   private readonly fetchImpl: typeof fetch;
   private readonly baseUrl: string;
   private readonly cache: TtlCache<string, unknown>;
+  private readonly requestTimeoutMs: number;
 
   constructor(options: RawgClientOptions) {
     this.apiKey = options.apiKey;
     this.fetchImpl = bindFetchImplementation(options.fetch);
     this.baseUrl = options.baseUrl ?? "https://api.rawg.io/api";
     this.cache = options.cache ?? new TtlCache<string, unknown>();
+    this.requestTimeoutMs = options.requestTimeoutMs ?? DEFAULT_RAWG_REQUEST_TIMEOUT_MS;
   }
 
   async searchGames(query: string): Promise<RawgMetadata[]> {
@@ -68,12 +71,31 @@ export class RawgClient {
 
   private async fetchGames(url: URL): Promise<RawgMetadata[]> {
     const response = (await this.cache.getOrLoad(url.toString(), 600_000, async () => {
-      const request = await this.fetchImpl(url);
-      if (!request.ok) {
-        throw new Error(`RAWG request failed with ${request.status}`);
-      }
+      const controller = new AbortController();
+      let timedOut = false;
+      const timeoutHandle = setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, this.requestTimeoutMs);
 
-      return (await request.json()) as RawgResponse;
+      try {
+        const request = await this.fetchImpl(url, {
+          signal: controller.signal
+        });
+        if (!request.ok) {
+          throw new Error(`RAWG request failed with ${request.status}`);
+        }
+
+        return (await request.json()) as RawgResponse;
+      } catch (error) {
+        if (timedOut || isAbortError(error)) {
+          throw new Error(`RAWG request failed with timeout after ${this.requestTimeoutMs}ms`);
+        }
+
+        throw error;
+      } finally {
+        clearTimeout(timeoutHandle);
+      }
     })) as RawgResponse;
 
     return (response.results ?? []).map((item) => ({
@@ -88,6 +110,8 @@ export class RawgClient {
     }));
   }
 }
+
+const DEFAULT_RAWG_REQUEST_TIMEOUT_MS = 1_500;
 
 function ensureTrailingSlash(value: string): string {
   return value.endsWith("/") ? value : `${value}/`;
@@ -116,5 +140,12 @@ function inferMultiplayer(
       value.includes("co-op") ||
       value.includes("coop") ||
       value.includes("online co op")
+  );
+}
+
+function isAbortError(error: unknown): boolean {
+  return (
+    (error instanceof DOMException && error.name === "AbortError") ||
+    (error instanceof Error && error.name === "AbortError")
   );
 }
