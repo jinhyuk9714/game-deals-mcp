@@ -20,10 +20,10 @@ import {
 } from "../../scripts/run-deterministic-recommend-audit.js";
 
 describe("deterministic recommendation audit fixtures", () => {
-  it("keeps 81 provider-backed cases across five stable groups", () => {
-    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(81);
+  it("keeps 91 provider-backed cases across five stable groups", () => {
+    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(91);
     expect(new Set(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.map((testCase) => testCase.caseId)).size).toBe(
-      81
+      91
     );
 
     const counts = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.reduce<Record<string, number>>(
@@ -38,8 +38,8 @@ describe("deterministic recommendation audit fixtures", () => {
       "local-guardrail": 18,
       "provider-outage": 13,
       "steam-deck-overlay": 17,
-      "social-tiering": 13,
-      "junk-suppression": 20
+      "social-tiering": 14,
+      "junk-suppression": 29
     });
 
     for (const testCase of DETERMINISTIC_RECOMMENDATION_AUDIT_CASES) {
@@ -138,6 +138,21 @@ describe("deterministic recommendation audit fixtures", () => {
     expect(strategyHeavyCase?.expectation.forbiddenTopTitles).toContain(
       "Dominions 5 - Warriors of the Faith"
     );
+
+    const socialGatherCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "social-friends-gathering-rejects-brightgunner"
+    );
+    expect(socialGatherCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
+
+    const grandStrategyCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-constraint-strategy-not-grand-strategy-rejects-brightgunner"
+    );
+    expect(grandStrategyCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
+
+    const hybridBuildcraftCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-hybrid-action-buildcraft-rejects-brightgunner"
+    );
+    expect(hybridBuildcraftCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
   });
 });
 

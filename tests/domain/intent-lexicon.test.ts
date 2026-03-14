@@ -20,7 +20,8 @@ describe("parseRecommendationIntent", () => {
     "shared-screen party deal",
     "chill co-op discount",
     "여럿이 같이 놀기 좋은 할인 게임",
-    "well-reviewed party co-op, not sports"
+    "well-reviewed party co-op, not sports",
+    "친구들 모였을 때 바로 켜기 좋은 할인 게임"
   ])("marks %s as multiplayer intent", (preferences) => {
     const result = parseRecommendationIntent(preferences);
 
@@ -74,10 +75,24 @@ describe("parseRecommendationIntent", () => {
   it.each([
     "잠깐씩 즐길 카드게임",
     "한 판씩 돌리기 좋은 카드 배틀러",
-    "출퇴근할 때 하기 좋은 덱빌딩"
+    "출퇴근할 때 하기 좋은 덱빌딩",
+    "casual strategy hybrid game"
   ])("marks %s as short-session intent", (preferences) => {
     const result = parseRecommendationIntent(preferences);
 
     expect(result.shortSession).toBe(true);
+  });
+
+  it("treats buildcraft phrasing as deckbuilding intent", () => {
+    const result = parseRecommendationIntent("arcade action plus buildcraft hybrid deal");
+
+    expect(result.deckbuilding).toBe(true);
+    expect(result.rawgGenres).toContain("card");
+  });
+
+  it("treats systems-heavy phrasing as strategy intent", () => {
+    const result = parseRecommendationIntent("systems-heavy but not oppressive hybrid bargain");
+
+    expect(result.genres).toContain("Strategy");
   });
 });

@@ -15,13 +15,14 @@ const INTENT_PATTERNS = {
     /덱빌딩/i,
     /deck ?build/i,
     /deckbuilder/i,
+    /buildcraft/i,
     /카드 ?게임/i,
     /카드 ?배틀러/i,
     /card game/i,
     /card battler/i,
     /손패/i
   ],
-  strategy: [/전략|전술|strategy|tactics|tactical/i],
+  strategy: [/전략|전술|strategy|tactics|tactical|systems-heavy/i],
   action: [
     /액션|전투(?:\s*위주)?|핵앤슬래시|슈팅/i,
     /action/i,
@@ -37,6 +38,7 @@ const INTENT_PATTERNS = {
     /협동|co-?op|coop|멀티|teamplay|multiplayer/i,
     /친구(?:랑|와)?\s*같이/i,
     /친구\s*모임(?:용)?/i,
+    /친구들?\s*모였(?:을\s*때)?/i,
     /친구\s*둘이서/i,
     /둘이서/i,
     /2인/i,
@@ -58,7 +60,8 @@ const INTENT_PATTERNS = {
     /high[- ]rated|highly rated|well-reviewed/i
   ],
   shortSession: [
-    /짧게|가볍게|부담 없이|잠깐|짬짬이|출퇴근/i,
+    /짧게|가볍게|부담 없이|잠깐|짬짬이|출퇴근|casual/i,
+    /바로\s*켜기\s*좋/i,
     /한 ?판/i,
     /quick|short session|pick-?up/i
   ]

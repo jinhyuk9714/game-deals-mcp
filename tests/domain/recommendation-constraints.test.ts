@@ -51,11 +51,14 @@ describe("parseRecommendationConstraints", () => {
     const nonSweaty = parseRecommendationConstraints("non-sweaty multiplayer sale for PC");
     const gameNight = parseRecommendationConstraints("game night bargain for friends");
     const chill = parseRecommendationConstraints("shared-screen chill co-op discount");
+    const gathering = parseRecommendationConstraints("친구들 모였을 때 바로 켜기 좋은 할인 게임");
 
     expect(nonSweaty.coopMode).toContain("non-competitive");
     expect(nonSweaty.excludeGenres).toContain("pvp");
     expect(gameNight.coopMode).toEqual(expect.arrayContaining(["coop", "party"]));
     expect(chill.coopMode).toEqual(expect.arrayContaining(["coop", "party"]));
+    expect(gathering.coopMode).toEqual(expect.arrayContaining(["coop", "party"]));
+    expect(gathering.preferSession).toContain("short");
   });
 
   it("parses review-backed and not-filler quality requests", () => {
@@ -74,6 +77,23 @@ describe("parseRecommendationConstraints", () => {
     expect(result.avoidComplexity).toContain("reading-heavy");
     expect(result.qualityIntent).toContain("review-backed");
     expect(result.strategyPreference).toBe("required");
+  });
+
+  it("keeps strategy intent when only grand strategy is excluded", () => {
+    const result = parseRecommendationConstraints("전략은 좋은데 grand strategy 말고 할인 중인 것");
+
+    expect(result.strategyPreference).toBe("required");
+    expect(result.excludeGenres).not.toContain("strategy");
+    expect(result.avoidComplexity).toContain("complex-strategy");
+  });
+
+  it("treats buildcraft and systems-heavy hybrid phrasing as actionable constraints", () => {
+    const buildcraft = parseRecommendationConstraints("arcade action plus buildcraft hybrid deal");
+    const systems = parseRecommendationConstraints("systems-heavy but not oppressive hybrid bargain");
+
+    expect(buildcraft.deckPreference).toBe("required");
+    expect(systems.strategyPreference).toBe("required");
+    expect(systems.avoidComplexity).toContain("complex-strategy");
   });
 
   it.each([

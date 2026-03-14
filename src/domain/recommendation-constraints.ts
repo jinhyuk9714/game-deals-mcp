@@ -43,17 +43,17 @@ interface ConstraintCandidate {
 const NEGATION_TERMS =
   "(?:말고|빼고|제외|아닌|없이|싫(?:은)?|피하(?:고|는)|원치 않|avoid|without|not)";
 
-const CARD_PATTERNS = /(카드|card|cards|deck(?:builder|building)?|덱빌딩|덱빌더|손패)/i;
+const CARD_PATTERNS = /(카드|card|cards|deck(?:builder|building)?|덱빌딩|덱빌더|손패|buildcraft)/i;
 const RACING_PATTERNS = /(레이싱|racing)/i;
 const SPORTS_PATTERNS = /(스포츠|sports?)/i;
-const STRATEGY_PATTERNS = /(전략|strategy|strategic)/i;
+const STRATEGY_PATTERNS = /(전략|strategy|strategic|systems-heavy)/i;
 const TACTICS_PATTERNS = /(전술|tactics?|tactical|turn-?based|턴제)/i;
 const HORROR_PATTERNS = /(호러|공포|horror)/i;
 const PVP_PATTERNS = /(pvp|경쟁|대전|versus|\bvs\b|competitive|배틀로얄|battle royale)/i;
 const PARTY_PATTERNS =
-  /(파티|party|party-friendly|party night|hangout|game night|shared-?screen|friends-?first|chill co-?op|친구\s*모임(?:용)?|웃기|웃으면서|떠들|fun|brawler|beat ?em ?up)/i;
+  /(파티|party|party-friendly|party night|hangout|game night|shared-?screen|friends-?first|chill co-?op|친구\s*모임(?:용)?|친구들?\s*모였(?:을\s*때)?|바로\s*켜기\s*좋|웃기|웃으면서|떠들|fun|brawler|beat ?em ?up)/i;
 const COOP_PATTERNS =
-  /(협동|co-?op|coop|teamplay|multiplayer|친구(?:들이)?랑.*(?:같이|놀)|친구\s*모임(?:용)?|친구\s*둘이서|둘이서|2인|멀티|with friends|friends|play together|여럿이.*(?:같이|놀)|hangout|game night|shared-?screen|friends-?first|chill co-?op)/i;
+  /(협동|co-?op|coop|teamplay|multiplayer|친구(?:들이)?랑.*(?:같이|놀)|친구\s*모임(?:용)?|친구들?\s*모였(?:을\s*때)?|친구\s*둘이서|둘이서|2인|멀티|with friends|friends|play together|여럿이.*(?:같이|놀)|hangout|game night|shared-?screen|friends-?first|chill co-?op)/i;
 const ACTION_CUE_PATTERNS =
   /(액션성|손맛|real-?time|shooty|슈터|shooter|shooting|빠른|템포|tempo|fast)/i;
 const REVIEW_PATTERNS =
@@ -61,7 +61,7 @@ const REVIEW_PATTERNS =
 const POPULAR_PATTERNS = /(인기|유명|많이 하는|popular|well-known)/i;
 const NOT_FILLER_PATTERNS = /(filler\s*(?:아닌|말고)|잡게임\s*말고|뻔한\s*거\s*말고|not filler)/i;
 const SHORT_SESSION_PATTERNS =
-  /(짧게|짧은|가볍게|잠깐|짬짬이|한 ?판|quick|short session|pick-?up)/i;
+  /(짧게|짧은|가볍게|잠깐|짬짬이|한 ?판|quick|short session|pick-?up|casual|바로\s*켜기\s*좋)/i;
 const MEDIUM_SESSION_PATTERNS = /(적당한 길이|medium session|한두 시간|1-?2 hours?)/i;
 const LONG_SESSION_PATTERNS = /(긴 세션|오래 걸리|long session|한 판이 길|hours?-long)/i;
 const READING_HEAVY_PATTERNS =
@@ -88,12 +88,14 @@ export function parseRecommendationConstraints(preferences: string): Recommendat
   const turnBasedExcluded =
     matchesNegated(preferences, TACTICS_PATTERNS) ||
     /strategy 느낌은 말고|turn-?based 말고|not turn-?based/i.test(preferences);
-  const hasStrategy =
-    STRATEGY_PATTERNS.test(preferences) && !matchesNegated(preferences, STRATEGY_PATTERNS);
+  const grandStrategySpecificExclusion = hasGrandStrategySpecificExclusion(preferences);
+  const strategyNegated =
+    matchesNegated(preferences, STRATEGY_PATTERNS) && !grandStrategySpecificExclusion;
+  const hasStrategy = STRATEGY_PATTERNS.test(preferences) && !strategyNegated;
   const hasTactics =
     /전술|tactics?|tactical/i.test(preferences) ||
     ((/turn-?based|턴제/i.test(preferences) || TACTICS_PATTERNS.test(preferences)) && !turnBasedExcluded);
-  const strategyExcluded = matchesNegated(preferences, STRATEGY_PATTERNS) && !hasTactics;
+  const strategyExcluded = strategyNegated && !hasTactics;
   const actionBias =
     ACTION_CUE_PATTERNS.test(preferences) ||
     turnBasedExcluded ||
@@ -131,6 +133,8 @@ export function parseRecommendationConstraints(preferences: string): Recommendat
 
   if (
     COMPLEX_STRATEGY_PATTERNS.test(preferences) ||
+    grandStrategySpecificExclusion ||
+    (/\bsystems-heavy\b/i.test(preferences) && /\bnot oppressive\b/i.test(preferences)) ||
     ((hasStrategy || hasTactics) && /너무\s*복잡한\s*건\s*말고|too complex/i.test(preferences))
   ) {
     avoidComplexity.add("complex-strategy");
@@ -419,6 +423,15 @@ function matchesNegated(preferences: string, pattern: RegExp): boolean {
       `(?:말고|빼고|제외|없이|avoid|without|not)\\s*(?:the\\s+)?${pattern.source}`,
       "i"
     ).test(preferences)
+  );
+}
+
+function hasGrandStrategySpecificExclusion(preferences: string): boolean {
+  return (
+    new RegExp(`(?:grand strategy|4x)\\s*(?:은|는|이|가|도|만)?\\s*${NEGATION_TERMS}`, "i").test(
+      preferences
+    ) ||
+    new RegExp(`${NEGATION_TERMS}\\s*(?:the\\s+)?(?:grand strategy|4x)`, "i").test(preferences)
   );
 }
 
