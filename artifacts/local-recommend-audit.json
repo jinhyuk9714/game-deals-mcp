@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T01:14:01.419Z",
+  "generatedAt": "2026-03-15T01:35:30.180Z",
   "summary": {
     "total": 50,
     "zeroMatches": 24,
@@ -19,11 +19,11 @@
       },
       {
         "title": "Slay the Spire",
-        "count": 7
+        "count": 6
       },
       {
         "title": "Dice & Fold",
-        "count": 1
+        "count": 2
       }
     ]
   },
@@ -47,11 +47,11 @@
       "topCounts": [
         {
           "title": "Slay the Spire",
-          "count": 7
+          "count": 6
         },
         {
           "title": "Dice & Fold",
-          "count": 1
+          "count": 2
         }
       ],
       "flagged": 0,
@@ -369,7 +369,8 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Shogun Showdown (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -394,10 +395,11 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
+        "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Chess (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
@@ -407,8 +409,7 @@
       "missingEvidence": [
         "Steam Deck verified/playable 근거",
         "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
+        "RAWG 카드·덱빌딩 메타데이터"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -425,10 +426,11 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
+        "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Chess (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
@@ -438,8 +440,7 @@
       "missingEvidence": [
         "Steam Deck verified/playable 근거",
         "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
+        "RAWG 카드·덱빌딩 메타데이터"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -456,30 +457,31 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
+        "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Chess (RAWG request failed with timeout after 1500ms)",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
-      "topTitle": "Slay the Spire",
+      "topTitle": "Dice & Fold",
       "topMatch": {
-        "title": "Slay the Spire",
-        "cut": 75,
+        "title": "Dice & Fold",
+        "cut": 55,
         "price": {
-          "amount": 6750,
+          "amount": 6520,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.37,
-        "metacritic": 86,
+        "rating": 4,
         "genres": [
-          "Card",
+          "Casual",
           "Strategy",
           "Indie",
           "RPG",
-          "Deckbuilder"
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
         ],
         "steamDeckStatus": "verified"
       },
@@ -502,8 +504,7 @@
       "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dice & Fold (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 1,
       "topTitle": "Dice & Fold",
@@ -1406,9 +1407,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1444,9 +1443,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1482,9 +1479,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1520,9 +1515,7 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
-      ],
+      "warnings": [],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
