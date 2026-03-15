@@ -248,6 +248,82 @@ scoped 이름으로 배포됐다면 `args`의 패키지 이름만 `@jinhyuk9714/
 }
 ```
 
+`recommend_sale_games`는 `structuredContent.matches[*]`에 evidence-first 필드를 함께 넣습니다. 추천이 통과한 이유는 `evidence`, `matchedSignals`, `recommendationReason`, `evidenceCompleteness`로 설명하고, 결과를 비웠을 때는 `emptyReason`과 `missingEvidence`로 부족한 공식 근거를 드러냅니다.
+
+빠른 기준:
+
+- `ITAD`: 현재가, 정상가, 할인율, 역대 최저가 같은 가격 근거
+- `Steam`: `Steam Deck Verified` / `Steam Deck Playable` 같은 공식 호환성 근거
+- `RAWG`: 장르, 태그, 평점, 메타크리틱 같은 메타데이터 근거
+
+자세한 계약은 [recommend-sale-games-evidence.md](https://github.com/jinhyuk9714/game-deals-mcp/blob/main/docs/reference/recommend-sale-games-evidence.md)에서 볼 수 있습니다.
+
+#### accepted response 예시
+
+```json
+{
+  "query": {
+    "preferences": "평가 좋은 전략 할인 게임",
+    "budget": 20000,
+    "platforms": ["PC"],
+    "country": "KR"
+  },
+  "country": "KR",
+  "matches": [
+    {
+      "title": "Reviewed Tactics Reserve",
+      "cut": 50,
+      "evidence": {
+        "priceEvidence": {
+          "source": "ITAD",
+          "current": { "amount": 15900, "currency": "KRW" },
+          "regular": { "amount": 31800, "currency": "KRW" },
+          "cut": 50,
+          "historyLow": { "amount": 14900, "currency": "KRW" }
+        },
+        "platformEvidence": {
+          "source": "ITAD",
+          "platforms": ["PC"]
+        },
+        "metadataEvidence": {
+          "source": "RAWG",
+          "genres": ["Strategy", "Tactics"],
+          "rating": 4.4,
+          "metacritic": 84
+        }
+      },
+      "matchedSignals": ["strategy", "tactics", "high-rating"],
+      "missingEvidence": [],
+      "recommendationReason": "ITAD 가격 근거와 RAWG 장르·평점 근거가 모두 확인돼 전략 고평가 조건을 충족합니다.",
+      "evidenceCompleteness": "hard-facts-plus-metadata"
+    }
+  ],
+  "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 15,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, high-rating.",
+  "warnings": []
+}
+```
+
+#### empty response 예시
+
+```json
+{
+  "query": {
+    "preferences": "스팀덱에서 하기 좋은 로그라이크",
+    "budget": 20000,
+    "platforms": ["Steam Deck"],
+    "country": "KR"
+  },
+  "country": "KR",
+  "matches": [],
+  "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다.",
+  "warnings": [
+    "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+  ],
+  "emptyReason": "missing-steam-deck-evidence",
+  "missingEvidence": ["Steam Deck verified/playable 근거"]
+}
+```
+
 ### `explain_deal_value`
 
 ```json
@@ -270,11 +346,12 @@ MCP 클라이언트에서 아래처럼 바로 써볼 수 있습니다.
 
 ## 제한 사항
 
-- `Steam Deck` 요청에서는 공식 Steam 호환성 정보를 우선 확인합니다. 확인하지 못한 게임은 `Steam Deck 정보 없음`으로 표시합니다.
+- `recommend_sale_games`는 coverage보다 공식 근거 정확성을 우선합니다. `ITAD`, `Steam`, `RAWG` 근거가 부족하면 결과를 비울 수 있습니다.
+- `Steam Deck` 추천은 공식 `Steam Deck Verified` 또는 `Steam Deck Playable` 근거가 있을 때만 통과합니다. `unknown`이나 title-only 추정은 추천 근거로 쓰지 않습니다.
 - 공개 Worker는 인증 없이 열어 두는 구성이며, 운영 제어는 Cloudflare 쪽 보호 규칙을 전제로 합니다.
 - v1은 조회 전용입니다. wishlist, alerting, account sync는 포함하지 않습니다.
 - 가격은 API가 내려준 원본 통화 그대로 보여주며, 환율 변환은 하지 않습니다.
-- RAWG 제목 매칭은 보수적으로 잡아 두었습니다. 신뢰도가 낮으면 메타데이터 없이 가격 정보만 반환합니다.
+- RAWG 제목 매칭은 보수적으로 잡아 두었습니다. 신뢰도가 낮으면 메타데이터 없이 가격 정보만 반환하거나, evidence-first 정책에 따라 추천을 비울 수 있습니다.
 
 ## 개발
 

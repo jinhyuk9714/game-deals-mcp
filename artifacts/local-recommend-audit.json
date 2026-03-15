@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-15T01:35:30.180Z",
+  "generatedAt": "2026-03-15T01:45:00.256Z",
   "summary": {
     "total": 50,
-    "zeroMatches": 24,
+    "zeroMatches": 23,
     "flagged": 0,
     "groundlessRecommendations": 0,
     "recoverableButMissed": 0,
-    "evidenceRejected": 24,
+    "evidenceRejected": 23,
     "timeouts": 0,
     "topCounts": [
       {
@@ -14,16 +14,16 @@
         "count": 10
       },
       {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "count": 8
-      },
-      {
         "title": "Slay the Spire",
-        "count": 6
+        "count": 9
       },
       {
-        "title": "Dice & Fold",
-        "count": 2
+        "title": "Dominions 5 - Warriors of the Faith",
+        "count": 7
+      },
+      {
+        "title": "The King is Watching",
+        "count": 1
       }
     ]
   },
@@ -32,7 +32,7 @@
       "uniqueTopPicks": 1,
       "topCounts": [
         {
-          "title": "Dominions 5 - Warriors of the Faith",
+          "title": "The King is Watching",
           "count": 1
         }
       ],
@@ -43,21 +43,17 @@
       "timeouts": 0
     },
     "deckbuilding-short": {
-      "uniqueTopPicks": 2,
+      "uniqueTopPicks": 1,
       "topCounts": [
         {
           "title": "Slay the Spire",
-          "count": 6
-        },
-        {
-          "title": "Dice & Fold",
-          "count": 2
+          "count": 9
         }
       ],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 2,
+      "evidenceRejected": 1,
       "timeouts": 0
     },
     "strategy-rating": {
@@ -272,32 +268,22 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 75% 할인, 현재가 10,500원, Steam 판매, Steam Deck Playable, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, steam-deck.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 75,
-        "price": {
-          "amount": 10500,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "steamDeckStatus": "playable"
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-steam-deck-evidence",
+      "missingEvidence": [
+        "Steam Deck verified/playable 근거",
+        "RAWG 장르·평점 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -366,23 +352,33 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, Steam Deck Playable, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Shogun Showdown (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-steam-deck-evidence",
-      "missingEvidence": [
-        "Steam Deck verified/playable 근거",
-        "RAWG 장르·평점 근거"
-      ],
+      "matchCount": 1,
+      "topTitle": "The King is Watching",
+      "topMatch": {
+        "title": "The King is Watching",
+        "cut": 35,
+        "price": {
+          "amount": 9680,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.36,
+        "genres": [
+          "Strategy",
+          "Indie",
+          "Roguelike"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -395,25 +391,36 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-steam-deck-evidence",
-      "missingEvidence": [
-        "Steam Deck verified/playable 근거",
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터"
-      ],
+      "matchCount": 1,
+      "topTitle": "Slay the Spire",
+      "topMatch": {
+        "title": "Slay the Spire",
+        "cut": 75,
+        "price": {
+          "amount": 6750,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.37,
+        "metacritic": 86,
+        "genres": [
+          "Card",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -426,25 +433,36 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-steam-deck-evidence",
-      "missingEvidence": [
-        "Steam Deck verified/playable 근거",
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터"
-      ],
+      "matchCount": 1,
+      "topTitle": "Slay the Spire",
+      "topMatch": {
+        "title": "Slay the Spire",
+        "cut": 75,
+        "price": {
+          "amount": 6750,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.37,
+        "metacritic": 86,
+        "genres": [
+          "Card",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -457,31 +475,28 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 1,
-      "topTitle": "Dice & Fold",
+      "topTitle": "Slay the Spire",
       "topMatch": {
-        "title": "Dice & Fold",
-        "cut": 55,
+        "title": "Slay the Spire",
+        "cut": 75,
         "price": {
-          "amount": 6520,
+          "amount": 6750,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4,
+        "rating": 4.37,
+        "metacritic": 86,
         "genres": [
-          "Casual",
+          "Card",
           "Strategy",
           "Indie",
           "RPG",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
+          "Deckbuilder"
         ],
         "steamDeckStatus": "verified"
       },
@@ -501,37 +516,22 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dice & Fold",
-      "topMatch": {
-        "title": "Dice & Fold",
-        "cut": 55,
-        "price": {
-          "amount": 6520,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4,
-        "genres": [
-          "Casual",
-          "Strategy",
-          "Indie",
-          "RPG",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
-        ],
-        "steamDeckStatus": "verified"
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-steam-deck-evidence",
+      "missingEvidence": [
+        "Steam Deck verified/playable 근거",
+        "RAWG 카드·덱빌딩 메타데이터"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
