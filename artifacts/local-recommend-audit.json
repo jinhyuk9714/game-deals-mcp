@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-15T01:45:00.256Z",
+  "generatedAt": "2026-03-15T03:16:58.573Z",
   "summary": {
     "total": 50,
     "zeroMatches": 23,
@@ -394,6 +394,7 @@
       "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 1,
@@ -436,6 +437,7 @@
       "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 1,
@@ -477,7 +479,8 @@
       "country": "KR",
       "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Slay the Spire",
