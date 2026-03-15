@@ -705,7 +705,41 @@ function toAuditTopMatch(value: unknown): RotatingRecommendationAuditTopMatch | 
     tags: Array.isArray((deal as { tags?: unknown }).tags)
       ? (((deal as { tags?: unknown }).tags as string[]) ?? undefined)
       : undefined,
-    steamDeckStatus: deal.steamDeckCompatibility?.status ?? null
+    steamDeckStatus: deal.steamDeckCompatibility?.status ?? null,
+    matchedSignals: Array.isArray((deal as { matchedSignals?: unknown }).matchedSignals)
+      ? (((deal as { matchedSignals?: unknown }).matchedSignals as string[]) ?? undefined)
+      : undefined,
+    missingEvidence: Array.isArray((deal as { missingEvidence?: unknown }).missingEvidence)
+      ? (((deal as { missingEvidence?: unknown }).missingEvidence as string[]) ?? undefined)
+      : undefined,
+    recommendationReason:
+      typeof (deal as { recommendationReason?: unknown }).recommendationReason === "string"
+        ? ((deal as { recommendationReason?: string }).recommendationReason ?? undefined)
+        : undefined,
+    evidenceCompleteness:
+      typeof (deal as { evidenceCompleteness?: unknown }).evidenceCompleteness === "string"
+        ? ((deal as { evidenceCompleteness?: string }).evidenceCompleteness ?? undefined)
+        : undefined,
+    priceEvidenceSource:
+      typeof (deal as { evidence?: { priceEvidence?: { source?: unknown } } }).evidence?.priceEvidence
+        ?.source === "string"
+        ? ((deal as { evidence?: { priceEvidence?: { source?: string } } }).evidence?.priceEvidence
+            ?.source ?? undefined)
+        : undefined,
+    platformEvidenceSource:
+      typeof (deal as { evidence?: { platformEvidence?: { source?: unknown } } }).evidence
+        ?.platformEvidence?.source === "string"
+        ? ((deal as {
+            evidence?: { platformEvidence?: { source?: string } };
+          }).evidence?.platformEvidence?.source ?? undefined)
+        : undefined,
+    metadataEvidenceSource:
+      typeof (deal as { evidence?: { metadataEvidence?: { source?: unknown } } }).evidence
+        ?.metadataEvidence?.source === "string"
+        ? ((deal as {
+            evidence?: { metadataEvidence?: { source?: string } };
+          }).evidence?.metadataEvidence?.source ?? undefined)
+        : undefined
   };
 }
 

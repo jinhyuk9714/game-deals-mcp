@@ -102,14 +102,14 @@
     "genre-hybrid-29",
     "genre-hybrid-20"
   ],
-  "generatedAt": "2026-03-15T01:02:00.912Z",
+  "generatedAt": "2026-03-15T01:16:14.096Z",
   "summary": {
     "total": 100,
-    "zeroMatches": 56,
-    "flagged": 1,
-    "groundlessRecommendations": 1,
+    "zeroMatches": 59,
+    "flagged": 0,
+    "groundlessRecommendations": 0,
     "recoverableButMissed": 0,
-    "evidenceRejected": 56,
+    "evidenceRejected": 59,
     "timeouts": 0,
     "topCounts": [
       {
@@ -118,15 +118,15 @@
       },
       {
         "title": "Balatro",
-        "count": 9
-      },
-      {
-        "title": "BALL x PIT",
-        "count": 8
+        "count": 10
       },
       {
         "title": "Dominions 5 - Warriors of the Faith",
         "count": 8
+      },
+      {
+        "title": "BALL x PIT",
+        "count": 6
       },
       {
         "title": "Dice & Fold",
@@ -135,14 +135,6 @@
       {
         "title": "Shogun Showdown",
         "count": 3
-      },
-      {
-        "title": "ROUNDS",
-        "count": 1
-      },
-      {
-        "title": "The King is Watching",
-        "count": 1
       }
     ]
   },
@@ -161,7 +153,7 @@
       "topCounts": [
         {
           "title": "Balatro",
-          "count": 6
+          "count": 7
         },
         {
           "title": "Shogun Showdown",
@@ -171,7 +163,7 @@
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 2,
+      "evidenceRejected": 1,
       "timeouts": 0
     },
     "strategy-rating": {
@@ -231,21 +223,17 @@
           "count": 1
         }
       ],
-      "flagged": 1,
-      "groundlessRecommendations": 1,
+      "flagged": 0,
+      "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
       "evidenceRejected": 4,
       "timeouts": 0
     },
     "mixed-language": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
           "title": "Balatro",
-          "count": 1
-        },
-        {
-          "title": "BALL x PIT",
           "count": 1
         },
         {
@@ -260,7 +248,7 @@
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 6,
+      "evidenceRejected": 7,
       "timeouts": 0
     },
     "budget-strict": {
@@ -308,25 +296,12 @@
       "timeouts": 0
     },
     "genre-hybrid": {
-      "uniqueTopPicks": 3,
-      "topCounts": [
-        {
-          "title": "BALL x PIT",
-          "count": 1
-        },
-        {
-          "title": "ROUNDS",
-          "count": 1
-        },
-        {
-          "title": "The King is Watching",
-          "count": 1
-        }
-      ],
+      "uniqueTopPicks": 0,
+      "topCounts": [],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 7,
+      "evidenceRejected": 10,
       "timeouts": 0
     }
   },
@@ -344,7 +319,12 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: TurboJoy (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -372,7 +352,12 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: TurboJoy (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -400,7 +385,12 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: AI Games (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: TurboJoy (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -429,7 +419,12 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: RUNGORE: Beginner Experience (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: TurboJoy (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -459,7 +454,10 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: TurboJoy (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -488,7 +486,10 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: TurboJoy (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -516,7 +517,8 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -544,7 +546,8 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 카드·덱빌딩 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -626,23 +629,59 @@
       ],
       "country": "KR",
       "index": 11,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
+        "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-deckbuilding-evidence",
-      "missingEvidence": [
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
-      ],
+      "matchCount": 1,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11359,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "tags": [],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -687,7 +726,21 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -737,7 +790,21 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -756,7 +823,7 @@
       ],
       "country": "KR",
       "index": 14,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
@@ -766,7 +833,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -786,7 +853,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -805,7 +887,7 @@
       ],
       "country": "KR",
       "index": 15,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
@@ -815,7 +897,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -835,7 +917,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -884,10 +981,11 @@
       ],
       "country": "KR",
       "index": 17,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 3,
       "topTitle": "Balatro",
@@ -895,7 +993,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -915,7 +1013,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -934,7 +1047,7 @@
       ],
       "country": "KR",
       "index": 18,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
@@ -944,7 +1057,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -964,7 +1077,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -983,7 +1111,7 @@
       ],
       "country": "KR",
       "index": 19,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
@@ -993,7 +1121,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -1013,7 +1141,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1032,7 +1175,7 @@
       ],
       "country": "KR",
       "index": 20,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다."
       ],
@@ -1042,7 +1185,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -1062,7 +1205,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1107,7 +1265,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1152,7 +1321,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1197,7 +1377,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1271,7 +1462,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1345,7 +1547,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1447,7 +1660,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1469,7 +1693,9 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Superfighters Deluxe (RAWG request failed with timeout after 1500ms)",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1494,16 +1720,19 @@
       ],
       "country": "KR",
       "index": 32,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Micro Mages (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Superfighters Deluxe (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-social-metadata",
       "missingEvidence": [
-        "RAWG 멀티플레이/co-op 메타데이터"
+        "RAWG 멀티플레이/co-op 메타데이터",
+        "ITAD 현재가/할인율 근거"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -1524,7 +1753,9 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Superfighters Deluxe (RAWG request failed with timeout after 1500ms)",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1551,7 +1782,8 @@
       "index": 34,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Superfighters Deluxe (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1796,7 +2028,19 @@
           "macOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1839,7 +2083,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1910,7 +2164,19 @@
           "macOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1953,7 +2219,19 @@
           "macOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -1996,7 +2274,19 @@
           "macOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2039,7 +2329,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2109,7 +2409,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2151,7 +2461,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2253,7 +2573,21 @@
           "macOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2295,7 +2629,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2373,7 +2717,23 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "verified",
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "steam-deck",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2395,7 +2755,10 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Downfall (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Bio Prototype (RAWG request failed with timeout after 1500ms)",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: PASSAGE (RAWG request failed with timeout after 1500ms)",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -2444,13 +2807,25 @@
           "macOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
       "evidenceRejected": false,
-      "flagged": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -2486,7 +2861,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2558,7 +2943,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2663,7 +3059,23 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": "verified"
+        "steamDeckStatus": "verified",
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "steam-deck",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "Steam",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2682,7 +3094,7 @@
       ],
       "country": "KR",
       "index": 66,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
@@ -2692,7 +3104,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -2712,7 +3124,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -2731,40 +3158,22 @@
       ],
       "country": "KR",
       "index": 67,
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, Steam Deck Verified, 장르 Indie/Action, 평점 4.3, 충족 신호 deckbuilder, card, roguelike.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
-        ],
-        "platforms": [
-          "PC",
-          "Nintendo Switch",
-          "macOS"
-        ],
-        "tags": [],
-        "steamDeckStatus": "verified"
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-steam-deck-evidence",
+      "missingEvidence": [
+        "Steam Deck verified/playable 근거",
+        "RAWG 카드·덱빌딩 메타데이터",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -2946,7 +3355,7 @@
       ],
       "country": "KR",
       "index": 74,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
@@ -2956,7 +3365,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -2976,7 +3385,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3026,7 +3450,22 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "55% 할인, 현재가 6,520원, Steam 판매, PC 지원, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3071,7 +3510,18 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "multiplayer",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3226,7 +3676,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3275,7 +3735,21 @@
           "Linux"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3317,7 +3791,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3389,7 +3873,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3460,7 +3954,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3479,7 +3983,7 @@
       ],
       "country": "KR",
       "index": 88,
-      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
@@ -3489,7 +3993,7 @@
         "title": "Balatro",
         "cut": 5,
         "price": {
-          "amount": 11077,
+          "amount": 11359,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -3509,7 +4013,22 @@
           "iOS"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "5% 할인, 현재가 11,359원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3551,7 +4070,17 @@
           "PC"
         ],
         "tags": [],
-        "steamDeckStatus": null
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "action",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "100% 할인, 현재가 0원, PC 지원, 장르 Indie/Action, 충족 신호 action, short-session",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
       },
       "missingEvidence": [],
       "groundlessRecommendation": false,
@@ -3599,7 +4128,11 @@
       "country": "KR",
       "index": 91,
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
-      "warnings": [],
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
+        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
+      ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
@@ -3624,38 +4157,23 @@
       ],
       "country": "KR",
       "index": 92,
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 deckbuilder, card, roguelike.",
-      "warnings": [],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
-        ],
-        "platforms": [
-          "PC",
-          "Nintendo Switch",
-          "macOS"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
+        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-deckbuilding-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "RAWG 카드·덱빌딩 메타데이터"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -3672,7 +4190,8 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cobalt Core (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -3700,37 +4219,22 @@
       ],
       "country": "KR",
       "index": 94,
-      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 3,
-      "topTitle": "The King is Watching",
-      "topMatch": {
-        "title": "The King is Watching",
-        "cut": 35,
-        "price": {
-          "amount": 9680,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.36,
-        "genres": [
-          "Strategy",
-          "Indie",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -3744,9 +4248,10 @@
       ],
       "country": "KR",
       "index": 95,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
+        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
@@ -3755,8 +4260,7 @@
       "emptyReason": "missing-review-evidence",
       "missingEvidence": [
         "RAWG 장르·평점 근거",
-        "RAWG 멀티플레이/co-op 메타데이터",
-        "ITAD 현재가/할인율 근거"
+        "RAWG 멀티플레이/co-op 메타데이터"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -3777,6 +4281,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Downfall (RAWG request failed with timeout after 1500ms)",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
@@ -3888,36 +4393,24 @@
       ],
       "country": "KR",
       "index": 100,
-      "summary": "ROUNDS를 추천합니다. 50% 할인, 현재가 3,200원, Dreamgame 판매, PC 지원, 장르 Indie/Action, 평점 3.7, 충족 신호 deckbuilder, card, roguelike.",
-      "warnings": [],
-      "matchCount": 1,
-      "topTitle": "ROUNDS",
-      "topMatch": {
-        "title": "ROUNDS",
-        "cut": 50,
-        "price": {
-          "amount": 3200,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 3.72,
-        "genres": [
-          "Indie",
-          "Action",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "warnings": [
+        "일부 메타데이터를 생략했습니다.",
+        "가격 개요 정보가 없어 제목만 확인했습니다.",
+        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
+      ],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-deckbuilding-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "RAWG 카드·덱빌딩 메타데이터",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     }

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-15T01:00:57.079Z",
+  "generatedAt": "2026-03-15T01:14:01.419Z",
   "summary": {
     "total": 50,
-    "zeroMatches": 25,
+    "zeroMatches": 24,
     "flagged": 0,
     "groundlessRecommendations": 0,
     "recoverableButMissed": 0,
-    "evidenceRejected": 25,
+    "evidenceRejected": 24,
     "timeouts": 0,
     "topCounts": [
       {
@@ -15,18 +15,14 @@
       },
       {
         "title": "Dominions 5 - Warriors of the Faith",
-        "count": 7
+        "count": 8
       },
       {
         "title": "Slay the Spire",
-        "count": 6
+        "count": 7
       },
       {
         "title": "Dice & Fold",
-        "count": 1
-      },
-      {
-        "title": "The King is Watching",
         "count": 1
       }
     ]
@@ -36,7 +32,7 @@
       "uniqueTopPicks": 1,
       "topCounts": [
         {
-          "title": "The King is Watching",
+          "title": "Dominions 5 - Warriors of the Faith",
           "count": 1
         }
       ],
@@ -51,7 +47,7 @@
       "topCounts": [
         {
           "title": "Slay the Spire",
-          "count": 6
+          "count": 7
         },
         {
           "title": "Dice & Fold",
@@ -61,7 +57,7 @@
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 3,
+      "evidenceRejected": 2,
       "timeouts": 0
     },
     "strategy-rating": {
@@ -276,22 +272,32 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 75% 할인, 현재가 10,500원, Steam 판매, Steam Deck Playable, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-steam-deck-evidence",
-      "missingEvidence": [
-        "Steam Deck verified/playable 근거",
-        "RAWG 장르·평점 근거"
-      ],
+      "matchCount": 1,
+      "topTitle": "Dominions 5 - Warriors of the Faith",
+      "topMatch": {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "cut": 75,
+        "price": {
+          "amount": 10500,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 4.67,
+        "genres": [
+          "Strategy",
+          "Indie"
+        ],
+        "steamDeckStatus": "playable"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -360,34 +366,22 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, Steam Deck Playable, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, steam-deck.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: The King is Watching (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "The King is Watching",
-      "topMatch": {
-        "title": "The King is Watching",
-        "cut": 35,
-        "price": {
-          "amount": 9680,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.36,
-        "genres": [
-          "Strategy",
-          "Indie",
-          "Roguelike"
-        ],
-        "steamDeckStatus": "playable"
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-steam-deck-evidence",
+      "missingEvidence": [
+        "Steam Deck verified/playable 근거",
+        "RAWG 장르·평점 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -403,6 +397,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Chess (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
@@ -433,6 +428,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Chess (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
@@ -460,23 +456,37 @@
         "Steam Deck"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거, RAWG 장르·평점 근거, RAWG 카드·덱빌딩 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Slay the Spire를 추천합니다. 75% 할인, 현재가 6,750원, Steam 판매, Steam Deck Verified, 장르 Card/Strategy, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Chess (RAWG request failed with timeout after 1500ms)",
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-steam-deck-evidence",
-      "missingEvidence": [
-        "Steam Deck verified/playable 근거",
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
-      ],
+      "matchCount": 1,
+      "topTitle": "Slay the Spire",
+      "topMatch": {
+        "title": "Slay the Spire",
+        "cut": 75,
+        "price": {
+          "amount": 6750,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.37,
+        "metacritic": 86,
+        "genres": [
+          "Card",
+          "Strategy",
+          "Indie",
+          "RPG",
+          "Deckbuilder"
+        ],
+        "steamDeckStatus": "verified"
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -492,7 +502,8 @@
       "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Dice & Fold (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Dice & Fold",
@@ -1395,7 +1406,9 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [],
+      "warnings": [
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1431,7 +1444,9 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [],
+      "warnings": [
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1467,7 +1482,9 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [],
+      "warnings": [
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {
@@ -1503,7 +1520,9 @@
       ],
       "country": "KR",
       "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
-      "warnings": [],
+      "warnings": [
+        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+      ],
       "matchCount": 1,
       "topTitle": "BALL x PIT",
       "topMatch": {

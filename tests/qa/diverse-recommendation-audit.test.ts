@@ -194,6 +194,29 @@ describe("diverse recommendation audit flagging", () => {
       )
     ).toBe(true);
   });
+
+  it("does not misread genre-hybrid '같이 있는' phrasing as multiplayer when provider-backed signals match", () => {
+    expect(
+      isDiverseRecommendationAuditFlagged(
+        {
+          index: 91,
+          group: "genre-hybrid",
+          preferences: "전략이랑 로그라이크가 같이 있는 세일작",
+          budget: 22000,
+          platforms: ["PC"],
+          country: "KR"
+        },
+        {
+          title: "The King is Watching",
+          genres: ["Strategy", "Indie", "Roguelike"],
+          platforms: ["PC"],
+          rating: 4.36,
+          matchedSignals: ["strategy", "roguelike", "high-rating"],
+          evidenceCompleteness: "hard-facts-plus-metadata"
+        }
+      )
+    ).toBe(false);
+  });
 });
 
 describe("diverse recommendation audit summary", () => {
@@ -424,6 +447,84 @@ describe("runDiverseRecommendationAudit", () => {
       zeroMatches: 1,
       flagged: 0,
       evidenceRejected: 1
+    });
+  });
+
+  it("preserves provider-backed matched signals for genre-hybrid audit alignment", async () => {
+    const service: DiverseRecommendationAuditService = {
+      async recommendSaleGames() {
+        return {
+          query: {},
+          country: "KR",
+          matches: [
+            {
+              id: "the-king-is-watching",
+              title: "The King is Watching",
+              price: { amount: 9680, currency: "KRW" },
+              regular: { amount: 14890, currency: "KRW" },
+              cut: 35,
+              genres: ["Strategy", "Indie", "Roguelike"],
+              platforms: ["PC"],
+              multiplayer: false,
+              rating: 4.36,
+              tags: [],
+              matchedSignals: ["strategy", "roguelike", "high-rating"],
+              missingEvidence: [],
+              recommendationReason: "RAWG 장르 근거로 strategy와 roguelike 축을 모두 충족합니다.",
+              evidenceCompleteness: "hard-facts-plus-metadata",
+              evidence: {
+                priceEvidence: {
+                  source: "ITAD",
+                  current: { amount: 9680, currency: "KRW" },
+                  regular: { amount: 14890, currency: "KRW" },
+                  cut: 35
+                },
+                platformEvidence: {
+                  source: "ITAD",
+                  platforms: ["PC"]
+                },
+                metadataEvidence: {
+                  source: "RAWG",
+                  genres: ["Strategy", "Indie", "Roguelike"],
+                  tags: [],
+                  rating: 4.36
+                }
+              }
+            }
+          ],
+          summary:
+            "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, PC 지원, 장르 Strategy/Indie/Roguelike, 평점 4.4, 충족 신호 strategy, roguelike, high-rating.",
+          sources: ["IsThereAnyDeal", "RAWG"],
+          warnings: []
+        };
+      }
+    };
+
+    const run = await runDiverseRecommendationAudit(
+      service,
+      [
+        {
+          index: 91,
+          group: "genre-hybrid",
+          preferences: "전략이랑 로그라이크가 같이 있는 세일작",
+          budget: 22000,
+          platforms: ["PC"],
+          country: "KR"
+        }
+      ],
+      { timeoutMs: 100, concurrency: 1 }
+    );
+
+    const result = run.results[0]!;
+
+    expect(result).toMatchObject({
+      topTitle: "The King is Watching",
+      flagged: false,
+      groundlessRecommendation: false
+    });
+    expect(result.topMatch).toMatchObject({
+      matchedSignals: ["strategy", "roguelike", "high-rating"],
+      evidenceCompleteness: "hard-facts-plus-metadata"
     });
   });
 });

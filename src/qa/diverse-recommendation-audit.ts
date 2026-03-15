@@ -40,6 +40,13 @@ export interface DiverseRecommendationAuditTopMatch {
   platforms?: string[] | undefined;
   tags?: string[] | undefined;
   steamDeckStatus?: string | null | undefined;
+  matchedSignals?: string[] | undefined;
+  missingEvidence?: string[] | undefined;
+  recommendationReason?: string | undefined;
+  evidenceCompleteness?: string | undefined;
+  priceEvidenceSource?: string | undefined;
+  platformEvidenceSource?: string | undefined;
+  metadataEvidenceSource?: string | undefined;
 }
 
 export interface DiverseRecommendationAuditResult extends DiverseRecommendationAuditCase {
@@ -599,7 +606,7 @@ function inferPromptRequirements(testCase: DiverseRecommendationAuditCase) {
   const text = normalizeText(testCase.preferences);
   const sanitizedDeckText = text.replace(/steam deck|handheld deck/gi, " ");
   const sanitizedStrategyText = text.replace(
-    /turn-based 말고|not turn-based|turn based 말고|턴제 말고/gi,
+    /turn-based(?:\s*말고|\s*아닌데|\s*아닌)?|not turn-based|turn based(?:\s*말고|\s*아닌데|\s*아닌)?|턴제(?:는|가)?\s*아닌데|턴제(?:는|가)?\s*아닌|턴제 말고/gi,
     " "
   );
   const needsDeck = /(deckbuilder|deckbuilding|card|cards|battler|hand|카드|덱|\bdeck\b)/i.test(
@@ -616,7 +623,9 @@ function inferPromptRequirements(testCase: DiverseRecommendationAuditCase) {
     text
   );
   const needsMultiplayer =
-    /(friends|co-?op|party|hangout|multiplayer|teamplay|친구|협동|파티|팀플|둘이서|같이)/i.test(text) ||
+    /(friends|co-?op|party|hangout|multiplayer|teamplay|친구|협동|파티|팀플|둘이서|같이\s*(할|하는|하|웃|놀|켜|즐|떠들|모여|모였|하기))/i.test(
+      text
+    ) ||
     testCase.group === "multiplayer-social";
   const needsPartyShape = /(party|hangout|funny|떠들면서|같이 웃으면서|party-friendly|party night|웃긴)/i.test(
     text
@@ -629,7 +638,10 @@ function inferPromptRequirements(testCase: DiverseRecommendationAuditCase) {
   const excludesStrategy = /(strategy 말고|grand strategy 말고|too complex|너무 복잡|마이너하지 않은|not too complex)/i.test(
     text
   );
-  const excludesTurnBased = /(turn-based 말고|not turn-based|turn based 말고|턴제 말고)/i.test(text);
+  const excludesTurnBased =
+    /(turn-based(?:\s*말고|\s*아닌데|\s*아닌)|not turn-based|turn based(?:\s*말고|\s*아닌데|\s*아닌)|턴제(?:는|가)?\s*아닌데|턴제(?:는|가)?\s*아닌|턴제 말고)/i.test(
+      text
+    );
   const excludesPvp = /(not pvp|pvp 말고|non-competitive|경쟁 말고)/i.test(text);
   const excludesRacing = /(not racing|레이싱 말고|racing 말고)/i.test(text);
   const excludesSports = /(not sports|스포츠 말고|sports 말고)/i.test(text);
@@ -689,7 +701,41 @@ function toAuditTopMatch(value: unknown): DiverseRecommendationAuditTopMatch | n
     tags: Array.isArray((deal as { tags?: unknown }).tags)
       ? (((deal as { tags?: unknown }).tags as string[]) ?? undefined)
       : undefined,
-    steamDeckStatus: deal.steamDeckCompatibility?.status ?? null
+    steamDeckStatus: deal.steamDeckCompatibility?.status ?? null,
+    matchedSignals: Array.isArray((deal as { matchedSignals?: unknown }).matchedSignals)
+      ? (((deal as { matchedSignals?: unknown }).matchedSignals as string[]) ?? undefined)
+      : undefined,
+    missingEvidence: Array.isArray((deal as { missingEvidence?: unknown }).missingEvidence)
+      ? (((deal as { missingEvidence?: unknown }).missingEvidence as string[]) ?? undefined)
+      : undefined,
+    recommendationReason:
+      typeof (deal as { recommendationReason?: unknown }).recommendationReason === "string"
+        ? ((deal as { recommendationReason?: string }).recommendationReason ?? undefined)
+        : undefined,
+    evidenceCompleteness:
+      typeof (deal as { evidenceCompleteness?: unknown }).evidenceCompleteness === "string"
+        ? ((deal as { evidenceCompleteness?: string }).evidenceCompleteness ?? undefined)
+        : undefined,
+    priceEvidenceSource:
+      typeof (deal as { evidence?: { priceEvidence?: { source?: unknown } } }).evidence?.priceEvidence
+        ?.source === "string"
+        ? ((deal as { evidence?: { priceEvidence?: { source?: string } } }).evidence?.priceEvidence
+            ?.source ?? undefined)
+        : undefined,
+    platformEvidenceSource:
+      typeof (deal as { evidence?: { platformEvidence?: { source?: unknown } } }).evidence
+        ?.platformEvidence?.source === "string"
+        ? ((deal as {
+            evidence?: { platformEvidence?: { source?: string } };
+          }).evidence?.platformEvidence?.source ?? undefined)
+        : undefined,
+    metadataEvidenceSource:
+      typeof (deal as { evidence?: { metadataEvidence?: { source?: unknown } } }).evidence
+        ?.metadataEvidence?.source === "string"
+        ? ((deal as {
+            evidence?: { metadataEvidence?: { source?: string } };
+          }).evidence?.metadataEvidence?.source ?? undefined)
+        : undefined
   };
 }
 
@@ -718,7 +764,13 @@ function countTopTitles(results: DiverseRecommendationAuditResult[]): DiverseRec
 
 function collectText(match: DiverseRecommendationAuditTopMatch): string {
   return normalizeText(
-    [match.title, ...(match.genres ?? []), ...(match.tags ?? []), ...(match.platforms ?? [])].join(" ")
+    [
+      match.title,
+      ...(match.genres ?? []),
+      ...(match.tags ?? []),
+      ...(match.platforms ?? []),
+      ...(match.matchedSignals ?? [])
+    ].join(" ")
   );
 }
 

@@ -147,6 +147,30 @@ describe("rotating recommendation audit flagging", () => {
       )
     ).toBe(true);
   });
+
+  it("treats '턴제는 아닌데' phrasing as a turn-based exclusion instead of a strategy requirement", () => {
+    expect(
+      isRotatingRecommendationAuditFlagged(
+        {
+          caseId: "constraint-heavy-08",
+          index: 59,
+          group: "constraint-heavy",
+          preferences: "턴제는 아닌데 로그라이크 느낌은 나는 세일작",
+          budget: 20000,
+          platforms: ["PC"],
+          country: "KR"
+        },
+        {
+          title: "BALL x PIT",
+          genres: ["Indie", "Action", "Roguelike"],
+          platforms: ["PC"],
+          rating: 4.35,
+          matchedSignals: ["roguelike", "action", "high-rating"],
+          evidenceCompleteness: "hard-facts-plus-metadata"
+        }
+      )
+    ).toBe(false);
+  });
 });
 
 describe("rotating recommendation audit summary", () => {
@@ -348,6 +372,88 @@ describe("runRotatingRecommendationAudit", () => {
       zeroMatches: 1,
       flagged: 0,
       evidenceRejected: 1
+    });
+  });
+
+  it("preserves matched signals when a constraint-heavy roguelike prompt is valid", async () => {
+    const cases: RotatingRecommendationAuditCase[] = [
+      {
+        caseId: "constraint-heavy-08",
+        index: 59,
+        group: "constraint-heavy",
+        preferences: "턴제는 아닌데 로그라이크 느낌은 나는 세일작",
+        budget: 20000,
+        platforms: ["PC"],
+        country: "KR"
+      }
+    ];
+
+    const service: RotatingRecommendationAuditService = {
+      async recommendSaleGames() {
+        return {
+          query: {},
+          country: "KR",
+          matches: [
+            {
+              id: "ball-x-pit",
+              title: "BALL x PIT",
+              price: { amount: 13200, currency: "KRW" },
+              regular: { amount: 16500, currency: "KRW" },
+              cut: 20,
+              genres: ["Indie", "Action", "Roguelike"],
+              platforms: ["PC", "Nintendo Switch", "macOS"],
+              multiplayer: false,
+              rating: 4.35,
+              matchedSignals: ["roguelike", "action", "high-rating"],
+              missingEvidence: [],
+              recommendationReason:
+                "RAWG 장르 근거로 로그라이크 축을 충족하고 턴제 제외 조건과도 충돌하지 않습니다.",
+              evidenceCompleteness: "hard-facts-plus-metadata",
+              evidence: {
+                priceEvidence: {
+                  source: "ITAD",
+                  current: { amount: 13200, currency: "KRW" },
+                  regular: { amount: 16500, currency: "KRW" },
+                  cut: 20
+                },
+                platformEvidence: {
+                  source: "ITAD",
+                  platforms: ["PC", "Nintendo Switch", "macOS"]
+                },
+                metadataEvidence: {
+                  source: "RAWG",
+                  genres: ["Indie", "Action", "Roguelike"],
+                  tags: [],
+                  rating: 4.35
+                }
+              }
+            }
+          ],
+          summary:
+            "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action/Roguelike, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
+          sources: ["IsThereAnyDeal", "RAWG"],
+          warnings: []
+        };
+      }
+    };
+
+    const run = await runRotatingRecommendationAudit(service, {
+      seed: "2026-03-14",
+      cases,
+      timeoutMs: 100,
+      concurrency: 1
+    });
+
+    const result = run.results[0]!;
+
+    expect(result).toMatchObject({
+      topTitle: "BALL x PIT",
+      flagged: false,
+      groundlessRecommendation: false
+    });
+    expect(result.topMatch).toMatchObject({
+      matchedSignals: ["roguelike", "action", "high-rating"],
+      evidenceCompleteness: "hard-facts-plus-metadata"
     });
   });
 });
