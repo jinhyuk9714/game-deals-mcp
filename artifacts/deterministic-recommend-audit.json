@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-03-14T23:51:49.051Z",
+  "generatedAt": "2026-03-15T01:00:11.548Z",
   "summary": {
-    "total": 91,
+    "total": 99,
     "zeroMatches": 19,
     "flagged": 0,
     "timeouts": 0,
@@ -12,14 +12,18 @@
       },
       {
         "title": "Rogue Deck Assault",
-        "count": 9
-      },
-      {
-        "title": "Party Brawler Heroes",
-        "count": 6
+        "count": 10
       },
       {
         "title": "Reviewed Tactics Reserve",
+        "count": 7
+      },
+      {
+        "title": "Arcade Run Zero",
+        "count": 6
+      },
+      {
+        "title": "Party Brawler Heroes",
         "count": 6
       },
       {
@@ -31,15 +35,15 @@
         "count": 4
       },
       {
-        "title": "Arcade Run Zero",
-        "count": 3
-      },
-      {
         "title": "BALL x PIT",
         "count": 3
       },
       {
         "title": "Portable Lounge Brawler",
+        "count": 3
+      },
+      {
+        "title": "Tactics Breakthrough",
         "count": 3
       },
       {
@@ -59,7 +63,7 @@
         "count": 2
       },
       {
-        "title": "Tactics Breakthrough",
+        "title": "Rogue Tactics Reserve",
         "count": 2
       },
       {
@@ -99,11 +103,11 @@
         "count": 1
       },
       {
-        "title": "Rogue Tactics Reserve",
+        "title": "Shining Force III",
         "count": 1
       },
       {
-        "title": "Shining Force III",
+        "title": "Systems Tactics Bargain",
         "count": 1
       }
     ]
@@ -262,14 +266,18 @@
       "timeouts": 0
     },
     "junk-suppression": {
-      "uniqueTopPicks": 11,
+      "uniqueTopPicks": 13,
       "topCounts": [
         {
           "title": "Rogue Deck Assault",
-          "count": 7
+          "count": 8
         },
         {
           "title": "Arcade Run Zero",
+          "count": 6
+        },
+        {
+          "title": "Reviewed Tactics Reserve",
           "count": 3
         },
         {
@@ -281,7 +289,7 @@
           "count": 2
         },
         {
-          "title": "Reviewed Tactics Reserve",
+          "title": "Rogue Tactics Reserve",
           "count": 2
         },
         {
@@ -305,7 +313,11 @@
           "count": 1
         },
         {
-          "title": "Rogue Tactics Reserve",
+          "title": "Systems Tactics Bargain",
+          "count": 1
+        },
+        {
+          "title": "Tactics Breakthrough",
           "count": 1
         }
       ],
@@ -4217,7 +4229,7 @@
       "country": "KR",
       "summary": "Arcade Run Zero를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Arcade Run Zero",
       "topMatch": {
         "title": "Arcade Run Zero",
@@ -4324,7 +4336,7 @@
       "country": "KR",
       "summary": "Arcade Run Zero를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Arcade Run Zero",
       "topMatch": {
         "title": "Arcade Run Zero",
@@ -4487,7 +4499,7 @@
       "country": "KR",
       "summary": "Rogue Tactics Reserve를 추천합니다. 50% 할인, 현재가 15,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, roguelike.",
       "warnings": [],
-      "matchCount": 2,
+      "matchCount": 1,
       "topTitle": "Rogue Tactics Reserve",
       "topMatch": {
         "title": "Rogue Tactics Reserve",
@@ -4626,6 +4638,446 @@
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-review-evidence",
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 92,
+      "caseId": "junk-observed-strategy-rating-grand-strategy-rejects-dominions",
+      "group": "junk-suppression",
+      "preferences": "grand strategy 말고 검증된 전략 세일작",
+      "budget": 25000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Tactics Breakthrough를 추천합니다. 50% 할인, 현재가 16,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Tactics Breakthrough",
+      "topMatch": {
+        "title": "Tactics Breakthrough",
+        "cut": 50,
+        "price": {
+          "amount": 16900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.34,
+        "metacritic": 84,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "tactics",
+          "strategy",
+          "turn-based"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 16,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 93,
+      "caseId": "junk-observed-constraint-cardless-action-roguelite-rejects-ball-pit",
+      "group": "junk-suppression",
+      "preferences": "카드 말고 액션 로그라이트, filler도 말고",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Arcade Run Zero를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Arcade Run Zero",
+      "topMatch": {
+        "title": "Arcade Run Zero",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.28,
+        "metacritic": 82,
+        "genres": [
+          "Action",
+          "Arcade",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "action",
+          "combat",
+          "roguelike",
+          "real-time"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 94,
+      "caseId": "junk-observed-constraint-strategy-not-grand-strategy-rejects-dominions",
+      "group": "junk-suppression",
+      "preferences": "전략은 좋은데 grand strategy 말고 할인 중인 것",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Reviewed Tactics Reserve를 추천합니다. 50% 할인, 현재가 17,500원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Reviewed Tactics Reserve",
+      "topMatch": {
+        "title": "Reviewed Tactics Reserve",
+        "cut": 50,
+        "price": {
+          "amount": 17500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "metacritic": 84,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "tactics",
+          "turn-based"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 17,500원, PC 지원, 장르 Strategy/Tactics, 평점 4.3, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 95,
+      "caseId": "junk-observed-constraint-turn-based-not-deck-roguelike-rejects-ball-pit",
+      "group": "junk-suppression",
+      "preferences": "turn-based 말고 deck 아닌 로그라이크",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Arcade Run Zero를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Arcade Run Zero",
+      "topMatch": {
+        "title": "Arcade Run Zero",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.28,
+        "metacritic": 82,
+        "genres": [
+          "Action",
+          "Arcade",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "action",
+          "combat",
+          "roguelike",
+          "real-time"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 96,
+      "caseId": "junk-observed-hybrid-strategy-roguelike-rejects-shogun-showdown",
+      "group": "junk-suppression",
+      "preferences": "전략이랑 로그라이크가 같이 있는 세일작",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Tactics Reserve를 추천합니다. 50% 할인, 현재가 15,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, roguelike.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Tactics Reserve",
+      "topMatch": {
+        "title": "Rogue Tactics Reserve",
+        "cut": 50,
+        "price": {
+          "amount": 15900,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.42,
+        "metacritic": 86,
+        "genres": [
+          "Strategy",
+          "Tactics",
+          "Roguelike",
+          "Action"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "strategy",
+          "tactics",
+          "roguelike",
+          "action"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 15,900원, PC 지원, 장르 Strategy/Tactics, 평점 4.4, 충족 신호 strategy, tactics, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 97,
+      "caseId": "junk-observed-constraint-roguelike-not-turn-based-rejects-ball-pit",
+      "group": "junk-suppression",
+      "preferences": "턴제는 아닌데 로그라이크 느낌은 나는 세일작",
+      "budget": 20000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Arcade Run Zero를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party.",
+      "warnings": [],
+      "matchCount": 2,
+      "topTitle": "Arcade Run Zero",
+      "topMatch": {
+        "title": "Arcade Run Zero",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.28,
+        "metacritic": 82,
+        "genres": [
+          "Action",
+          "Arcade",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "action",
+          "combat",
+          "roguelike",
+          "real-time"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "roguelike",
+          "action",
+          "party",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Arcade, 평점 4.3, 충족 신호 roguelike, action, party",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 98,
+      "caseId": "junk-observed-hybrid-action-buildcraft-rejects-rounds",
+      "group": "junk-suppression",
+      "preferences": "arcade action plus buildcraft hybrid deal",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Rogue Deck Assault를 추천합니다. 50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Rogue Deck Assault",
+      "topMatch": {
+        "title": "Rogue Deck Assault",
+        "cut": 50,
+        "price": {
+          "amount": 13500,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.18,
+        "metacritic": 81,
+        "genres": [
+          "Action",
+          "Card",
+          "Deckbuilder",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "action",
+          "card",
+          "deckbuilder",
+          "roguelike"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "deckbuilder",
+          "card",
+          "roguelike",
+          "action",
+          "high-rating",
+          "short-session"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 13,500원, PC 지원, 장르 Action/Card, 평점 4.2, 충족 신호 deckbuilder, card, roguelike",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
+      "flagged": false,
+      "timeout": false
+    },
+    {
+      "index": 99,
+      "caseId": "junk-observed-hybrid-systems-heavy-not-oppressive-rejects-dominions",
+      "group": "junk-suppression",
+      "preferences": "systems-heavy but not oppressive hybrid bargain",
+      "budget": 22000,
+      "platforms": [
+        "PC"
+      ],
+      "country": "KR",
+      "summary": "Systems Tactics Bargain를 추천합니다. 50% 할인, 현재가 16,200원, PC 지원, 장르 Strategy/Tactics, 평점 4.1, 충족 신호 strategy, tactics, high-rating.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "Systems Tactics Bargain",
+      "topMatch": {
+        "title": "Systems Tactics Bargain",
+        "cut": 50,
+        "price": {
+          "amount": 16200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.12,
+        "metacritic": 79,
+        "genres": [
+          "Strategy",
+          "Tactics"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [
+          "strategy",
+          "tactics",
+          "systems",
+          "approachable"
+        ],
+        "steamDeckStatus": null,
+        "matchedSignals": [
+          "strategy",
+          "tactics",
+          "high-rating"
+        ],
+        "missingEvidence": [],
+        "recommendationReason": "50% 할인, 현재가 16,200원, PC 지원, 장르 Strategy/Tactics, 평점 4.1, 충족 신호 strategy, tactics, high-rating",
+        "evidenceCompleteness": "hard-facts-plus-metadata",
+        "priceEvidenceSource": "ITAD",
+        "platformEvidenceSource": "ITAD",
+        "metadataEvidenceSource": "RAWG"
+      },
       "flagged": false,
       "timeout": false
     }

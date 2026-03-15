@@ -150,6 +150,56 @@ describe("GameDealService recommendation regressions", () => {
     expect(result.matches[0]).toMatchObject({ title: "Tactics Breakthrough" });
   });
 
+  it("rejects grand-strategy outliers when the prompt explicitly asks for reviewed strategy but not grand strategy", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "dominions-grand-strategy",
+            title: "Dominions 5 - Warriors of the Faith",
+            price: { amount: 9450, currency: "KRW" },
+            regular: { amount: 43000, currency: "KRW" },
+            cut: 78,
+            genres: ["Strategy", "Indie"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 4.67,
+            metacritic: 82,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "tactics-breakthrough",
+            title: "Tactics Breakthrough",
+            price: { amount: 14500, currency: "KRW" },
+            regular: { amount: 22300, currency: "KRW" },
+            cut: 35,
+            genres: ["Strategy", "Tactics", "Indie"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.45,
+            metacritic: 81,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "grand strategy 말고 검증된 전략 세일작",
+      budget: 25_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Tactics Breakthrough" });
+    expect(result.matches.map((match) => (match as { title: string }).title)).not.toContain(
+      "Dominions 5 - Warriors of the Faith"
+    );
+  });
+
   it("reranks fast-tempo roguelike prompts toward action roguelites over card roguelikes", async () => {
     const service = new GameDealService({
       async findDeals() {
@@ -1730,6 +1780,151 @@ describe("GameDealService recommendation regressions", () => {
     });
 
     expect(result.matches[0]).toMatchObject({ title: "BALL x PIT" });
+  });
+
+  it("prefers stronger action-roguelite evidence when the prompt excludes deckbuilding filler", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "ball-x-pit",
+            title: "BALL x PIT",
+            price: { amount: 13200, currency: "KRW" },
+            regular: { amount: 16500, currency: "KRW" },
+            cut: 20,
+            genres: ["Indie", "Action", "Roguelike"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.35,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "arcade-run-zero",
+            title: "Arcade Run Zero",
+            price: { amount: 13500, currency: "KRW" },
+            regular: { amount: 27000, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Arcade", "Roguelike"],
+            platforms: ["PC"],
+            tags: ["action", "combat", "roguelike", "real-time"],
+            multiplayer: false,
+            rating: 4.28,
+            metacritic: 82,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "카드 말고 액션 로그라이트, filler도 말고",
+      budget: 20_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Arcade Run Zero" });
+    expect(result.matches.map((match) => (match as { title: string }).title)).not.toContain("BALL x PIT");
+  });
+
+  it("requires a non-multiplayer buildcraft-capable candidate for action buildcraft hybrid prompts", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "rounds",
+            title: "ROUNDS",
+            price: { amount: 3200, currency: "KRW" },
+            regular: { amount: 6400, currency: "KRW" },
+            cut: 50,
+            genres: ["Indie", "Action", "Deckbuilder", "Card", "Roguelike"],
+            platforms: ["PC"],
+            multiplayer: true,
+            rating: 3.72,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "rogue-deck-assault",
+            title: "Rogue Deck Assault",
+            price: { amount: 13500, currency: "KRW" },
+            regular: { amount: 27000, currency: "KRW" },
+            cut: 50,
+            genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+            platforms: ["PC"],
+            tags: ["action", "card", "deckbuilder", "roguelike"],
+            multiplayer: false,
+            rating: 4.18,
+            metacritic: 81,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "arcade action plus buildcraft hybrid deal",
+      budget: 22_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Rogue Deck Assault" });
+    expect(result.matches.map((match) => (match as { title: string }).title)).not.toContain("ROUNDS");
+  });
+
+  it("demotes deckbuilder-heavy roguelikes when the prompt wants strategy plus roguelike without deck cues", async () => {
+    const service = new GameDealService({
+      async findDeals() {
+        return [
+          {
+            id: "shogun-showdown",
+            title: "Shogun Showdown",
+            price: { amount: 11263, currency: "KRW" },
+            regular: { amount: 22526, currency: "KRW" },
+            cut: 50,
+            genres: ["Strategy", "Indie", "RPG", "Roguelike", "Deckbuilder", "Card"],
+            platforms: ["PC"],
+            multiplayer: false,
+            rating: 4.36,
+            metacritic: 84,
+            metadataStatus: "rawg"
+          },
+          {
+            id: "rogue-tactics-reserve",
+            title: "Rogue Tactics Reserve",
+            price: { amount: 15900, currency: "KRW" },
+            regular: { amount: 31800, currency: "KRW" },
+            cut: 50,
+            genres: ["Strategy", "Tactics", "Roguelike", "Action"],
+            platforms: ["PC"],
+            tags: ["strategy", "tactics", "roguelike", "action"],
+            multiplayer: false,
+            rating: 4.42,
+            metacritic: 86,
+            metadataStatus: "rawg"
+          }
+        ];
+      },
+      async enrichDeals(deals) {
+        return deals;
+      }
+    });
+
+    const result = await service.recommendSaleGames({
+      preferences: "전략이랑 로그라이크가 같이 있는 세일작",
+      budget: 22_000,
+      platforms: ["PC"],
+      country: "KR"
+    });
+
+    expect(result.matches[0]).toMatchObject({ title: "Rogue Tactics Reserve" });
+    expect(result.matches.map((match) => (match as { title: string }).title)).not.toContain("Shogun Showdown");
   });
 
   it("removes racing and sports outliers when the prompt excludes them", async () => {

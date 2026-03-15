@@ -20,10 +20,10 @@ import {
 } from "../../scripts/run-deterministic-recommend-audit.js";
 
 describe("deterministic recommendation audit fixtures", () => {
-  it("keeps 91 provider-backed cases across five stable groups", () => {
-    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(91);
+  it("keeps 99 provider-backed cases across five stable groups", () => {
+    expect(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES).toHaveLength(99);
     expect(new Set(DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.map((testCase) => testCase.caseId)).size).toBe(
-      91
+      99
     );
 
     const counts = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.reduce<Record<string, number>>(
@@ -39,7 +39,7 @@ describe("deterministic recommendation audit fixtures", () => {
       "provider-outage": 13,
       "steam-deck-overlay": 17,
       "social-tiering": 14,
-      "junk-suppression": 29
+      "junk-suppression": 37
     });
 
     for (const testCase of DETERMINISTIC_RECOMMENDATION_AUDIT_CASES) {
@@ -153,6 +153,23 @@ describe("deterministic recommendation audit fixtures", () => {
       (testCase) => testCase.caseId === "junk-hybrid-action-buildcraft-rejects-brightgunner"
     );
     expect(hybridBuildcraftCase?.expectation.forbiddenTopTitles).toContain("BrightGunner");
+
+    const observedGrandStrategyCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-observed-strategy-rating-grand-strategy-rejects-dominions"
+    );
+    expect(observedGrandStrategyCase?.expectation.forbiddenTopTitles).toContain(
+      "Dominions 5 - Warriors of the Faith"
+    );
+
+    const observedShogunCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-observed-hybrid-strategy-roguelike-rejects-shogun-showdown"
+    );
+    expect(observedShogunCase?.expectation.forbiddenTopTitles).toContain("Shogun Showdown");
+
+    const observedRoundsCase = DETERMINISTIC_RECOMMENDATION_AUDIT_CASES.find(
+      (testCase) => testCase.caseId === "junk-observed-hybrid-action-buildcraft-rejects-rounds"
+    );
+    expect(observedRoundsCase?.expectation.forbiddenTopTitles).toContain("ROUNDS");
   });
 });
 

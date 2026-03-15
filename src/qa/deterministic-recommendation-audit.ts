@@ -5128,6 +5128,381 @@ export const DETERMINISTIC_RECOMMENDATION_AUDIT_CASES: DeterministicRecommendati
       expectMatchCount: 0,
       forbiddenTopTitles: ["BrightGunner", "Dominions 5 - Warriors of the Faith"]
     }
+  },
+  {
+    index: 92,
+    caseId: "junk-observed-strategy-rating-grand-strategy-rejects-dominions",
+    group: "junk-suppression",
+    preferences: "grand strategy 말고 검증된 전략 세일작",
+    budget: 25_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "dominions-grand-strategy-observed-bad",
+              title: "Dominions 5 - Warriors of the Faith",
+              priceAmount: 9_450,
+              regularAmount: 43_000,
+              cut: 78,
+              genres: ["Strategy", "Indie"],
+              tags: ["grand strategy", "wargame", "simulation", "reading-heavy"],
+              multiplayer: true,
+              rating: 4.67,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "tactics-breakthrough-reviewed",
+              title: "Tactics Breakthrough",
+              priceAmount: 16_900,
+              regularAmount: 33_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              tags: ["tactics", "strategy", "turn-based"],
+              multiplayer: false,
+              rating: 4.34,
+              metacritic: 84,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Tactics Breakthrough",
+      forbiddenTopTitles: ["Dominions 5 - Warriors of the Faith"],
+      requiredTopSignals: ["strategy", "tactics", "high-rating"]
+    }
+  },
+  {
+    index: 93,
+    caseId: "junk-observed-constraint-cardless-action-roguelite-rejects-ball-pit",
+    group: "junk-suppression",
+    preferences: "카드 말고 액션 로그라이트, filler도 말고",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "ball-pit-observed-cardless-bad",
+              title: "BALL x PIT",
+              priceAmount: 13_200,
+              regularAmount: 16_500,
+              cut: 20,
+              genres: ["Indie", "Action", "Roguelike"],
+              multiplayer: false,
+              rating: 4.35,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "arcade-run-zero-observed-cardless-good",
+              title: "Arcade Run Zero",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Arcade", "Roguelike"],
+              tags: ["action", "combat", "roguelike", "real-time"],
+              multiplayer: false,
+              rating: 4.28,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Arcade Run Zero",
+      forbiddenTopTitles: ["BALL x PIT"],
+      requiredTopSignals: ["action", "roguelike"]
+    }
+  },
+  {
+    index: 94,
+    caseId: "junk-observed-constraint-strategy-not-grand-strategy-rejects-dominions",
+    group: "junk-suppression",
+    preferences: "전략은 좋은데 grand strategy 말고 할인 중인 것",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "dominions-strategy-not-grand-bad",
+              title: "Dominions 5 - Warriors of the Faith",
+              priceAmount: 9_450,
+              regularAmount: 43_000,
+              cut: 78,
+              genres: ["Strategy", "Indie"],
+              tags: ["grand strategy", "wargame", "simulation", "reading-heavy"],
+              multiplayer: true,
+              rating: 4.67,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "reviewed-tactics-reserve-observed",
+              title: "Reviewed Tactics Reserve",
+              priceAmount: 17_500,
+              regularAmount: 35_000,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              tags: ["tactics", "turn-based"],
+              multiplayer: false,
+              rating: 4.35,
+              metacritic: 84,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Reviewed Tactics Reserve",
+      forbiddenTopTitles: ["Dominions 5 - Warriors of the Faith"],
+      requiredTopSignals: ["strategy", "tactics"]
+    }
+  },
+  {
+    index: 95,
+    caseId: "junk-observed-constraint-turn-based-not-deck-roguelike-rejects-ball-pit",
+    group: "junk-suppression",
+    preferences: "turn-based 말고 deck 아닌 로그라이크",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "ball-pit-turnbased-deck-bad",
+              title: "BALL x PIT",
+              priceAmount: 13_200,
+              regularAmount: 16_500,
+              cut: 20,
+              genres: ["Indie", "Action", "Roguelike"],
+              multiplayer: false,
+              rating: 4.35,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "arcade-run-zero-turnbased-deck-good",
+              title: "Arcade Run Zero",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Arcade", "Roguelike"],
+              tags: ["action", "combat", "roguelike", "real-time"],
+              multiplayer: false,
+              rating: 4.28,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Arcade Run Zero",
+      forbiddenTopTitles: ["BALL x PIT"],
+      requiredTopSignals: ["action", "roguelike"]
+    }
+  },
+  {
+    index: 96,
+    caseId: "junk-observed-hybrid-strategy-roguelike-rejects-shogun-showdown",
+    group: "junk-suppression",
+    preferences: "전략이랑 로그라이크가 같이 있는 세일작",
+    budget: 22_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "shogun-showdown-observed-bad",
+              title: "Shogun Showdown",
+              priceAmount: 11_263,
+              regularAmount: 22_526,
+              cut: 50,
+              genres: ["Strategy", "Indie", "RPG", "Roguelike", "Deckbuilder", "Card"],
+              multiplayer: false,
+              rating: 4.36,
+              metacritic: 84,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "rogue-tactics-reserve-observed-good",
+              title: "Rogue Tactics Reserve",
+              priceAmount: 15_900,
+              regularAmount: 31_800,
+              cut: 50,
+              genres: ["Strategy", "Tactics", "Roguelike", "Action"],
+              tags: ["strategy", "tactics", "roguelike", "action"],
+              multiplayer: false,
+              rating: 4.42,
+              metacritic: 86,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Rogue Tactics Reserve",
+      forbiddenTopTitles: ["Shogun Showdown"],
+      requiredTopSignals: ["strategy", "roguelike"]
+    }
+  },
+  {
+    index: 97,
+    caseId: "junk-observed-constraint-roguelike-not-turn-based-rejects-ball-pit",
+    group: "junk-suppression",
+    preferences: "턴제는 아닌데 로그라이크 느낌은 나는 세일작",
+    budget: 20_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "ball-pit-observed-not-turnbased-bad",
+              title: "BALL x PIT",
+              priceAmount: 13_200,
+              regularAmount: 16_500,
+              cut: 20,
+              genres: ["Indie", "Action", "Roguelike"],
+              multiplayer: false,
+              rating: 4.35,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "arcade-run-zero-observed-not-turnbased-good",
+              title: "Arcade Run Zero",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Arcade", "Roguelike"],
+              tags: ["action", "combat", "roguelike", "real-time"],
+              multiplayer: false,
+              rating: 4.28,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Arcade Run Zero",
+      forbiddenTopTitles: ["BALL x PIT"],
+      requiredTopSignals: ["action", "roguelike"]
+    }
+  },
+  {
+    index: 98,
+    caseId: "junk-observed-hybrid-action-buildcraft-rejects-rounds",
+    group: "junk-suppression",
+    preferences: "arcade action plus buildcraft hybrid deal",
+    budget: 22_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "rounds-buildcraft-bad",
+              title: "ROUNDS",
+              priceAmount: 3_200,
+              regularAmount: 6_400,
+              cut: 50,
+              genres: ["Indie", "Action", "Deckbuilder", "Card", "Roguelike"],
+              multiplayer: true,
+              rating: 3.72,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "rogue-deck-assault-observed-buildcraft-good",
+              title: "Rogue Deck Assault",
+              priceAmount: 13_500,
+              regularAmount: 27_000,
+              cut: 50,
+              genres: ["Action", "Card", "Deckbuilder", "Roguelike"],
+              tags: ["action", "card", "deckbuilder", "roguelike"],
+              multiplayer: false,
+              rating: 4.18,
+              metacritic: 81,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Rogue Deck Assault",
+      forbiddenTopTitles: ["ROUNDS"],
+      requiredTopSignals: ["action", "card", "deckbuilder"]
+    }
+  },
+  {
+    index: 99,
+    caseId: "junk-observed-hybrid-systems-heavy-not-oppressive-rejects-dominions",
+    group: "junk-suppression",
+    preferences: "systems-heavy but not oppressive hybrid bargain",
+    budget: 22_000,
+    platforms: ["PC"],
+    country: "KR",
+    providers: {
+      findDeals: [
+        {
+          result: [
+            buildDeal({
+              id: "dominions-systems-hybrid-observed-bad",
+              title: "Dominions 5 - Warriors of the Faith",
+              priceAmount: 9_450,
+              regularAmount: 43_000,
+              cut: 78,
+              genres: ["Strategy", "Indie"],
+              tags: ["grand strategy", "wargame", "simulation", "reading-heavy"],
+              multiplayer: true,
+              rating: 4.67,
+              metacritic: 82,
+              metadataStatus: "rawg"
+            }),
+            buildDeal({
+              id: "systems-tactics-bargain-good",
+              title: "Systems Tactics Bargain",
+              priceAmount: 16_200,
+              regularAmount: 32_400,
+              cut: 50,
+              genres: ["Strategy", "Tactics"],
+              tags: ["strategy", "tactics", "systems", "approachable"],
+              multiplayer: false,
+              rating: 4.12,
+              metacritic: 79,
+              metadataStatus: "rawg"
+            })
+          ]
+        }
+      ]
+    },
+    expectation: {
+      expectedTopTitle: "Systems Tactics Bargain",
+      forbiddenTopTitles: ["Dominions 5 - Warriors of the Faith"],
+      requiredTopSignals: ["strategy", "tactics"]
+    }
   }
 ];
 

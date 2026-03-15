@@ -102,23 +102,19 @@
     "genre-hybrid-29",
     "genre-hybrid-20"
   ],
-  "generatedAt": "2026-03-14T23:54:54.360Z",
+  "generatedAt": "2026-03-15T01:02:00.912Z",
   "summary": {
     "total": 100,
-    "zeroMatches": 53,
-    "flagged": 3,
-    "groundlessRecommendations": 3,
+    "zeroMatches": 56,
+    "flagged": 1,
+    "groundlessRecommendations": 1,
     "recoverableButMissed": 0,
-    "evidenceRejected": 53,
+    "evidenceRejected": 56,
     "timeouts": 0,
     "topCounts": [
       {
         "title": "BrightGunner",
         "count": 11
-      },
-      {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "count": 10
       },
       {
         "title": "Balatro",
@@ -129,16 +125,24 @@
         "count": 8
       },
       {
-        "title": "Shogun Showdown",
-        "count": 4
+        "title": "Dominions 5 - Warriors of the Faith",
+        "count": 8
       },
       {
         "title": "Dice & Fold",
         "count": 3
       },
       {
+        "title": "Shogun Showdown",
+        "count": 3
+      },
+      {
         "title": "ROUNDS",
-        "count": 2
+        "count": 1
+      },
+      {
+        "title": "The King is Watching",
+        "count": 1
       }
     ]
   },
@@ -212,7 +216,7 @@
       "timeouts": 0
     },
     "constraint-heavy": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
           "title": "BrightGunner",
@@ -225,16 +229,12 @@
         {
           "title": "Dice & Fold",
           "count": 1
-        },
-        {
-          "title": "Dominions 5 - Warriors of the Faith",
-          "count": 1
         }
       ],
       "flagged": 1,
       "groundlessRecommendations": 1,
       "recoverableButMissed": 0,
-      "evidenceRejected": 3,
+      "evidenceRejected": 4,
       "timeouts": 0
     },
     "mixed-language": {
@@ -308,29 +308,25 @@
       "timeouts": 0
     },
     "genre-hybrid": {
-      "uniqueTopPicks": 4,
+      "uniqueTopPicks": 3,
       "topCounts": [
-        {
-          "title": "ROUNDS",
-          "count": 2
-        },
         {
           "title": "BALL x PIT",
           "count": 1
         },
         {
-          "title": "Dominions 5 - Warriors of the Faith",
+          "title": "ROUNDS",
           "count": 1
         },
         {
-          "title": "Shogun Showdown",
+          "title": "The King is Watching",
           "count": 1
         }
       ],
-      "flagged": 2,
-      "groundlessRecommendations": 2,
+      "flagged": 0,
+      "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 5,
+      "evidenceRejected": 7,
       "timeouts": 0
     }
   },
@@ -1473,8 +1469,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1499,17 +1494,16 @@
       ],
       "country": "KR",
       "index": 32,
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 멀티플레이·co-op 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 멀티플레이/co-op 메타데이터를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "가격 개요 정보가 없어 제목만 확인했습니다."
+        "일부 메타데이터를 생략했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
       "topMatch": null,
       "emptyReason": "missing-social-metadata",
       "missingEvidence": [
-        "RAWG 멀티플레이/co-op 메타데이터",
-        "ITAD 현재가/할인율 근거"
+        "RAWG 멀티플레이/co-op 메타데이터"
       ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
@@ -2204,38 +2198,22 @@
       ],
       "country": "KR",
       "index": 53,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
+      "evidenceRejected": true,
       "flagged": false,
       "timeout": false
     },
@@ -3620,37 +3598,20 @@
       ],
       "country": "KR",
       "index": 91,
-      "summary": "ROUNDS를 추천합니다. 50% 할인, 현재가 3,200원, Dreamgame 판매, PC 지원, 장르 Indie/Action, 평점 3.7, 충족 신호 deckbuilder, card, roguelike.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [],
-      "matchCount": 1,
-      "topTitle": "ROUNDS",
-      "topMatch": {
-        "title": "ROUNDS",
-        "cut": 50,
-        "price": {
-          "amount": 3200,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 3.72,
-        "genres": [
-          "Indie",
-          "Action",
-          "Deckbuilder",
-          "Card",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-deckbuilding-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "RAWG 카드·덱빌딩 메타데이터"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -3739,18 +3700,18 @@
       ],
       "country": "KR",
       "index": 94,
-      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 5,
-      "topTitle": "Shogun Showdown",
+      "matchCount": 3,
+      "topTitle": "The King is Watching",
       "topMatch": {
-        "title": "Shogun Showdown",
-        "cut": 50,
+        "title": "The King is Watching",
+        "cut": 35,
         "price": {
-          "amount": 11263,
+          "amount": 9680,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -3758,15 +3719,10 @@
         "genres": [
           "Strategy",
           "Indie",
-          "RPG",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
+          "Roguelike"
         ],
         "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -3903,39 +3859,23 @@
       ],
       "country": "KR",
       "index": 99,
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {

@@ -1,20 +1,16 @@
 {
-  "generatedAt": "2026-03-14T23:53:44.587Z",
+  "generatedAt": "2026-03-15T01:02:03.744Z",
   "summary": {
     "total": 100,
-    "zeroMatches": 55,
-    "flagged": 5,
-    "groundlessRecommendations": 5,
+    "zeroMatches": 56,
+    "flagged": 1,
+    "groundlessRecommendations": 1,
     "recoverableButMissed": 0,
-    "evidenceRejected": 55,
+    "evidenceRejected": 56,
     "timeouts": 0,
     "topCounts": [
       {
         "title": "BALL x PIT",
-        "count": 11
-      },
-      {
-        "title": "Dominions 5 - Warriors of the Faith",
         "count": 10
       },
       {
@@ -23,7 +19,11 @@
       },
       {
         "title": "Balatro",
-        "count": 6
+        "count": 8
+      },
+      {
+        "title": "Dominions 5 - Warriors of the Faith",
+        "count": 8
       },
       {
         "title": "Dice & Fold",
@@ -34,11 +34,15 @@
         "count": 2
       },
       {
-        "title": "Shogun Showdown",
-        "count": 2
+        "title": "Downfall",
+        "count": 1
       },
       {
-        "title": "Downfall",
+        "title": "ROUNDS",
+        "count": 1
+      },
+      {
+        "title": "The King is Watching",
         "count": 1
       }
     ]
@@ -59,25 +63,21 @@
       "timeouts": 0
     },
     "deckbuilding-card": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 2,
       "topCounts": [
         {
           "title": "Balatro",
-          "count": 4
+          "count": 6
         },
         {
           "title": "Monster Train",
           "count": 2
-        },
-        {
-          "title": "Shogun Showdown",
-          "count": 1
         }
       ],
       "flagged": 0,
       "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 3,
+      "evidenceRejected": 2,
       "timeouts": 0
     },
     "strategy-rating": {
@@ -85,13 +85,13 @@
       "topCounts": [
         {
           "title": "Dominions 5 - Warriors of the Faith",
-          "count": 6
+          "count": 5
         }
       ],
-      "flagged": 1,
-      "groundlessRecommendations": 1,
+      "flagged": 0,
+      "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 4,
+      "evidenceRejected": 5,
       "timeouts": 0
     },
     "multiplayer-social": {
@@ -118,25 +118,17 @@
       "timeouts": 0
     },
     "constraint-heavy": {
-      "uniqueTopPicks": 3,
+      "uniqueTopPicks": 1,
       "topCounts": [
-        {
-          "title": "BALL x PIT",
-          "count": 2
-        },
         {
           "title": "BrightGunner",
           "count": 1
-        },
-        {
-          "title": "Dominions 5 - Warriors of the Faith",
-          "count": 1
         }
       ],
-      "flagged": 3,
-      "groundlessRecommendations": 3,
+      "flagged": 0,
+      "groundlessRecommendations": 0,
       "recoverableButMissed": 0,
-      "evidenceRejected": 6,
+      "evidenceRejected": 9,
       "timeouts": 0
     },
     "mixed-language": {
@@ -214,17 +206,25 @@
       "timeouts": 0
     },
     "genre-hybrid": {
-      "uniqueTopPicks": 1,
+      "uniqueTopPicks": 3,
       "topCounts": [
         {
-          "title": "Shogun Showdown",
+          "title": "BALL x PIT",
+          "count": 1
+        },
+        {
+          "title": "ROUNDS",
+          "count": 1
+        },
+        {
+          "title": "The King is Watching",
           "count": 1
         }
       ],
       "flagged": 1,
       "groundlessRecommendations": 1,
       "recoverableButMissed": 0,
-      "evidenceRejected": 9,
+      "evidenceRejected": 7,
       "timeouts": 0
     }
   },
@@ -241,8 +241,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -269,8 +268,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -297,8 +295,7 @@
       "summary": "Dice & Fold를 추천합니다. 55% 할인, 현재가 6,520원, Steam 판매, Steam Deck Verified, 장르 Casual/Strategy, 평점 4.0, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 1,
       "topTitle": "Dice & Fold",
@@ -347,8 +344,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -560,7 +556,8 @@
       "country": "KR",
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -586,7 +583,8 @@
       "country": "KR",
       "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
-        "일부 메타데이터를 생략했습니다."
+        "일부 메타데이터를 생략했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: Cozy Grove (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "Balatro",
@@ -632,34 +630,35 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Shogun Showdown",
+      "matchCount": 3,
+      "topTitle": "Balatro",
       "topMatch": {
-        "title": "Shogun Showdown",
-        "cut": 50,
+        "title": "Balatro",
+        "cut": 5,
         "price": {
-          "amount": 11263,
+          "amount": 11077,
           "currency": "KRW"
         },
         "multiplayer": false,
-        "rating": 4.36,
+        "rating": 4.32,
         "genres": [
+          "Casual",
           "Strategy",
           "Indie",
-          "RPG",
           "Deckbuilder",
           "Card",
           "Roguelike"
         ],
         "platforms": [
           "PC",
-          "macOS",
-          "Linux"
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -725,23 +724,44 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
+      "summary": "Balatro를 추천합니다. 5% 할인, 현재가 11,077원, PlanetPlay 판매, PC 지원, 장르 Casual/Strategy, 평점 4.3, 충족 신호 strategy, deckbuilder, card.",
       "warnings": [
+        "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-deckbuilding-evidence",
-      "missingEvidence": [
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
-      ],
+      "matchCount": 1,
+      "topTitle": "Balatro",
+      "topMatch": {
+        "title": "Balatro",
+        "cut": 5,
+        "price": {
+          "amount": 11077,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.32,
+        "genres": [
+          "Casual",
+          "Strategy",
+          "Indie",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC",
+          "PlayStation 5",
+          "Nintendo Switch",
+          "iOS"
+        ],
+        "tags": [],
+        "steamDeckStatus": null
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -1188,39 +1208,23 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -1785,8 +1789,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -1856,7 +1859,6 @@
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: UnReal World (RAWG request failed with timeout after 1500ms)",
         "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
       ],
       "matchCount": 0,
@@ -1954,8 +1956,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. ITAD 현재가·할인율 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "응답 시간을 맞추기 위해 일부 추천 후보 보강을 생략했습니다."
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -2005,37 +2006,19 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC",
-          "Nintendo Switch",
-          "macOS"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-genre-evidence",
+      "missingEvidence": [
+        "RAWG 장르 메타데이터"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -2047,39 +2030,23 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Dominions 5 - Warriors of the Faith를 추천합니다. 78% 할인, 현재가 9,450원, GamersGate 판매, PC 지원, 장르 Strategy/Indie, 평점 4.7, 충족 신호 strategy, multiplayer, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다. 추가로 ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
         "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 1,
-      "topTitle": "Dominions 5 - Warriors of the Faith",
-      "topMatch": {
-        "title": "Dominions 5 - Warriors of the Faith",
-        "cut": 78,
-        "price": {
-          "amount": 9450,
-          "currency": "KRW"
-        },
-        "multiplayer": true,
-        "rating": 4.67,
-        "genres": [
-          "Strategy",
-          "Indie"
-        ],
-        "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-review-evidence",
+      "missingEvidence": [
+        "RAWG 장르·평점 근거",
+        "ITAD 현재가/할인율 근거"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -2212,37 +2179,19 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 roguelike, action, high-rating.",
+      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 장르 메타데이터 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [],
-      "matchCount": 1,
-      "topTitle": "BALL x PIT",
-      "topMatch": {
-        "title": "BALL x PIT",
-        "cut": 20,
-        "price": {
-          "amount": 13200,
-          "currency": "KRW"
-        },
-        "multiplayer": false,
-        "rating": 4.35,
-        "genres": [
-          "Indie",
-          "Action",
-          "Roguelike"
-        ],
-        "platforms": [
-          "PC",
-          "Nintendo Switch",
-          "macOS"
-        ],
-        "tags": [],
-        "steamDeckStatus": null
-      },
-      "missingEvidence": [],
-      "groundlessRecommendation": true,
+      "matchCount": 0,
+      "topTitle": null,
+      "topMatch": null,
+      "emptyReason": "missing-genre-evidence",
+      "missingEvidence": [
+        "RAWG 장르 메타데이터"
+      ],
+      "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": false,
-      "flagged": true,
+      "evidenceRejected": true,
+      "flagged": false,
       "timeout": false
     },
     {
@@ -3433,19 +3382,18 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "Shogun Showdown를 추천합니다. 50% 할인, 현재가 11,263원, GOG 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, deckbuilder, card.",
+      "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, PC 지원, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, high-rating.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: UnReal World (RAWG request failed with timeout after 1500ms)"
+        "가격 개요 정보가 없어 제목만 확인했습니다."
       ],
-      "matchCount": 5,
-      "topTitle": "Shogun Showdown",
+      "matchCount": 3,
+      "topTitle": "The King is Watching",
       "topMatch": {
-        "title": "Shogun Showdown",
-        "cut": 50,
+        "title": "The King is Watching",
+        "cut": 35,
         "price": {
-          "amount": 11263,
+          "amount": 9680,
           "currency": "KRW"
         },
         "multiplayer": false,
@@ -3453,15 +3401,10 @@
         "genres": [
           "Strategy",
           "Indie",
-          "RPG",
-          "Roguelike",
-          "Deckbuilder",
-          "Card"
+          "Roguelike"
         ],
         "platforms": [
-          "PC",
-          "macOS",
-          "Linux"
+          "PC"
         ],
         "tags": [],
         "steamDeckStatus": null
@@ -3511,23 +3454,38 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거를 확인하지 못해 추천을 비웠습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "추가 추천 후보를 보강하지 못해 일부 결과만 표시했습니다. (RAWG request failed with timeout after 1500ms)",
-        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
-      ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-deckbuilding-evidence",
-      "missingEvidence": [
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터"
-      ],
+      "summary": "BALL x PIT를 추천합니다. 20% 할인, 현재가 13,200원, Steam 판매, PC 지원, 장르 Indie/Action, 평점 4.3, 충족 신호 deckbuilder, card, roguelike.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "BALL x PIT",
+      "topMatch": {
+        "title": "BALL x PIT",
+        "cut": 20,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW"
+        },
+        "multiplayer": false,
+        "rating": 4.35,
+        "genres": [
+          "Indie",
+          "Action",
+          "Roguelike",
+          "Deckbuilder",
+          "Card"
+        ],
+        "platforms": [
+          "PC",
+          "Nintendo Switch",
+          "macOS"
+        ],
+        "tags": [],
+        "steamDeckStatus": null
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },
@@ -3651,24 +3609,36 @@
         "PC"
       ],
       "country": "KR",
-      "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. RAWG 카드·덱빌딩 메타데이터 근거를 확인하지 못해 추천을 비웠습니다. 추가로 RAWG 장르·평점 근거, ITAD 현재가/할인율 근거를 확인하지 못해 추천을 비웠습니다.",
-      "warnings": [
-        "일부 메타데이터를 생략했습니다.",
-        "가격 개요 정보가 없어 제목만 확인했습니다.",
-        "메타데이터가 불안정해 완화된 추천 기준을 적용했습니다."
-      ],
-      "matchCount": 0,
-      "topTitle": null,
-      "topMatch": null,
-      "emptyReason": "missing-deckbuilding-evidence",
-      "missingEvidence": [
-        "RAWG 장르·평점 근거",
-        "RAWG 카드·덱빌딩 메타데이터",
-        "ITAD 현재가/할인율 근거"
-      ],
+      "summary": "ROUNDS를 추천합니다. 50% 할인, 현재가 3,200원, Dreamgame 판매, PC 지원, 장르 Indie/Action, 평점 3.7, 충족 신호 deckbuilder, card, roguelike.",
+      "warnings": [],
+      "matchCount": 1,
+      "topTitle": "ROUNDS",
+      "topMatch": {
+        "title": "ROUNDS",
+        "cut": 50,
+        "price": {
+          "amount": 3200,
+          "currency": "KRW"
+        },
+        "multiplayer": true,
+        "rating": 3.72,
+        "genres": [
+          "Indie",
+          "Action",
+          "Deckbuilder",
+          "Card",
+          "Roguelike"
+        ],
+        "platforms": [
+          "PC"
+        ],
+        "tags": [],
+        "steamDeckStatus": null
+      },
+      "missingEvidence": [],
       "groundlessRecommendation": false,
       "recoverableButMissed": false,
-      "evidenceRejected": true,
+      "evidenceRejected": false,
       "flagged": false,
       "timeout": false
     },

@@ -71,6 +71,12 @@ describe("parseRecommendationConstraints", () => {
     expect(result.preferSession).toContain("short");
   });
 
+  it("treats filler도 말고 phrasing as a not-filler quality constraint", () => {
+    const result = parseRecommendationConstraints("카드 말고 액션 로그라이트, filler도 말고");
+
+    expect(result.qualityIntent).toContain("not-filler");
+  });
+
   it("parses natural reading-heavy avoidance variants", () => {
     const result = parseRecommendationConstraints("리뷰 좋은 전략 게임인데 읽을 거 너무 많은 건 말고");
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-14T23:52:40.537Z",
+  "generatedAt": "2026-03-15T01:00:57.079Z",
   "summary": {
     "total": 50,
     "zeroMatches": 25,
@@ -115,12 +115,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Aquabike Rush (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -147,12 +142,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Aquabike Rush (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -179,12 +169,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Aquabike Rush (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -211,12 +196,7 @@
       "summary": "조건에 맞는 추천 할인 게임을 찾지 못했습니다. Steam Deck Verified/Playable 근거를 확인하지 못해 추천을 비웠습니다. 추가로 Steam Deck verified/playable 근거를 확인하지 못해 추천을 비웠습니다.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Deponia (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Run from the Cops! (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Speed Vortex (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Aquabike Rush (RAWG request failed with timeout after 1500ms)",
-        "RAWG 메타데이터를 일부 불러오지 못했습니다: Wheelborne (RAWG request failed with timeout after 1500ms)"
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
       ],
       "matchCount": 0,
       "topTitle": null,
@@ -383,7 +363,8 @@
       "summary": "The King is Watching를 추천합니다. 35% 할인, 현재가 9,680원, Steam 판매, Steam Deck Playable, 장르 Strategy/Indie, 평점 4.4, 충족 신호 strategy, roguelike, steam-deck.",
       "warnings": [
         "일부 메타데이터를 생략했습니다.",
-        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다."
+        "Steam Deck 호환성 정보를 일부 확인하지 못했습니다.",
+        "RAWG 메타데이터를 일부 불러오지 못했습니다: The King is Watching (RAWG request failed with timeout after 1500ms)"
       ],
       "matchCount": 1,
       "topTitle": "The King is Watching",

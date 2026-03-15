@@ -59,7 +59,8 @@ const ACTION_CUE_PATTERNS =
 const REVIEW_PATTERNS =
   /(리뷰 좋(?:은|고)|평가 좋(?:은|고)|평\s*좋(?:은|고)|평이\s*단단한|검증된|평점 높은|well-reviewed|high[- ]rated|highly rated)/i;
 const POPULAR_PATTERNS = /(인기|유명|많이 하는|popular|well-known)/i;
-const NOT_FILLER_PATTERNS = /(filler\s*(?:아닌|말고)|잡게임\s*말고|뻔한\s*거\s*말고|not filler)/i;
+const NOT_FILLER_PATTERNS =
+  /(filler\s*(?:도\s*)?(?:아닌|말고)|잡게임\s*말고|뻔한\s*거\s*말고|not filler)/i;
 const SHORT_SESSION_PATTERNS =
   /(짧게|짧은|가볍게|잠깐|짬짬이|한 ?판|quick|short session|pick-?up|casual|바로\s*켜기\s*좋)/i;
 const MEDIUM_SESSION_PATTERNS = /(적당한 길이|medium session|한두 시간|1-?2 hours?)/i;

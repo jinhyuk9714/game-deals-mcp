@@ -3045,7 +3045,31 @@ function buildRecommendationMatchEvidence(
     return null;
   }
 
+  if (
+    requiresApproachableStrategyEvidence(context) &&
+    hasStrategyRecoveryDealEvidence(deal) &&
+    !hasTacticsDealEvidence(deal)
+  ) {
+    return null;
+  }
+
   if (context.constraints.qualityIntent.includes("not-filler") && hasStoryAdventurePuzzleBrowseFiller(deal)) {
+    return null;
+  }
+
+  if (requiresStrongActionRogueliteShape(context) && !hasStrongActionRogueliteStyleEvidence(deal)) {
+    return null;
+  }
+
+  if (isBuildcraftHybridPrompt(context) && !context.preferences.multiplayer && deal.multiplayer) {
+    return null;
+  }
+
+  if (
+    requiresNonDeckStrategyRoguelikeHybrid(context) &&
+    hasDeckbuildingEvidence(deal) &&
+    !hasTacticsDealEvidence(deal)
+  ) {
     return null;
   }
 
@@ -5113,6 +5137,45 @@ function hasShortSessionEvidence(deal: RecommendationTaggedDeal): boolean {
     !hasReadingHeavyDealEvidence(deal) &&
     !hasLongSessionDealEvidence(deal) &&
     !hasHeavyStrategyDealEvidence(deal)
+  );
+}
+
+function requiresApproachableStrategyEvidence(context: RecommendationEvidenceContext): boolean {
+  return (
+    context.constraints.strategyPreference === "required" &&
+    context.constraints.avoidComplexity.includes("complex-strategy")
+  );
+}
+
+function requiresStrongActionRogueliteShape(context: RecommendationEvidenceContext): boolean {
+  return (
+    requiresActionEvidence(context) &&
+    requiresRoguelikeEvidence(context) &&
+    (context.constraints.qualityIntent.includes("not-filler") ||
+      (context.constraints.excludeGenres.includes("card/deckbuilder") &&
+        context.constraints.excludeGameplay.includes("turn-based")))
+  );
+}
+
+function hasStrongActionRogueliteStyleEvidence(deal: DealCandidate): boolean {
+  const values = `${deal.title} ${deal.genres.join(" ")} ${getRecommendationDealTags(
+    deal as RecommendationTaggedDeal
+  ).join(" ")}`;
+
+  return /\b(arcade|combat|shooter|shooting|hack|slash|real-time|fast|tempo)\b/i.test(values);
+}
+
+function isBuildcraftHybridPrompt(context: RecommendationEvidenceContext): boolean {
+  return /\bbuildcraft\b/i.test(context.rawPreferences);
+}
+
+function requiresNonDeckStrategyRoguelikeHybrid(
+  context: RecommendationEvidenceContext
+): boolean {
+  return (
+    requiresRoguelikeEvidence(context) &&
+    context.constraints.strategyPreference === "required" &&
+    !requiresDeckbuildingEvidence(context)
   );
 }
 
